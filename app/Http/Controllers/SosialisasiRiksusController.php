@@ -33,7 +33,7 @@ class SosialisasiRiksusController extends Controller
 
         SosialisasiRiksus::create($request->all());
 
-        return redirect()->route('sosialisasi-riksus.view')->with('success', 'Agenda Sosialisasi berhasil ditambahkan');
+        return redirect()->route('view-sosialisasi-riksus.index')->with('success', 'Agenda Sosialisasi berhasil ditambahkan');
     }
 
     // Menghapus agenda

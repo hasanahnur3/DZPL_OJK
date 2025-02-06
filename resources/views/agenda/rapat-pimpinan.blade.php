@@ -4,7 +4,7 @@
 <div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <h3>Agenda Rapat Pimpinan (Rapim)</h3>
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Seleksi form
@@ -30,9 +30,11 @@
     });
 </script>
     {{-- Form Tambah Agenda --}}
-    <div class="form-container">
+    <div class="form-container" >
+        
         <form action="{{ route('rapim.store') }}" method="POST">
             @csrf
+            <h3>Agenda Rapat Pimpinan (Rapim)</h3>
             <div class="form-group">
                 <label for="tanggal">Hari/Tanggal</label>
                 <input type="date" name="tanggal" class="form-control" required>
@@ -56,7 +58,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 80vh;
     padding: 20px; /* Tambahkan padding jika dibutuhkan */
     width: 100%; /* Pastikan memenuhi layar */
 }
