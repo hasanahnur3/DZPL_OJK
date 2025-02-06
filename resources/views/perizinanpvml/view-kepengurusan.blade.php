@@ -33,11 +33,10 @@
                     <th>Nomor Persetujuan</th>
                     <th>Tanggal Persetujuan</th>
                     <th>Jumlah Hari Kerja</th>
-                    <th>Jumlah Hari Kerja</th>
-                    <th>Jumlah Hari Kerja</th>
-                    <th>Jumlah Hari Kerja</th>
-                    <th>Jumlah Hari Kerja</th>
-                    <th>Jumlah Hari Kerja</th>
+                    <th>ADAM</th>
+                    <th>ADAM</th>
+                    <th>ADAM</th>
+                    <th>ADAM</th>
                     <th>Action</th>
                 </tr>
             </thead>
