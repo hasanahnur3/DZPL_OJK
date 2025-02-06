@@ -32,11 +32,7 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->kesimpulan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}" style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                            <form action="{{ route('sosialisasi-riksus.destroy', $item->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="background-color: #dc3545; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-                            </form>
+                
                         </td>
                     </tr>
                 @endforeach

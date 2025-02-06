@@ -24,6 +24,8 @@ class PkkAgendaController extends Controller
             'zoom' => 'required|string',
             'pic' => 'required|string',
             'penguji' => 'required|string',
+            'penguji1' => 'required|string',  // Pastikan penguji1 ada dan tidak kosong
+            'penguji2' => 'nullable|string',  // Penguji2 bisa kosong
             'hasil' => 'required|string',
         ]);
 
@@ -49,6 +51,8 @@ class PkkAgendaController extends Controller
             'zoom' => 'required|string',
             'pic' => 'required|string',
             'penguji' => 'required|string',
+            'penguji1' => 'required|string',  // Pastikan penguji1 ada dan tidak kosong
+            'penguji2' => 'nullable|string',  // Penguji2 bisa kosong
             'hasil' => 'required|string',
         ]);
     

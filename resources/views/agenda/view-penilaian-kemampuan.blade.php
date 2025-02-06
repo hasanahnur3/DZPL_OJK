@@ -22,7 +22,9 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jabatan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Zoom</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">PIC</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji 1</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji 2</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji 3</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
                 </tr>
@@ -39,6 +41,8 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->zoom }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->pic }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->penguji }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->penguji1 }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->penguji2 }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->hasil }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             <a href="{{ route('pkk-agenda.edit', $agenda->id) }}" style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>

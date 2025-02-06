@@ -58,6 +58,16 @@
             <label for="penguji">Penguji</label>
             <input type="text" name="penguji" id="penguji" value="{{ old('penguji', $agenda->penguji) }}" required class="form-control">
         </div>
+
+        <div class="form-group">
+            <label for="penguji1">Penguji 1</label>
+            <input type="text" name="penguji1" id="penguji1" value="{{ old('penguji1', $agenda->penguji1) }}" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="penguji2">Penguji 2</label>
+            <input type="text" name="penguji2" id="penguji2" value="{{ old('penguji2', $agenda->penguji2) }}" required class="form-control">
+        </div>
         
         <div class="form-group">
             <label for="hasil">Hasil</label>

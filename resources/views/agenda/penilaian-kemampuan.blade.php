@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
         <input type="text" name="penguji" placeholder="Penguji" class="form-control" required><br>
         </div>
         <div class="form-group">
+            <input type="text" name="penguji1" placeholder="Penguji 1" id="penguji1" class="form-control" required><br>
+        </div>
+        <div class="form-group">
+            <input type="text" name="penguji2" placeholder="Penguji 2" id="penguji2" class="form-control"><br>
+        </div>        
+        <div class="form-group">
         <textarea name="hasil" placeholder="Hasil" class="form-control" required></textarea><br>
         </div>
 

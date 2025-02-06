@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('zoom');
             $table->string('pic');
             $table->string('penguji');
+            $table->string('penguji1');
+            $table->string('penguji2');
             $table->string('hasil');
             $table->timestamps();
         });

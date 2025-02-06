@@ -18,6 +18,8 @@ class PkkAgenda extends Model
         'zoom',
         'pic',
         'penguji',
+        'penguji1',
+        'penguji2',
         'hasil',
     ];
 }
