@@ -323,3 +323,9 @@ Route::get('/daftar-ljk', function () {
 });
 
 Route::get('/daftar-ljk', [DaftarljkController::class, 'index']);
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/chart-data', [DashboardController::class, 'getChartData']);
+Route::get('sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
