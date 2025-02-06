@@ -16,13 +16,6 @@
             font-family: Arial, sans-serif;
         }
 
-        .header {
-            background-color: #B71C1C;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: relative;
-        }
 
         .menu-toggle {
             display: none;
@@ -44,7 +37,7 @@
 
         .sidebar {
             width: 250px;
-            background-color: #E0E0E0;
+            background-color: #A91111;
             padding: 1rem;
             transition: transform 0.3s ease-in-out;
         }
@@ -113,6 +106,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        span{
+            margin-left: 10px;
+        }
+        span, i{
+            color: #ffffff;
+        }
 
         /* Responsive Styles */
         @media (max-width: 1024px) {
@@ -149,10 +148,7 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-        <h1>Departemen Perizinan, Pemeriksaan Khusus, dan Pengendalian Kualitas PVML</h1>
-    </header>
+
 
     <div class="container">
         <nav class="sidebar">
@@ -167,7 +163,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                   <!-- <a href="#" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-clock"></i>
                         <span>Pending Matters</span>
                     </a>
@@ -182,7 +178,7 @@
                             <a href="#">Submenu 3</a>
                         </li>
                     </ul>
-                </li> -->
+                </li>
                 <!-- Menu bar with dropdown submenu -->
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
@@ -192,7 +188,7 @@
                     <ul class="dropdown-content">
                         <li class="sub-item">
                             <a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a>
-                        </li>                        
+                        </li>
                         <li class="sub-item">
                             <a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a>
                         </li>
@@ -206,11 +202,11 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="{{ url('/daftar-ljk') }}">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-list"></i>
                         <span>Daftar LJK PVML</span>
                     </a>
-                    <!-- <ul class="dropdown-content">
+                    <ul class="dropdown-content">
                         <li class="sub-item">
                             <a href="{{ route('list.lembagaKeuanganMikro') }}">Lembaga Keuangan Mikro</a>
                         </li>
@@ -229,7 +225,7 @@
                         <li class="sub-item">
                             <a href="{{ route('list.sueGeneris') }}">Sue Generis</a>
                         </li>                        
-                    </ul>-->
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
@@ -244,13 +240,13 @@
                                     <a href="{{ route('kepengurusan.index') }}">Kepengurusan</a>
                                 </li>
                                 <li class="sub-item dropdown">
-                                    <a href="{{ route('view-kelembagaan.index') }}">Kelembagaan</a>
+                                    <a href="{{ route('kelembagaan') }}">Kelembagaan</a>
                                 </li>
                                 <li class="sub-item dropdown">
                                     <a href="{{ route('pkk') }}">PKK</a>
                                 </li>
                                 <li class="sub-item dropdown">
-                                    <a class="nav-link" href="{{ route('view-dirkom') }}">Direksi Komisaris</a>
+                                    <a href="{{ route('dirkom') }}">Dirkom</a>
                                 </li>
                                 <li class="sub-item dropdown">
                                     <a href="{{ route('tka') }}">TKA</a>
@@ -270,12 +266,6 @@
         
     
         <main class="main-content">
-            <div class="industry-dropdown">
-                <select>
-                    <option>Jenis Industri</option>
-                    <option>Perusahaan Pembiayaan</option>
-                </select>
-            </div>
 
             <div class="chart-container">
                 @yield('content')
