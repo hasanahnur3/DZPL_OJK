@@ -47,7 +47,7 @@ class ViewPenilaianController extends Controller
 
         ViewPenilaian::create($data);
 
-        return redirect()->route('kepengurusan')->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('kepengurusan.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
     public function edit($id)

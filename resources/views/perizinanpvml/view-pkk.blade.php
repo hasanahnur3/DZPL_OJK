@@ -1,62 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="text-center mb-4">Daftar Penilaian Kemampuan & Kepatutan</h2>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <a href="{{ route('pkk.create') }}" class="btn btn-primary mb-4">Tambah Data</a>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Jenis Industri</th>
-                <th>Nama Perusahaan</th>
-                <th>Nama Pihak Utama</th>
-                <th>Jabatan</th>
-                <th>Status</th>
-                <th>Nomor Surat Permohonan</th>
-                <th>Tanggal Surat Permohonan</th>
-                <th>Tanggal Pengajuan Sistem</th>
-                <th>Tanggal Dokumen Lengkap</th>
-                <th>Perlu Klarifikasi</th>
-                <th>Tanggal Klarifikasi</th>
-                <th>Hasil</th>
-                <th>Nomor Persetujuan</th>
-                <th>Tanggal Persetujuan</th>
-                <th>Jumlah Hari Kerja</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $item)
+    <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;"> Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
+    
+    
+    <div style="overflow-x: auto;">
+        <table  id="kepengurusanTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
                 <tr>
-                    <td>{{ $item->jenis_industri }}</td>
-                    <td>{{ $item->nama_perusahaan }}</td>
-                    <td>{{ $item->nama_pihak_utama }}</td>
-                    <td>{{ $item->jabatan }}</td>
-                    <td>{{ $item->status }}</td>
-                    <td>{{ $item->nomor_surat_permohonan }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal_surat_permohonan)->format('d-m-Y') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal_pengajuan_sistem)->format('d-m-Y') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal_dok_lengkap)->format('d-m-Y') }}</td>
-                    <td>{{ $item->perlu_klarifikasi }}</td>
-                    <td>{{ $item->tanggal_klarifikasi ? \Carbon\Carbon::parse($item->tanggal_klarifikasi)->format('d-m-Y') : '-' }}</td>
-                    <td>{{ $item->hasil }}</td>
-                    <td>{{ $item->nomor_persetujuan }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal_persetujuan)->format('d-m-Y') }}</td>
-                    <td>{{ $item->jumlah_hari_kerja }}</td>
-                    <td>
-                        <a href="{{ route('pkk.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                    </td>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Pihak Utama</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jabatan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat Permohonan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Permohonan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Sistem</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dok Lengkap</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Perlu Klarifikasi</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Klarifikasi</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Persetujuan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Persetujuan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jumlah Hari Kerja</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th> 
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach($data as $item)
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jenis_industri }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nama_perusahaan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nama_pihak_utama }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jabatan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->status }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat_permohonan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_surat_permohonan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_pengajuan_sistem }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_dok_lengkap }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->perlu_klarifikasi }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_klarifikasi }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->hasil }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_persetujuan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_persetujuan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jumlah_hari_kerja }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            <a href="{{ route('kepengurusan.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    
+    <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
+        <a href="{{ route('kepengurusan.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Tambah Data</a>
+         
+<script>
+    $(document).ready(function () {
+        $('#kepengurusanTable').DataTable();
+    });
+</script>
+<style>
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
 @endsection

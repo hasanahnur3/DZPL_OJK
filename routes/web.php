@@ -74,7 +74,7 @@ Route::get('/list/lpbbti', [KelembagaanController::class, 'index']);
 Route::get('/list/lpbbti', [KelembagaanController::class, 'index'])->name('list.lpbbti');
 
 Route::post('/kepengurusan/store', [PenilaianController::class, 'store'])->name('kepengurusan.store');
-Route::get('/kepengurusan', [PenilaianController::class, 'index'])->name('kepengurusan');
+Route::get('/kepengurusan', [PenilaianController::class, 'index'])->name('kepengurusan.index');
 
 
 
