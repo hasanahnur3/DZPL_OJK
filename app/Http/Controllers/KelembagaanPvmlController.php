@@ -2,46 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KelembagaanPvml;
 use Illuminate\Http\Request;
+use App\Models\KelembagaanPvml;
+use Carbon\Carbon;
 
 class KelembagaanPvmlController extends Controller
 {
-    public function edit($id)
-{
-    $kelembagaan = KelembagaanPvml::findOrFail($id);
-    return view('kelembagaan.edit', compact('kelembagaan'));
-}
     public function index()
     {
-        $data = KelembagaanPvml::all(); // Tambahkan ini jika ingin menampilkan data
-        return view('perizinanpvml.kelembagaan', compact('data'));
+        try {
+            // Mengambil data dari database "ojk"
+            $kelembagaan = KelembagaanPvml::on('ojk')->orderBy('created_at', 'desc')->get();
+            return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengambil data');
+        }
+    }
+
+    public function create()
+    {
+        return view('perizinanpvml.kelembagaan');
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'jenis_industri' => 'nullable|string|max:33',
-            'nama_perusahaan' => 'nullable|string|max:54',
-            'detail_izin' => 'nullable|string|max:255',
-            'status' => 'nullable|string|max:23', // Sesuaikan dengan nama field di form
-            'nomor_surat_permohonan' => 'nullable|string|max:80',
-            'tanggal_surat_permohonan' => 'nullable|date',
-            'tanggal_pengajuan_sistem' => 'nullable|date',
-            'tanggal_dokumen_lengkap' => 'nullable|date',
-            'tanggal_selesai_analisis' => 'nullable|date',
-            'sla' => 'nullable|integer',
-            'nomor_surat' => 'nullable|string|max:11',
-            'tanggal_surat' => 'nullable|date',
-            'jumlah_hari_kerja' => 'nullable|string|max:17',
-            'aksi' => 'nullable|string|max:4',
-        ]);
-
         try {
-            KelembagaanPvml::create($validatedData);
-            return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil disimpan');
+            $validated = $request->validate([
+                'jenis_industri' => 'required|string|max:255',
+                'nama_perusahaan' => 'required|string|max:255',
+                'detail_izin' => 'nullable|string',
+                'status' => 'required|string|max:50',
+                'nomor_surat_permohonan' => 'nullable|string|max:100',
+                'tanggal_surat_permohonan' => 'nullable|date',
+                'tanggal_pengajuan_sistem' => 'nullable|date',
+                'tanggal_dokumen_lengkap' => 'nullable|date',
+                'tanggal_selesai_analisis' => 'nullable|date',
+                'sla' => 'nullable|integer|min:0',
+                'nomor_surat' => 'nullable|string|max:100',
+                'tanggal_surat' => 'nullable|date',
+                'jumlah_hari_kerja' => 'nullable|integer|min:0',
+            ]);
+
+            // Menyimpan data ke database "ojk"
+            KelembagaanPvml::on('ojk')->create($validated);
+            return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data')->withInput();
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            $kelembagaan = KelembagaanPvml::on('ojk')->findOrFail($id);
+            return view('perizinanpvml.edit-kelembagaan', compact('kelembagaan'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $validated = $request->validate([
+                'jenis_industri' => 'required|string|max:255',
+                'nama_perusahaan' => 'required|string|max:255',
+                'detail_izin' => 'nullable|string',
+                'status' => 'required|string|max:50',
+                'nomor_surat_permohonan' => 'nullable|string|max:100',
+                'tanggal_surat_permohonan' => 'nullable|date',
+                'tanggal_pengajuan_sistem' => 'nullable|date',
+                'tanggal_dokumen_lengkap' => 'nullable|date',
+                'tanggal_selesai_analisis' => 'nullable|date',
+                'sla' => 'nullable|integer|min:0',
+                'nomor_surat' => 'nullable|string|max:100',
+                'tanggal_surat' => 'nullable|date',
+                'jumlah_hari_kerja' => 'nullable|integer|min:0',
+            ]);
+
+            $kelembagaan = KelembagaanPvml::on('ojk')->findOrFail($id);
+            $kelembagaan->update($validated);
+            
+            return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data')->withInput();
         }
     }
 }

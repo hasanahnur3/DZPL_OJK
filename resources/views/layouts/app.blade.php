@@ -239,8 +239,8 @@
                                 <li class="sub-item">
                                     <a href="{{ route('kepengurusan.index') }}">Kepengurusan</a>
                                 </li>
-                                <li class="sub-item dropdown">
-                                    <a href="{{ route('kelembagaan') }}">Kelembagaan</a>
+                                <li class="sub-item">
+                                    <a href="{{ route('kelembagaan.index') }}">Kelembagaan</a>
                                 </li>
                                 <li class="sub-item dropdown">
                                     <a href="{{ route('pkk') }}">PKK</a>

@@ -7,33 +7,27 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        if (!Schema::hasTable('penilaian')) {
-            Schema::create('penilaian', function (Blueprint $table) {
-                $table->id();
-                $table->string('jenis_industri');
-                $table->string('nama_perusahaan');
-                $table->string('nama_pihak_utama');
-                $table->string('jabatan');
-                $table->string('status');
-                $table->string('nomor_surat_permohonan');
-                $table->date('tanggal_surat_permohonan');
-                $table->date('tanggal_pengajuan_sistem');
-                $table->date('tanggal_dok_lengkap');
-                $table->enum('perlu_klarifikasi', ['iya', 'tidak']);
-                $table->date('tanggal_klarifikasi')->nullable();
-                $table->enum('hasil', ['direkomendasikan', 'tidak direkomendasikan']);
-                $table->date('tanggal_sk')->nullable();
-                $table->string('nomor_persetujuan');
-                $table->date('tanggal_persetujuan');
-                $table->integer('jumlah_hari_kerja');
-                $table->timestamps();
-            });
-        }
+        Schema::create('kelembagaan', function (Blueprint $table) {
+            $table->id();
+            $table->string('jenis_industri');
+            $table->string('nama_perusahaan');
+            $table->string('detail_izin');
+            $table->string('status');
+            $table->string('nomor_surat_permohonan');
+            $table->date('tanggal_surat_permohonan');
+            $table->date('tanggal_pengajuan_sistem');
+            $table->date('tanggal_dokumen_lengkap')->nullable();
+            $table->date('tanggal_selesai_analisis')->nullable();
+            $table->string('sla')->nullable();
+            $table->string('nomor_surat')->nullable();
+            $table->date('tanggal_surat')->nullable();
+            $table->integer('jumlah_hari_kerja')->nullable();
+            $table->timestamps();
+        });
     }
-    
 
     public function down()
     {
-        Schema::dropIfExists('penilaian');
+        Schema::dropIfExists('kelembagaan');
     }
 };

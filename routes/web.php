@@ -100,16 +100,29 @@ Route::post('perizinanpvml/tka', [TkaController::class, 'store'])->name('tka.sto
 
 
 
-// Menampilkan halaman utama dirkom
-Route::get('perizinanpvml/kelembagaan', [KelembagaanPvmlController::class, 'index'])->name('kelembagaan');
+// Menampilkan halaman utama (daftar kelembagaan)
+Route::get('perizinanpvml/kelembagaan', [KelembagaanPvmlController::class, 'index'])->name('kelembagaan.index');
 
-// Menampilkan form untuk membuat dirkom baru
+// Menampilkan form tambah kelembagaan
 Route::get('perizinanpvml/kelembagaan/create', [KelembagaanPvmlController::class, 'create'])->name('kelembagaan.create');
 
-// Menyimpan data dirkom
+// Menyimpan data kelembagaan
 Route::post('perizinanpvml/kelembagaan', [KelembagaanPvmlController::class, 'store'])->name('kelembagaan.store');
 
-Route::post('perizinanpvml/kelembagaan', [KelembagaanController::class, 'store']);
+// Menampilkan halaman edit kelembagaan
+Route::get('perizinanpvml/kelembagaan/{id}/edit', [KelembagaanPvmlController::class, 'edit'])->name('kelembagaan.edit');
+
+// Update data kelembagaan
+Route::put('perizinanpvml/kelembagaan/{id}', [KelembagaanPvmlController::class, 'update'])->name('kelembagaan.update');
+
+// Hapus data kelembagaan
+Route::delete('perizinanpvml/kelembagaan/{id}', [KelembagaanPvmlController::class, 'destroy'])->name('kelembagaan.destroy');
+Route::get('/kelembagaan', [KelembagaanController::class, 'index'])->name('kelembagaan.index');
+
+Route::get('/kelembagaan', [KelembagaanController::class, 'index'])->name('kelembagaan');
+
+Route::get('/kelembagaan', [KelembagaanController::class, 'index'])->name('kelembagaan.index');
+
 
 Route::get('/kelembagaan', [KelembagaanPvmlController::class, 'index'])->name('kelembagaan.index');
 Route::post('/kelembagaan', [KelembagaanPvmlController::class, 'store'])->name('kelembagaan.store');
@@ -247,6 +260,7 @@ Route::resource('kelembagaan', KelembagaanController::class);
 Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
 Route::get('/kelembagaan/{id}/edit', [ViewKelembagaanPvmlController::class, 'edit'])->name('kelembagaan.edit');
 Route::put('/kelembagaan/{id}', [ViewKelembagaanPvmlController::class, 'update'])->name('kelembagaan.update');
+Route::post('perizinanpvml/kelembagaan', [KelembagaanController::class, 'store'])->name('kelembagaan.store');
 
 
 
@@ -329,3 +343,30 @@ Route::get('/daftar-ljk', [DaftarljkController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/chart-data', [DashboardController::class, 'getChartData']);
 Route::get('sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
+
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard']);  // Pastikan ini mengarah ke metode dashboard
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+
+
+
+Route::get('/kelembagaan', [KelembagaanController::class, 'index'])->name('kelembagaan.index');
+Route::resource('kelembagaan', KelembagaanController::class);
+
+
+Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
+Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');
+
+
+Route::resource('kelembagaan', KelembagaanController::class);
+Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
+Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');
+Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
+Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');
+Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
+Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');

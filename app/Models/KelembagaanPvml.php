@@ -10,7 +10,7 @@ class KelembagaanPvml extends Model
     use HasFactory;
 
     protected $table = 'kelembagaan_pvml';
-
+    
     protected $fillable = [
         'jenis_industri',
         'nama_perusahaan',

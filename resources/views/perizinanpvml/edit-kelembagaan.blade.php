@@ -8,6 +8,7 @@
         @csrf
         @method('PUT')
 
+
         <div class="form-group">
             <label for="jenis_industri">Jenis Industri:</label>
             <input type="text" class="form-control" id="jenis_industri" name="jenis_industri" value="{{ $kelembagaan->jenis_industri }}" required>

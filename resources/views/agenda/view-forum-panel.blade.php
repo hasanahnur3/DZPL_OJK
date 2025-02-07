@@ -38,13 +38,6 @@
                         <div style="display: flex; justify-content: flex-start; gap: 10px;">
                             <a href="{{ route('forum-panel.edit', $panel->id) }}"
                                 style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                            <form action="{{ route('forum-panel.destroy', $panel->id) }}" method="POST"
-                                style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    style="background-color: #dc3545; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-                            </form>
                         </div>
                     </td>
             @endforeach
