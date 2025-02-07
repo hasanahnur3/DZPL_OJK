@@ -336,32 +336,13 @@
 
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('daftarljk.index') }}" class="nav-link">
                         <i class="fas fa-list"></i>
-                        <span class="menu-text" >Daftar LJK PVML</span>
+                        <span>Daftar LJK PVML</span>
                     </a>
-                    <ul class="dropdown-content">
-                        <li class="sub-item">
-                            <a href="{{ route('list.lembagaKeuanganMikro') }}">Lembaga Keuangan Mikro</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.lpbbti') }}">LPBBTI</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.pergadaian') }}">Pergadaian</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.perusahaanModalVentura') }}">Perusahaan Modal ventura</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.perusahaanPembiayaan') }}">Perusahaan Penbiayaan</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.sueGeneris') }}">Sue Generis</a>
-                        </li>
-                    </ul>
                 </li>
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="daftarPengajuan">
                         <i class="fas fa-file-alt"></i>

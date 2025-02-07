@@ -14,20 +14,5 @@ class Daftarljk extends Model
     public $timestamps = false; // Menonaktifkan timestamp jika tidak digunakan
 
     // Jika Anda hanya ingin memfasilitasi kolom tertentu
-    protected $fillable = [
-        'jenis_industri',
-        'nama_perusahaan',
-        'detail_izin',
-        'status',
-        'nomor_surat_permohonan',
-        'tanggal_surat_permohonan',
-        'tanggal_pengajuan_sistem',
-        'tanggal_dokumen_lengkap',
-        'tanggal_selesai_analisis',
-        'sla',
-        'nomor_surat',
-        'tanggal_surat',
-        'jumlah_hari_kerja',
-        'aksi'
-    ];
+    protected $fillable = ['jenis_industri', 'nama_perusahaan'];
 }

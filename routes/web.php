@@ -373,3 +373,6 @@ Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name(
 
 Route::get('/daftar-ljk', [DaftarljkController::class, 'index'])->name('daftarljk.index');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/daftar-ljk', [DaftarljkController::class, 'index'])->name('daftarljk.index');
+Route::get('/daftar-ljk/{id}/edit', [DaftarljkController::class, 'edit'])->name('daftarljk.edit');
+Route::post('/daftar-ljk/{id}/update', [DaftarljkController::class, 'update'])->name('daftarljk.update');
