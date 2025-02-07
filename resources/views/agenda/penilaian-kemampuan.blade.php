@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: auto;
     padding: 20px; /* Tambahkan padding jika dibutuhkan */
     width: 100%; /* Pastikan memenuhi layar */
 }

@@ -74,7 +74,7 @@ Route::get('/list/lpbbti', [KelembagaanController::class, 'index']);
 Route::get('/list/lpbbti', [KelembagaanController::class, 'index'])->name('list.lpbbti');
 
 Route::post('/kepengurusan/store', [PenilaianController::class, 'store'])->name('kepengurusan.store');
-Route::get('/kepengurusan', [PenilaianController::class, 'index'])->name('kepengurusan');
+Route::get('/kepengurusan', [PenilaianController::class, 'index'])->name('kepengurusan.index');
 
 
 
@@ -90,7 +90,7 @@ Route::post('perizinanpvml/dirkom', [DirkomController::class, 'store'])->name('d
 
 
 // Menampilkan halaman utama dirkom
-Route::get('perizinanpvml/tka', [TkaController::class, 'index'])->name('tka');
+Route::get('perizinanpvml/tka', [TkaController::class, 'index'])->name('tka.index');
 
 // Menampilkan form untuk membuat dirkom baru
 Route::get('perizinanpvml/tka/create', [TkaController::class, 'create'])->name('tka.create');
@@ -317,10 +317,9 @@ Route::put('/forum-panel/{id}', [ForumPanelController::class, 'update'])->name('
 
 Route::get('/sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
 
-
+Route::get('/pkk-agenda/{id}/edit', [PkkAgendaController::class, 'edit'])->name('pkk-agenda.edit');
 Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
 Route::get('/pkk-agenda', [PkkAgendaController::class, 'index'])->name('pkk-agenda.index');
-Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
 
 
 

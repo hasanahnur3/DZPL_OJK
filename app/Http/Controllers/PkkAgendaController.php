@@ -59,7 +59,7 @@ class PkkAgendaController extends Controller
         $agenda = PkkAgenda::findOrFail($id);
         $agenda->update($request->all());
     
-        return redirect()->route('view-penilaian-kemampuan.index')->with('success', 'Agenda berhasil diperbarui');
+        return redirect()->route('pkk-agenda.index')->with('success', 'Agenda berhasil diperbarui');
     }
     
 

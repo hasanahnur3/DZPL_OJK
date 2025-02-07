@@ -50,7 +50,7 @@ class PenilaianController extends Controller
         ViewPenilaian::create($validated);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('kepengurusan')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->route('kepengurusan.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     // Menambahkan metode untuk menampilkan form edit
@@ -87,7 +87,7 @@ class PenilaianController extends Controller
         $penilaian->update($validated);
 
         // Mengarahkan kembali ke halaman dengan pesan sukses
-        return redirect()->route('kepengurusan')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('kepengurusan.index')->with('success', 'Data berhasil diupdate');
     }
 
     // Menambahkan metode untuk menghapus data

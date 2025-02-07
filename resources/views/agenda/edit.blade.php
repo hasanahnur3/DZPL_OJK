@@ -1,14 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Edit Agenda Sosialisasi Riksus</h1>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Seleksi form
+        const form = document.querySelector('form');
+
+        // Tambahkan event listener ke form
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Mencegah pengiriman form secara default
+
+            // Tampilkan SweetAlert2
+            Swal.fire({
+                title: 'Data berhasil diupdate!',
+                text: 'Data Anda telah berhasil dikirim ke server.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim form ke server jika tombol "OK" diklik
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
+
+<div class="form-container">
     <!-- Form untuk edit agenda SOSIALISASI RIKSUS -->
     <form action="{{ route('sosialisasi-riksus.update', $agenda->id) }}" method="POST">
         @csrf
         @method('PUT') <!-- Menyatakan bahwa ini adalah request PUT untuk update -->
-        
+        <h3 style="text-align:center;">Edit Agenda Sosialisasi Riksus</h3>
         <div class="form-group">
             <label for="judul_sosialisasi">Judul Sosialisasi</label>
             <input type="text" name="judul_sosialisasi" class="form-control" value="{{ old('judul_sosialisasi', $agenda->judul_sosialisasi) }}" required>
@@ -32,5 +58,55 @@
         
         <button type="submit" class="btn btn-primary">Update Agenda</button>
     </form>
+
 </div>
+
+<style>
+    
+        /* Pusatkan form di tengah layar */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            padding: 20px;
+            /* Tambahkan padding jika dibutuhkan */
+            width: 100%;
+            /* Pastikan memenuhi layar */
+        }
+
+        /* Styling untuk frame form */
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            /* Lebar maksimal diperbesar */
+        }
+
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 30px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin: 10px;
+        }
+
+        .btn-primary {
+            color:#ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #A91111;
+            height: 30px;
+            width: 100%;
+            /* Tombol melebar */
+        }
+</style>
 @endsection

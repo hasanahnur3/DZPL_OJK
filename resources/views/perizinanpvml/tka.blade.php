@@ -1,54 +1,76 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Form Pengisian TKA</h1>
+<div style="max-width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session('success'))
-        <div>
-            <strong>{{ session('success') }}</strong>
-        </div>
-    @endif
+    <h2 style="text-align: center; color: #333;">Form Pengisian TKA</h2>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
 
-    <form action="{{ route('tka.store') }}" method="POST">
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Data berhasil disimpan!',
+                text: 'Formulir Anda telah berhasil dikirim.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+    </script>
+
+    <form method="POST" action="{{ route('tka.store') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
-        <label for="jenis_industri">Jenis Industri:</label>
-        <input type="text" name="jenis_industri" id="jenis_industri" required><br><br>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
+            <input type="text" name="jenis_industri" id="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="nama_perusahaan">Nama Perusahaan:</label>
-        <input type="text" name="nama_perusahaan" id="nama_perusahaan" required><br><br>
+            <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
+            <input type="text" name="nama_perusahaan" id="nama_perusahaan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="nomor_surat_permohonan">Nomor Surat Permohonan:</label>
-        <input type="text" name="nomor_surat_permohonan" id="nomor_surat_permohonan" required><br><br>
+            <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat Permohonan</label>
+            <input type="text" name="nomor_surat_permohonan" id="nomor_surat_permohonan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="tanggal_surat_permohonan">Tanggal Surat Permohonan:</label>
-        <input type="date" name="tanggal_surat_permohonan" id="tanggal_surat_permohonan" required><br><br>
+            <label for="tanggal_surat_permohonan" style="font-weight: bold; color: #555;">Tanggal Surat Permohonan</label>
+            <input type="date" name="tanggal_surat_permohonan" id="tanggal_surat_permohonan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="status_perizinan">Status Perizinan:</label>
-        <select name="status_perizinan" id="status_perizinan" required>
-            <option value="Dalam proses analisis">Dalam proses analisis</option>
-            <option value="Kelengkapan dok">Kelengkapan dok</option>
-            <option value="Selesai">Selesai</option>
-            <option value="Ditolak/Dikembalikan">Ditolak/Dikembalikan</option>
-        </select><br><br>
+            <label for="status_perizinan" style="font-weight: bold; color: #555;">Status Perizinan</label>
+            <select name="status_perizinan" id="status_perizinan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                <option value="Dalam proses analisis">Dalam proses analisis</option>
+                <option value="Kelengkapan dok">Kelengkapan dok</option>
+                <option value="Selesai">Selesai</option>
+                <option value="Ditolak/Dikembalikan">Ditolak/Dikembalikan</option>
+            </select>
 
-        <label for="jenis_output">Jenis Output:</label>
-        <select name="jenis_output" id="jenis_output" required>
-            <option value="pencatatan">Pencatatan</option>
-            <option value="penolakan">Penolakan</option>
-        </select><br><br>
+            <label for="jenis_output" style="font-weight: bold; color: #555;">Jenis Output</label>
+            <select name="jenis_output" id="jenis_output" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                <option value="pencatatan">Pencatatan</option>
+                <option value="penolakan">Penolakan</option>
+            </select>
+        </div>
 
-        <label for="tanggal_dok_lengkap">Tanggal Dokumen Lengkap:</label>
-        <input type="date" name="tanggal_dok_lengkap" id="tanggal_dok_lengkap"><br><br>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>
+            <input type="date" name="tanggal_dok_lengkap" id="tanggal_dok_lengkap" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="no_surat_pencatatan">No Surat Pencatatan:</label>
-        <input type="text" name="no_surat_pencatatan" id="no_surat_pencatatan"><br><br>
+            <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">No Surat Pencatatan</label>
+            <input type="text" name="no_surat_pencatatan" id="no_surat_pencatatan" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="tanggal_surat_pencatatan">Tanggal Surat Pencatatan:</label>
-        <input type="date" name="tanggal_surat_pencatatan" id="tanggal_surat_pencatatan"><br><br>
+            <label for="tanggal_surat_pencatatan" style="font-weight: bold; color: #555;">Tanggal Surat Pencatatan</label>
+            <input type="date" name="tanggal_surat_pencatatan" id="tanggal_surat_pencatatan" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <label for="jumlah_hari_kerja">Jumlah Hari Kerja:</label>
-        <input type="text" name="jumlah_hari_kerja" id="jumlah_hari_kerja"><br><br>
+            <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
+            <input type="text" name="jumlah_hari_kerja" id="jumlah_hari_kerja" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-        <button type="submit">Simpan</button>
+            <button type="submit" style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Simpan</button>
+        </div>
     </form>
-    @endsection
+</div>
+@endsection
