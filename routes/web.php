@@ -376,3 +376,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/daftar-ljk', [DaftarljkController::class, 'index'])->name('daftarljk.index');
 Route::get('/daftar-ljk/{id}/edit', [DaftarljkController::class, 'edit'])->name('daftarljk.edit');
 Route::post('/daftar-ljk/{id}/update', [DaftarljkController::class, 'update'])->name('daftarljk.update');
+
+
+
+Route::get('/daftarljk', [DaftarljkController::class, 'index'])->name('daftarljk.index'); // Tampilkan daftar LJK
+Route::get('/daftarljk/create', [DaftarljkController::class, 'create'])->name('daftarljk.create'); // Form tambah data
+Route::post('/daftarljk', [DaftarljkController::class, 'store'])->name('daftarljk.store'); // Simpan data baru
+Route::get('/daftarljk/{id}/edit', [DaftarljkController::class, 'edit'])->name('daftarljk.edit'); // Form edit data
+Route::post('/daftarljk/{id}', [DaftarljkController::class, 'update'])->name('daftarljk.update'); // Update data
+Route::delete('/daftarljk/{id}', [DaftarljkController::class, 'destroy'])->name('daftarljk.destroy'); // Hapus data
