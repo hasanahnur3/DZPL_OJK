@@ -9,10 +9,9 @@ class DaftarljkController extends Controller
 {
     public function index()
     {
-        // Ambil data dari tabel kelembagaan
-        $kelembagaan = Daftarljk::all();
+        // Ambil semua data dari tabel kelembagaan
+        $ljkList = Daftarljk::all();
         
-        // Kirim data ke view daftar-ljk
-        return view('daftar-ljk', compact('kelembagaan'));
+        return view('daftar-ljk', compact('ljkList'));
     }
 }

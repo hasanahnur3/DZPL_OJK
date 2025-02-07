@@ -14,8 +14,9 @@
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:5%;">No</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:20%;">Hari/Tanggal</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:35%">Topik</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:40%;" >Hasil</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:30%;">Topik</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:35%;">Hasil</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; width:10%;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,9 @@
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->tanggal }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->topik }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->hasil }}</td>
+                <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                    <a href="{{ route('rapim.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -60,6 +64,19 @@
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
+    }
+    .btn-warning {
+        background-color: #ffc107;
+        border: 2px solid #ffc107;
+        border-radius: 8px;
+        padding: 5px 10px;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-warning:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
     }
     table {
         width: 100%;

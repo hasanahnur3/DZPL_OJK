@@ -9,7 +9,7 @@ class Daftarljk extends Model
 {
     use HasFactory;
 
-    protected $table = 'kelembagaan'; // Nama tabel
+    protected $table = 'kelembagaan_pvml'; // Nama tabel
     protected $primaryKey = 'id'; // Primary key tabel
     public $timestamps = false; // Menonaktifkan timestamp jika tidak digunakan
 

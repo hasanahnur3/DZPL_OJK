@@ -12,10 +12,18 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
 
         .menu-toggle {
             display: none;
@@ -27,12 +35,13 @@
             font-size: 1.5rem;
             color: white;
             cursor: pointer;
+            z-index: 10; /* Ensure it's above the sidebar */
         }
 
         .container {
             display: flex;
-            flex-direction: row;
-            min-height: 100vh;
+            flex-grow: 1; /* Key: Allow container to grow and fill available space */
+            height: 100%; /* Important: Set container height to 100% */
         }
 
         .sidebar {
@@ -40,6 +49,8 @@
             background-color: #A91111;
             padding: 1rem;
             transition: transform 0.3s ease-in-out;
+            overflow-y: auto; /* Add scroll if content overflows */
+            color: white; /* Text color in sidebar */
         }
 
         .logo {
@@ -60,13 +71,13 @@
             display: flex;
             align-items: center;
             padding: 0.75rem;
-            color: #333;
+            color: white; /* Link color */
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
         .nav-link:hover {
-            background-color: #D0D0D0;
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
         }
 
         .dropdown-content {
@@ -85,32 +96,27 @@
         }
 
         .main-content {
-            flex: 1;
+            flex: 1; /* Key: Allow main content to take up remaining space */
             padding: 2rem;
             background-color: #f5f5f5;
-        }
-
-        .industry-dropdown {
-            text-align: right;
-            margin-bottom: 1rem;
-        }
-
-        select {
-            padding: 0.5rem;
-            border-radius: 4px;
+            overflow-y: auto; /* Add scroll if content overflows */
+            height: 100%; /* Important: Set main content height to 100% */
         }
 
         .chart-container {
             background-color: white;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100%; /* Important: Chart container should also be 100% height */
         }
-        span{
+
+        span {
             margin-left: 10px;
         }
-        span, i{
-            color: #ffffff;
+
+        span, i {
+            color: white;
         }
 
         /* Responsive Styles */
@@ -118,29 +124,36 @@
             .menu-toggle {
                 display: block;
             }
+
             .container {
                 flex-direction: column;
             }
+
             .sidebar {
                 width: 250px;
                 position: fixed;
                 left: -250px;
                 top: 0;
-                height: 100vh; /* Menjadikan sidebar penuh dari atas ke bawah */
-                background-color: #E0E0E0;
+                height: 100%; /* Sidebar takes full height on mobile */
+                background-color: #A91111; /* Keep the dark background */
                 padding: 1rem;
                 transition: left 0.3s ease-in-out;
-                overflow-y: auto; /* Jika konten lebih panjang dari layar, bisa di-scroll */
+                overflow-y: auto;
+                z-index: 11; /* Ensure sidebar is above main content */
             }
+
             .sidebar.active {
                 left: 0;
             }
+
             .main-content {
                 padding: 1rem;
             }
+
             .industry-dropdown {
                 text-align: center;
             }
+
             select {
                 width: 100%;
             }
@@ -150,7 +163,7 @@
 <body>
 
 
-    <div class="container">
+     <div class="container">
         <nav class="sidebar">
             <div class="logo">
                <a href="{{ route('dashboard') }}">  <img src="img/logo.jpg" alt="OJK Logo" style="max-width: 150px;"></a>
@@ -201,31 +214,11 @@
                                                
                     </ul>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('daftarljk.index') }}" class="nav-link">
                         <i class="fas fa-list"></i>
                         <span>Daftar LJK PVML</span>
                     </a>
-                    <ul class="dropdown-content">
-                        <li class="sub-item">
-                            <a href="{{ route('list.lembagaKeuanganMikro') }}">Lembaga Keuangan Mikro</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.lpbbti') }}">LPBBTI</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.pergadaian') }}">Pergadaian</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.perusahaanModalVentura') }}">Perusahaan Modal ventura</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.perusahaanPembiayaan') }}">Perusahaan Penbiayaan</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('list.sueGeneris') }}">Sue Generis</a>
-                        </li>                        
-                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">

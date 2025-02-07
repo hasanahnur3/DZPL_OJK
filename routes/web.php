@@ -369,3 +369,7 @@ Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->na
 Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');
 Route::get('/kelembagaan/{id}/edit', [KelembagaanController::class, 'edit'])->name('kelembagaan.edit');
 Route::put('/kelembagaan/{id}', [KelembagaanController::class, 'update'])->name('kelembagaan.update');
+
+
+Route::get('/daftar-ljk', [DaftarljkController::class, 'index'])->name('daftarljk.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

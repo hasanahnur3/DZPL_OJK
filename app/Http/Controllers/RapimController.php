@@ -30,9 +30,10 @@ class RapimController extends Controller
 
     public function edit($id)
     {
-        $rapim = Rapim::findOrFail($id);  // Mencari rapim berdasarkan ID
+        $rapim = Rapim::findOrFail($id);
         return view('agenda.edit-rapim', compact('rapim'));
     }
+    
 
     // Method untuk memproses update data rapim
     // Method untuk memproses update data rapim

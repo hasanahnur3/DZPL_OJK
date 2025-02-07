@@ -23,22 +23,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($kelembagaan as $data)
+            @foreach($ljkList as $ljk)
                 <tr>
-                    <td>{{ $data->jenis_industri }}</td>
-                    <td>{{ $data->nama_perusahaan }}</td>
-                    <td>{{ $data->detail_izin }}</td>
-                    <td>{{ $data->status }}</td>
-                    <td>{{ $data->nomor_surat_permohonan }}</td>
-                    <td>{{ $data->tanggal_surat_permohonan }}</td>
-                    <td>{{ $data->tanggal_pengajuan_sistem }}</td>
-                    <td>{{ $data->tanggal_dokumen_lengkap }}</td>
-                    <td>{{ $data->tanggal_selesai_analisis }}</td>
-                    <td>{{ $data->sla }}</td>
-                    <td>{{ $data->nomor_surat }}</td>
-                    <td>{{ $data->tanggal_surat }}</td>
-                    <td>{{ $data->jumlah_hari_kerja }}</td>
-                    <td>{{ $data->aksi }}</td>
+                    <td>{{ $ljk->jenis_industri }}</td>
+                    <td>{{ $ljk->nama_perusahaan }}</td>
+                    <td>{{ $ljk->detail_izin }}</td>
+                    <td>{{ $ljk->status }}</td>
+                    <td>{{ $ljk->nomor_surat_permohonan }}</td>
+                    <td>{{ $ljk->tanggal_surat_permohonan }}</td>
+                    <td>{{ $ljk->tanggal_pengajuan_sistem }}</td>
+                    <td>{{ $ljk->tanggal_dokumen_lengkap }}</td>
+                    <td>{{ $ljk->tanggal_selesai_analisis }}</td>
+                    <td>{{ $ljk->sla }}</td>
+                    <td>{{ $ljk->nomor_surat }}</td>
+                    <td>{{ $ljk->tanggal_surat }}</td>
+                    <td>{{ $ljk->jumlah_hari_kerja }}</td>
+                    <td>{{ $ljk->aksi }}</td>
                 </tr>
             @endforeach
         </tbody>
