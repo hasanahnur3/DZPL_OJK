@@ -4,7 +4,7 @@
 <div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <h2 style="text-align: center; color: #333; ">Tambah Daftar Penilaian Kemampuan & Kepatutan</h2><br><br>
+    <h2 style="text-align: center; color: #333; ">Tambah Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Seleksi form
@@ -16,7 +16,7 @@
 
             // Tampilkan SweetAlert2
             Swal.fire({
-                title: 'Data berhasil disimpan!',
+                title: 'Data berhasil diupdate!',
                 text: 'Data Anda telah berhasil dikirim ke server.',
                 icon: 'success',
                 confirmButtonText: 'OK',
