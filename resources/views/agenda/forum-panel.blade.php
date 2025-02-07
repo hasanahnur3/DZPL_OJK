@@ -82,7 +82,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 90vh;
+            height: auto;
             padding: 20px;
             /* Tambahkan padding jika dibutuhkan */
             width: 100%;
