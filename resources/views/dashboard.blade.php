@@ -6,14 +6,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
-        /* body, html, .container-fluid {
+         body, html, .container-fluid {
             height: 100%;
             margin: 0;
             padding: 0;
-        } */
+        } 
+         .container {
+            margin: 0px;
+        padding: 0px;
+         }
 
         .container-fluid {
-            padding: 20px;
+            margin: 0px;
+        padding: 0px;
             background: #f4f6f9;
             width: 100%;
             max-width: 100%;
