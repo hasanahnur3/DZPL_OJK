@@ -1,59 +1,83 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Daftar Direksi Komisaris
-                    <a href="{{ route('dirkom.create') }}" class="btn btn-primary float-end">Tambah Data</a>
-                </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-                <div class="card-body">
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Direksi Komisaris</h2>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Jenis Industri</th>
-                                <th>Nama Perusahaan</th>
-                                <th>Nomor Surat Permohonan</th>
-                                <th>Tanggal Surat Permohonan</th>
-                                <th>Status Perizinan</th>
-                                <th>Jenis Output</th>
-                                <th>Tanggal Dokumen Lengkap</th>
-                                <th>No Surat Pencatatan</th>
-                                <th>Tanggal Surat Pencatatan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($dirkoms as $dirkom)
-                                <tr>
-                                    <td>{{ $dirkom->jenis_industri }}</td>
-                                    <td>{{ $dirkom->nama_perusahaan }}</td>
-                                    <td>{{ $dirkom->nomor_surat_permohonan }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($dirkom->tanggal_surat_permohonan)->format('Y-m-d') }}</td>
-                                    <td>{{ $dirkom->status_perizinan }}</td>
-                                    <td>{{ $dirkom->jenis_output }}</td>
-                                    <td>{{ $dirkom->tanggal_dok_lengkap ? \Carbon\Carbon::parse($dirkom->tanggal_dok_lengkap)->format('Y-m-d') : '-' }}</td>
-                                    <td>{{ $dirkom->no_surat_pencatatan }}</td>
-                                    <td>{{ $dirkom->tanggal_surat_pencatatan ? \Carbon\Carbon::parse($dirkom->tanggal_surat_pencatatan)->format('Y-m-d') : '-' }}</td>
-                                    <td>
-                                        <a href="{{ route('dirkom.edit', $dirkom->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="overflow-x: auto;">
+    <table id="dirkomTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+            <tr>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat Permohonan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Permohonan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status Perizinan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Output</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dokumen Lengkap</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No Surat Pencatatan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Pencatatan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($dirkoms as $dirkom)
+                <tr>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->jenis_industri }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->nama_perusahaan }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->nomor_surat_permohonan }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ \Carbon\Carbon::parse($dirkom->tanggal_surat_permohonan)->format('Y-m-d') }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->status_perizinan }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->jenis_output }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
+                        {{ $dirkom->tanggal_dok_lengkap ? \Carbon\Carbon::parse($dirkom->tanggal_dok_lengkap)->format('Y-m-d') : '-' }}
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $dirkom->no_surat_pencatatan }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
+                        {{ $dirkom->tanggal_surat_pencatatan ? \Carbon\Carbon::parse($dirkom->tanggal_surat_pencatatan)->format('Y-m-d') : '-' }}
+                    </td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                        <a href="{{ route('dirkom.edit', $dirkom->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+
+<div style="text-align: right; margin-bottom: 1rem;" class="button-container">
+    <a href="{{ route('dirkom.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Tambah Data</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#dirkomTable').DataTable();
+    });
+</script>
+<style>
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
 @endsection

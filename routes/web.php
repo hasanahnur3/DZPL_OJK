@@ -90,7 +90,7 @@ Route::post('perizinanpvml/dirkom', [DirkomController::class, 'store'])->name('d
 
 
 // Menampilkan halaman utama dirkom
-Route::get('perizinanpvml/tka', [TkaController::class, 'index'])->name('tka');
+Route::get('perizinanpvml/tka', [TkaController::class, 'index'])->name('tka.index');
 
 // Menampilkan form untuk membuat dirkom baru
 Route::get('perizinanpvml/tka/create', [TkaController::class, 'create'])->name('tka.create');

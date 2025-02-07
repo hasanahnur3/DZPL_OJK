@@ -38,7 +38,7 @@ class TkaController extends Controller
 
         Tka::create($request->all());
 
-        return redirect()->route('tka.create')->with('success', 'Data berhasil disimpan');
+        return redirect()->route('tka.index')->with('success', 'Data berhasil disimpan');
     }
 
     // Menampilkan form edit data
