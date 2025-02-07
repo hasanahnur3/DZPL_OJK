@@ -6,11 +6,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
-        body, html, .container-fluid {
+        /* body, html, .container-fluid {
             height: 100%;
             margin: 0;
             padding: 0;
-        }
+        } */
 
         .container-fluid {
             padding: 20px;
@@ -61,7 +61,7 @@
         }
     </style>
 
-    <div class="container-fluid">
+    <div>
         <div class="row mb-4">
             <div class="col-md-12">
                 <div class="card p-3">

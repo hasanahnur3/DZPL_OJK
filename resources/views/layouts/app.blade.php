@@ -20,16 +20,9 @@
             min-height: 100vh;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Ensure body takes full viewport height */
-        }
-
-        /* .menu-toggle {
+/* 
+        .menu-toggle {
             display: none;
-            position: absolute;
             top: 15px;
             left: 15px;
             background: none;
@@ -41,7 +34,7 @@
 
         .container {
             display: flex;
-            /* flex-direction: row; */
+            flex-direction: row;
             width: 100%;
         }
 
@@ -51,7 +44,7 @@
             color: white;
             display: flex;
             flex-direction: column;
-            /* padding: 1rem; */
+            padding: 1rem;
             transition: transform 0.3s ease-in-out;
             position: relative;
         }
@@ -144,13 +137,13 @@
             display: flex;
             align-items: center;
             padding: 0.75rem;
-            color: white; /* Link color */
+            color: #333;
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
         .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white on hover */
+            background-color: #D0D0D0;
         }
 
         .dropdown-content {
@@ -169,11 +162,19 @@
         }
 
         .main-content {
-            flex: 1; /* Key: Allow main content to take up remaining space */
+            flex: 1;
             padding: 2rem;
             background-color: #f5f5f5;
-            overflow-y: auto; /* Add scroll if content overflows */
-            height: 100%; /* Important: Set main content height to 100% */
+        }
+
+        .industry-dropdown {
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+
+        select {
+            padding: 0.5rem;
+            border-radius: 4px;
         }
 
         .chart-container {
@@ -283,7 +284,7 @@
 <body>
 
 
-     <div class="container">
+    <div class="container">
         <nav class="sidebar">
             <div class="logo">
                 <a href="{{ route('dashboard') }}"> <img src="img/logo.jpg" alt="OJK Logo"
@@ -335,8 +336,8 @@
 
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('daftarljk.index') }}" class="nav-link">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-list"></i>
                         <span class="menu-text" >Daftar LJK PVML</span>
                     </a>
