@@ -303,10 +303,9 @@ Route::put('/forum-panel/{id}', [ForumPanelController::class, 'update'])->name('
 
 Route::get('/sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
 
-
+Route::get('/pkk-agenda/{id}/edit', [PkkAgendaController::class, 'edit'])->name('pkk-agenda.edit');
 Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
 Route::get('/pkk-agenda', [PkkAgendaController::class, 'index'])->name('pkk-agenda.index');
-Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
 
 
 

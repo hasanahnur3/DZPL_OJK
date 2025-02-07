@@ -1,12 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Seleksi form
+        const form = document.querySelector('form');
+
+        // Tambahkan event listener ke form
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Mencegah pengiriman form secara default
+
+            // Tampilkan SweetAlert2
+            Swal.fire({
+                title: 'Data berhasil diupdate!',
+                text: 'Data Anda telah berhasil dikirim ke server.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Kirim form ke server jika tombol "OK" diklik
+                    form.submit();
+                }
+            });
+        });
+    });
+</script>
 <div class="form-container">
 <form action="{{ route('forum-panel.update', $forumPanel->id) }}" method="POST">
     @csrf
     @method('PUT')  <!-- Pastikan method PUT ada di sini -->
  <!-- Pastikan menggunakan method PUT untuk update -->
+ <h3 style="text-align:center;">Edit Agenda Forum Panel</h3>
     <div class="form-group">
     <label>Nama Perusahaan:</label>
     <input class="form-control"type="text" name="nama_perusahaan" value="{{ old('nama_perusahaan', $forumPanel->nama_perusahaan) }}" required><br>
