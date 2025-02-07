@@ -16,10 +16,12 @@
 
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
         }
 
 
-        .menu-toggle {
+        /* .menu-toggle {
             display: none;
             position: absolute;
             top: 15px;
@@ -29,19 +31,93 @@
             font-size: 1.5rem;
             color: white;
             cursor: pointer;
-        }
+        } */
 
         .container {
             display: flex;
-            flex-direction: row;
-            min-height: 100vh;
+            /* flex-direction: row; */
+            width: 100%;
         }
 
         .sidebar {
             width: 250px;
             background-color: #A91111;
-            padding: 1rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            /* padding: 1rem; */
             transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .sidebar .logo img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.collapsed .logo img {
+            transform: scale(0.7);
+        }
+
+        .sidebar .nav-menu {
+            list-style: none;
+            padding: 1rem;
+        }
+
+        .sidebar .nav-item {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #D84343;
+        }
+
+        .sidebar .menu-text {
+            margin-left: 10px;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .sidebar.collapsed .menu-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar .toggle-btn {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #D84343;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .sidebar .toggle-btn:hover {
+            background-color: #FF5757;
         }
 
         .logo {
@@ -108,7 +184,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
+/* 
         span {
             margin-left: 10px;
         }
@@ -116,7 +192,7 @@
         span,
         i {
             color: #ffffff;
-        }
+        } */
 
         /* Awal: Sembunyikan submenu */
         .dropdown-menu {
@@ -219,13 +295,13 @@
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="fas fa-home"></i>
-                        <span>Dashboard</span>
+                        <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <i class="fas fa-clock"></i>
-                        <span>Pending Matters</span>
+                        <span class="menu-text">Pending Matters</span>
                     </a>
                     <ul class="dropdown-content">
                         <li class="sub-item">
@@ -243,7 +319,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <i class="fas fa-calendar"></i>
-                        <span>Agenda DZPL</span>
+                        <span class="menu-text">Agenda DZPL</span>
                     </a>
                     <ul class="dropdown-content">
                         <li class="sub-item">
@@ -264,7 +340,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
                         <i class="fas fa-list"></i>
-                        <span>Daftar LJK PVML</span>
+                        <span class="menu-text" >Daftar LJK PVML</span>
                     </a>
                     <ul class="dropdown-content">
                         <li class="sub-item">
@@ -290,7 +366,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="daftarPengajuan">
                         <i class="fas fa-file-alt"></i>
-                        <span>Pengajuan Perizinan PVML</span>
+                        <span class="menu-text" >Pengajuan Perizinan PVML</span>
                     </a>
                     <ul class="dropdown-content" id="perizinanPVML">
                         <li class="sub-item">
@@ -311,6 +387,7 @@
                     </ul>
                 </li>
             </ul>
+            <button class="toggle-btn" id="toggleSidebar">☰</button>
         </nav>
 
 
@@ -338,6 +415,19 @@
             document.querySelector('.sidebar').classList.toggle('active');
         });
 
+        document.querySelector('.toggle-button').addEventListener('click', function () {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            sidebar.classList.toggle('small');
+        });
+
+    </script>
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('collapsed');
+        });
     </script>
 </body>
 
