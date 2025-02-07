@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard PVML</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!-- asli -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- asli -->
     <style>
         * {
             margin: 0;
@@ -104,56 +106,114 @@
             background-color: white;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        span{
+
+        span {
             margin-left: 10px;
         }
-        span, i{
+
+        span,
+        i {
             color: #ffffff;
         }
+
+        /* Awal: Sembunyikan submenu */
+        .dropdown-menu {
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            min-width: 200px;
+            z-index: 1000;
+            left: 0;
+            /* Menjaga menu tetap di bawah item parent */
+            top: 100%;
+            /* Menu muncul di bawah item induk */
+        }
+
+        /* Tampilkan submenu ketika parent di-hover */
+        .sub-item:hover>.dropdown-menu {
+            display: block;
+        }
+
+        /* Submenu item styling */
+        .dropdown-menu li {
+            padding: 10px 20px;
+        }
+
+        .dropdown-menu li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .sub-item {
+            position: relative;
+        }
+
 
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .menu-toggle {
                 display: block;
             }
+
             .container {
                 flex-direction: column;
             }
+
             .sidebar {
                 width: 250px;
                 position: fixed;
                 left: -250px;
                 top: 0;
-                height: 100vh; /* Menjadikan sidebar penuh dari atas ke bawah */
+                height: 100vh;
+                /* Menjadikan sidebar penuh dari atas ke bawah */
                 background-color: #E0E0E0;
                 padding: 1rem;
                 transition: left 0.3s ease-in-out;
-                overflow-y: auto; /* Jika konten lebih panjang dari layar, bisa di-scroll */
+                overflow-y: auto;
+                /* Jika konten lebih panjang dari layar, bisa di-scroll */
             }
+
             .sidebar.active {
                 left: 0;
             }
+
             .main-content {
                 padding: 1rem;
             }
+
             .industry-dropdown {
                 text-align: center;
             }
+
             select {
                 width: 100%;
             }
         }
     </style>
 </head>
+
 <body>
 
 
     <div class="container">
         <nav class="sidebar">
             <div class="logo">
-               <a href="{{ route('dashboard') }}">  <img src="img/logo.jpg" alt="OJK Logo" style="max-width: 150px;"></a>
+                <a href="{{ route('dashboard') }}"> <img src="img/logo.jpg" alt="OJK Logo"
+                        style="max-width: 150px;"></a>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -198,7 +258,7 @@
                         <li class="sub-item">
                             <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
                         </li>
-                                               
+
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -224,47 +284,36 @@
                         </li>
                         <li class="sub-item">
                             <a href="{{ route('list.sueGeneris') }}">Sue Generis</a>
-                        </li>                        
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">
+                    <a class="nav-link" id="daftarPengajuan">
                         <i class="fas fa-file-alt"></i>
-                        <span>Daftar Pengajuan</span>
+                        <span>Pengajuan Perizinan PVML</span>
                     </a>
-                    <ul class="dropdown-content">
+                    <ul class="dropdown-content" id="perizinanPVML">
                         <li class="sub-item">
-                            <a href="#">Perizinan PVML</a>
-                            <ul class="sub-dropdown-content">
-                                <li class="sub-item">
-                                    <a href="{{ route('kepengurusan.index') }}">Kepengurusan</a>
-                                </li>
-                                <li class="sub-item">
-                                    <a href="{{ route('kelembagaan.index') }}">Kelembagaan</a>
-                                </li>
-                                <li class="sub-item dropdown">
-                                    <a href="{{ route('pkk') }}">PKK</a>
-                                </li>
-                                <li class="sub-item dropdown">
-                                    <a href="{{ route('dirkom') }}">Dirkom</a>
-                                </li>
-                                <li class="sub-item dropdown">
-                                    <a href="{{ route('tka') }}">TKA</a>
-                                </li>
+                            <a class="nav-link" id="kepengurusan">Kepengurusan</a>
+                            <ul class="dropdown-menu" id="kepengurusanMenu">
+                                <li><a href="{{ route('pkk') }}">PKK</a></li>
+                                <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
+                                <li><a href="{{ route('tka') }}">TKA</a></li>
                             </ul>
                         </li>
                         <li class="sub-item">
-                            <a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('riksus') }}">Riksus</a>
+                            <a class="nav-link" id="kelembagaan">Kelembagaan</a>
+                            <ul class="dropdown-menu" id="kelembagaanMenu">
+                                <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
+                                <li><a href="{{ route('riksus') }}">Riksus</a></li>
+                            </ul>
                         </li>
                     </ul>
-                </li>     
+                </li>
             </ul>
         </nav>
-        
-    
+
+
         <main class="main-content">
 
             <div class="chart-container">
@@ -275,7 +324,7 @@
 
     <script>
         document.querySelectorAll('.nav-item > .nav-link').forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 const parentItem = this.parentElement;
                 const dropdownContent = parentItem.querySelector('.dropdown-content');
                 if (dropdownContent) {
@@ -285,11 +334,11 @@
             });
         });
 
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
             document.querySelector('.sidebar').classList.toggle('active');
         });
+
     </script>
 </body>
+
 </html>
-
-
