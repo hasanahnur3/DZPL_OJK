@@ -6,6 +6,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
+        /* Override container styles */
+    .container-fluid {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        width: 100vw !important;
+    }
+
+    /* Ensure row takes full width */
+    .row {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Override any padding from app.blade.php */
+    main.main-content {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Existing styles... */
+    .container {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
         body, html, .container-fluid {
             height: 100%;
             margin: 0;
@@ -14,7 +44,7 @@
 
         .container-fluid {
             margin: 0px;
-            padding: 20px;
+            padding: 0px;
             background: #f4f6f9;
             width: 100%;
             max-width: 100%;
@@ -55,11 +85,11 @@
             background: #218838;
         }
 
-        Tambahkan style ini untuk memastikan chart responsif
         canvas {
             max-width: 100%;
             height: auto;
         }
+        
     </style>
 
     <div class="container-fluid">

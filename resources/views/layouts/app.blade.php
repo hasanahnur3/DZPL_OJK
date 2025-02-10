@@ -18,6 +18,8 @@
             font-family: Arial, sans-serif;
             display: flex;
             min-height: 100vh;
+            margin: 0px;
+            padding: 0px;
         }
 
         /* 
@@ -50,8 +52,6 @@
             position: relative;
             /* Sidebar tetap 250px */
             background-color: #A91111;
-            overflow-y: auto;
-
         }
 
         .sidebar.collapsed {
@@ -206,7 +206,7 @@
             margin: 0;
             padding: 0;
             position: absolute;
-            background-color: #f8f9fa;
+            background-color: #faf8f8;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             min-width: 200px;

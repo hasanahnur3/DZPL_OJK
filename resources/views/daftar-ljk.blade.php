@@ -78,6 +78,8 @@
 <div class="full-container">
     <div class="table-container">
         <h2>Daftar LJK PVML</h2>
+        <a href="{{ route('daftarljk.create') }}" class="btn btn-primary">Add Data</a>
+
         <table class="table">
             <thead>
                 <tr>
