@@ -9,6 +9,7 @@
         body, html, .container-fluid {
             height: 100%;
             margin: 0;
+            padding: 0;
         }
 
         .container-fluid {
@@ -29,7 +30,7 @@
             border-radius: 15px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease-in-out;
-            width: 100%; /* Pastikan card memenuhi lebar kolom
+            width: 100%; /* Pastikan card memenuhi lebar kolom */
         }
 
         .card:hover {
@@ -54,7 +55,7 @@
             background: #218838;
         }
 
-        /* Tambahkan style ini untuk memastikan chart responsif */
+        Tambahkan style ini untuk memastikan chart responsif
         canvas {
             max-width: 100%;
             height: auto;
