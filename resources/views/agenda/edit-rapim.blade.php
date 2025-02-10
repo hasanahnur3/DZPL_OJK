@@ -30,11 +30,12 @@
     });
 </script>
     <div class="form-container">
-        <h2>Edit Agenda Rapat Pimpinan (Rapim)</h2>
+        
         {{-- Form untuk Edit Agenda --}}
         <form action="{{ route('rapim.update', $rapim->id) }}" method="POST">
             @csrf
             @method('PUT')  <!-- Menambahkan metode PUT untuk update -->
+            <h2>Edit Agenda Rapat Pimpinan (Rapim)</h2>
             <div class="form-group">
                 <label for="tanggal">Hari/Tanggal</label>
                 <input type="date" name="tanggal" class="form-control" value="{{ $rapim->tanggal }}" required>

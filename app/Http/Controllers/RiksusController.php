@@ -49,7 +49,7 @@ public function store(Request $request)
         'tanggal_lhpk_ke_dpjk' => 'nullable|date',
         'no_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|string',
         'tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|date',
-        'tanggal_kpkp' => 'nullable|date',
+        'tanggal_kkpk' => 'nullable|date',
         'no_siputri' => 'nullable|string',
         'tanggal_siputri' => 'nullable|date',
         'tanggal_persetujuan_kadep' => 'nullable|date',
@@ -78,7 +78,7 @@ public function store(Request $request)
     $riksus->tanggal_lhpk_ke_dpjk = $request->tanggal_lhpk_ke_dpjk;
     $riksus->no_nd_penyampaian_lhpk_ke_pengawas_dpjk = $request->no_nd_penyampaian_lhpk_ke_pengawas_dpjk;
     $riksus->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk = $request->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk;
-    $riksus->tanggal_kpkp = $request->tanggal_kpkp;
+    $riksus->tanggal_kkpk = $request->tanggal_kkpk;
     $riksus->no_siputri = $request->no_siputri;
     $riksus->tanggal_siputri = $request->tanggal_siputri;
     $riksus->tanggal_persetujuan_kadep = $request->tanggal_persetujuan_kadep;
@@ -121,7 +121,7 @@ public function store(Request $request)
         'tanggal_lhpk_ke_dpjk' => 'nullable|date',
         'no_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable',
         'tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|date',
-        'tanggal_kpkp' => 'nullable|date',
+        'tanggal_kkpk' => 'nullable|date',
         'no_siputri' => 'nullable',
         'tanggal_siputri' => 'nullable|date',
         'tanggal_persetujuan_kadep' => 'nullable|date',
