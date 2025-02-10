@@ -6,19 +6,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
-         body, html, .container-fluid {
+        body, html, .container-fluid {
             height: 100%;
             margin: 0;
             padding: 0;
-        } 
-         .container {
-            margin: 0px;
-        padding: 0px;
-         }
+        }
 
         .container-fluid {
             margin: 0px;
-        padding: 0px;
+            padding: 20px;
             background: #f4f6f9;
             width: 100%;
             max-width: 100%;
@@ -59,14 +55,14 @@
             background: #218838;
         }
 
-        /* Tambahkan style ini untuk memastikan chart responsif */
+        Tambahkan style ini untuk memastikan chart responsif
         canvas {
             max-width: 100%;
             height: auto;
         }
     </style>
 
-    <div>
+    <div class="container-fluid">
         <div class="row mb-4">
             <div class="col-md-12">
                 <div class="card p-3">

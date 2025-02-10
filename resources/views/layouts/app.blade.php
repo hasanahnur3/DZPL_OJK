@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-/* 
+        /* 
         .menu-toggle {
             display: none;
             top: 15px;
@@ -36,21 +36,26 @@
             display: flex;
             flex-direction: row;
             width: 100%;
+            min-height: 100vh;
+            transition: all 0.3s ease-in-out;
         }
 
         .sidebar {
             width: 250px;
-            background-color: #A91111;
             color: white;
             display: flex;
             flex-direction: column;
             padding: 1rem;
             transition: transform 0.3s ease-in-out;
             position: relative;
+            /* Sidebar tetap 250px */
+            background-color: #A91111;
+            overflow-y: auto;
+
         }
 
         .sidebar.collapsed {
-            width: 80px;
+            width: 100px;
         }
 
         .sidebar .logo {
@@ -183,7 +188,8 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-/* 
+
+        /* 
         span {
             margin-left: 10px;
         }
@@ -239,7 +245,7 @@
 
 
         /* Responsive Styles */
-        @media (max-width: 1024px) {
+        @media (max-width: 1300px) {
             .menu-toggle {
                 display: block;
             }
@@ -339,14 +345,14 @@
                 <li class="nav-item">
                     <a href="{{ route('daftarljk.index') }}" class="nav-link">
                         <i class="fas fa-list"></i>
-                        <span>Daftar LJK PVML</span>
+                        <span class="menu-text">Daftar LJK PVML</span>
                     </a>
                 </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="daftarPengajuan">
                         <i class="fas fa-file-alt"></i>
-                        <span class="menu-text" >Pengajuan Perizinan PVML</span>
+                        <span class="menu-text">Pengajuan Perizinan PVML</span>
                     </a>
                     <ul class="dropdown-content" id="perizinanPVML">
                         <li class="sub-item">
