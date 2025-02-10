@@ -145,10 +145,10 @@
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                 value="{{ old('tanggal_lhpk_ke_dpjk', $riksus->tanggal_lhpk_ke_dpjk) }}">
 
-            <label for="no_nd_penyampaian_lhpk_ke_pengawas_dpjks" style="font-weight: bold; color: #555;">Nomor ND Penyampaian LHPK ke DPJK</label>
-            <input type="text" name="no_nd_penyampaian_lhpk_ke_pengawas_dpjks"
+            <label for="no_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="font-weight: bold; color: #555;">Nomor ND Penyampaian LHPK ke DPJK</label>
+            <input type="text" name="no_nd_penyampaian_lhpk_ke_pengawas_dpjk"
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                value="{{ old('no_nd_penyampaian_lhpk_ke_pengawas_dpjks', $riksus->no_nd_penyampaian_lhpk_ke_pengawas_dpjks) }}">
+                value="{{ old('no_nd_penyampaian_lhpk_ke_pengawas_dpjk', $riksus->no_nd_penyampaian_lhpk_ke_pengawas_dpjk) }}">
         
                 <label for="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="font-weight: bold; color: #555;">Tanggal ND Penyampaian LHPK ke DPJK</label>
             <input type="date" name="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk"
@@ -156,10 +156,10 @@
                 value="{{ old('tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk', $riksus->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk) }}">
 
 
-                <label for="tanggal_kkpk" style="font-weight: bold; color: #555;">Tanggal KKPK</label>
-            <input type="date" name="tanggal_kkpk"
+                <label for="tanggal_kpkp" style="font-weight: bold; color: #555;">Tanggal kpkp</label>
+            <input type="date" name="tanggal_kpkp"
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                value="{{ old('tanggal_kkpk', $riksus->tanggal_kkpk) }}">
+                value="{{ old('tanggal_kpkp', $riksus->tanggal_kpkp) }}">
 
                 <label for="no_siputri" style="font-weight: bold; color: #555;">Nomor SIPUTRI</label>
             <input type="text" name="no_siputri"

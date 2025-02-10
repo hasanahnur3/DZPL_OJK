@@ -385,3 +385,13 @@ Route::post('/daftarljk', [DaftarljkController::class, 'store'])->name('daftarlj
 Route::get('/daftarljk/{id}/edit', [DaftarljkController::class, 'edit'])->name('daftarljk.edit'); // Form edit data
 Route::post('/daftarljk/{id}', [DaftarljkController::class, 'update'])->name('daftarljk.update'); // Update data
 Route::delete('/daftarljk/{id}', [DaftarljkController::class, 'destroy'])->name('daftarljk.destroy'); // Hapus data
+
+
+Route::get('/get-companies', [PkkController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [DirkomController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [TkaController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [RiksusController::class, 'getCompaniesByIndustry']);
+
+
+Route::post('/quality_control', [QualityControlController::class, 'store'])->name('quality_control.store');

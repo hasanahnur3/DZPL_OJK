@@ -10,6 +10,9 @@ class Tka extends Model
     use HasFactory;
 
     protected $table = 'tka';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'jenis_industri', 'nama_perusahaan', 'nomor_surat_permohonan',

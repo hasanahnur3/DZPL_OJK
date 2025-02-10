@@ -29,21 +29,36 @@
         });
     });
 </script>
-    <form method="POST" action="{{ route('kepengurusan.store') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <form method="POST" action="{{ route('pkk.store') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
         <div style="display: flex; flex-direction: column; gap:5px;">
-        <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-        <select name="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-            <option value="Perusahaan Pembiayaan">Perusahaan Pembiayaan</option>
-            <option value="PPBTI">PPBTI</option>
-            <option value="Perusahaan Modal Ventura">Perusahaan Modal Ventura</option>
-            <option value="Lembaga Keuangan Mikro">Lembaga Keuangan Mikro</option>
-            <option value="Pergadaian">Pergadaian</option>
-        </select>
-        
-
-        <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
-        <input type="text" name="nama_perusahaan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            <select id="jenis_industri" name="jenis_industri" required>
+                <option value="">Pilih Jenis Industri</option>
+                @foreach($jenis_industri as $jenis)
+                    <option value="{{ $jenis }}">{{ $jenis }}</option>
+                @endforeach
+            </select>
+            
+            <select id="nama_perusahaan" name="nama_perusahaan" required>
+                <option value="">Pilih Nama Perusahaan</option>
+            </select>
+            <script>
+                document.getElementById('jenis_industri').addEventListener('change', function() {
+                    let jenisIndustri = this.value;
+                    fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                            namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                            data.forEach(nama => {
+                                let option = document.createElement('option');
+                                option.value = nama;
+                                option.textContent = nama;
+                                namaPerusahaanDropdown.appendChild(option);
+                            });
+                        });
+                });
+                </script>
 
         <label for="nama_pihak_utama" style="font-weight: bold; color: #555;">Nama Pihak Utama</label>
         <input type="text" name="nama_pihak_utama" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

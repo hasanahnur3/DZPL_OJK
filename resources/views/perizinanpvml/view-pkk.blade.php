@@ -58,7 +58,7 @@
     </div>
     
     <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
-        <a href="{{ route('kepengurusan.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Tambah Data</a>
+        <a href="{{ route('pkk.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Tambah Data</a>
          
 <script>
     $(document).ready(function () {

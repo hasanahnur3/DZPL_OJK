@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Riksus;
+use Illuminate\Support\Facades\DB;
 
 class RiksusController extends Controller
 {
@@ -14,9 +15,18 @@ class RiksusController extends Controller
     }
 
     public function create()
-{
-    return view('pengendaliankualitas.riksus');
-}
+    {
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        return view('pengendaliankualitas.riksus', compact('jenis_industri'));
+    }
+
+    public function getCompaniesByIndustry(Request $request)
+    {
+        $companies = DB::table('daftarljk')
+            ->where('jenis_industri', $request->jenis_industri)
+            ->pluck('nama_perusahaan');
+        return response()->json($companies);
+    }
 
     public function index()
 {
@@ -49,7 +59,7 @@ public function store(Request $request)
         'tanggal_lhpk_ke_dpjk' => 'nullable|date',
         'no_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|string',
         'tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|date',
-        'tanggal_kkpk' => 'nullable|date',
+        'tanggal_kpkp' => 'nullable|date',
         'no_siputri' => 'nullable|string',
         'tanggal_siputri' => 'nullable|date',
         'tanggal_persetujuan_kadep' => 'nullable|date',
@@ -78,7 +88,7 @@ public function store(Request $request)
     $riksus->tanggal_lhpk_ke_dpjk = $request->tanggal_lhpk_ke_dpjk;
     $riksus->no_nd_penyampaian_lhpk_ke_pengawas_dpjk = $request->no_nd_penyampaian_lhpk_ke_pengawas_dpjk;
     $riksus->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk = $request->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk;
-    $riksus->tanggal_kkpk = $request->tanggal_kkpk;
+    $riksus->tanggal_kpkp = $request->tanggal_kpkp;
     $riksus->no_siputri = $request->no_siputri;
     $riksus->tanggal_siputri = $request->tanggal_siputri;
     $riksus->tanggal_persetujuan_kadep = $request->tanggal_persetujuan_kadep;
@@ -121,7 +131,7 @@ public function store(Request $request)
         'tanggal_lhpk_ke_dpjk' => 'nullable|date',
         'no_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable',
         'tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk' => 'nullable|date',
-        'tanggal_kkpk' => 'nullable|date',
+        'tanggal_kpkp' => 'nullable|date',
         'no_siputri' => 'nullable',
         'tanggal_siputri' => 'nullable|date',
         'tanggal_persetujuan_kadep' => 'nullable|date',

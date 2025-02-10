@@ -25,20 +25,42 @@
     </script>
     <form action="{{ route('riksus.store') }}" method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
+
         <div style="display: flex; flex-direction: column; gap: 5px;">
-            <label for="kode_riskus" style="font-weight: bold; color: #555;">Kode Riskus*</label>
-            <input type="text" name="kode_riskus" class="form-control" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-
-            <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-            <select name="jenis_industri" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                <option value="">Pilih Jenis Industri</option>
-                <option value="Manufaktur">Manufaktur</option>
-                <option value="Jasa">Jasa</option>
-                <option value="Perdagangan">Perdagangan</option>
-            </select>
-
-            <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
-            <input type="text" name="nama_perusahaan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+        <label for="kode_riskus" style="font-weight: bold; color: #555;">Kode Riskus*</label>
+        <input type="text" name="kode_riskus" class="form-control" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+                <label for="jenis_industri">Jenis Industri</label>
+                <select id="jenis_industri" name="jenis_industri" required>
+                    <option value="">Pilih Jenis Industri</option>
+                    @foreach($jenis_industri as $jenis)
+                        <option value="{{ $jenis }}">{{ $jenis }}</option>
+                    @endforeach
+                </select>
+                
+                <label for="nama_perusahaan">Nama Perusahaan</label>
+                <select id="nama_perusahaan" name="nama_perusahaan" required>
+                    <option value="">Pilih Nama Perusahaan</option>
+                </select>
+            </div>
+            
+            <script>
+            document.getElementById('jenis_industri').addEventListener('change', function() {
+                let jenisIndustri = this.value;
+                fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                        namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                        data.forEach(nama => {
+                            let option = document.createElement('option');
+                            option.value = nama;
+                            option.textContent = nama;
+                            namaPerusahaanDropdown.appendChild(option);
+                        });
+                    });
+            });
+            </script>
 
             <label for="no_nd_pelimpahan" style="font-weight: bold; color: #555;">No ND Pelimpahan</label>
             <input type="text" name="no_nd_pelimpahan" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
@@ -98,8 +120,8 @@
             <label for="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="font-weight: bold; color: #555;">Tanggal ND Penyampaian LHPK ke Pengawas DPJK</label>
             <input type="date" name="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-            <label for="tanggal_kkpk" style="font-weight: bold; color: #555;">Tanggal KKPK</label>
-            <input type="date" name="tanggal_kkpk" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            <label for="tanggal_kpkp" style="font-weight: bold; color: #555;">Tanggal kpkp</label>
+            <input type="date" name="tanggal_kpkp" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
             <label for="no_siputri" style="font-weight: bold; color: #555;">No SIPUTRI</label>
             <input type="text" name="no_siputri" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

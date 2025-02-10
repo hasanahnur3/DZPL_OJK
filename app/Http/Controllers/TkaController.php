@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tka;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TkaController extends Controller
 {
@@ -17,7 +18,16 @@ class TkaController extends Controller
     // Menampilkan form tambah data
     public function create()
     {
-        return view('perizinanpvml.tka');
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        return view('perizinanpvml.tka', compact('jenis_industri'));
+    }
+
+    public function getCompaniesByIndustry(Request $request)
+    {
+        $companies = DB::table('daftarljk')
+            ->where('jenis_industri', $request->jenis_industri)
+            ->pluck('nama_perusahaan');
+        return response()->json($companies);
     }
 
     // Menyimpan data

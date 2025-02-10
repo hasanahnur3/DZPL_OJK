@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pkk;
+use App\Models\DaftarLJK; 
+use Illuminate\Support\Facades\DB;
 
 class PkkController extends Controller
 {
@@ -13,11 +15,21 @@ class PkkController extends Controller
         return view('perizinanpvml.view-pkk', compact('data'));
     }
 
-    // Halaman form tambah data
+    // Halaman form tambah data dengan data dari DB
     public function create()
     {
-        return view('perizinanpvml.pkk');
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        return view('perizinanpvml.pkk', compact('jenis_industri'));
     }
+
+    public function getCompaniesByIndustry(Request $request)
+    {
+        $companies = DB::table('daftarljk')
+            ->where('jenis_industri', $request->jenis_industri)
+            ->pluck('nama_perusahaan');
+        return response()->json($companies);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

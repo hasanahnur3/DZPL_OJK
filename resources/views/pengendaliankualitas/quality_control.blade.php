@@ -9,17 +9,38 @@
     <!-- Form Input untuk Menambahkan Data Quality Control -->
     <form action="{{ route('quality_control.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="industry_type">Jenis Industri</label>
-            <select class="form-control" id="industry_type" name="industry_type" required>
-                <option value="Perusahaan Pembiayaan">Perusahaan Pembiayaan</option>
-                <option value="Perusahaan Modal Ventura">Perusahaan Modal Ventura</option>
-                <option value="LPBBTI">LPBBTI</option>
-                <option value="Lembaga Keuangan Mikro">Lembaga Keuangan Mikro</option>
-                <option value="Pergadaian">Pergadaian</option>
-                <option value="Sui Generis">Sui Generis</option>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label for="jenis_industri">Jenis Industri</label>
+            <select id="jenis_industri" name="jenis_industri" required>
+                <option value="">Pilih Jenis Industri</option>
+                @foreach($jenis_industri as $jenis)
+                    <option value="{{ $jenis }}">{{ $jenis }}</option>
+                @endforeach
+            </select>
+            
+            <label for="nama_perusahaan">Nama Perusahaan</label>
+            <select id="nama_perusahaan" name="nama_perusahaan" required>
+                <option value="">Pilih Nama Perusahaan</option>
             </select>
         </div>
+        
+        <script>
+        document.getElementById('jenis_industri').addEventListener('change', function() {
+            let jenisIndustri = this.value;
+            fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                .then(response => response.json())
+                .then(data => {
+                    let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                    namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                    data.forEach(nama => {
+                        let option = document.createElement('option');
+                        option.value = nama;
+                        option.textContent = nama;
+                        namaPerusahaanDropdown.appendChild(option);
+                    });
+                });
+        });
+        </script>
 
         <div class="form-group">
             <label for="criteria">Kriteria</label>
@@ -44,11 +65,6 @@
         <div class="form-group">
             <label for="other_considerations">Pertimbangan Lainnya</label>
             <textarea class="form-control" id="other_considerations" name="other_considerations" required></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="company_name">Nama Perusahaan</label>
-            <input type="text" class="form-control" id="company_name" name="company_name" required>
         </div>
 
         <div class="form-group">

@@ -1,15 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
-
-<div style="overflow-x: auto; max-width: 100%;">
-    <table id="riksusTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
-        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+<div class="container mt-4">
+    <h2 class="mb-3">Daftar Riksus</h2>
+    <div class="table-responsive">
+        <table id="riksusTable" class="table table-bordered table-striped">
+            <thead class="thead-dark">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">#</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kode Riksus</th>
@@ -65,7 +61,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_lhpk_ke_dpjk ? \Carbon\Carbon::parse($riksusItem->tanggal_lhpk_ke_dpjk)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->no_nd_penyampaian_lhpk_ke_pengawas_dpjk }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk ? \Carbon\Carbon::parse($riksusItem->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk)->format('d-m-Y') : '-' }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_kkpk ? \Carbon\Carbon::parse($riksusItem->tanggal_kkpk)->format('d-m-Y') : '-' }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_kpkp ? \Carbon\Carbon::parse($riksusItem->tanggal_kpkp)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->no_siputri }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_siputri ? \Carbon\Carbon::parse($riksusItem->tanggal_siputri)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_persetujuan_kadep ? \Carbon\Carbon::parse($riksusItem->tanggal_persetujuan_kadep)->format('d-m-Y') : '-' }}</td>
