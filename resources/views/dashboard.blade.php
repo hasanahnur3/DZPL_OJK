@@ -47,7 +47,6 @@
             padding: 0px;
             background: #f4f6f9;
             width: 100%;
-            max-width: 100%;
         }
 
         .row {
@@ -89,7 +88,9 @@
             max-width: 100%;
             height: auto;
         }
-        
+        .main-content {
+            background-color: white;
+        }
     </style>
 
     <div class="container-fluid">

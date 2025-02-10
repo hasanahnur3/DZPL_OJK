@@ -1,195 +1,112 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Quality Control Management</h2>
+
+<div style="overflow-x: auto; max-width: 100%;">
+    <table id="qualityControlTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+            <tr>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">ID</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kriteria</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Forum</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Masalah Keuangan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Masalah Non Keuangan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Akar Penyebab</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Rekomendasi Utama</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Rekomendasi Pendukung</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Batas Tindak Lanjut</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Panelis</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Pengawas</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Dokumen</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hari Kerja</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Dokumen</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Tindak Lanjut</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status Tindak Lanjut</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($qualityControls as $control)
+                <tr>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->id }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->industry_type }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->criteria }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->company_name }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->forum_date }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->financial_issues }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->non_financial_issues }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->root_cause }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->main_recommendation }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->supporting_recommendation }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->follow_up_deadline }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->panelists }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->supervisors }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->document_submission_date }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->working_days }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->document_number }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->follow_up_submission_date }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->follow_up_status }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                        <a href="{{ route('quality_control.edit', $control) }}" style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<div style="text-align: right; margin-bottom: 1rem;" class="button-container">
+    <a href="{{ route('quality_control.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Tambah Data</a>
+</div>
+
+<script>
+$(document).ready(function () {
+    $('#qualityControlTable').DataTable({
+        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
+    });
+});
+</script>
+
 <style>
-    .container {
-        max-width: 90%;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 26px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 5px;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    .table-container {
-        overflow-x: auto;
-        background: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .table {
+    div.dataTables_wrapper {
         width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
+        overflow-x: auto;  */
+    }
+    div.dataTables_scrollHead{
+        margin-bottom: -25px;
     }
 
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: center;
+    table {
+        max-width: 100%; 
     }
 
-    .table th {
-        background-color: #007bff;
-        color: white;
-        font-size: 14px;
-    }
-
-    .table tbody tr:nth-child(even) {
-        background-color: #f8f9fa;
-    }
-
-    .table tbody tr:hover {
-        background-color: #e9ecef;
-    }
-
-    .btn-warning, .btn-danger {
-        padding: 8px 12px;
-        font-size: 14px;
-        border-radius: 5px;
-        transition: 0.3s;
-    }
-
-    .btn-warning {
-        background-color: #ffc107;
-        border: none;
-    }
-
-    .btn-warning:hover {
-        background-color: #e0a800;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border: none;
-    }
-
-    .btn-danger:hover {
-        background-color: #c82333;
-    }
-
-    .action-buttons {
+    .button-container {
         display: flex;
-        justify-content: center;
-        gap: 5px;
+        justify-content: flex-end;
+        margin-top: 20px;
     }
 
-    .alert-success {
-        color: #155724;
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 5px;
+    .btn-success {
+        background-color: #28a745;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: white;
         text-align: center;
-        font-weight: bold;
+        text-decoration: none;
     }
 
-    @media screen and (max-width: 768px) {
-        .table th, .table td {
-            font-size: 12px;
-            padding: 8px;
-        }
-
-        .btn-warning, .btn-danger {
-            padding: 6px 8px;
-            font-size: 12px;
-        }
-
-        .container {
-            max-width: 100%;
-            padding: 0px;
-        }
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
     }
 </style>
-
-<div class="container">
-   
-    
-    <div class="table-container">
-        <h1>Quality Control Management</h1>
-        <a href="{{ route('quality_control.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
-    
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Jenis Industri</th>
-                    <th>Kriteria</th>
-                    <th>Nama Perusahaan</th>
-                    <th>Tanggal Forum</th>
-                    <th>Masalah Keuangan</th>
-                    <th>Masalah Non Keuangan</th>
-                    <th>Akar Penyebab</th>
-                    <th>Rekomendasi Utama</th>
-                    <th>Rekomendasi Pendukung</th>
-                    <th>Tanggal Batas Tindak Lanjut</th>
-                    <th>Panelis</th>
-                    <th>Pengawas</th>
-                    <th>Tanggal Pengajuan Dokumen</th>
-                    <th>Hari Kerja</th>
-                    <th>Nomor Dokumen</th>
-                    <th>Tanggal Pengajuan Tindak Lanjut</th>
-                    <th>Status Tindak Lanjut</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($qualityControls as $control)
-                    <tr>
-                        <td>{{ $control->id }}</td>
-                        <td>{{ $control->industry_type }}</td>
-                        <td>{{ $control->criteria }}</td>
-                        <td>{{ $control->company_name }}</td>
-                        <td>{{ $control->forum_date }}</td>
-                        <td>{{ $control->financial_issues }}</td>
-                        <td>{{ $control->non_financial_issues }}</td>
-                        <td>{{ $control->root_cause }}</td>
-                        <td>{{ $control->main_recommendation }}</td>
-                        <td>{{ $control->supporting_recommendation }}</td>
-                        <td>{{ $control->follow_up_deadline }}</td>
-                        <td>{{ $control->panelists }}</td>
-                        <td>{{ $control->supervisors }}</td>
-                        <td>{{ $control->document_submission_date }}</td>
-                        <td>{{ $control->working_days }}</td>
-                        <td>{{ $control->document_number }}</td>
-                        <td>{{ $control->follow_up_submission_date }}</td>
-                        <td>{{ $control->follow_up_status }}</td>
-                        <td class="action-buttons">
-                            <a href="{{ route('quality_control.edit', $control) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('quality_control.destroy', $control) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
 @endsection

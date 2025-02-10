@@ -22,7 +22,7 @@
             padding: 0px;
         }
 
-        /* 
+        
         .menu-toggle {
             display: none;
             top: 15px;
@@ -32,7 +32,7 @@
             font-size: 1.5rem;
             color: white;
             cursor: pointer;
-        } */
+        }
 
         .container {
             display: flex;
@@ -168,8 +168,9 @@
 
         .main-content {
             flex: 1;
-            padding: 2rem;
+            padding: 1rem;
             background-color: #f5f5f5;
+            width: 100%;
         }
 
         .industry-dropdown {
@@ -187,6 +188,7 @@
             padding: 1rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
         }
 
         /* 
@@ -245,13 +247,14 @@
 
 
         /* Responsive Styles */
-        @media (max-width: 1300px) {
+        @media (max-width: 1400px) {
             .menu-toggle {
                 display: block;
             }
 
             .container {
                 flex-direction: column;
+                max-width: 100%;
             }
 
             .sidebar {

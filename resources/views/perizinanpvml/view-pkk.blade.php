@@ -9,7 +9,7 @@
     
     
     <div style="overflow-x: auto;">
-        <table  id="kepengurusanTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <table  id="kepengurusanTable" style="width: 500px; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
                 <tr>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
