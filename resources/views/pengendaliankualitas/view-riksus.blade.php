@@ -65,7 +65,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_lhpk_ke_dpjk ? \Carbon\Carbon::parse($riksusItem->tanggal_lhpk_ke_dpjk)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->no_nd_penyampaian_lhpk_ke_pengawas_dpjk }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk ? \Carbon\Carbon::parse($riksusItem->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk)->format('d-m-Y') : '-' }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_kkpk ? \Carbon\Carbon::parse($riksusItem->tanggal_kkpk)->format('d-m-Y') : '-' }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_kpkp ? \Carbon\Carbon::parse($riksusItem->tanggal_kpkp)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->no_siputri }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_siputri ? \Carbon\Carbon::parse($riksusItem->tanggal_siputri)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_persetujuan_kadep ? \Carbon\Carbon::parse($riksusItem->tanggal_persetujuan_kadep)->format('d-m-Y') : '-' }}</td>

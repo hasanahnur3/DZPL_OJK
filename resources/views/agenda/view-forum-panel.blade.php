@@ -5,9 +5,10 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Forum Panels</h2>
 
-<div style="overflow-x: auto;">
+
+<div class="form-container" style="overflow-x: auto;">
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Forum Panels</h2>
     <table id="forumPanelTable"
         style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
@@ -55,6 +56,15 @@
 </script>
 
 <style>
+    .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
     .button-container {
         display: flex;
         justify-content: flex-end;

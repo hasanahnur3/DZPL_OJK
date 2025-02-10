@@ -98,8 +98,8 @@
             <label for="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="font-weight: bold; color: #555;">Tanggal ND Penyampaian LHPK ke Pengawas DPJK</label>
             <input type="date" name="tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-            <label for="tanggal_kkpk" style="font-weight: bold; color: #555;">Tanggal KKPK</label>
-            <input type="date" name="tanggal_kkpk" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            <label for="tanggal_kpkp" style="font-weight: bold; color: #555;">Tanggal KKPK</label>
+            <input type="date" name="tanggal_kpkp" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
             <label for="no_siputri" style="font-weight: bold; color: #555;">No SIPUTRI</label>
             <input type="text" name="no_siputri" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

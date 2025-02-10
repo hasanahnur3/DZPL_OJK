@@ -53,16 +53,16 @@
 </div >
 
 <style>
-    /* Pusatkan form di tengah layar */
-    .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    padding: 20px; /* Tambahkan padding jika dibutuhkan */
-    width: 100%; /* Pastikan memenuhi layar */
-}
-
+        .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }
     /* Styling untuk frame form */
     form {
     background-color: #ffffff;
