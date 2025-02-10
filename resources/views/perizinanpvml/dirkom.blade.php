@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="form-container">
 <div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -77,4 +78,18 @@
         </div>
     </form>
 </div>
+</div>
+
+<style>
+             .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }  
+</style>
 @endsection

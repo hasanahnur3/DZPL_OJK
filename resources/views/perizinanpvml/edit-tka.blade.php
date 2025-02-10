@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="form-container">
     <h1>Edit Data TKA</h1>
 
     <form action="{{ route('tka.update', $tka->id) }}" method="POST">
@@ -47,4 +48,17 @@
 
         <button type="submit">Update</button>
     </form>
+    </div>
+<style>
+             .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }  
+</style>
 @endsection

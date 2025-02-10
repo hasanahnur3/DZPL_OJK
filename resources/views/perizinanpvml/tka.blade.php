@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="max-width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+<div class="form-container">
+<div  style="width: 900px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:#FFFFFF
+">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<h2 style="text-align: center; color: #333; margin-bottom:20px;">Form Pengisian TKA</h2>
 
-    <h2 style="text-align: center; color: #333;">Form Pengisian TKA</h2>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.querySelector('form');
@@ -28,6 +30,7 @@
 
     <form method="POST" action="{{ route('tka.store') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
+        
         <div style="display: flex; flex-direction: column; gap: 5px;">
             <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
             <input type="text" name="jenis_industri" id="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
@@ -73,4 +76,17 @@
         </div>
     </form>
 </div>
+</div>
+<style>
+        .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }
+</style>
 @endsection

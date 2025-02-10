@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-<div class="form-container "style="max-width: 800px; height:auto; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ">
+<div class="form-container">
+<div style="width: 800px; height:auto; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ">
     <h2>Edit Daftar Direksi Komisaris</h2>
     <form action="{{ route('dirkom.update', $dirkom->id) }}" method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
@@ -78,14 +79,17 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </form>
 </div>
+</div>
 <style>
-.form-container {
-    max-width: 800px;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
-}
+          .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }  
 </style>
 @endsection
