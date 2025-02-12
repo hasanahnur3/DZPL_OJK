@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Daftarljk;
 use Illuminate\Http\Request;
 use App\Models\Pkk;
 use App\Models\DaftarLJK; 

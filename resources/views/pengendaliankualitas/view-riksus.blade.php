@@ -2,10 +2,13 @@
 
 @section('content')
 
-    <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
-    <div style="overflow-x: auto; max-width: 100%;">
-        <table id="riksusTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
-            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+
+<div class="form-container">
+    
+<div style="overflow-x: auto; max-width: 100%;">
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
+    <table id="riksusTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">#</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kode Riksus</th>
@@ -72,11 +75,13 @@
             @endforeach
         </tbody>
     </table>
-</div>
-
-<div style="text-align: right; margin-top: 1rem;" class="button-container">
+    <div style="text-align: right; margin-top: 1rem;" class="button-container">
     <a href="{{ route('riksus.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Tambah Data</a>
 </div>
+</div>
+</div>
+
+
 
 <script>
 $(document).ready(function () {
@@ -86,6 +91,17 @@ $(document).ready(function () {
 });
 </script>
 <style>
+
+.form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }
         div.dataTables_wrapper {
         width: 100%;
         overflow-x: auto;  */

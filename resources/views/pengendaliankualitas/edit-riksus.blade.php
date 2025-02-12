@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="form-container">
 <div
-    style="max-width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    style="width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <h2 style="text-align: center; color: #333; margin-bottom: 10px;">Edit Daftar Pengendalian Kualitas</h2>
 
@@ -156,7 +157,7 @@
                 value="{{ old('tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk', $riksus->tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk) }}">
 
 
-                <label for="tanggal_kpkp" style="font-weight: bold; color: #555;">Tanggal kpkp</label>
+                <label for="tanggal_kpkp" style="font-weight: bold; color: #555;">Tanggal KKPK</label>
             <input type="date" name="tanggal_kpkp"
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                 value="{{ old('tanggal_kpkp', $riksus->tanggal_kpkp) }}">
@@ -183,4 +184,17 @@
         </div>
     </form>
 </div>
+</div>
+<style>
+    .form-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }
+</style>
 @endsection

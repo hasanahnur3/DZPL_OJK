@@ -22,7 +22,7 @@
             padding: 0px;
         }
 
-        
+
         .menu-toggle {
             display: none;
             top: 15px;
@@ -183,12 +183,22 @@
             border-radius: 4px;
         }
 
+        /* .chart-container {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        } */
+
+        F
         .chart-container {
+            display: flex;
+            align-items: center;
             background-color: white;
             padding: 1rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             width: 100%;
+            height: 100%;
         }
 
         /* 
@@ -351,7 +361,7 @@
                         <span class="menu-text">Daftar LJK PVML</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="daftarPengajuan">
                         <i class="fas fa-file-alt"></i>

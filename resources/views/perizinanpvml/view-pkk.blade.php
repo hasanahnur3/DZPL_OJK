@@ -5,11 +5,12 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
+
+    
+    
+    <div class="form-container" style="overflow-x: auto;">
     <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;"> Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
-    
-    
-    <div style="overflow-x: auto;">
-        <table  id="kepengurusanTable" style="width: 500px; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <table id="kepengurusanTable"  style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
                 <tr>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
@@ -55,10 +56,15 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
     </div>
     
+
     <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
         <a href="{{ route('pkk.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Tambah Data</a>
+
+
+
          
 <script>
     $(document).ready(function () {
@@ -66,9 +72,19 @@
     });
 </script>
 <style>
+
+    .form-container{
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+    
     .button-container {
         display: flex;
-        justify-content: flex-end;
+        justify-content: end;
         margin-top: 20px;
     }
 
