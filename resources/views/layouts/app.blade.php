@@ -306,8 +306,7 @@
     <div class="container">
         <nav class="sidebar">
             <div class="logo">
-                <a href="{{ route('dashboard') }}"> <img src="img/logo.jpg" alt="OJK Logo"
-                        style="max-width: 150px;"></a>
+                <a href="{{ route('dashboard') }}"> <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
