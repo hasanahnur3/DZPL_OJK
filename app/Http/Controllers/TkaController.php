@@ -52,10 +52,16 @@ class TkaController extends Controller
     }
 
     // Menampilkan form edit data
+
     public function edit($id)
     {
         $tka = Tka::findOrFail($id);
-        return view('perizinanpvml.edit-tka', compact('tka'));
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        $nama_perusahaan = DB::table('daftarljk')
+            ->where('jenis_industri', $tka->jenis_industri)
+            ->pluck('nama_perusahaan');
+    
+        return view('perizinanpvml.edit-tka', compact('tka', 'jenis_industri', 'nama_perusahaan'));
     }
 
     // Mengupdate data
