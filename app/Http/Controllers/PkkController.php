@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Daftarljk;
 use Illuminate\Http\Request;
 use App\Models\Pkk;
-use App\Models\DaftarLJK; 
 use Illuminate\Support\Facades\DB;
 
 class PkkController extends Controller
