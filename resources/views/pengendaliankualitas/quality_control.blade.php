@@ -68,7 +68,7 @@
             @enderror
         </div>
 
-        <div class="form-group">
+      <!--  <div class="form-group">
             <label for="pvml_utama">PVML Utama</label>
             <input type="text" class="form-control" id="pvml_utama" name="pvml_utama" required>
             @error('pvml_utama')
@@ -98,7 +98,7 @@
             @error('other_considerations')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>
+        </div>-->
 
         <div class="form-group">
             <label for="forum_date">Tanggal Forum</label>

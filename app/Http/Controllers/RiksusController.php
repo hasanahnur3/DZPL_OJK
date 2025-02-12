@@ -8,11 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class RiksusController extends Controller
 {
+
     public function edit($id)
-    {
-        $riksus = Riksus::findOrFail($id);
-        return view('pengendaliankualitas.edit-riksus', compact('riksus'));
-    }
+{
+    $riksus = Riksus::findOrFail($id);
+    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+    $nama_perusahaan = DB::table('daftarljk')
+        ->where('jenis_industri', $riksus->jenis_industri)
+        ->pluck('nama_perusahaan');
+
+    return view('pengendaliankualitas.edit-riksus', compact('riksus', 'jenis_industri', 'nama_perusahaan'));
+}
+
+
 
     public function create()
     {

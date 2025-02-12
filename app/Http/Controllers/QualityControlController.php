@@ -68,11 +68,16 @@ class QualityControlController extends Controller
     }
 }
 
-    public function edit(QualityControl $qualityControl)
-    {
-        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
-        return view('pengendaliankualitas.edit-quality_control', compact('qualityControl', 'jenis_industri'));
-    }
+        public function edit($id)
+{
+    $qualityControls= QualityControl::findOrFail($id);
+    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+    $nama_perusahaan = DB::table('daftarljk')
+        ->where('jenis_industri', $qualityControls->jenis_industri)
+        ->pluck('nama_perusahaan');
+
+    return view('pengendaliankualitas.edit-quality_control', compact('qualityControls', 'jenis_industri', 'nama_perusahaan'));
+}
 
     public function update(Request $request, QualityControl $qualityControl)
     {
@@ -80,24 +85,24 @@ class QualityControlController extends Controller
             'jenis_industri' => 'required|string',
             'criteria' => 'required|string',
             'nama_perusahaan' => 'required|string',
-            'pvml_utama' => 'required|string',
-            'special_monitoring_status' => 'required|string',
-            'intensive_monitoring_status' => 'required|string',
-            'other_considerations' => 'required|string',
+            //'pvml_utama' => 'required|string',
+            //'special_monitoring_status' => 'required|string',
+           // 'intensive_monitoring_status' => 'required|string',
+            //'other_considerations' => 'required|string',
             'forum_date' => 'required|date',
             'financial_issues' => 'required|string',
             'non_financial_issues' => 'required|string',
             'root_cause' => 'required|string',
             'main_recommendation' => 'required|string',
             'supporting_recommendation' => 'required|string',
-            'follow_up_deadline' => 'required|date',
+            'follow_up_deadline' => 'date',
             'panelists' => 'required|string',
             'supervisors' => 'required|string',
             'document_submission_date' => 'required|date',
             'working_days' => 'required|integer',
             'document_number' => 'required|string',
             'follow_up_submission_date' => 'required|date',
-            'follow_up_status' => 'required|in:Belum Lengkap,Sudah Lengkap',
+            'follow_up_status' => 'in:Belum Lengkap,Sudah Lengkap',
             'follow_up_status_description' => 'nullable|string',
         ]);
 

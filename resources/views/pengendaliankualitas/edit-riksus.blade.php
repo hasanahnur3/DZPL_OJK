@@ -47,19 +47,33 @@
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                 value="{{ old('kode_riskus', $riksus->kode_riskus) }}">
 
-            <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-            <select name="jenis_industri" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                <option value="">Pilih Jenis Industri</option>
-                <option value="Manufaktur" {{ old('jenis_industri', $riksus->jenis_industri) == 'Manufaktur' ? 'selected' : '' }}>Manufaktur</option>
-                <option value="Jasa" {{ old('jenis_industri', $riksus->jenis_industri) == 'Jasa' ? 'selected' : '' }}>Jasa
-                </option>
-                <option value="Perdagangan" {{ old('jenis_industri', $riksus->jenis_industri) == 'Perdagangan' ? 'selected' : '' }}>Perdagangan</option>
-            </select>
-
-            <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
-            <input type="text" name="nama_perusahaan" required
-                style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                value="{{ old('nama_perusahaan', $riksus->nama_perusahaan) }}">
+                <select id="jenis_industri" name="jenis_industri" required>
+                    <option value="">Pilih Jenis Industri</option>
+                    @foreach($jenis_industri as $jenis)
+                        <option value="{{ $jenis }}">{{ $jenis }}</option>
+                    @endforeach
+                </select>
+                
+                <select id="nama_perusahaan" name="nama_perusahaan" required>
+                    <option value="">Pilih Nama Perusahaan</option>
+                </select>
+                <script>
+                    document.getElementById('jenis_industri').addEventListener('change', function() {
+                        let jenisIndustri = this.value;
+                        fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                                namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                                data.forEach(nama => {
+                                    let option = document.createElement('option');
+                                    option.value = nama;
+                                    option.textContent = nama;
+                                    namaPerusahaanDropdown.appendChild(option);
+                                });
+                            });
+                    });
+                    </script>
 
             <label for="no_nd_pelimpahan" style="font-weight: bold; color: #555;">No ND Pelimpahan</label>
             <input type="text" name="no_nd_pelimpahan"
