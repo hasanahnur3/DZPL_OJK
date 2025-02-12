@@ -11,23 +11,29 @@
     body {
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
+        overflow-x: hidden; /* Mencegah scroll horizontal di body */
     }
 
     .full-container {
-        width: 100vw; /* Full width */
-        min-height: 100vh; /* Full height */
+        width: 100%; /* Pastikan 100% */
+        min-height: 100vh;
         padding: 20px;
         background-color: white;
+        display: flex; /* Untuk centering vertikal */
+        flex-direction: column; /* Untuk centering vertikal */
+        align-items: center; /* Untuk centering horizontal */
+        justify-content: center; /* Untuk centering vertikal */
     }
 
     .table-container {
-        max-width: 95%;
+        width: 95%; /* Lebar tabel container */
+        max-width: 95%; /* Maksimal lebar tabel container */
         margin: 20px auto;
         padding: 20px;
         background: white;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
-        overflow-x: auto; /* Agar tabel tidak pecah di layar kecil */
+        overflow-x: auto; /* Aktifkan scroll horizontal jika konten terlalu lebar */
     }
 
     h2 {
@@ -39,6 +45,7 @@
     .table {
         width: 100%;
         border-collapse: collapse;
+        table-layout: fixed; /* Ini kunci untuk membuat kolom compact */
         margin-top: 20px;
     }
 
@@ -46,6 +53,9 @@
         padding: 12px;
         text-align: left;
         border-bottom: 1px solid #ddd;
+        overflow: hidden; /* Mencegah teks meluap dari kolom */
+        text-overflow: ellipsis; /* Menambahkan ellipsis (...) jika teks terlalu panjang */
+        white-space: nowrap; /* Mencegah teks wrap ke baris baru */
     }
 
     .table th {
@@ -58,7 +68,6 @@
         background-color: #f0f0f0;
     }
 
-    /* Tombol Edit */
     .btn {
         display: inline-block;
         padding: 8px 16px;
@@ -73,12 +82,20 @@
     .btn:hover {
         background-color: #e0a800;
     }
+
+    /* Style tambahan untuk tombol Add Data */
+    .add-data-button {
+        margin-bottom: 10px; /* Spasi di bawah tombol */
+        display: inline-block; /* Agar tombol tampil di baris sendiri */
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 
 <div class="full-container">
     <div class="table-container">
         <h2>Daftar LJK PVML</h2>
-        <a href="{{ route('daftarljk.create') }}" class="btn btn-primary">Add Data</a>
+        <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button">Add Data</a>
 
         <table class="table">
             <thead>

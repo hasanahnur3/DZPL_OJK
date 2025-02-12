@@ -12,7 +12,7 @@
         padding-left: 0 !important;
         margin-right: 0 !important;
         margin-left: 0 !important;
-        width: 85vw !important;
+        width: 80vw !important;
     }
 
     /* Ensure row takes full width */

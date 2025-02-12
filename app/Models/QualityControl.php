@@ -11,9 +11,9 @@ class QualityControl extends Model {
     protected $table = 'quality_control';
 
     protected $fillable = [
-        'industry_type',
+        'jenis_industri',
         'criteria',
-        'company_name',
+        'nama_perusahaan', 
         'forum_date',
         'financial_issues',
         'non_financial_issues',

@@ -36,7 +36,7 @@
         @csrf
         @method('PUT')
      <!-- Menandakan ini adalah update request -->
-     <h3 style="text-align:center;">Edit PKK Agenda</h3>
+     <h3 style="text-align:center;">Edit Agenda PKK </h3>
         <div class="form-group">
             <label for="hari_tanggal">Hari/Tanggal</label>
             <input type="date" name="hari_tanggal" id="hari_tanggal" value="{{ old('hari_tanggal', $agenda->hari_tanggal) }}" required class="form-control">

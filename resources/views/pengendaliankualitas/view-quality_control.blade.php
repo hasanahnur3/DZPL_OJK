@@ -36,9 +36,9 @@
             @foreach($qualityControls as $control)
                 <tr>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->id }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->industry_type }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->jenis_industri }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->criteria }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->company_name }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->nama_perusahaan }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->forum_date }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->financial_issues }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->non_financial_issues }}</td>

@@ -236,7 +236,7 @@
         }
 
         .dropdown-menu li a:hover {
-            background-color: #007bff;
+            background-color: #A91111;
             color: white;
             border-radius: 4px;
         }

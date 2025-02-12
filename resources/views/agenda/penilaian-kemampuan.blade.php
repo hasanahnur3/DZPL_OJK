@@ -29,13 +29,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-    <h2 style="margin-bottom:10px;">Form PKK Agenda</h2>
-
     <!-- Form untuk Menambah Data -->
     <div class="form-container">
     <form action="{{ route('penilaian-kemampuan.store') }}" method="POST">
         @csrf
-        <h3 style="text-align:center;">Tambah Data Penilaian Kemampuan</h3>
+        <h3 style="text-align:center;">Tambah Data Agenda PKK</h3>
         <div class="form-group">
         <input type="date" name="hari_tanggal" class="form-control"  required>
         </div>

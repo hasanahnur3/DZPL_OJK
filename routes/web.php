@@ -296,7 +296,7 @@ Route::post('/tka/update/{id}', [TkaController::class, 'update'])->name('tka.upd
 
 
 
-Route::resource('quality_control', QualityControlController::class);
+
 
 
 Route::get('/riksus', [RiksusController::class, 'index'])->name('riksus.index');
@@ -392,6 +392,17 @@ Route::get('/get-companies', [DirkomController::class, 'getCompaniesByIndustry']
 Route::get('/get-companies', [TkaController::class, 'getCompaniesByIndustry']);
 Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry']);
 Route::get('/get-companies', [RiksusController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry'])->name('quality_control.getCompanies');
+
+
+Route::resource('quality-control', QualityControlController::class);
 
 
 Route::post('/quality_control', [QualityControlController::class, 'store'])->name('quality_control.store');
+
+
+Route::get('/quality-control', [QualityControlController::class, 'index'])->name('quality_control.index');
+Route::get('/quality-control/create', [QualityControlController::class, 'create'])->name('quality_control.create');
+Route::post('/quality-control', [QualityControlController::class, 'store'])->name('quality_control.store');
+Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry']);
+Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry'])->name('get.companies');

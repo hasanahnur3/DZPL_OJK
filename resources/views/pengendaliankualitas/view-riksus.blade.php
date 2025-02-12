@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <h2 class="mb-3">Daftar Riksus</h2>
-    <div class="table-responsive">
-        <table id="riksusTable" class="table table-bordered table-striped">
-            <thead class="thead-dark">
+
+    <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
+    <div style="overflow-x: auto; max-width: 100%;">
+        <table id="riksusTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">#</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kode Riksus</th>
