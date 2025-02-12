@@ -58,10 +58,17 @@ class PkkController extends Controller
 
     // Halaman form edit data
     public function edit($id)
-    {
-        $data = Pkk::findOrFail($id);
-        return view('perizinanpvml.edit-pkk', compact('data'));
-    }
+{
+    $data = Pkk::findOrFail($id);
+    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+    $nama_perusahaan = DB::table('daftarljk')
+        ->where('jenis_industri', $data->jenis_industri)
+        ->pluck('nama_perusahaan');
+
+    return view('perizinanpvml.edit-pkk', compact('data', 'jenis_industri', 'nama_perusahaan'));
+}
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
