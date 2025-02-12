@@ -34,15 +34,33 @@ document.addEventListener('DOMContentLoaded', function () {
         @method('PUT')
 
         <div style="display: flex; flex-direction: column; gap: 5px;">
-            <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-            <select id="jenis_industri" name="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                <option value="Manufaktur" {{ $dirkom->jenis_industri == 'Manufaktur' ? 'selected' : '' }}>Manufaktur</option>
-                <option value="Jasa" {{ $dirkom->jenis_industri == 'Jasa' ? 'selected' : '' }}>Jasa</option>
-                <option value="Perdagangan" {{ $dirkom->jenis_industri == 'Perdagangan' ? 'selected' : '' }}>Perdagangan</option>
+            <select id="jenis_industri" name="jenis_industri" required>
+                <option value="">Pilih Jenis Industri</option>
+                @foreach($jenis_industri as $jenis)
+                    <option value="{{ $jenis }}">{{ $jenis }}</option>
+                @endforeach
             </select>
-
-            <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
-            <input type="text" id="nama_perusahaan" name="nama_perusahaan" value="{{ old('nama_perusahaan', $dirkom->nama_perusahaan) }}" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            
+            <select id="nama_perusahaan" name="nama_perusahaan" required>
+                <option value="">Pilih Nama Perusahaan</option>
+            </select>
+            <script>
+                document.getElementById('jenis_industri').addEventListener('change', function() {
+                    let jenisIndustri = this.value;
+                    fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                            namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                            data.forEach(nama => {
+                                let option = document.createElement('option');
+                                option.value = nama;
+                                option.textContent = nama;
+                                namaPerusahaanDropdown.appendChild(option);
+                            });
+                        });
+                });
+                </script>
 
             <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat Permohonan</label>
             <input type="text" id="nomor_surat_permohonan" name="nomor_surat_permohonan" value="{{ old('nomor_surat_permohonan', $dirkom->nomor_surat_permohonan) }}" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

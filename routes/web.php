@@ -406,3 +406,8 @@ Route::get('/quality-control/create', [QualityControlController::class, 'create'
 Route::post('/quality-control', [QualityControlController::class, 'store'])->name('quality_control.store');
 Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry']);
 Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIndustry'])->name('get.companies');
+
+
+
+
+//=================================================================================================

@@ -50,7 +50,7 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_persetujuan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jumlah_hari_kerja }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            <a href="{{ route('kepengurusan.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                            <a href="{{ route('pkk.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         </td>
                     </tr>
                 @endforeach

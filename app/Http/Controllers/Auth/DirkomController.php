@@ -49,10 +49,15 @@ class DirkomController extends Controller
     }
 
     public function edit($id)
-    {
-        $dirkom = Dirkom::findOrFail($id);
-        return view('perizinanpvml.edit-dirkom', compact('dirkom'));
-    }
+{
+    $dirkom = Dirkom::findOrFail($id);
+    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+    $nama_perusahaan = DB::table('daftarljk')
+        ->where('jenis_industri', $dirkom->jenis_industri)
+        ->pluck('nama_perusahaan');
+
+    return view('perizinanpvml.edit-dirkom', compact('dirkom', 'jenis_industri', 'nama_perusahaan'));
+}
 
     public function update(Request $request, $id)
     {
