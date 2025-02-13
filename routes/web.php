@@ -268,3 +268,5 @@ Route::prefix('agenda')->group(function () {
     Route::get('view-sosialisasi-riksus', [ViewSosialisasiRiksusController::class, 'index'])->name('view-sosialisasi-riksus.index');
     Route::resource('sosialisasi-riksus', SosialisasiRiksusController::class);
 });
+
+

@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout'); // Guest middleware kecuali logout
+        $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
@@ -19,36 +19,30 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+        'role' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
+        $request->session()->regenerate();
 
-            // Redirect berdasarkan role
-            $user = Auth::user();
-            switch ($user->role) {
-                case 'staf':
-                case 'kasubag':
-                case 'kabag':
-                case 'direktur':
-                case 'deputi_direktur':
-                case 'kepala_departemen':
-                    return redirect()->intended('/dashboard'); // Atau route spesifik untuk role
-                    break;
-                default:
-                    return redirect()->intended('/dashboard'); // Redirect default jika role tidak dikenali
-                    break;
-            }
+        $user = Auth::user();
+        if ($user->role !== $credentials['role']) {
+            Auth::logout();
+            return back()->withErrors(['role' => 'Peran yang dipilih tidak sesuai dengan akun ini.']);
         }
 
-        return back()->withErrors([
-            'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.', // Pesan error dalam bahasa Indonesia
-        ]);
+        return redirect()->route('dashboard'); // Redirect ke dashboard
     }
+
+    return back()->withErrors([
+        'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
+    ]);
+}
+
 
     public function logout(Request $request)
     {
@@ -57,6 +51,4 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-
-    // Tidak perlu lagi method redirectTo di sini
 }
