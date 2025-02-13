@@ -150,7 +150,6 @@ Route::delete('pengendaliankualitas/riksus/{id}', [RiksusController::class, 'des
 Route::get('/riksus', [RiksusController::class, 'create'])->name('riksus');
 Route::post('/riksus/store', [RiksusController::class, 'store'])->name('pengendaliankualitas.store');
 Route::get('/riksus/create', [RiksusController::class, 'create'])->name('riksus.create');
-Route::get('/riksus', [RiksusController::class, 'index'])->name('riksus');
 Route::get('/riksus', [RiksusController::class, 'index'])->name('riksus.index');
 Route::get('/riksus/create', [RiksusController::class, 'create'])->name('riksus.create');
 Route::post('/riksus', [RiksusController::class, 'store'])->name('riksus.store');
@@ -255,3 +254,17 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 
 Route::put('/pkk-agenda/{pkk_agenda}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
+Route::get('/dirkom', [DirkomController::class, 'index'])->name('dirkom.index');
+
+
+// Group semua rute riksus dengan prefix dan name yang konsisten
+Route::prefix('pengendaliankualitas')->group(function () {
+    Route::resource('riksus', RiksusController::class);
+    Route::get('get-companies', [RiksusController::class, 'getCompaniesByIndustry'])->name('riksus.companies');
+});
+
+// Rute untuk sosialisasi riksus
+Route::prefix('agenda')->group(function () {
+    Route::get('view-sosialisasi-riksus', [ViewSosialisasiRiksusController::class, 'index'])->name('view-sosialisasi-riksus.index');
+    Route::resource('sosialisasi-riksus', SosialisasiRiksusController::class);
+});
