@@ -38,12 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 <select id="jenis_industri" name="jenis_industri" required>
                     <option value="">Pilih Jenis Industri</option>
                     @foreach($jenis_industri as $jenis)
-                        <option value="{{ $jenis }}">{{ $jenis }}</option>
+                        <option value="{{ $jenis }}" {{ old('jenis_industri', $tka->jenis_industri) == $jenis ? 'selected' : '' }}>{{ $jenis }}</option>
                     @endforeach
                 </select>
                 
                 <select id="nama_perusahaan" name="nama_perusahaan" required>
-                    <option value="">Pilih Nama Perusahaan</option>
+                    @foreach($nama_perusahaan as $nama)
+                    <option value="{{ $nama }}" {{ old('nama_perusahaan', $tka->nama_perusahaan) == $nama ? 'selected' : '' }}>{{ $nama }}</option>
+                @endforeach
                 </select>
                 <script>
                     document.getElementById('jenis_industri').addEventListener('change', function() {

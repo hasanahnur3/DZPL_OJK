@@ -43,20 +43,30 @@
 
         <div style="display: flex; flex-direction: column; gap: 5px;">
             <label for="kode_riskus" style="font-weight: bold; color: #555;">Kode Riskus*</label>
-            <input type="text" name="kode_riskus" class="form-control" required
-                style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                value="{{ old('kode_riskus', $riksus->kode_riskus) }}">
+<input type="text" name="kode_riskus" class="form-control" required
+    style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
+    value="{{ old('kode_riskus', $riksus->kode_riskus) }}">
 
-                <select id="jenis_industri" name="jenis_industri" required>
-                    <option value="">Pilih Jenis Industri</option>
-                    @foreach($jenis_industri as $jenis)
-                        <option value="{{ $jenis }}">{{ $jenis }}</option>
-                    @endforeach
-                </select>
-                
-                <select id="nama_perusahaan" name="nama_perusahaan" required>
-                    <option value="">Pilih Nama Perusahaan</option>
-                </select>
+<!-- Dropdown Jenis Industri -->
+<select id="jenis_industri" name="jenis_industri" required>
+    <option value="">Pilih Jenis Industri</option>
+    @foreach($jenis_industri as $jenis)
+        <option value="{{ $jenis }}" {{ old('jenis_industri', $riksus->jenis_industri) == $jenis ? 'selected' : '' }}>
+            {{ $jenis }}
+        </option>
+    @endforeach
+</select>
+
+<!-- Dropdown Nama Perusahaan -->
+<select id="nama_perusahaan" name="nama_perusahaan" required>
+    <option value="">Pilih Nama Perusahaan</option>
+    @foreach($nama_perusahaan as $perusahaan)
+        <option value="{{ $perusahaan }}" {{ old('nama_perusahaan', $riksus->nama_perusahaan) == $perusahaan ? 'selected' : '' }}>
+            {{ $perusahaan }}
+        </option>
+    @endforeach
+</select>
+
                 <script>
                     document.getElementById('jenis_industri').addEventListener('change', function() {
                         let jenisIndustri = this.value;
