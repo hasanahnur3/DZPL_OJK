@@ -29,9 +29,8 @@
     });
 </script>
 
+
 <div class="form-container">
-
-
     <form action="{{ route('pkk-agenda.update', $agenda->id) }}" method="POST">
         @csrf
         @method('PUT')
