@@ -25,6 +25,11 @@ use App\Http\Controllers\ViewPenilaianController;
 use App\Http\Controllers\ViewKelembagaanPvmlController;
 use App\Http\Controllers\DaftarljkController;
 use App\Models\Daftarljk;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use App\Http\Controllers\UserController;
 
 
 
@@ -269,4 +274,101 @@ Route::prefix('agenda')->group(function () {
     Route::resource('sosialisasi-riksus', SosialisasiRiksusController::class);
 });
 
+
+
+Route::get('/login', function () {
+    return view('login'); // Sesuai dengan lokasi di resource/views
+})->name('login');
+
+Route::post('/login', function (Request $request) {
+    $credentials = $request->validate([
+        'name' => 'required',
+        'password' => 'required',
+    ]);
+
+    $user = User::where('name', $request->name)->where('password', $request->password)->first();
+
+    if ($user) {
+        session([
+            'user_id' => $user->id,
+            'name' => $user->name,
+            'role' => $user->role,
+        ]);
+        return redirect('/dashboard');
+    }
+
+    return back()->withErrors(['login' => 'Username atau password salah.']);
+});
+
+Route::get('/dashboard', function () {
+    if (!session()->has('user_id')) {
+        return redirect('/login')->withErrors(['access' => 'Silakan login terlebih dahulu.']);
+    }
+
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/logout', function () {
+    session()->flush();
+    return redirect('/login');
+})->name('logout');
+
+Route::middleware(['role:staf|kasubag'])->group(function () {
+    Route::get('/users', function () {
+        $users = \App\Models\User::all();
+        return view('users.index', compact('users'));
+    });
+
+    Route::post('/users/create', function (Request $request) {
+        \App\Models\User::create([
+            'name' => $request->name,
+            'password' => $request->password,
+            'role' => $request->role,
+        ]);
+        return redirect('/users');
+    });
+
+    Route::get('/users/edit/{id}', function ($id) {
+        $user = \App\Models\User::findOrFail($id);
+        return view('users.edit', compact('user'));
+    });
+
+    Route::post('/users/update/{id}', function (Request $request, $id) {
+        $user = \App\Models\User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'password' => $request->password,
+            'role' => $request->role,
+        ]);
+        return redirect('/users');
+    });
+
+    Route::get('/users/delete/{id}', function ($id) {
+        \App\Models\User::destroy($id);
+        return redirect('/users');
+    });
+});
+
+Route::middleware(['role:kasubag'])->group(function () {
+    Route::get('/users/create', function () {
+        return view('users.create');
+    });
+});
+
+Route::middleware(['role:direktur|deputi direktur|kabag|kepala departemen'])->group(function () {
+    Route::get('/users', function () {
+        $users = \App\Models\User::all();
+        return view('users.view', compact('users'));
+    });
+});
+
+
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::resource('users', UserController::class);
+
+
+
+// Route untuk create user (hanya bisa diakses oleh kasubag)
+Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('users.create')->middleware('role:kasubag');
+Route::post('/register', [App\Http\Controllers\UserController::class, 'store'])->name('users.store')->middleware('role:kasubag');
 

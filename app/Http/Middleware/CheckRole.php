@@ -4,31 +4,36 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Session;
 
 class CheckRole
 {
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    protected $permissions = [
+        'staf' => ['create', 'read', 'update', 'delete'],
+        'kasubag' => ['create', 'read', 'update', 'delete', 'create_user'],
+        'kabag' => ['read'],
+        'direktur' => ['read'],
+        'deputi' => ['read'],
+        'kadep' => ['read']
+    ];
+
+    public function handle(Request $request, Closure $next, $permission = null)
     {
-        if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        if (!Session::has('user_id')) {
+            return redirect('/login')->withErrors(['access' => 'Silakan login terlebih dahulu.']);
         }
 
-        $user = auth()->user();
-
-        if (!$user) { // Check if user exists after authentication
-            return redirect()->route('login')->with('error', 'Sesi Anda telah berakhir. Silakan login kembali.');
-        }
-
-        if (!in_array($user->role, $roles)) {
-            // Check if $roles is an array before using in_array
-            if (is_array($roles) && !empty($roles)) {
-                return abort(403, 'Anda tidak memiliki akses.'); // Or redirect as before
-            } else {
-                return redirect()->route('dashboard')->with('error', 'Role tidak valid.'); // Handle the case where $roles is not an array
+        $userRole = Session::get('role');
+        
+        // If specific permission is required
+        if ($permission) {
+            if (!in_array($permission, $this->permissions[$userRole] ?? [])) {
+                return redirect('/dashboard')->withErrors(['access' => 'Anda tidak memiliki izin untuk mengakses halaman ini.']);
             }
-
         }
+
+        // Add permissions to request for use in views/controllers
+        $request->merge(['user_permissions' => $this->permissions[$userRole] ?? []]);
 
         return $next($request);
     }

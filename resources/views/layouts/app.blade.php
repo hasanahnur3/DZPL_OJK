@@ -308,6 +308,9 @@
             <div class="logo">
                 <a href="{{ route('dashboard') }}"> <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
             </div>
+        @if(Session::get('role') === 'kasubag')
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Create New User</a>
+        @endif
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link">
