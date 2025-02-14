@@ -308,8 +308,8 @@
             <div class="logo">
                 <a href="{{ route('dashboard') }}"> <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
             </div>
-        @if(Session::get('role') === 'kasubag')
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Create New User</a>
+            @if(Session::get('role') === 'kasubag')
+            <a href="{{ route('register') }}" class="btn btn-primary">Create New User</a>
         @endif
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -387,6 +387,17 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; color: inherit;">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="menu-text">Logout</span>
+                        </button>
+                    </form>
+                </li>
+                
             </ul>
             <button class="toggle-btn" id="toggleSidebar">☰</button>
         </nav>

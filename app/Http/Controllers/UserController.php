@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+
+    public function register()
+{
+    return view('register');
+}
     public function __construct()
     {
         // Only kasubag can create users
@@ -28,20 +33,20 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        return view('register'); // Pastikan ini merujuk ke register.blade.php
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'password' => 'required|min:3',
             'role' => 'required|in:staf,kadep,kabag,direktur,deputi'
         ]);
 
         DB::table('users')->insert([
             'name' => $request->name,
-            'password' => Hash::make($request->password), // Now properly hashed
+            'password' => $request->password, // Hashing password untuk keamanan
             'role' => $request->role,
             'created_at' => now(),
             'updated_at' => now()

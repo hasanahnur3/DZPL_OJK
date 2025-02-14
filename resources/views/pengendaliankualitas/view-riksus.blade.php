@@ -71,14 +71,18 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_siputri ? \Carbon\Carbon::parse($riksusItem->tanggal_siputri)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_persetujuan_kadep ? \Carbon\Carbon::parse($riksusItem->tanggal_persetujuan_kadep)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                         <a href="{{ route('riksus.edit', $riksusItem->id) }}" style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div style="text-align: right; margin-top: 1rem;" class="button-container">
+        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
     <a href="{{ route('riksus.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Tambah Data</a>
+    @endif
 </div>
 </div>
 </div>

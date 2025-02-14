@@ -32,6 +32,20 @@ use App\Models\User;
 use App\Http\Controllers\UserController;
 
 
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/login');
+})->name('logout');
+
+
+Route::get('/', function () {
+    return redirect()->route('login'); // Redirect ke halaman login
+});
+
+Route::get('/login', function () {
+    return view('login'); // Pastikan 'login.blade.php' ada di 'resources/views'
+})->name('login');
+
 
 
 Route::get('/daftar-ljk', function () {
@@ -246,8 +260,6 @@ Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pk
 Route::get('/pkk-agenda', [PkkAgendaController::class, 'index'])->name('pkk-agenda.index');
 
 
-
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/chart-data', [DashboardController::class, 'getChartData']);
 Route::get('/dashboard', [DashboardController::class, 'dashboard']);  // Pastikan ini mengarah ke metode dashboard
@@ -369,6 +381,8 @@ Route::resource('users', UserController::class);
 
 
 // Route untuk create user (hanya bisa diakses oleh kasubag)
-Route::get('/register', [App\Http\Controllers\UserController::class, 'create'])->name('users.create')->middleware('role:kasubag');
-Route::post('/register', [App\Http\Controllers\UserController::class, 'store'])->name('users.store')->middleware('role:kasubag');
 
+Route::get('/register', [UserController::class, 'create'])->name('register');
+Route::post('/register', [UserController::class, 'store'])->name('users.store');
+
+Route::get('/register', [UserController::class, 'register'])->name('register');

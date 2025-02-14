@@ -6,8 +6,6 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Agenda Rapat Pimpinan</h2>
-
 
 <div class="form-container" style="overflow-x: auto;">
 <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Rapat Pimpinan</h2>
@@ -29,14 +27,18 @@
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->topik }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->hasil }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                     <a href="{{ route('rapim.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
     <div class="button-container">
+    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
     <a href="{{ route('rapat-pimpinan.create') }}" class="btn btn-success">Add Data</a>
+    @endif
 </div>
 </div>
 

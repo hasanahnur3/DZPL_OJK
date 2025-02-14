@@ -5,7 +5,6 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Agenda Forum Panels</h2>
 
 
 <div class="form-container" style="overflow-x: auto;">
@@ -38,8 +37,10 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $panel->hasil }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
                         <div style="display: flex; justify-content: flex-start; gap: 10px;">
+                            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                             <a href="{{ route('forum-panel.edit', $panel->id) }}"
                                 style="background-color: #ffc107; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                                @endif
                         </div>
                     </td>
             @endforeach

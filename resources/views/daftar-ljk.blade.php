@@ -95,7 +95,10 @@
 <div class="full-container">
     <div class="table-container">
         <h2>Daftar LJK PVML</h2>
-        <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button">Add Data</a>
+        <!-- Tombol Add Data hanya muncul jika role bukan direktur, deputi, atau kadep -->
+        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button">Add Data</a>
+        @endif
 
         <table class="table">
             <thead>
@@ -111,7 +114,9 @@
                     <td>{{ $ljk->jenis_industri }}</td>
                     <td>{{ $ljk->nama_perusahaan }}</td>
                     <td>
+                        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                         <a href="{{ route('daftarljk.edit', $ljk->id) }}" class="btn">Edit</a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
