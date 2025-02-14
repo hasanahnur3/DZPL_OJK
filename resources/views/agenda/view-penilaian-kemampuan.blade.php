@@ -49,7 +49,7 @@
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                         <a href="{{ route('pkk-agenda.edit', $agenda->id) }}"
                             style="background-color: #ffc107; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                            @endif
+                        @endif
                     </td>
                 </tr>
             @endforeach

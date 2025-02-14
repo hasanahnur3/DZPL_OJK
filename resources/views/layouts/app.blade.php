@@ -309,8 +309,8 @@
                 <a href="{{ route('dashboard') }}"> <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
             </div>
             @if(Session::get('role') === 'kasubag')
-            <a href="{{ route('register') }}" class="btn btn-primary">Create New User</a>
-        @endif
+                <a href="{{ route('register') }}" class="btn">Create New User</a>
+            @endif
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link">
@@ -386,19 +386,20 @@
                             </ul>
                         </li>
                     </ul>
-                </li>
-
-                <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; color: inherit;">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span class="menu-text">Logout</span>
-                        </button>
-                    </form>
-                </li>
-                
+                </li>                
             </ul>
+           
+               <a href="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-white" 
+                        style="background: #dc3545; border: none; padding: 8px 16px; border-radius: 8px; 
+                               font-size: 14px; font-weight: bold; display: flex; align-items: center; 
+                               gap: 8px; cursor: pointer; transition: background 0.3s ease;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </a>
+
             <button class="toggle-btn" id="toggleSidebar">☰</button>
         </nav>
 

@@ -31,16 +31,18 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->kesimpulan }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                        <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}"
+                            <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}"
                             style="background-color: #ffc107; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                            @endif
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div class="button-container">
-        <a href="{{ route('sosialisasi-riksus.index') }}" class="btn btn-success">Add Data</a>
+        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            <a href="{{ route('sosialisasi-riksus.index') }}" class="btn btn-success">Add Data</a>
+        @endif
     </div>
 </div>
 <script>
