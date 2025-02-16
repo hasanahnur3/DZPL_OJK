@@ -8,7 +8,8 @@
 
     
     
-    <div class="form-container" style="overflow-x: auto;">
+    <div class="form-container">
+    <div style="overflow-x: auto; max-width: 100%;">
     <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;"> Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
         <table id="kepengurusanTable"  style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
@@ -71,9 +72,11 @@
 
          
 <script>
-    $(document).ready(function () {
-        $('#kepengurusanTable').DataTable();
+$(document).ready(function () {
+    $('#kepengurusanTable').DataTable({
+        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
+});
 </script>
 <style>
 
@@ -106,6 +109,18 @@
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
+    }
+
+    div.dataTables_wrapper {
+        width: 100%;
+        overflow-x: auto;  */
+    }
+    div.dataTables_scrollHead{
+        margin-bottom: -25px;
+    }
+
+    table {
+        max-width: 100%; 
     }
 </style>
 @endsection
