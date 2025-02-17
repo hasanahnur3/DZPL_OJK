@@ -4,267 +4,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard PVML</title>
+    <title>Collapsible Sidebar</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- asli -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="style.css">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Poppins", serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
             min-height: 100vh;
-            margin: 0px;
-            padding: 0px;
-        }
-
-
-        .menu-toggle {
-            display: none;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-        }
-
-        .container {
+            background: white;
             display: flex;
-            flex-direction: row;
-            width: 100%;
-            min-height: 100vh;
-            transition: all 0.3s ease-in-out;
+            margin: 0;
+            padding: 0;
         }
 
+        /* Sidebar Styles */
         .sidebar {
-            width: 250px;
-            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 290px;
+            height: 100vh;
+            background: #A91111;
+            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
             padding: 1rem;
-            transition: transform 0.3s ease-in-out;
-            position: relative;
-            /* Sidebar tetap 250px */
-            background-color: #A91111;
+            z-index: 1000;
         }
 
         .sidebar.collapsed {
-            width: 100px;
+            width: 90px;
         }
 
-        .sidebar .logo {
-            text-align: center;
-            padding: 1rem;
+        .sidebar .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 25px 20px;
+            justify-content: space-between;
         }
 
-        .sidebar .logo img {
-            max-width: 100%;
-            height: auto;
+        .sidebar-header .header-logo img {
+            height: 55px;
+            width: 44px;
+            display: block;
+            object-fit: contain;
             transition: transform 0.3s ease-in-out;
         }
 
-        .sidebar.collapsed .logo img {
+        .sidebar.collapsed .header-logo img {
             transform: scale(0.7);
         }
 
-        .sidebar .nav-menu {
-            list-style: none;
-            padding: 1rem;
-        }
-
-        .sidebar .nav-item {
-            margin-bottom: 1rem;
-        }
-
-        .sidebar .nav-link {
+        .sidebar-header .sidebar-toggler {
+            position: absolute;
+            right: 25px;
+            height: 35px;
+            width: 35px;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #EEF2FF;
+            transition: 0.4s ease;
+        }
+
+        .sidebar-header .sidebar-toggler:hover {
+            background: #d9e1fd;
+        }
+
+        .sidebar.collapsed .sidebar-toggler {
+            transform: translate(-4px, 65px);
+        }
+
+        .sidebar-header .sidebar-toggler span {
+            font-size: 1.75rem;
+            transition: 0.4s ease;
+        }
+
+        .sidebar.collapsed .sidebar-toggler span {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-nav .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 4px;
+            padding: 0 15px;
+            flex-direction: column;
+            transition: translateY(15px);
+            transition: 0.4s ease;
+        }
+
+        .sidebar.collapsed .sidebar-nav .primary-nav {
+            transform: translateY(65px);
+        }
+
+        .sidebar-nav .nav-item .nav-link {
+            color: #ffffff;
+            display: flex;
+            gap: 12px;
+            white-space: nowrap;
+            padding: 11px 15px;
+            align-items: center;
+            border-radius: 8px;
             text-decoration: none;
-            color: white;
-            padding: 0.75rem;
-            border-radius: 4px;
-            transition: background-color 0.3s ease-in-out;
+            border: 1px solid #A91111;
+            transition: 0.4s ease;
         }
 
-        .sidebar .nav-link:hover {
-            background-color: #D84343;
+        .sidebar-nav .nav-item:hover>.nav-link:not(.dropdown-title) {
+            color: #A91111;
+            background: #EEF2FF;
         }
 
-        .sidebar .menu-text {
-            margin-left: 10px;
-            transition: opacity 0.3s ease-in-out;
+        .sidebar-nav .nav-link :where(.nav-label, .dropdown-icon) {
+            transition: opacity 0.3s ease;
         }
 
-        .sidebar.collapsed .menu-text {
+        .sidebar.collapsed .nav-link :where(.nav-label, .dropdown-icon) {
             opacity: 0;
             pointer-events: none;
         }
 
-        .sidebar .toggle-btn {
+        .sidebar-nav .secondary-nav {
             position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #D84343;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
+            bottom: 30px;
+            width: 100%;
+            background: #A91111;
         }
 
-        .sidebar .toggle-btn:hover {
-            background-color: #FF5757;
+        /* Dropdown Styles */
+        .sidebar-nav .nav-item {
+            position: relative;
         }
 
-        .logo {
-            margin-bottom: 2rem;
-            padding: 1rem;
-            text-align: center;
+        .sidebar-nav .dropdown-container .dropdown-icon {
+            margin: 0 -4px 0 auto;
+            transition: transform 0.4s ease, opacity 0.3s 0.2s ease;
         }
 
-        .nav-menu {
+        .sidebar.collapsed .dropdown-container .dropdown-icon {
+            transition: opacity 0.3s 0s ease;
+        }
+
+        .sidebar-nav .dropdown-container.open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .sidebar-nav .dropdown-menu {
+            height: 0;
+            overflow-y: hidden;
             list-style: none;
+            padding-left: 10px;
+            transition: height 0.4s ease;
         }
 
-        .nav-item {
-            margin-bottom: 0.5rem;
+        .sidebar.collapsed .dropdown-menu {
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            opacity: 0;
+            height: auto !important;
+            overflow-y: unset;
+            pointer-events: none;
+            background: #A91111;
+            padding: 7px 10px 7px 24px;
+            border-radius: 0 10px 10px 0;
+            transition: 0s;
         }
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem;
-            color: #333;
-            text-decoration: none;
-            transition: background-color 0.3s;
+        .sidebar.collapsed .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(10px);
+            transition: 0.4s ease;
         }
 
-        .nav-link:hover {
-            background-color: #D0D0D0;
+        .dropdown-menu .nav-item .nav-link {
+            padding: 9px 15px;
         }
 
-        .dropdown-content {
+        .sidebar.collapsed .dropdown-menu .nav-link {
+            padding: 7px 15px;
+        }
+
+        .dropdown-menu .nav-item .dropdown-title {
             display: none;
-            padding-left: 1rem;
-            list-style: none;
+            font-weight: 500;
         }
 
-        .dropdown-content .sub-item {
-            padding: 0.75rem;
-            padding-left: 1.5rem;
-        }
-
-        .active .dropdown-content {
+        .sidebar.collapsed .dropdown-menu .nav-item .dropdown-title {
             display: block;
         }
 
         .main-content {
+            padding: 1rem;
             flex: 1;
-            padding: 1rem;
             background-color: #f5f5f5;
-            width: 100%;
+            margin-left: 290px;
+            /* Memberikan margin kiri yang cukup agar konten tidak tertimpa sidebar */
+            transition: margin-left 0.4s ease;
+            /* Menambahkan animasi saat sidebar collapse */
         }
 
-        .industry-dropdown {
-            text-align: right;
-            margin-bottom: 1rem;
+        .sidebar.collapsed+.main-content {
+            margin-left: 90px;
+            /* Mengatur margin saat sidebar collapse */
         }
-
-        select {
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        /* .chart-container {
-            display: flex;
-            align-items: center;
-            min-height: 100vh;
-        } */
-
-        F
-        .chart-container {
-            display: flex;
-            align-items: center;
-            background-color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            height: 100%;
-        }
-
-        /* 
-        span {
-            margin-left: 10px;
-        }
-
-        span,
-        i {
-            color: #ffffff;
-        } */
-
-        /* Awal: Sembunyikan submenu */
-        .dropdown-menu {
-            display: none;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            position: absolute;
-            background-color: #faf8f8;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            min-width: 200px;
-            z-index: 1000;
-            left: 0;
-            /* Menjaga menu tetap di bawah item parent */
-            top: 100%;
-            /* Menu muncul di bawah item induk */
-        }
-
-        /* Tampilkan submenu ketika parent di-hover */
-        .sub-item:hover>.dropdown-menu {
-            display: block;
-        }
-
-        /* Submenu item styling */
-        .dropdown-menu li {
-            padding: 10px 20px;
-        }
-
-        .dropdown-menu li a {
-            text-decoration: none;
-            color: #333;
-            display: block;
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: #A91111;
-            color: white;
-            border-radius: 4px;
-        }
-
-        .sub-item {
-            position: relative;
-        }
-
 
         /* Responsive Styles */
         @media (max-width: 1400px) {
             .menu-toggle {
                 display: block;
-            }
-
-            .container {
-                flex-direction: column;
-                max-width: 100%;
+                top: 15px;
+                left: 15px;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
             }
 
             .sidebar {
@@ -273,12 +242,10 @@
                 left: -250px;
                 top: 0;
                 height: 100vh;
-                /* Menjadikan sidebar penuh dari atas ke bawah */
                 background-color: #E0E0E0;
                 padding: 1rem;
                 transition: left 0.3s ease-in-out;
                 overflow-y: auto;
-                /* Jika konten lebih panjang dari layar, bisa di-scroll */
             }
 
             .sidebar.active {
@@ -287,14 +254,20 @@
 
             .main-content {
                 padding: 1rem;
+                flex: 1;
+                background-color: #f5f5f5;
+                margin-left: 290px;
+                ;
             }
 
-            .industry-dropdown {
-                text-align: center;
+            .sidebar .nav-link {
+                padding: 0.75rem;
             }
 
             select {
                 width: 100%;
+                padding: 0.5rem;
+                border-radius: 4px;
             }
         }
     </style>
@@ -304,108 +277,112 @@
 
 
     <div class="container">
-        <nav class="sidebar">
-            <div class="logo">
-                <a href="{{ route('dashboard') }}"> <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
-            </div>
-            @if(Session::get('role') === 'kasubag')
-                <a href="{{ route('register') }}" class="btn">Create New User</a>
-            @endif
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span class="menu-text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-clock"></i>
-                        <span class="menu-text">Pending Matters</span>
-                    </a>
-                    <ul class="dropdown-content">
-                        <li class="sub-item">
-                            <a href="#">Submenu 1</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="#">Submenu 2</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="#">Submenu 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- Menu bar with dropdown submenu -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-calendar"></i>
-                        <span class="menu-text">Agenda DZPL</span>
-                    </a>
-                    <ul class="dropdown-content">
-                        <li class="sub-item">
-                            <a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('view-sosialisasi-riksus.index') }}">Sosialisasi Riksus</a>
-                        </li>
-                        <li class="sub-item">
-                            <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('daftarljk.index') }}" class="nav-link">
-                        <i class="fas fa-list"></i>
-                        <span class="menu-text">Daftar LJK PVML</span>
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link" id="daftarPengajuan">
-                        <i class="fas fa-file-alt"></i>
-                        <span class="menu-text">Pengajuan Perizinan PVML</span>
-                    </a>
-                    <ul class="dropdown-content" id="perizinanPVML">
-                        <li class="sub-item">
-                            <a class="nav-link" id="kepengurusan">Kepengurusan</a>
-                            <ul class="dropdown-menu" id="kepengurusanMenu">
-                                <li><a href="{{ route('pkk') }}">PKK</a></li>
-                                <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
-                                <li><a href="{{ route('tka') }}">TKA</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-item">
-                            <a class="nav-link" id="kelembagaan">Kelembagaan</a>
-                            <ul class="dropdown-menu" id="kelembagaanMenu">
-                                <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
-                                <li><a href="{{ route('riksus') }}">Riksus</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>                
-            </ul>
-           
-               <a href="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="text-white" 
-                        style="background: #dc3545; border: none; padding: 8px 16px; border-radius: 8px; 
-                               font-size: 14px; font-weight: bold; display: flex; align-items: center; 
-                               gap: 8px; cursor: pointer; transition: background 0.3s ease;">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </button>
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <a href="{{ route('dashboard') }}" class="header-logo">
+                    <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" style="max-width: 150px;">
                 </a>
+                <button class="sidebar-toggler">
+                    <span class="material-symbols-rounded">chevron_left</span>
+                </button>
+            </header>
 
-            <button class="toggle-btn" id="toggleSidebar">☰</button>
-        </nav>
+            <nav class="sidebar-nav">
+                <ul class="nav-list primary-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('dashboard') }}" class="nav-link">
+                            <span class="material-symbols-rounded">space_dashboard</span>
+                            <span class="nav-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <span class="material-symbols-rounded">schedule</span>
+                            <span class="nav-label">Pending Matters</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown-container">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <span class="material-symbols-rounded">view_agenda</span>
+                            <span class="nav-label">Agenda DZPL</span>
+                            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('view-rapat-pimpinan.index') }}" class="nav-link dropdown-link">Rapat
+                                    Pimpinan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('view-penilaian-kemampuan.index') }}"
+                                    class="nav-link dropdown-link">PKK</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('view-sosialisasi-riksus.index') }}"
+                                    class="nav-link dropdown-link">Sosialisasi Riksus</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('forum-panel.index') }}" class="nav-link dropdown-link">Forum
+                                    Panel</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('daftarljk.index') }}" class="nav-link">
+                            <span class="material-symbols-rounded">list_alt</span>
+                            <span class="nav-label">Daftar LJK PVML</span>
+                        </a>
+                    </li>
 
+                    <li class="nav-item dropdown-container">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <span class="material-symbols-rounded">edit_document</span>
+                            <span class="nav-label">Pengajuan Perizinan Kepengurusan</span>
+                            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('pkk') }}" class="nav-link dropdown-link">PKK</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('dirkom') }}" class="nav-link dropdown-link">Dirkom</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('tka') }}" class="nav-link dropdown-link">TKA</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown-container">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <span class="material-symbols-rounded">edit_document</span>
+                            <span class="nav-label">Pengajuan Perizinan Kelembagaan</span>
+                            <span class="dropdown-icon material-symbols-rounded">keyboard_arrow_down</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <a href="{{ route('quality_control.index') }}"
+                                    class="nav-link dropdown-link">Pengendalian Kualitas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('riksus') }}" class="nav-link dropdown-link">Riksus</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav-list secondary-nav">
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link logout">
+                                <span class="material-symbols-rounded">logout</span>
+                                <span class="nav-label">Logout</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
         <main class="main-content">
-
             <div class="chart-container">
                 @yield('content')
             </div>
@@ -413,34 +390,72 @@
     </div>
 
     <script>
-        document.querySelectorAll('.nav-item > .nav-link').forEach(link => {
-            link.addEventListener('click', function (e) {
-                const parentItem = this.parentElement;
-                const dropdownContent = parentItem.querySelector('.dropdown-content');
-                if (dropdownContent) {
-                    e.preventDefault();
-                    parentItem.classList.toggle('active');
-                }
+        const toggleDropdown = (dropdown, menu, isOpen) => {
+            dropdown.classList.toggle("open", isOpen)
+            menu.style.height = isOpen ? `${menu.scrollHeight}px` : 0;
+        }
+
+        const closeAllDropdowns = () => {
+            document.querySelectorAll(".dropdown-container.open").forEach(openDropdown => {
+                toggleDropdown(openDropdown, openDropdown.querySelector(".dropdown-menu"), false);
+            })
+        }
+
+        document.querySelectorAll(".dropdown-toggle").forEach(dropdownToggle => {
+            dropdownToggle.addEventListener("click", e => {
+                e.preventDefault();
+
+                const dropdown = e.target.closest(".dropdown-container");
+                const menu = dropdown.querySelector(".dropdown-menu");
+                const isOpen = dropdown.classList.contains("open");
+
+                toggleDropdown(dropdown, menu, !isOpen);
             });
         });
 
-        document.querySelector('.menu-toggle').addEventListener('click', function () {
-            document.querySelector('.sidebar').classList.toggle('active');
-        });
 
-        document.querySelector('.toggle-button').addEventListener('click', function () {
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
+        document.querySelector(".sidebar-toggler").addEventListener
+            ("click", () => {
+                closeAllDropdowns();
 
-            sidebar.classList.toggle('small');
-        });
 
-    </script>
-    <script>
-        document.getElementById('toggleSidebar').addEventListener('click', () => {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('collapsed');
-        });
+                document.querySelector(".sidebar").classList.toggle
+                    ("collapsed");
+            })
+
+
+
+
+
+
+
+
+        // document.querySelectorAll('.nav-item > .nav-link').forEach(link => {
+        //     link.addEventListener('click', function (e) {
+        //         const parentItem = this.parentElement;
+        //         const dropdownContent = parentItem.querySelector('.dropdown-content');
+        //         if (dropdownContent) {
+        //             e.preventDefault();
+        //             parentItem.classList.toggle('active');
+        //         }
+        //     });
+        // });
+
+        // document.querySelector('.menu-toggle').addEventListener('click', function () {
+        //     document.querySelector('.sidebar').classList.toggle('active');
+        // });
+
+        // document.querySelector('.toggle-button').addEventListener('click', function () {
+        //     const sidebar = document.querySelector('.sidebar');
+        //     const mainContent = document.querySelector('.main-content');
+
+        //     sidebar.classList.toggle('small');
+        // });
+
+        // document.getElementById('toggleSidebar').addEventListener('click', () => {
+        //     const sidebar = document.querySelector('.sidebar');
+        //     sidebar.classList.toggle('collapsed');
+        // });
     </script>
 </body>
 

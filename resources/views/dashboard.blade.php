@@ -11,7 +11,7 @@
         padding-right: 0 !important;
         padding-left: 0 !important;
         margin-right: 0 !important;
-        margin-left: 0 !important;
+        margin-left: 10 !important;
         width: 80vw !important;
     }
 
@@ -43,8 +43,8 @@
         }
 
         .container-fluid {
-            margin: 0px;
-            padding: 0px;
+            margin: 10px;
+            padding: 10px;
             background: #f4f6f9;
             width: 100%;
         }

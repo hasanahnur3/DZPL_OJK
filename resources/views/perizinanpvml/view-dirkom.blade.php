@@ -44,7 +44,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                         <a href="{{ route('dirkom.edit', $dirkom->id) }}"
-                            style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                            style="background-color: #ffc107;; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                             @endif
                     </td>
                 </tr>
