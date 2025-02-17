@@ -97,7 +97,7 @@
         <h2>Daftar LJK PVML</h2>
         <!-- Tombol Add Data hanya muncul jika role bukan direktur, deputi, atau kadep -->
         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-            <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button">Add Data</a>
+            <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;" class="btn btn-success">Add Data</a>
         @endif
 
         <table class="table">

@@ -204,7 +204,7 @@
 
         <div style="grid-column: span 2; text-align: center; margin-top: 20px;">
             <button type="submit" class="btn btn-success"
-                style="padding: 0.75rem 1.5rem; border-radius: 10px; background-color: #28a745; color: white; font-weight: bold;">Update</button>
+            style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Update</button>
         </div>
     </form>
 </div>

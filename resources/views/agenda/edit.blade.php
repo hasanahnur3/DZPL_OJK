@@ -56,7 +56,7 @@
             <textarea name="kesimpulan" class="form-control" required>{{ old('kesimpulan', $agenda->kesimpulan) }}</textarea>
         </div>
         
-        <button type="submit" class="btn btn-primary">Update Agenda</button>
+        <button type="submit" class="btn btn-success" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Update Agenda</button>
     </form>
 
 </div>
@@ -83,16 +83,6 @@
         } */
 
         /* Styling untuk frame form */
-        form {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            /* Lebar maksimal diperbesar */
-        }
 
         .form-control {
             padding: 10px;
@@ -115,5 +105,20 @@
             width: 100%;
             /* Tombol melebar */
         }
+
+        .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
 </style>
 @endsection
