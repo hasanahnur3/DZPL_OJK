@@ -80,6 +80,7 @@
         .card:hover {
             transform: scale(1.02);
         }
+        
 
         .card-header {
             font-weight: bold;
@@ -158,7 +159,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card" style="height: 10.1cm">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Status</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('statusChart', 'Status_Distribution')">
@@ -185,6 +186,55 @@
             </div>
         </div>
     </div>
+<br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-user-check"></i> Frekuensi Penguji</span>
+                    <button class="btn btn-sm download-btn" onclick="downloadChart('frekuensiPengujiChart')">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <canvas id="frekuensiPengujiChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const pengujiData = @json($pengujiData);
+    
+        new Chart(document.getElementById('frekuensiPengujiChart'), {
+            type: 'bar',
+            data: {
+                labels: pengujiData.map(item => item.nama),
+                datasets: [{
+                    label: 'Jumlah Frekuensi',
+                    data: pengujiData.map(item => item.total),
+                    backgroundColor: '#FF6384'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    
+    
+    
 
     <script>
         const statusData = @json($statusData);

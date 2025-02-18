@@ -262,7 +262,7 @@
                     </a>
                     <ul class="dropdown-content">
                         <li class="sub-item dropdown">
-                            <a href="#" class="nav-link">Kepengurusan</a>
+                            <a>Kepengurusan</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('pkk') }}">PKK</a></li>
                                 <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
@@ -270,7 +270,7 @@
                             </ul>
                         </li>
                         <li class="sub-item dropdown">
-                            <a href="#" class="nav-link">Kelembagaan</a>
+                            <a>Kelembagaan</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
                                 <li><a href="{{ route('riksus') }}">Riksus</a></li>

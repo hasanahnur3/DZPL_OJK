@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
 
+@extends('layouts.app')
+
+@section('content')
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -35,10 +31,7 @@
         width: 334px;
     }
     img{
-        width: 310px;
-        height: 376px;
-        object-fit: cover;
-        border-radius: 70px  10px 10px 70px;
+        
     }
 
     label {
@@ -56,20 +49,6 @@
             border-radius: 5px;
         }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #2575fc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #6a11cb;
-        }
         .form-control{
             height: 40px;
             width: 293px;
@@ -77,9 +56,8 @@
         }
 </style>
 
-<body>
     <div class="container">
-        <img src="{{ asset('img/ruangan.jpg') }}">
+        <img src="{{ asset('img/ruangan.jpg') }}" style="width: 310px; height: 376px; object-fit: cover; border-radius: 70px  10px 10px 70px;">
         <div class="signup-container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -128,7 +106,7 @@
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" style=" width: 100%; padding: 10px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer;font-size: 16px;">
                                         Register
                                     </button>
                                 </div>
@@ -140,3 +118,4 @@
         </div>
     </div>
 </body>
+@endsection
