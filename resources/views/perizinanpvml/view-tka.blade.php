@@ -57,9 +57,11 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#tkaTable').DataTable();
+$(document).ready(function () {
+    $('#tkaTable').DataTable({
+        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
+});
 </script>
 <style>
 

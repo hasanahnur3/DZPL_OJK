@@ -7,8 +7,8 @@
 
 
 
-<div class="form-container" style="overflow-x: auto;">
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Direksi Komisaris</h2>
+<div class="form-container">
+<h2 style="overflow-x: auto; text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Direksi Komisaris</h2>
     <table id="dirkomTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
@@ -64,9 +64,11 @@
 
 
 <script>
-    $(document).ready(function () {
-        $('#dirkomTable').DataTable();
+$(document).ready(function () {
+    $('#dirkomTable').DataTable({
+        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
+});
 </script>
 <style>
     .form-container {
