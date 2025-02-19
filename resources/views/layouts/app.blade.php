@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collapsible Sidebar</title>
+    <title>DZPL OJK</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -26,13 +26,32 @@
             position: fixed;
             top: 0;
             left: 0;
-            transition: width 0.3s ease;
             z-index: 1000;
             overflow-y: auto;
+            transition: width 0.4s ease, background-color 0.3s ease;
+        }
+
+        .nav-menu .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 4px;
+            padding: 0 15px;
+            flex-direction: column;
+            transition: 0.4s ease;
         }
 
         .sidebar.collapsed {
             width: 70px;
+            background-color: #B02A2A;
+        }
+
+        .nav-menu .nav-link .menu-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .nav-link .menu-text {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .sidebar .logo {
@@ -42,7 +61,7 @@
 
         .sidebar .logo img {
             max-width: 150px;
-            transition: max-width 0.3s ease;
+            transition: max-width 0.4s ease;
         }
 
         .sidebar.collapsed .logo img {
@@ -55,7 +74,6 @@
             padding: 15px;
             text-align: center;
             color: #fff;
-            background-color: #5cb85c;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -101,6 +119,7 @@
             display: block;
             /* Tampilkan dropdown saat aktif */
         }
+        
 
 
         .sidebar .dropdown-content,
@@ -179,6 +198,10 @@
             cursor: pointer;
         }
 
+        .sidebar.collapsed .toggle-btn {
+            transform: translate(-8px, 55px);
+        }
+
         @media (max-width: 1380px) {
             .sidebar {
                 width: 70px;
@@ -188,6 +211,7 @@
                 flex-direction: column;
                 max-width: 100%;
             }
+
             select {
                 width: 100%;
             }
@@ -215,92 +239,103 @@
                 <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" class="logo-image">
             </a>
         </div>
-        @if(Session::get('role') === 'kasubag')
-            <a href="{{ route('register') }}" class="btn create-user-btn">Create New User</a>
-        @endif
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-clock"></i>
-                    <span class="menu-text">Pending Matters</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item">
-                        <a href="#">Submenu 1</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="#">Submenu 2</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="#">Submenu 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-calendar"></i>
-                    <span class="menu-text">Agenda DZPL</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item">
-                        <a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('view-sosialisasi-riksus.index') }}">Sosialisasi Riksus</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('daftarljk.index') }}" class="nav-link">
-                    <i class="fas fa-list"></i>
-                    <span class="menu-text">Daftar LJK PVML</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="menu-text">Pengajuan Perizinan PVML</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item dropdown">
-                        <a>Kepengurusan</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('pkk') }}">PKK</a></li>
-                            <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
-                            <li><a href="{{ route('tka') }}">TKA</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-item dropdown">
-                        <a>Kelembagaan</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
-                            <li><a href="{{ route('riksus') }}">Riksus</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item logout-item">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="nav-link logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </button>
-                </form>
-            </li>
-        </ul>
+
+        <nav class="nav-menu">
+            <ul class="nav-list primary-nav">
+                <li class="nav-item">
+                    @if(Session::get('role') === 'kasubag')
+                        <a href="{{ route('register') }}" class="nav-link">
+                            <i class="fa fa-plus"></i>
+                            <span class="menu-text">Create New User</span>
+                        </a>
+                    @endif
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span class="menu-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-clock"></i>
+                        <span class="menu-text">Pending Matters</span>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li class="sub-item">
+                            <a href="#">Submenu 1</a>
+                        </li>
+                        <li class="sub-item">
+                            <a href="#">Submenu 2</a>
+                        </li>
+                        <li class="sub-item">
+                            <a href="#">Submenu 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-calendar"></i>
+                        <span class="menu-text">Agenda DZPL</span>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li class="sub-item">
+                            <a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a>
+                        </li>
+                        <li class="sub-item">
+                            <a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a>
+                        </li>
+                        <li class="sub-item">
+                            <a href="{{ route('view-sosialisasi-riksus.index') }}">Sosialisasi Riksus</a>
+                        </li>
+                        <li class="sub-item">
+                            <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('daftarljk.index') }}" class="nav-link">
+                        <i class="fas fa-list"></i>
+                        <span class="menu-text">Daftar LJK PVML</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="menu-text">Pengajuan Perizinan PVML</span>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li class="sub-item dropdown">
+                            <a>Kepengurusan</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('pkk') }}">PKK</a></li>
+                                <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
+                                <li><a href="{{ route('tka') }}">TKA</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-item dropdown">
+                            <a>Kelembagaan</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
+                                <li><a href="{{ route('riksus') }}">Riksus</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav-list secondary-nav">
+                <li class="nav-item logout-item">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="nav-link logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
         <button class="toggle-btn" id="toggleSidebar">
             <i class="fas fa-bars"></i>
         </button>
