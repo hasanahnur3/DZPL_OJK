@@ -71,7 +71,7 @@ class DashboardController extends Controller
     
         // Fetch upcoming agendas from pkk_agendas
         $pkkAgendas = DB::table('pkk_agendas')
-            ->select('hari_tanggal as date', DB::raw("'PKK' as source"))
+            ->select('hari_tanggal as date', DB::raw("'Agenda PKK' as source"))
             ->where('hari_tanggal', '>=', now())
             ->get();
     

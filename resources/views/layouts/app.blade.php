@@ -174,6 +174,29 @@
                 margin-left: 70px;
             }
         }
+
+
+        .sidebar .dropdown-content .sub-item.dropdown .dropdown-menu {
+    position: static;
+    display: none;
+    padding-left: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.sidebar .dropdown-content .sub-item.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+/* Ensure all menu text is visible */
+.sidebar .nav-link .menu-text,
+.sidebar .dropdown-content .sub-item a,
+.sidebar .dropdown-menu a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
     </style>
 </head>
 
@@ -283,29 +306,37 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Menangani klik pada link navigasi untuk dropdown
-            document.querySelectorAll('.nav-item > .nav-link').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    const parentItem = this.parentElement;
-                    const dropdownContent = parentItem.querySelector('.dropdown-content');
-                    if (dropdownContent) {
-                        e.preventDefault();
-                        parentItem.classList.toggle('active');
-                        dropdownContent.classList.toggle('show'); // Menambahkan kelas untuk menampilkan dropdown
-                    }
-                });
-            });
-            // Menangani toggle sidebar
-            document.getElementById('toggleSidebar').addEventListener('click', () => {
-                const sidebar = document.querySelector('.sidebar');
-                const mainContent = document.querySelector('.main-content');
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('collapsed');
-                // Menyesuaikan ukuran logo berdasarkan status sidebar
-                const logoImage = sidebar.querySelector('.logo img');
-                logoImage.style.maxWidth = sidebar.classList.contains('collapsed') ? '70px' : '150px';
-            });
+       // Replace your current dropdown JS with this
+document.addEventListener('DOMContentLoaded', () => {
+    // Main dropdown toggles
+    document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parentItem = this.parentElement;
+            parentItem.classList.toggle('active');
         });
+    });
+    
+    // Sub-item dropdown toggles
+    document.querySelectorAll('.sub-item.dropdown > a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const parentItem = this.parentElement;
+            parentItem.classList.toggle('active');
+        });
+    });
+
+    // Toggle sidebar
+    document.getElementById('toggleSidebar').addEventListener('click', () => {
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+        
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('collapsed');
+        
+        const logoImage = sidebar.querySelector('.logo img');
+        logoImage.style.maxWidth = sidebar.classList.contains('collapsed') ? '70px' : '150px';
+    });
+});
     </script>
 </body>
