@@ -13,13 +13,13 @@ services:
       - key: DB_PORT
         value: "3306"
       - key: DB_HOST
-        fromService: mysql-database
+        fromDatabase: mysql-database
       - key: DB_DATABASE
-        fromService: mysql-database
+        fromDatabase: mysql-database
       - key: DB_USERNAME
-        fromService: mysql-database
+        fromDatabase: mysql-database
       - key: DB_PASSWORD
-        fromService: mysql-database
+        fromDatabase: mysql-database
     buildCommand: |
       composer install --no-dev --optimize-autoloader
       php artisan cache:clear
