@@ -83,6 +83,7 @@
 
         .sidebar .nav-item {
             position: relative;
+            align-items: center;
         }
 
         .sidebar .nav-link {
@@ -236,6 +237,16 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .nav-menu .secondary-nav {
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
+        }
+
+        .nav-menu .nav-link .nav-item{
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -329,13 +340,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item logout-item">
+            <li class="nav-item secondary-nav">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link logout-btn">
+                    <a class="nav-link ">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </button>
+                        <span class="menu-text">Logout</span>
+                    </a>
                 </form>
             </li>
         </ul>
