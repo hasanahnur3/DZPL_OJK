@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -28,10 +27,9 @@
             });
         });
     });
-</script>
+    </script>
     {{-- Form Tambah Agenda --}}
-    <div class="form-container" >
-        
+    <div class="form-container">
         <form action="{{ route('rapim.store') }}" method="POST">
             @csrf
             <h3>Agenda Rapat Pimpinan (Rapim)</h3>
@@ -47,13 +45,13 @@
                 <label for="hasil">Hasil</label>
                 <input name="hasil" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary" style="color:white;">Tambah Agenda</button>
+            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah Agenda</button>
         </form>
     </div>
-</div >
+</div>
 
 <style>
-        .form-container {
+    .form-container {
         max-width: 100%;
         width: 100%;
         padding: 2rem;
@@ -64,21 +62,27 @@
         justify-content: center;
     }
     /* Styling untuk frame form */
-    form {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px; /* Lebar maksimal diperbesar */
-}
-
+    
 
     /* Styling untuk heading */
     h3 {
         text-align: center; /* Rata tengah teks */
         margin-bottom: 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
     }
 
     /* Styling untuk tombol */
@@ -89,18 +93,18 @@
         height: 30px;
         width: 100%; /* Tombol melebar */
     }
-    .form-control{
+
+    .form-control {
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 10px;
         height: 30px;
         width: 100%;
     }
-    .form-group{
+
+    .form-group {
         margin: 10px;
     }
-
 </style>
-
 
 @endsection

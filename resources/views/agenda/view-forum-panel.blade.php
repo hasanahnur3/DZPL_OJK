@@ -8,9 +8,8 @@
 
 
 <div class="form-container" style="overflow-x: auto;">
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Forum Panel</h2>
-    <table id="forumPanelTable"
-        style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Forum Panels</h2>
+    <table id="forumPanelTable"class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
@@ -39,7 +38,7 @@
                         <div style="display: flex; justify-content: flex-start; gap: 10px;">
                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                             <a href="{{ route('forum-panel.edit', $panel->id) }}"
-                                style="background-color: #ffc107; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                                style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                             @endif
                         </div>
                     </td>
@@ -48,7 +47,7 @@
     </table>
     <div class="button-container">
         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-        <a href="{{ route('forum-panel.create') }}" class="btn btn-success">Add Data</a>
+        <a href="{{ route('forum-panel.create') }}" class="btn-success">Add Data</a>
         @endif
     </div>
 </div>
@@ -89,6 +88,47 @@
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* Ini kunci untuk membuat kolom compact */
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden; /* Mencegah teks meluap dari kolom */
+        text-overflow: ellipsis; /* Menambahkan ellipsis (...) jika teks terlalu panjang */
+        white-space: nowrap; /* Mencegah teks wrap ke baris baru */
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table tr:hover {
+        background-color: #f0f0f0;
     }
 </style>
 

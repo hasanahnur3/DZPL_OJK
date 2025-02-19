@@ -12,7 +12,7 @@
 
 <div class="form-container" style="overflow-x: auto;">
     <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Agenda PKK</h2>
-    <table id="pkkTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+    <table id="pkkTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
@@ -48,7 +48,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                         <a href="{{ route('pkk-agenda.edit', $agenda->id) }}"
-                            style="background-color: #ffc107; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                            style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         @endif
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
     </table>
     <div class="button-container">
         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-        <a href="{{ route('penilaian-kemampuan.create') }}" class="btn btn-success">Add Data</a>
+        <a href="{{ route('penilaian-kemampuan.create') }}" class="btn-success">Add Data</a>
         @endif
     </div>
 </div>
@@ -98,6 +98,47 @@
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed; /* Ini kunci untuk membuat kolom compact */
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden; /* Mencegah teks meluap dari kolom */
+        text-overflow: ellipsis; /* Menambahkan ellipsis (...) jika teks terlalu panjang */
+        white-space: nowrap; /* Mencegah teks wrap ke baris baru */
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table tr:hover {
+        background-color: #f0f0f0;
     }
 </style>
 

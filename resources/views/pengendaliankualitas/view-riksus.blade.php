@@ -9,7 +9,7 @@
     
 <div style="overflow-x: auto; max-width: 100%;">
 <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
-    <table id="riksusTable" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+    <table id="riksusTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">#</th>
@@ -72,7 +72,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_persetujuan_kadep ? \Carbon\Carbon::parse($riksusItem->tanggal_persetujuan_kadep)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                        <a href="{{ route('riksus.edit', $riksusItem->id) }}" style="background-color: #ffc107; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                        <a href="{{ route('riksus.edit', $riksusItem->id) }}" style="background-color: #007bff; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         @endif
                     </td>
                 </tr>
@@ -116,8 +116,61 @@ $(document).ready(function () {
         margin-bottom: -25px;
     }
 
-    table {
-        max-width: 100%; 
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden; /* Mencegah teks meluap dari kolom */
+        text-overflow: ellipsis; /* Menambahkan ellipsis (...) jika teks terlalu panjang */
+        white-space: nowrap; /* Mencegah teks wrap ke baris baru */
+    }
+
+    .table th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table tr:hover {
+        background-color: #f0f0f0;
     }
 </style>
 @endsection

@@ -6,6 +6,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
+
+.btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
         /* Override container styles */
     .container-fluid {
         padding-right: 0 !important;
@@ -133,7 +148,7 @@
                                 </select>
                             </div>
                             <div class="col-md-3 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary w-100"><i class="fas fa-filter"></i> Filter</button>
+                                <button type="submit" style="background-color: #007bff;" class="btn w-100"><i class="fas fa-filter"></i> Filter</button>
                             </div>
                         </div>
                     </form>

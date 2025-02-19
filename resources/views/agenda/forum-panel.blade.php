@@ -70,7 +70,7 @@
                 <textarea name="hasil" class="form-control" required></textarea><br>
             </div>
 
-            <button type="submit" class="btn btn-primary">Tambah Forum Panel</button>
+            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah Forum Panel</button>
         </form>
     </div>
     </div>
@@ -97,16 +97,7 @@
         } */
 
         /* Styling untuk frame form */
-        form {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            /* Lebar maksimal diperbesar */
-        }
+        
 
         .form-control {
             padding: 10px;
@@ -129,6 +120,21 @@
             width: 100%;
             /* Tombol melebar */
         }
+
+        .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .btn:hover {
+        background-color: #e0a800;
+    }
     </style>
 
     @endsection

@@ -15,13 +15,13 @@ class DashboardController extends Controller
         $selectedJenisIndustri = $request->input('jenis_industri', '');
 
         // Ambil daftar jenis industri unik untuk dropdown
-        $jenisIndustriList = DB::table('kelembagaan')
+        $jenisIndustriList = DB::table('kelembagaan_pvml')
             ->select('jenis_industri')
             ->distinct()
             ->pluck('jenis_industri');
 
         // Query untuk Status Chart
-        $statusData = DB::table('kelembagaan')
+        $statusData = DB::table('kelembagaan_pvml')
             ->select('status', DB::raw('count(*) as total'))
             ->when($selectedMonth, function ($query, $month) {
                 return $query->whereMonth('tanggal_pengajuan_sistem', $month);
@@ -36,7 +36,7 @@ class DashboardController extends Controller
             ->get();
 
         // Query untuk Detail Izin Chart
-        $detailIzinData = DB::table('kelembagaan')
+        $detailIzinData = DB::table('kelembagaan_pvml')
             ->select('detail_izin', DB::raw('count(*) as total'))
             ->when($selectedMonth, function ($query, $month) {
                 return $query->whereMonth('tanggal_pengajuan_sistem', $month);
