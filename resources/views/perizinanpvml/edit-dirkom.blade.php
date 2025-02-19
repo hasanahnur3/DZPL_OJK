@@ -88,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
             </select>
 
             <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>
-            <input type="date" id="tanggal_dok_lengkap" name="tanggal_dok_lengkap" value="{{ old('tanggal_dok_lengkap', $dirkom->tanggal_dok_lengkap ? \Carbon\Carbon::parse($dirkom->tanggal_dok_lengkap)->format('Y-m-d') : '') }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+<input type="date" id="tanggal_dok_lengkap" name="tanggal_dok_lengkap" value="{{ old('tanggal_dok_lengkap', $dirkom->tanggal_dok_lengkap ? \Carbon\Carbon::parse($dirkom->tanggal_dok_lengkap)->format('Y-m-d') : '') }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+
 
             <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">Nomor Surat Pencatatan</label>
             <input type="text" id="no_surat_pencatatan" name="no_surat_pencatatan" value="{{ old('no_surat_pencatatan', $dirkom->no_surat_pencatatan) }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

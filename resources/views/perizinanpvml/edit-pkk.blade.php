@@ -78,8 +78,13 @@
 
             <!-- Input Status -->
             <label for="status" style="font-weight: bold; color: #555;">Status</label>
-            <input type="text" name="status" required value="{{$data->status }}"
-                style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            <select name="status" id="status" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                <option value="Sudah diajukan" {{ $data->status == 'Sudah diajukan' ? 'selected' : '' }}>Sudah diajukan</option>
+                <option value="Dokumen perlu dilengkapi" {{ $data->status == 'Dokumen perlu dilengkapi' ? 'selected' : '' }}>Dokumen perlu dilengkapi</option>
+                <option value="Dokumen sudah diverifikasi" {{ $data->status == 'Dokumen sudah diverifikasi' ? 'selected' : '' }}>Dokumen sudah diverifikasi</option>
+                <option value="Selesai" {{ $data->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+            </select>
+
 
             <!-- Input Nomor Surat Permohonan -->
             <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat Permohonan</label>
@@ -104,8 +109,9 @@
         <div style="display: flex; flex-direction: column; gap:5px;">
             <!-- Input Tanggal Dok Lengkap -->
             <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dok Lengkap</label>
-            <input type="date" name="tanggal_dok_lengkap" required value="{{$data->tanggal_dok_lengkap }}"
+            <input type="date" name="tanggal_dok_lengkap" value="{{$data->tanggal_dok_lengkap }}"
                 style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            
 
             <!-- Input Perlu Klarifikasi -->
             <label for="perlu_klarifikasi" style="font-weight: bold; color: #555;">Perlu Klarifikasi</label>
