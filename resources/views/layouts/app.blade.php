@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collapsible Sidebar</title>
     <title>Dashboard DZPL</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet"
@@ -29,7 +28,6 @@
             left: 0;
             transition: width 0.3s ease;
             z-index: 1000;
-            overflow-y: auto;
         }
 
         .sidebar.collapsed {
@@ -78,7 +76,7 @@
         .sidebar .nav-menu {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0.3cm;
         }
 
         .sidebar .nav-item {
@@ -188,6 +186,9 @@
             font-size: 24px;
             cursor: pointer;
         }
+        .sidebar.collapsed .toggle-btn{
+            transform: translate(-10px, 45px)
+        }
 
         @media (max-width: 1380px) {
             .sidebar {
@@ -235,7 +236,7 @@
         .sidebar .dropdown-menu a {
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
+         
         }
 
         .nav-menu .secondary-nav {
@@ -383,16 +384,22 @@
             });
 
             // Toggle sidebar
-            document.getElementById('toggleSidebar').addEventListener('click', () => {
-                const sidebar = document.querySelector('.sidebar');
-                const mainContent = document.querySelector('.main-content');
-
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('collapsed');
-
-                const logoImage = sidebar.querySelector('.logo img');
-                logoImage.style.maxWidth = sidebar.classList.contains('collapsed') ? '70px' : '150px';
-            });
+           // Toggle sidebar with logo resizing
+document.getElementById('toggleSidebar').addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+    const logoImage = document.querySelector('.logo img');
+    
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('collapsed');
+    
+    // Explicitly change the logo size based on sidebar state
+    if (sidebar.classList.contains('collapsed')) {
+        logoImage.style.maxWidth = '40px'; // Even smaller when collapsed
+    } else {
+        logoImage.style.maxWidth = '150px'; // Original size when expanded
+    }
+});
         });
     </script>
 </body>
