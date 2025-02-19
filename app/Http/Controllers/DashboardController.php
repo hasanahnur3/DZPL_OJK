@@ -69,7 +69,37 @@ class DashboardController extends Controller
             ->groupBy('nama')
             ->get();
     
-        // Return view dengan data yang sudah diinisialisasi
+        // Fetch upcoming agendas from pkk_agendas
+        $pkkAgendas = DB::table('pkk_agendas')
+            ->select('hari_tanggal as date', DB::raw("'PKK' as source"))
+            ->where('hari_tanggal', '>=', now())
+            ->get();
+    
+        // Fetch upcoming agendas from rapim
+        $rapimAgendas = DB::table('rapim')
+            ->select('tanggal as date', DB::raw("'RAPIM' as source"))
+            ->where('tanggal', '>=', now())
+            ->get();
+    
+        // Fetch upcoming agendas from riksus
+        $riksusAgendas = DB::table('sosialisasi_riksus')
+            ->select('hari_tanggal as date', DB::raw("'RIKSUS' as source"))
+            ->where('hari_tanggal', '>=', now())
+            ->get();
+    
+        // Fetch upcoming agendas from forum_panels
+        $forumPanelsAgendas = DB::table('forum_panels')
+            ->select('hari_pelaksanaan as date', DB::raw("'FORUM PANEL' as source"))
+            ->where('hari_pelaksanaan', '>=', now())
+            ->get();
+    
+        // Merge all agendas into a single collection
+        $allAgendas = $pkkAgendas->merge($rapimAgendas)->merge($riksusAgendas)->merge($forumPanelsAgendas);
+    
+        // Sort agendas by date
+        $allAgendas = $allAgendas->sortBy('date');
+    
+        // Return view with data that has been initialized
         return view('dashboard', compact(
             'statusData',
             'detailIzinData',
@@ -77,7 +107,8 @@ class DashboardController extends Controller
             'selectedMonth',
             'selectedYear',
             'jenisIndustriList',
-            'selectedJenisIndustri'
+            'selectedJenisIndustri',
+            'allAgendas'
         ));
     }
     

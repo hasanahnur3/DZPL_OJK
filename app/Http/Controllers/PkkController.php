@@ -41,7 +41,7 @@ class PkkController extends Controller
             'nomor_surat_permohonan' => 'required',
             'tanggal_surat_permohonan' => 'required|date',
             'tanggal_pengajuan_sistem' => 'required|date',
-            'tanggal_dok_lengkap' => 'required|date',
+            'tanggal_dok_lengkap' => 'date',
             'perlu_klarifikasi' => 'required',
             'tanggal_klarifikasi' => 'nullable|date',
             'hasil' => 'required',

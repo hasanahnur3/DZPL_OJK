@@ -75,6 +75,7 @@
             <option value="Sudah diajukan">Sudah diajukan</option>
             <option value="Dokumen perlu dilengkapi">Dokumen perlu dilengkapi</option>
             <option value="Dokumen sudah diverifikasi">Dokumen sudah diverifikasi</option>
+            <option value="Selesai">Selesai</option>
         </select>
 
         <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat Permohonan</label>

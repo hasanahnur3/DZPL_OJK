@@ -6,50 +6,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
     <style>
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffc107;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-.btn {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #ffc107;
-        color: black;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: bold;
-    }
+        .btn:hover {
+            background-color: #e0a800;
+        }
 
-    .btn:hover {
-        background-color: #e0a800;
-    }
         /* Override container styles */
-    .container-fluid {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 80vw !important;
-    }
+        .container-fluid {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            width: 80vw !important;
+        }
 
-    /* Ensure row takes full width */
-    .row {
-        margin-right: 0 !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
+        /* Ensure row takes full width */
+        .row {
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            width: 100% !important;
+        }
 
-    /* Override any padding from app.blade.php */
-    main.main-content {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-        width: 100% !important;
-    }
+        /* Override any padding from app.blade.php */
+        main.main-content {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            width: 100% !important;
+        }
 
-    /* Existing styles... */
-    .container {
-        margin: 0px;
-        padding: 0px;
-        width: 100%;
-    }
+        /* Existing styles... */
+        .container {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+        }
 
         body, html, .container-fluid {
             height: 100%;
@@ -74,13 +74,12 @@
             border-radius: 15px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease-in-out;
-            width: 100%; /* Pastikan card memenuhi lebar kolom */
+            width: 100%; /* Ensure card fills column width */
         }
 
         .card:hover {
             transform: scale(1.02);
         }
-        
 
         .card-header {
             font-weight: bold;
@@ -104,6 +103,7 @@
             max-width: 100%;
             height: auto;
         }
+
         .main-content {
             background-color: white;
         }
@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 1cm">
             <div class="col-md-6">
                 <div class="card" style="height: 10.1cm">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -171,7 +171,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-pie"></i> Detail Distribusi Izin</span>
@@ -184,28 +185,66 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-<br>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span><i class="fas fa-user-check"></i> Frekuensi Penguji</span>
-                    <button class="btn btn-sm download-btn" onclick="downloadChart('frekuensiPengujiChart')">
-                        <i class="fas fa-download"></i>
-                    </button>
+        
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-user-check"></i> Frekuensi Penguji</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('frekuensiPengujiChart')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="frekuensiPengujiChart"></canvas>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <canvas id="frekuensiPengujiChart"></canvas>
+            </div>
+        
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-alt"></i> Jadwal Agenda</span>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th>Sumber</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($allAgendas as $index => $agenda)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($agenda->date)->format('d F Y') }}</td>
+                                        <td>{{ $agenda->source }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
-    
+</div>
+
     <script>
         const pengujiData = @json($pengujiData);
-    
+        const statusData = @json($statusData);
+        const detailIzinData = @json($detailIzinData);
+
+        function downloadChart(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = filename + '.png';
+            link.click();
+        }
+
         new Chart(document.getElementById('frekuensiPengujiChart'), {
             type: 'bar',
             data: {
@@ -231,22 +270,6 @@
                 }
             }
         });
-    </script>
-    
-    
-    
-
-    <script>
-        const statusData = @json($statusData);
-        const detailIzinData = @json($detailIzinData);
-
-        function downloadChart(canvasId, filename) {
-            const canvas = document.getElementById(canvasId);
-            const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/png');
-            link.download = filename + '.png';
-            link.click();
-        }
 
         new Chart(document.getElementById('statusChart'), {
             type: 'bar',
@@ -260,7 +283,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false, // Tambahkan ini untuk memastikan chart memenuhi lebar
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'bottom'
@@ -285,7 +308,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false, // Tambahkan ini untuk memastikan chart memenuhi lebar
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'bottom'

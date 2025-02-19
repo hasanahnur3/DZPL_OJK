@@ -118,7 +118,6 @@
     .table {
         width: 100%;
         border-collapse: collapse;
-        table-layout: fixed; /* Ini kunci untuk membuat kolom compact */
         margin-top: 20px;
     }
 

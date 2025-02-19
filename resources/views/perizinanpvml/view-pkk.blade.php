@@ -23,6 +23,7 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Permohonan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Sistem</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dok Lengkap</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Perlu Klarifikasi</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Klarifikasi</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
@@ -43,7 +44,44 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat_permohonan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_surat_permohonan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_pengajuan_sistem }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_dok_lengkap }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->status == 'Selesai' ? '-' : $item->tanggal_dok_lengkap }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
+                            @php
+                                if ($item->status == 'Selesai' || !$item->tanggal_dok_lengkap) {
+                                    echo '-';
+                                } else {
+                                    $today = new DateTime();
+                                    $dokDate = new DateTime($item->tanggal_dok_lengkap);
+                                    
+                                    // Count business days between dates (excluding weekends)
+                                    $daysPassed = 0;
+                                    $currentDate = clone $dokDate;
+                                    
+                                    while ($currentDate <= $today) {
+                                        $weekDay = $currentDate->format('N');
+                                        if ($weekDay < 6) { // 1 (Monday) to 5 (Friday)
+                                            $daysPassed++;
+                                        }
+                                        $currentDate->modify('+1 day');
+                                    }
+                                    
+                                    // Calculate SLA: 20 minus business days passed
+                                    $sla = 20 - $daysPassed;
+                                    
+                                    // Color code based on SLA value
+                                    $color = '';
+                                    if ($sla < 0) {
+                                        $color = 'color: red;';
+                                    } elseif ($sla <= 5) {
+                                        $color = 'color: orange;';
+                                    } else {
+                                        $color = 'color: green;';
+                                    }
+                                    
+                                    echo "<span style='$color font-weight: bold;'>$sla</span>";
+                                }
+                            @endphp
+                        </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->perlu_klarifikasi }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_klarifikasi }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->hasil }}</td>
