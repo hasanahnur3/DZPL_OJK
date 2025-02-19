@@ -13,7 +13,7 @@ services:
       - key: DB_PORT
         value: "3306"
       - key: DB_HOST
-        value: "dpg-cuqk8r52ng1s73f77bs0-a"  # Use Render database service if possible
+        value: "dpg-cuqk8r52ng1s73f77bs0-a"
       - key: DB_DATABASE
         value: "dzpl_ojk"
       - key: DB_USERNAME
@@ -26,3 +26,5 @@ services:
       php artisan config:clear
       php artisan config:cache
       php artisan route:cache
+      php artisan key:generate || true
+      php artisan migrate --force || true
