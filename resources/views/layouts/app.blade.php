@@ -18,6 +18,7 @@
             display: flex;
             background-color: #EEEEEE;
         }
+
         .sidebar {
             width: 250px;
             background-color: #D84343;
@@ -30,20 +31,34 @@
             z-index: 1000;
             overflow-y: auto;
         }
+
         .sidebar.collapsed {
             width: 70px;
         }
+
+        .nav-menu .nav-link .menu-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .nav-link .menu-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .sidebar .logo {
             padding: 20px;
             text-align: center;
         }
+
         .sidebar .logo img {
             max-width: 150px;
             transition: max-width 0.3s ease;
         }
+
         .sidebar.collapsed .logo img {
             max-width: 70px;
         }
+
         .sidebar .create-user-btn {
             display: block;
             width: 100%;
@@ -55,17 +70,21 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .sidebar .create-user-btn:hover {
             background-color: #4cae4c;
         }
+
         .sidebar .nav-menu {
             list-style: none;
             padding: 0;
             margin: 0;
         }
+
         .sidebar .nav-item {
             position: relative;
         }
+
         .sidebar .nav-link {
             display: flex;
             align-items: center;
@@ -74,20 +93,25 @@
             color: #fff;
             transition: background-color 0.3s ease;
         }
+
         .sidebar .nav-link:hover {
             background-color: #D84343;
         }
+
         .sidebar .nav-link .menu-text {
             margin-left: 15px;
         }
+
         .dropdown-content {
             display: none;
             /* Sembunyikan dropdown secara default */
         }
+
         .dropdown-content.show {
             display: block;
             /* Tampilkan dropdown saat aktif */
         }
+
         .sidebar .dropdown-content,
         .sidebar .dropdown-menu {
             display: none;
@@ -96,6 +120,7 @@
             margin: 0;
             background-color: #D84343;
         }
+
         .sidebar .dropdown-content .sub-item a,
         .sidebar .dropdown-menu a {
             display: flex;
@@ -105,20 +130,25 @@
             color: #fff;
             transition: background-color 0.3s ease;
         }
+
         .sidebar .dropdown-content .sub-item a:hover,
         .sidebar .dropdown-menu a:hover {
             background-color: #E0E0E0;
         }
+
         .sidebar .dropdown-content .sub-item.dropdown .dropdown-menu {
             margin-left: 20px;
         }
+
         .sidebar .dropdown.active .dropdown-content,
         .sidebar .dropdown.active .dropdown-menu {
             display: block;
         }
+
         .sidebar .logout-item {
             margin-top: auto;
         }
+
         .sidebar .logout-btn {
             display: flex;
             align-items: center;
@@ -131,18 +161,22 @@
             transition: background-color 0.3s ease;
             width: 100%;
         }
+
         .sidebar .logout-btn:hover {
             background-color: #c9302c;
         }
+
         .main-content {
             margin-left: 250px;
             padding: 20px;
             transition: margin-left 0.3s ease;
             width: 100%;
         }
+
         .main-content.collapsed {
             margin-left: 70px;
         }
+
         .toggle-btn {
             position: absolute;
             top: 10px;
@@ -153,23 +187,29 @@
             font-size: 24px;
             cursor: pointer;
         }
+
         @media (max-width: 1380px) {
             .sidebar {
                 width: 70px;
             }
+
             .container {
                 flex-direction: column;
                 max-width: 100%;
             }
+
             select {
                 width: 100%;
             }
+
             .sidebar .logo img {
                 max-width: 70px;
             }
+
             .sidebar .create-user-btn {
                 display: none;
             }
+
             .main-content {
                 margin-left: 70px;
             }
@@ -177,26 +217,25 @@
 
 
         .sidebar .dropdown-content .sub-item.dropdown .dropdown-menu {
-    position: static;
-    display: none;
-    padding-left: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 100%;
-}
+            position: static;
+            display: none;
+            padding-left: 15px;
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
 
-.sidebar .dropdown-content .sub-item.dropdown.active .dropdown-menu {
-    display: block;
-}
+        .sidebar .dropdown-content .sub-item.dropdown.active .dropdown-menu {
+            display: block;
+        }
 
-/* Ensure all menu text is visible */
-.sidebar .nav-link .menu-text,
-.sidebar .dropdown-content .sub-item a,
-.sidebar .dropdown-menu a {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
+        /* Ensure all menu text is visible */
+        .sidebar .nav-link .menu-text,
+        .sidebar .dropdown-content .sub-item a,
+        .sidebar .dropdown-menu a {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 
@@ -208,10 +247,16 @@
                 <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" class="logo-image">
             </a>
         </div>
-        @if(Session::get('role') === 'kasubag')
-            <a href="{{ route('register') }}" class="btn create-user-btn">Create New User</a>
-        @endif
+
         <ul class="nav-menu">
+            <li class="nav-item">
+                @if(Session::get('role') === 'kasubag')
+                    <a href="{{ route('register') }}" class="nav-link">
+                        <i class="fas fa-plus"></i>
+                        <span class="menu-text">Create New User</span>
+                    </a>
+                @endif
+            </li>
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="fas fa-home"></i>
@@ -306,37 +351,37 @@
     </main>
 
     <script>
-       // Replace your current dropdown JS with this
-document.addEventListener('DOMContentLoaded', () => {
-    // Main dropdown toggles
-    document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parentItem = this.parentElement;
-            parentItem.classList.toggle('active');
-        });
-    });
-    
-    // Sub-item dropdown toggles
-    document.querySelectorAll('.sub-item.dropdown > a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const parentItem = this.parentElement;
-            parentItem.classList.toggle('active');
-        });
-    });
+        // Replace your current dropdown JS with this
+        document.addEventListener('DOMContentLoaded', () => {
+            // Main dropdown toggles
+            document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parentItem = this.parentElement;
+                    parentItem.classList.toggle('active');
+                });
+            });
 
-    // Toggle sidebar
-    document.getElementById('toggleSidebar').addEventListener('click', () => {
-        const sidebar = document.querySelector('.sidebar');
-        const mainContent = document.querySelector('.main-content');
-        
-        sidebar.classList.toggle('collapsed');
-        mainContent.classList.toggle('collapsed');
-        
-        const logoImage = sidebar.querySelector('.logo img');
-        logoImage.style.maxWidth = sidebar.classList.contains('collapsed') ? '70px' : '150px';
-    });
-});
+            // Sub-item dropdown toggles
+            document.querySelectorAll('.sub-item.dropdown > a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const parentItem = this.parentElement;
+                    parentItem.classList.toggle('active');
+                });
+            });
+
+            // Toggle sidebar
+            document.getElementById('toggleSidebar').addEventListener('click', () => {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('collapsed');
+
+                const logoImage = sidebar.querySelector('.logo img');
+                logoImage.style.maxWidth = sidebar.classList.contains('collapsed') ? '70px' : '150px';
+            });
+        });
     </script>
 </body>
