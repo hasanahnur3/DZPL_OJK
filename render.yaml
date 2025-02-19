@@ -10,21 +10,28 @@ services:
         sync: false
       - key: DB_CONNECTION
         value: mysql
-      - key: DB_HOST
-        sync: false
       - key: DB_PORT
         value: "3306"
+      - key: DB_HOST
+        fromService: mysql-database
       - key: DB_DATABASE
-        sync: false
+        fromService: mysql-database
       - key: DB_USERNAME
-        sync: false
+        fromService: mysql-database
       - key: DB_PASSWORD
-        sync: false
+        fromService: mysql-database
     buildCommand: |
       composer install --no-dev --optimize-autoloader
       php artisan cache:clear
       php artisan config:clear
       php artisan config:cache
       php artisan route:cache
-    startCommand: apache2-foreground
+    startCommand: php artisan serve --host=0.0.0.0 --port=10000
     preDeployCommand: php artisan migrate --force && php artisan storage:link
+
+databases:
+  - name: mysql-database
+    plan: free
+    region: oregon
+    databaseName: your_db_name
+    user: your_db_user
