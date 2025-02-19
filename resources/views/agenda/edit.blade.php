@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 90vh; ">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -31,7 +32,7 @@
 
 <div class="form-container">
     <!-- Form untuk edit agenda SOSIALISASI RIKSUS -->
-    <form action="{{ route('sosialisasi-riksus.update', $agenda->id) }}" method="POST">
+    <form action="{{ route('sosialisasi-riksus.update', $agenda->id) }}" method="POST"  style="width:100%;">
         @csrf
         @method('PUT') <!-- Menyatakan bahwa ini adalah request PUT untuk update -->
         <h3 style="text-align:center;">Edit Agenda Sosialisasi Riksus</h3>
@@ -56,15 +57,16 @@
             <textarea name="kesimpulan" class="form-control" required>{{ old('kesimpulan', $agenda->kesimpulan) }}</textarea>
         </div>
         
-        <button type="submit" class="btn btn-success" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Update Agenda</button>
+        <button type="submit" class="btn btn-success" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; width: 100%; margin-left:5px;">Update Agenda</button>
     </form>
 
+</div>
 </div>
 
 <style>
     
     .form-container {
-        max-width: 100%;
+        max-width: 500px;
         width: 100%;
         padding: 2rem;
         border-radius: 8px;
@@ -73,23 +75,14 @@
         display: flex;
         justify-content: center;
     }
-        /* .form-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: auto;
-            padding: 20px;
-            width: 100%;
-        } */
 
         /* Styling untuk frame form */
 
         .form-control {
-            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            height: 30px;
-            width: 100%;
+        border-radius: 10px;
+        height: 50px;
+        width: 100%;
         }
 
         .form-group {
@@ -101,7 +94,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #A91111;
-            height: 30px;
+            height: 40px;
             width: 100%;
             /* Tombol melebar */
         }

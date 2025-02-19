@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 80vh;  ">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -30,7 +30,7 @@
     </script>
     {{-- Form Tambah Agenda --}}
     <div class="form-container">
-        <form action="{{ route('rapim.store') }}" method="POST">
+        <form action="{{ route('rapim.store') }}" method="POST" style="width: 100%;">
             @csrf
             <h3>Agenda Rapat Pimpinan (Rapim)</h3>
             <div class="form-group">
@@ -45,15 +45,15 @@
                 <label for="hasil">Hasil</label>
                 <input name="hasil" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah Agenda</button>
+            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; margin-left:5px;">Tambah Agenda</button>
         </form>
     </div>
 </div>
 
 <style>
     .form-container {
-        max-width: 100%;
-        width: 100%;
+        max-width: 500px ;
+        width:100%;
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -95,10 +95,9 @@
     }
 
     .form-control {
-        padding: 10px;
         border: 1px solid #ddd;
         border-radius: 10px;
-        height: 30px;
+        height: 50px;
         width: 100%;
     }
 

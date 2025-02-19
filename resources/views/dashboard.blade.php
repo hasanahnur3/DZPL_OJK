@@ -22,13 +22,13 @@
         }
 
         /* Override container styles */
-        .container-fluid {
-            padding-right: 0 !important;
-            padding-left: 0 !important;
-            margin-right: 0 !important;
-            margin-left: 0 !important;
-            width: 80vw !important;
-        }
+    .container-fluid {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 10 !important;
+        width: 80vw !important;
+    }
 
         /* Ensure row takes full width */
         .row {
@@ -58,8 +58,8 @@
         }
 
         .container-fluid {
-            margin: 0px;
-            padding: 0px;
+            margin: 10px;
+            padding: 10px;
             background: #f4f6f9;
             width: 100%;
         }

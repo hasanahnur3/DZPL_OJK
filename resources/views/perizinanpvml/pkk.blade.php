@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+<div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: white;">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <h2 style="text-align: center; color: #333; ">Tambah Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>

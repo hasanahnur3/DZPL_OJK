@@ -97,9 +97,11 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('#dirkomTable').DataTable();
+$(document).ready(function () {
+    $('#dirkomTable').DataTable({
+        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
+});
 </script>
 <style>
     .form-container {

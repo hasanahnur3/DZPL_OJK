@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
+<div class="container"  style="max-width: 700px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:white;">
+<h3 style="text-align: center;">Tambah Forum Panel</h3> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -31,10 +32,13 @@
     </script>
 
     <!-- Form untuk menambah forum panel -->
-    <div class="form-container">
-        <form action="{{ route('forum-panel.store') }}" method="POST">
+     
+    <div class="form-container" >
+
+        <form action="{{ route('forum-panel.store') }}" method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:20px; align-item:center; ">
             @csrf
-            <h3>Tambah Forum Panel</h3>
+ 
+            <div style="display: flex; flex-direction: column; gap:5px;">
             <div class="form-group">
                 <label>Nama Perusahaan:</label>
                 <input type="text" name="nama_perusahaan" class="form-control" required><br>
@@ -54,7 +58,9 @@
                 <label>Tempat Pelaksanaan:</label>
                 <input type="text" name="tempat_pelaksanaan" class="form-control" required><br>
             </div>
+            </div>
 
+            <div style="display: flex; flex-direction: column; gap:5px;">
             <div class="form-group">
                 <label>Kriteria:</label>
                 <textarea name="kriteria" class="form-control" required></textarea><br>
@@ -69,8 +75,10 @@
                 <label>Hasil:</label>
                 <textarea name="hasil" class="form-control" required></textarea><br>
             </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; margin-top:21px; height:35px;">Tambah Forum Panel</button>
 
-            <button type="submit" class="btn btn-primary" style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah Forum Panel</button>
+            </div>
+
         </form>
     </div>
     </div>
@@ -78,11 +86,9 @@
 
     <style>
         .form-container {
-        max-width: 100%;
-        width: 100%;
+            margin-top: -30px;
+        width: auto;
         padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: white;
         display: flex;
         justify-content: center;
@@ -100,10 +106,9 @@
         
 
         .form-control {
-            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 10px;
-            height: 30px;
+            height: 50px;
             width: 100%;
         }
 
@@ -116,7 +121,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #A91111;
-            height: 30px;
+            height: 40px;
             width: 100%;
             /* Tombol melebar */
         }
