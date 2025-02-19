@@ -70,7 +70,7 @@
 </script>
 <style>
     .form-container {
-        max-width: 100%;
+        max-width: 94%;
         width: 100%;
         padding: 2rem;
         border-radius: 8px;

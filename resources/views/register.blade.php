@@ -6,7 +6,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #ED3237, #CFD1CF);
+        background: #FFFFFE;
         display: flex;
         justify-content: center;
         align-items: center;

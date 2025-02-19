@@ -185,9 +185,7 @@
                 </div>
             </div>
         </div>
-    </div>
-<br>
-    <div class="row">
+        <div class="row" style="margin-top:10px;">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -202,6 +200,11 @@
             </div>
         </div>
     </div>
+
+    </div>
+
+<br>
+
     
     <script>
         const pengujiData = @json($pengujiData);
