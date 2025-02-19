@@ -1,0 +1,30 @@
+services:
+  - name: laravel-app
+    type: web
+    runtime: docker
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan cache:clear
+      php artisan config:clear
+      php artisan config:cache
+      php artisan route:cache
+    startCommand: apache2-foreground
+    preDeployCommand: php artisan migrate --force && php artisan storage:link
