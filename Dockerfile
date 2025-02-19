@@ -7,6 +7,13 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . .
 
+# Copy Nginx configuration
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Copy start script to set webroot
+COPY start.sh /start-custom.sh
+RUN chmod +x /start-custom.sh
+
 # Allow composer to run inside container
 ENV SKIP_COMPOSER 0
 ENV WEBROOT /var/www/html/public
@@ -38,5 +45,5 @@ RUN chmod -R 775 storage bootstrap/cache
 # Expose Nginx port
 EXPOSE 80
 
-# Start services
-CMD ["/start.sh"]
+# Start services using the custom start script
+CMD ["/start-custom.sh"]
