@@ -13,13 +13,13 @@ services:
       - key: DB_PORT
         value: "3306"
       - key: DB_HOST
-        fromService: mysql-database
+        value: "dpg-cuqk8r52ng1s73f77bs0-a"
       - key: DB_DATABASE
-        fromService: mysql-database
+        value: "dzpl_ojk"
       - key: DB_USERNAME
-        fromService: mysql-database
+        value: "dzpl_ojk_user"
       - key: DB_PASSWORD
-        fromService: mysql-database
+        value: "VjFiVs0eIKrSMQMyG7kVKdL21tO9ak9L"
     buildCommand: |
       composer install --no-dev --optimize-autoloader
       php artisan cache:clear
@@ -28,10 +28,3 @@ services:
       php artisan route:cache
     startCommand: php artisan serve --host=0.0.0.0 --port=10000
     preDeployCommand: php artisan migrate --force && php artisan storage:link
-
-databases:
-  - name: mysql-database
-    plan: free
-    region: oregon
-    databaseName: your_db_name
-    user: your_db_user
