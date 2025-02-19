@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: white;">
+<div  style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <h2 style="text-align: center; color: #333; ">Tambah Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
@@ -89,8 +89,9 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap:5px;">
-        <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dok Lengkap</label>
-        <input type="date" name="tanggal_dok_lengkap" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dok Lengkap</label>
+            <input type="date" name="tanggal_dok_lengkap" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+            
 
         <label for="perlu_klarifikasi" style="font-weight: bold; color: #555;">Perlu Klarifikasi</label>
         <select name="perlu_klarifikasi" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

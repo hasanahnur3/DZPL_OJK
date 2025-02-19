@@ -85,6 +85,7 @@
             <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>
             <input type="date" name="tanggal_dok_lengkap" id="tanggal_dok_lengkap" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
+
             <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">No Surat Pencatatan</label>
             <input type="text" name="no_surat_pencatatan" id="no_surat_pencatatan" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
