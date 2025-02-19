@@ -25,12 +25,15 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+# Ensure the `.env` file exists before generating APP_KEY
+RUN if [ ! -f ".env" ]; then cp .env.example .env; fi
+
+# Generate APP_KEY (if not set)
+RUN php artisan key:generate || true
+
 # Set correct permissions for Laravel storage
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache
-
-# Generate APP_KEY (if not set)
-RUN if [ -z "$APP_KEY" ]; then php artisan key:generate; fi
 
 # Expose Nginx port
 EXPOSE 80
