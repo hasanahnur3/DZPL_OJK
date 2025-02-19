@@ -1,7 +1,7 @@
-# Use the official PHP image with Apache
+# Use the official PHP with Apache
 FROM php:8.2-apache
 
-# Install required dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     unzip \
     curl \
@@ -24,11 +24,17 @@ COPY . .
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
+# Set proper permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Expose port 80 for Apache
+# Enable Apache Rewrite Module
+RUN a2enmod rewrite
+
+# Set the DocumentRoot to Laravel's public directory
+RUN sed -i 's|/var/www/html|/var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
+# Expose port 80
 EXPOSE 80
 
-# Start Apache server
+# Start Apache in foreground
 CMD ["apache2-foreground"]
