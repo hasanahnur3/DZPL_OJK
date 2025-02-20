@@ -115,29 +115,16 @@
                 <div class="card p-3">
                     <form method="GET" action="{{ route('dashboard') }}">
                         <div class="row g-3">
+                            <!-- Date Range Filter -->
                             <div class="col-md-3">
-                                <label for="month" class="form-label">Bulan</label>
-                                <select id="month" name="month" class="form-control">
-                                    <option value="">Semua</option>
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ $i }}" {{ $selectedMonth == $i ? 'selected' : '' }}>
-                                            {{ date('F', mktime(0, 0, 0, $i, 10)) }}
-                                        </option>
-                                    @endfor
-                                </select>
+                                <label for="start_date" class="form-label">Tanggal Mulai</label>
+                                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ $startDate ?? '' }}">
                             </div>
                             <div class="col-md-3">
-                                <label for="year" class="form-label">Tahun</label>
-                                <select id="year" name="year" class="form-control">
-                                    <option value="">Semua</option>
-                                    @for ($i = date('Y'); $i >= 2000; $i--)
-                                        <option value="{{ $i }}" {{ $selectedYear == $i ? 'selected' : '' }}>
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
+                                <label for="end_date" class="form-label">Tanggal Akhir</label>
+                                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ $endDate ?? '' }}">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <label for="jenis_industri" class="form-label">Jenis Industri</label>
                                 <select id="jenis_industri" name="jenis_industri" class="form-control">
                                     <option value="">Semua</option>
@@ -148,8 +135,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-3 d-flex align-items-end">
-                                <button type="submit" style="background-color: #007bff;" class="btn w-100"><i class="fas fa-filter"></i> Filter</button>
+                        </div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-2">
+                                <button type="submit" style="background-color: #007bff;" class="btn w-100 mt-4"><i class="fas fa-filter"></i> Filter</button>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-end justify-content-end">
+                                <button type="button" class="btn btn-secondary" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset Filter</button>
                             </div>
                         </div>
                     </form>
@@ -231,6 +223,44 @@
         </div>
     </div>
 </div>
+<script>
+    // Add this with your existing scripts
+    function resetFilters() {
+        document.getElementById('start_date').value = '';
+        document.getElementById('end_date').value = '';
+        document.getElementById('month').value = '';
+        document.getElementById('year').value = '';
+        document.getElementById('jenis_industri').value = '';
+        document.forms[0].submit();
+    }
+    
+    // Add validation for date ranges
+    document.addEventListener('DOMContentLoaded', function() {
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+        const monthSelect = document.getElementById('month');
+        const yearSelect = document.getElementById('year');
+        
+        // Disable month/year selects if date range is being used
+        function toggleDateControls() {
+            const usingDateRange = startDateInput.value || endDateInput.value;
+            monthSelect.disabled = usingDateRange;
+            yearSelect.disabled = usingDateRange;
+            
+            if (usingDateRange) {
+                monthSelect.value = '';
+                yearSelect.value = '';
+            }
+        }
+        
+        startDateInput.addEventListener('change', toggleDateControls);
+        endDateInput.addEventListener('change', toggleDateControls);
+        
+        // Initialize on page load
+        toggleDateControls();
+    });
+</script>
+
 
     <script>
         const pengujiData = @json($pengujiData);

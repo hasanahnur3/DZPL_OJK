@@ -13,6 +13,8 @@ class DashboardController extends Controller
         $selectedMonth = $request->input('month', '');
         $selectedYear = $request->input('year', date('Y'));
         $selectedJenisIndustri = $request->input('jenis_industri', '');
+        $startDate = $request->input('start_date', '');
+        $endDate = $request->input('end_date', '');
     
         // Ambil daftar jenis industri unik untuk dropdown
         $jenisIndustriList = DB::table('kelembagaan')
@@ -21,50 +23,68 @@ class DashboardController extends Controller
             ->pluck('jenis_industri');
     
         // Query untuk Status Chart
-        $statusData = DB::table('kelembagaan')
-            ->select('status', DB::raw('count(*) as total'))
-            ->when($selectedMonth, function ($query, $month) {
-                return $query->whereMonth('tanggal_pengajuan_sistem', $month);
-            })
-            ->when($selectedYear, function ($query, $year) {
-                return $query->whereYear('tanggal_pengajuan_sistem', $year);
-            })
-            ->when($selectedJenisIndustri, function ($query, $jenisIndustri) {
-                return $query->where('jenis_industri', $jenisIndustri);
-            })
-            ->groupBy('status')
-            ->get();
+        $statusQuery = DB::table('kelembagaan')
+            ->select('status', DB::raw('count(*) as total'));
+        
+        // Apply date range filter if provided
+        if ($startDate && $endDate) {
+            $statusQuery->whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate]);
+        } else {
+            // Apply individual month/year filters if date range not provided
+            if ($selectedMonth) {
+                $statusQuery->whereMonth('tanggal_pengajuan_sistem', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $statusQuery->whereYear('tanggal_pengajuan_sistem', $selectedYear);
+            }
+        }
+        
+        // Apply industry filter
+        if ($selectedJenisIndustri) {
+            $statusQuery->where('jenis_industri', $selectedJenisIndustri);
+        }
+        
+        $statusData = $statusQuery->groupBy('status')->get();
     
-        // Query untuk Detail Izin Chart
-        $detailIzinData = DB::table('kelembagaan')
-            ->select('detail_izin', DB::raw('count(*) as total'))
-            ->when($selectedMonth, function ($query, $month) {
-                return $query->whereMonth('tanggal_pengajuan_sistem', $month);
-            })
-            ->when($selectedYear, function ($query, $year) {
-                return $query->whereYear('tanggal_pengajuan_sistem', $year);
-            })
-            ->when($selectedJenisIndustri, function ($query, $jenisIndustri) {
-                return $query->where('jenis_industri', $jenisIndustri);
-            })
-            ->groupBy('detail_izin')
-            ->get();
+        // Query untuk Detail Izin Chart dengan pola yang sama
+        $detailIzinQuery = DB::table('kelembagaan')
+            ->select('detail_izin', DB::raw('count(*) as total'));
+        
+        if ($startDate && $endDate) {
+            $detailIzinQuery->whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $detailIzinQuery->whereMonth('tanggal_pengajuan_sistem', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $detailIzinQuery->whereYear('tanggal_pengajuan_sistem', $selectedYear);
+            }
+        }
+        
+        if ($selectedJenisIndustri) {
+            $detailIzinQuery->where('jenis_industri', $selectedJenisIndustri);
+        }
+        
+        $detailIzinData = $detailIzinQuery->groupBy('detail_izin')->get();
     
-        // Query untuk frekuensi penguji
-        $pengujiData = DB::table(DB::raw("(SELECT penguji AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1
-            " . ($selectedMonth ? "AND MONTH(hari_tanggal) = $selectedMonth" : "") . "
-            " . ($selectedYear ? "AND YEAR(hari_tanggal) = $selectedYear" : "") . "
-            GROUP BY penguji
+        // Query untuk frekuensi penguji (perlu dimodifikasi untuk mendukung filter tanggal)
+        $dateFilterSQL = "";
+        if ($startDate && $endDate) {
+            $dateFilterSQL = "AND hari_tanggal BETWEEN '$startDate' AND '$endDate'";
+        } else {
+            if ($selectedMonth) {
+                $dateFilterSQL .= "AND MONTH(hari_tanggal) = $selectedMonth";
+            }
+            if ($selectedYear) {
+                $dateFilterSQL .= "AND YEAR(hari_tanggal) = $selectedYear";
+            }
+        }
+    
+        $pengujiData = DB::table(DB::raw("(SELECT penguji AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1 $dateFilterSQL GROUP BY penguji
             UNION ALL
-            SELECT penguji1 AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1
-            " . ($selectedMonth ? "AND MONTH(hari_tanggal) = $selectedMonth" : "") . "
-            " . ($selectedYear ? "AND YEAR(hari_tanggal) = $selectedYear" : "") . "
-            GROUP BY penguji1
+            SELECT penguji1 AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1 $dateFilterSQL GROUP BY penguji1
             UNION ALL
-            SELECT penguji2 AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1
-            " . ($selectedMonth ? "AND MONTH(hari_tanggal) = $selectedMonth" : "") . "
-            " . ($selectedYear ? "AND YEAR(hari_tanggal) = $selectedYear" : "") . "
-            GROUP BY penguji2) AS combined"))
+            SELECT penguji2 AS nama, COUNT(*) AS total FROM pkk_agendas WHERE 1=1 $dateFilterSQL GROUP BY penguji2) AS combined"))
             ->select('nama', DB::raw('SUM(total) as total'))
             ->groupBy('nama')
             ->get();
@@ -108,8 +128,9 @@ class DashboardController extends Controller
             'selectedYear',
             'jenisIndustriList',
             'selectedJenisIndustri',
-            'allAgendas'
+            'allAgendas',
+            'startDate',
+            'endDate'
         ));
     }
-    
 }
