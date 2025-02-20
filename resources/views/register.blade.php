@@ -4,7 +4,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #FFFFFE;
+            background: #EEEEEE;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             width: auto;
-            background-color: #FFFFFF;
+            background-color: #EEEEEE;
         }
 
         .container {
@@ -111,7 +111,7 @@
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary"
-                                                style=" width: 100%; padding: 10px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer;font-size: 16px;">
+                                                style=" width: 100%; padding: 10px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer;font-size: 16px; margin-top: 20px;">
                                                 Register
                                             </button>
                                         </div>

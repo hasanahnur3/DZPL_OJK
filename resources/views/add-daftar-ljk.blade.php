@@ -1,101 +1,102 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .container {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+    <div class="container" 
+        style="max-width: 500px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:white;">
+        <h3 style="text-align:center;">Tambah Data LJK</h3>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Seleksi form
+                const form = document.querySelector('form');
 
-    .card-header {
-        background-color: #007bff;
-        color: white;
-        border-radius: 10px 10px 0 0;
-    }
+                // Tambahkan event listener ke form
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Mencegah pengiriman form secara default
 
-    .card-body {
-        padding: 20px;
-    }
+                    // Tampilkan SweetAlert2
+                    Swal.fire({
+                        title: 'Data berhasil disimpan!',
+                        text: 'Data Anda telah berhasil dikirim ke server.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim form ke server jika tombol "OK" diklik
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        </script>
 
-    .form-label {
-        font-weight: bold;
-    }
+        <!-- Form untuk Menambah Data -->
+        <div class="form-container">
+            <form action="{{ route('daftarljk.store') }}" method="POST"
+                style="gap: 20px; margin-top:20px; align-item:center; width:100%;">
+                @csrf
+                    <div class="form-group">
+                        <input type="text" name="jenis_industri" placeholder="Jenis Industri" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nama_perusahaan" placeholder="Nama Perusahaan" class="form-control" required><br>
+                    </div>
+                
 
-    .form-control {
-        border-radius: 5px;
-        border: 1px solid #ced4da;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
-    }
-
-    .btn {
-        border-radius: 5px;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-
-    .btn-secondary {
-        background-color: #6c757d;
-        border-color: #6c757d;
-    }
-
-    .btn-secondary:hover {
-        background-color: #545b62;
-        border-color: #545b62;
-    }
-
-    .btn-success {
-        background-color: #28a745;
-        border-color: #28a745;
-    }
-
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-
-    .d-flex.justify-content-between {
-        margin-top: 20px;
-    }
-</style>
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="mb-0">Tambah Data LJK</h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('daftarljk.store') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="jenis_industri" class="form-label">Jenis Industri</label>
-                            <input type="text" class="form-control" id="jenis_industri" name="jenis_industri" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
-                            <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" required>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ route('daftarljk.index') }}" class="btn btn-secondary">Batal</a>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; height:40px;">Simpan</button>
+                    <a href="{{ route('daftarljk.index') }}" class="btn btn-secondary"
+                        style="border-radius: 10px; background-color: #adb5bd; padding: 12px 24px; color: white; text-align: center; text-decoration: none;">Batal</a>
+                
+            </form>
         </div>
     </div>
-</div>
+
+    <style>
+        .form-container {
+            margin-top: -10px;
+            width: auto;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Styling untuk frame form */
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin: 10px;
+        }
+
+        .btn-primary {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #A91111;
+            height: 30px;
+            width: 60%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffc107;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        .btn:hover {
+            background-color: #e0a800;
+        }
+    </style>
 @endsection
