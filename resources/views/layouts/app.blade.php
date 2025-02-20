@@ -38,7 +38,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .sidebar.collapsed .nav-link .menu-text {
+        .sidebar.collapsed .nav-link .menu-text{
             opacity: 0;
             pointer-events: none;
         }
@@ -148,21 +148,21 @@
             margin-top: auto;
         }
 
+        .sidebar.collapsed .logout-btn{
+            width: 40px;
+        }
+
         .sidebar .logout-btn {
             display: flex;
             align-items: center;
             padding: 15px;
             text-decoration: none;
             color: #fff;
-            background-color: #9d0601;
+            background-color: #D84343;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
-
-        .sidebar .logout-btn:hover {
-            background-color: #c9302c;
+            transition:  0.3s ease;
+            width: auto;
         }
 
         .main-content {
@@ -186,7 +186,8 @@
             font-size: 24px;
             cursor: pointer;
         }
-        .sidebar.collapsed .toggle-btn{
+
+        .sidebar.collapsed .toggle-btn {
             transform: translate(-10px, 45px)
         }
 
@@ -236,7 +237,7 @@
         .sidebar .dropdown-menu a {
             white-space: nowrap;
             overflow: hidden;
-         
+
         }
 
         .nav-menu .secondary-nav {
@@ -245,7 +246,7 @@
             width: 100%;
         }
 
-        .nav-menu .nav-link .nav-item{
+        .nav-menu .nav-link .nav-item {
             align-items: center;
         }
     </style>
@@ -344,10 +345,10 @@
             <li class="nav-item secondary-nav">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <a class="nav-link ">
+                    <button class="nav-link logout-btn">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="menu-text">Logout</span>
-                    </a>
+                    </button>
                 </form>
             </li>
         </ul>
@@ -384,22 +385,22 @@
             });
 
             // Toggle sidebar
-           // Toggle sidebar with logo resizing
-document.getElementById('toggleSidebar').addEventListener('click', () => {
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
-    const logoImage = document.querySelector('.logo img');
-    
-    sidebar.classList.toggle('collapsed');
-    mainContent.classList.toggle('collapsed');
-    
-    // Explicitly change the logo size based on sidebar state
-    if (sidebar.classList.contains('collapsed')) {
-        logoImage.style.maxWidth = '40px'; // Even smaller when collapsed
-    } else {
-        logoImage.style.maxWidth = '150px'; // Original size when expanded
-    }
-});
+            // Toggle sidebar with logo resizing
+            document.getElementById('toggleSidebar').addEventListener('click', () => {
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+                const logoImage = document.querySelector('.logo img');
+
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('collapsed');
+
+                // Explicitly change the logo size based on sidebar state
+                if (sidebar.classList.contains('collapsed')) {
+                    logoImage.style.maxWidth = '40px'; // Even smaller when collapsed
+                } else {
+                    logoImage.style.maxWidth = '150px'; // Original size when expanded
+                }
+            });
         });
     </script>
 </body>
