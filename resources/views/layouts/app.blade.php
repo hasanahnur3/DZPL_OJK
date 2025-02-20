@@ -276,6 +276,12 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('kelembagaan.index') }}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span class="menu-text">Pengajuan Kelembagaan</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link">
                     <i class="fas fa-clock"></i>

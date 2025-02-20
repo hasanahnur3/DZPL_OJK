@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelembagaan;
 use Illuminate\Http\Request;
 use App\Models\KelembagaanPvml;
+use Illuminate\Support\Facades\DB;
 
 class KelembagaanController extends Controller
 {
@@ -16,7 +17,16 @@ class KelembagaanController extends Controller
 
     public function create()
     {
-        return view('perizinanpvml.kelembagaan');
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        return view('perizinanpvml.kelembagaan', compact('jenis_industri'));
+    }
+
+    public function getCompaniesByIndustry(Request $request)
+    {
+        $companies = DB::table('daftarljk')
+            ->where('jenis_industri', $request->jenis_industri)
+            ->pluck('nama_perusahaan');
+        return response()->json($companies);
     }
 
     public function store(Request $request)
