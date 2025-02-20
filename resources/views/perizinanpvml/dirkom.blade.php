@@ -30,7 +30,7 @@
         });
     });
 </script>
-    <form method="POST" action="{{ route('dirkom') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:20px;">
+    <form method="POST" action="{{ route('dirkom') }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:-20px;">
         @csrf
         <div style="display: flex; flex-direction: column; gap:5px;">
             <select id="jenis_industri" name="jenis_industri" required>

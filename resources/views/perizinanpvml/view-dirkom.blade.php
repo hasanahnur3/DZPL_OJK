@@ -151,7 +151,7 @@ $(document).ready(function () {
     .table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        height:43px;
     }
 
     .table th, .table td {
@@ -171,6 +171,9 @@ $(document).ready(function () {
 
     .table tr:hover {
         background-color: #f0f0f0;
+    }
+    .dataTables_scrollHead{
+        height: 43px;
     }
 </style>
 @endsection
