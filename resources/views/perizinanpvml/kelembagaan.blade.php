@@ -5,7 +5,7 @@
         <div
             style="width: 900px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:#FFFFFF">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <h2 style="text-align: center; color: #333; margin-bottom:20px;">Tambah Data Kelembagaan PVML</h2>
+            <h2 style="text-align: center; color: #333; margin-bottom:20px;">Tambah Data Kelembagaan</h2>
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
