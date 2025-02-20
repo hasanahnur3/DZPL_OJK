@@ -276,12 +276,6 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('kelembagaan.index') }}" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span class="menu-text">Pengajuan Kelembagaan</span>
-                </a>
-            </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link">
                     <i class="fas fa-clock"></i>
@@ -328,7 +322,7 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link">
                     <i class="fas fa-file-alt"></i>
-                    <span class="menu-text">Pengajuan Perizinan PVML</span>
+                    <span class="menu-text">Pengajuan Perizinan <br>PVML</span>
                 </a>
                 <ul class="dropdown-content">
                     <li class="sub-item dropdown">
@@ -344,6 +338,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
                             <li><a href="{{ route('riksus') }}">Riksus</a></li>
+                            <li><a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a></li>
                         </ul>
                     </li>
                 </ul>
