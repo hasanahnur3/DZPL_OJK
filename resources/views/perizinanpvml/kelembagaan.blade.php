@@ -60,9 +60,12 @@
                         });
                     </script>
                     <label for="detail_izin" style="font-weight: bold; color: #555;">Detail Izin</label>
-                    <input type="text" name="detail_izin" id="detail_izin"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                        value="{{ old('detail_izin') }}">
+                    <select id="detail_izin" name="detail_izin" required style="height: 40px; gap:10px">
+                        <option value="">Pilih Detail Izin</option>
+                        @foreach($detail_izin as $izin)
+                            <option value="{{ $izin }}">{{ $izin }}</option>
+                        @endforeach
+                    </select>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
                     <input type="text" name="status" id="status" required
@@ -74,7 +77,7 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('nomor_surat_permohonan') }}">
 
-                        <label for="tanggal_surat_permohonan" style="font-weight: bold; color: #555;">Tanggal Surat
+                    <label for="tanggal_surat_permohonan" style="font-weight: bold; color: #555;">Tanggal Surat
                         Permohonan</label>
                     <input type="date" name="tanggal_surat_permohonan" id="tanggal_surat_permohonan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
@@ -88,8 +91,6 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-
-
                     <label for="tanggal_dokumen_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen
                         Lengkap</label>
                     <input type="date" name="tanggal_dokumen_lengkap" id="tanggal_dokumen_lengkap"

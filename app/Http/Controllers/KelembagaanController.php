@@ -9,17 +9,21 @@ use Illuminate\Support\Facades\DB;
 
 class KelembagaanController extends Controller
 {
-    public function index()
-    {
-        $kelembagaan = KelembagaanPvml::all(); // Mengambil semua data dari tabel kelembagaan_pvml
-        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
-    }
+   // In KelembagaanController.php
+public function index()
+{
+    $kelembagaan = KelembagaanPvml::with('izinIndustri')->get();
+    return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
+}
 
     public function create()
-    {
-        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
-        return view('perizinanpvml.kelembagaan', compact('jenis_industri'));
-    }
+{
+    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+    $detail_izin = DB::table('izin_industri')->pluck('detail_izin'); // Fetch detail_izin from izin_industri table
+
+    return view('perizinanpvml.kelembagaan', compact('jenis_industri', 'detail_izin'));
+}
+
 
     public function getCompaniesByIndustry(Request $request)
     {
