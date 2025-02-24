@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="display: flex; justify-content: center; align-items: center; height: 90vh; ">
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 95vh; background-color:#FFFFFF;">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -33,7 +33,7 @@
 
     <!-- Form untuk tambah agenda -->
     <div class="form-container" >
-    <form action="{{ route('sosialisasi-riksus.store') }}" method="POST" style="width:100%;">
+    <form action="{{ route('sosialisasi-riksus.store') }}" method="POST" style="width:90%;">
         @csrf
         <h3>Agenda Sosialisasi Riksus</h3>
         <div class="form-group">
@@ -67,7 +67,7 @@
     .form-container {
         max-width: 500px;
         width: 100%;
-        padding: 2rem;
+        padding: 1.75rem;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: white;
@@ -78,7 +78,6 @@
     /* Styling untuk frame form */
     
     .form-control{
-
         border: 1px solid #ddd;
         border-radius: 10px;
         height: 50px;

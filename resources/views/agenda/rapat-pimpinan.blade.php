@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="display: flex; justify-content: center; align-items: center; height: 80vh;  ">
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 95vh; background-color:#FFFFFF; ">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -51,6 +51,11 @@
 </div>
 
 <style>
+    html, body {
+    height: 100%;
+    overflow: hidden; /* Menonaktifkan scroll */
+    margin: 0;
+}
     .form-container {
         max-width: 500px ;
         width:100%;
