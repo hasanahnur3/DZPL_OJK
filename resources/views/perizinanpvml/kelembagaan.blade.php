@@ -5,7 +5,7 @@
         <div
             style="width: 900px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:#FFFFFF">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <h2 style="text-align: center; color: #333; margin-bottom:20px;">Tambah Data Kelembagaan</h2>
+            <h2 style="text-align: center; color: #333; margin-top:-10px;">Tambah Data Kelembagaan</h2>
 
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -74,7 +74,7 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('nomor_surat_permohonan') }}">
 
-                        <label for="tanggal_surat_permohonan" style="font-weight: bold; color: #555;">Tanggal Surat
+                    <label for="tanggal_surat_permohonan" style="font-weight: bold; color: #555;">Tanggal Surat
                         Permohonan</label>
                     <input type="date" name="tanggal_surat_permohonan" id="tanggal_surat_permohonan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
@@ -120,17 +120,9 @@
                     <input type="text" name="jumlah_hari_kerja" id="jumlah_hari_kerja"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('jumlah_hari_kerja') }}">
-                </div>
+                    <button type="submit"
+                        style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Simpan</button>
 
-                <div class="form-group" style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-primary"
-                        style="padding: 1rem 2rem; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer;">
-                        Simpan
-                    </button>
-                    <a href="{{ route('kelembagaan.index') }}" class="btn btn-secondary"
-                        style="padding: 1rem 2rem; background-color: #6c757d; color: white; text-decoration: none; border-radius: 8px; cursor: pointer; margin-left: 10px;">
-                        Kembali
-                    </a>
                 </div>
             </form>
         </div>
@@ -139,7 +131,6 @@
     <style>
         .form-container {
             max-width: 100%;
-            width: 100%;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

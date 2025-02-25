@@ -137,7 +137,9 @@
 
 
                     <button type="submit"
-                        style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Simpan</button>
+                        style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">
+                        Simpan
+                    </button>
 
                 </div>
 
