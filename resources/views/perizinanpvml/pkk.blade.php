@@ -35,16 +35,22 @@
                 style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 @csrf
                 <div style="display: flex; flex-direction: column; gap:5px;">
-                    <select id="jenis_industri" name="jenis_industri" required style="height: 35px;">
-                        <option value="">Pilih Jenis Industri</option>
-                        @foreach($jenis_industri as $jenis)
-                            <option value="{{ $jenis }}">{{ $jenis }}</option>
-                        @endforeach
-                    </select>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
+                        <select id="jenis_industri" name="jenis_industri" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Jenis Industri</option>
+                            @foreach($jenis_industri as $jenis)
+                                <option value="{{ $jenis }}">{{ $jenis }}</option>
+                            @endforeach
+                        </select>
 
-                    <select id="nama_perusahaan" name="nama_perusahaan" required style="height: 35px;">
-                        <option value="">Pilih Nama Perusahaan</option>
-                    </select>
+                        <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
+                        <select id="nama_perusahaan" name="nama_perusahaan" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Nama Perusahaan</option>
+                        </select>
+                    </div>
                     <script>
                         document.getElementById('jenis_industri').addEventListener('change', function () {
                             let jenisIndustri = this.value;
@@ -148,8 +154,8 @@
         </div>
     </div>
 
-<style>
-            .form-container {
+    <style>
+        .form-container {
             height: auto;
             max-width: 100%;
             padding: 2rem;
@@ -159,5 +165,5 @@
             display: flex;
             justify-content: center;
         }
-</style>
+    </style>
 @endsection

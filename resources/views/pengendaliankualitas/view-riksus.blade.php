@@ -92,7 +92,9 @@
 <script>
 $(document).ready(function () {
     $('#riksusTable').DataTable({
-        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
+        scrollX: true,
+        scrollY: false,
+        "pageLength": 6 // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
 });
 </script>

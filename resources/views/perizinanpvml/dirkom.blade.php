@@ -6,7 +6,7 @@
             style="width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color:#FFFFFF">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-            <h2 style="text-align: center; color: #333;">Tambah Daftar Direksi Komisaris</h2>
+            <h2 style="text-align: center; color: #333; margin-bottom:40px; margin-top:-20px;">Tambah Daftar Direksi Komisaris</h2>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     // Seleksi form
@@ -35,16 +35,22 @@
                 style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:-20px;">
                 @csrf
                 <div style="display: flex; flex-direction: column; gap:5px;">
-                    <select id="jenis_industri" name="jenis_industri" required style="height: 35px;">
-                        <option value="">Pilih Jenis Industri</option>
-                        @foreach($jenis_industri as $jenis)
-                            <option value="{{ $jenis }}">{{ $jenis }}</option>
-                        @endforeach
-                    </select>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
+                        <select id="jenis_industri" name="jenis_industri" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Jenis Industri</option>
+                            @foreach($jenis_industri as $jenis)
+                                <option value="{{ $jenis }}">{{ $jenis }}</option>
+                            @endforeach
+                        </select>
 
-                    <select id="nama_perusahaan" name="nama_perusahaan" required style="height: 35px;">
-                        <option value="">Pilih Nama Perusahaan</option>
-                    </select>
+                        <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
+                        <select id="nama_perusahaan" name="nama_perusahaan" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Nama Perusahaan</option>
+                        </select>
+                    </div>
                     <script>
                         document.getElementById('jenis_industri').addEventListener('change', function () {
                             let jenisIndustri = this.value;
@@ -82,15 +88,17 @@
                         <option value="Ditolak / dikembalikkan">Ditolak / dikembalikkan</option>
                     </select>
 
+
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="jenis_output" style="font-weight: bold; color: #555;">Jenis Output</label>
                     <select name="jenis_output" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                         <option value="Pencatatan">Pencatatan</option>
                         <option value="Penolakan">Penolakan</option>
                     </select>
-                </div>
 
-                <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>
                     <input type="date" name="tanggal_dok_lengkap"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">

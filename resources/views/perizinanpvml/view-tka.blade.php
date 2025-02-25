@@ -93,7 +93,8 @@
 <script>
 $(document).ready(function () {
     $('#tkaTable').DataTable({
-        scrollX: true, // Tambahkan opsi ini untuk mendukung pengguliran horizontal
+        scrollX: true,
+        "pageLength": 6 // Tambahkan opsi ini untuk mendukung pengguliran horizontal
     });
 });
 </script>

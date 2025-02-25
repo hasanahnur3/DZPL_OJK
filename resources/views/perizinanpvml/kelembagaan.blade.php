@@ -32,16 +32,22 @@
                 style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 @csrf
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <select id="jenis_industri" name="jenis_industri" required style="height: 40px; gap:10px">
-                        <option value="">Pilih Jenis Industri</option>
-                        @foreach($jenis_industri as $jenis)
-                            <option value="{{ $jenis }}">{{ $jenis }}</option>
-                        @endforeach
-                    </select>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
+                        <select id="jenis_industri" name="jenis_industri" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Jenis Industri</option>
+                            @foreach($jenis_industri as $jenis)
+                                <option value="{{ $jenis }}">{{ $jenis }}</option>
+                            @endforeach
+                        </select>
 
-                    <select id="nama_perusahaan" name="nama_perusahaan" required style="height:40px ">
-                        <option value="">Pilih Nama Perusahaan</option>
-                    </select>
+                        <label for="nama_perusahaan" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
+                        <select id="nama_perusahaan" name="nama_perusahaan" required
+                            style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                            <option value="">Pilih Nama Perusahaan</option>
+                        </select>
+                    </div>>
                     <script>
                         document.getElementById('jenis_industri').addEventListener('change', function () {
                             let jenisIndustri = this.value;
@@ -68,11 +74,14 @@
                     </select>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
-                    <select name="status" id="status" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px; width: 100%;">
+                    <select name="status" id="status" required
+                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px; width: 100%;">
                         <option value="">Pilih Status</option>
                         <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                        <option value="Ditolak/Dikembalikan" {{ old('status') == 'Ditolak/Dikembalikan' ? 'selected' : '' }}>Ditolak/Dikembalikan</option>
-                        <option value="Kelengkapan dok" {{ old('status') == 'Kelengkapan dok' ? 'selected' : '' }}>Kelengkapan dok</option>
+                        <option value="Ditolak/Dikembalikan" {{ old('status') == 'Ditolak/Dikembalikan' ? 'selected' : '' }}>
+                            Ditolak/Dikembalikan</option>
+                        <option value="Kelengkapan dok" {{ old('status') == 'Kelengkapan dok' ? 'selected' : '' }}>Kelengkapan
+                            dok</option>
                         <option value="Dalam proses analisis" {{ old('status') == 'Dalam proses analisis' ? 'selected' : '' }}>Dalam proses analisis</option>
                     </select>
 

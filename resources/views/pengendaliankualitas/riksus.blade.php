@@ -31,16 +31,16 @@
         <label for="kode_riskus" style="font-weight: bold; color: #555;">Kode Riskus*</label>
         <input type="text" name="kode_riskus" class="form-control" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
         <div style="display: flex; flex-direction: column; gap: 5px;">
-                <label for="jenis_industri">Jenis Industri</label>
-                <select id="jenis_industri" name="jenis_industri" required>
+        <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
+                <select id="jenis_industri" name="jenis_industri" required style="height:35px;">
                     <option value="">Pilih Jenis Industri</option>
                     @foreach($jenis_industri as $jenis)
                         <option value="{{ $jenis }}">{{ $jenis }}</option>
                     @endforeach
                 </select>
                 
-                <label for="nama_perusahaan">Nama Perusahaan</label>
-                <select id="nama_perusahaan" name="nama_perusahaan" required>
+                <label for="jenis_industri" style="font-weight: bold; color: #555;">Nama Perusahaan</label>
+                <select id="nama_perusahaan" name="nama_perusahaan" required style="height:35px;">
                     <option value="">Pilih Nama Perusahaan</option>
                 </select>
             </div>
