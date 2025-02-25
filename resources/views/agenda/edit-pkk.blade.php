@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container"
-        style="max-width: 700px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:white;">
-        <h3 style="text-align:center;">Edit Agenda PKK</h3>
+        style="display: flex; justify-content: center; align-items: center; height:100vh; padding: 2rem; background-color: #FFFFFF;">
+
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -35,12 +35,13 @@
 
 
         <div class="form-container">
+        <h3 style="text-align:center; margin-top:-10px; margin-bottom: -10px;">Edit Agenda PKK</h3>
             <form action="{{ route('pkk-agenda.update', $agenda->id) }}" method="POST"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:20px; align-item:center; width:100%;">
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:20px; align-item:center; width:100%;">
                 @csrf
                 @method('PUT')
                 <!-- Menandakan ini adalah update request -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
+                <div style="display: flex; flex-direction: column; margin-left:10px; margin-right:-10px;">
                     <div class="form-group">
                         <label for="hari_tanggal">Hari/Tanggal</label>
                         <input type="date" name="hari_tanggal" id="hari_tanggal"
@@ -78,7 +79,7 @@
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap:5px;">
+                <div style="display: flex; flex-direction: column;">
                     <div class="form-group">
                         <label for="pic">PIC</label>
                         <input type="text" name="pic" id="pic" value="{{ old('pic', $agenda->pic) }}" required
@@ -119,11 +120,15 @@
 
     <style>
         .form-container {
-            margin-top: -10px;
-            width: auto;
+            width: 700px;
             background-color: white;
             display: flex;
             justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Styling untuk frame form */
@@ -132,7 +137,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             height: 50px;
-            width: 100%;
+            width: 95%;
         }
 
         .form-group {
@@ -144,9 +149,10 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #A91111;
-            height: 30px;
-            width: 100%;
-            /* Tombol melebar */
+            height: 40px;
+            width: 90%;
+            margin-left: 20px;
+            margin-top: 10px;
         }
 
         .btn {

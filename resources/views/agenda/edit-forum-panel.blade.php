@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container"
-        style="max-width: 700px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:white;">
-        <h3 style="text-align: center;">Tambah Forum Panel</h3>
+        style="display: flex; justify-content: center; align-items: center; height:85vh; padding: 2rem; background-color: #FFFFFF;">
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -32,12 +32,13 @@
             });
         </script>
         <div class="form-container">
+            <h3 style="text-align: center; margin-top:-10px; margin-bottom: -10px;">Tambah Forum Panel</h3>
             <form action="{{ route('forum-panel.update', $forumPanel->id) }}" method="POST"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:20px; align-item:center; ">
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:20px; align-item:center; width:100%;">
                 @csrf
                 @method('PUT') <!-- Pastikan method PUT ada di sini -->
                 <!-- Pastikan menggunakan method PUT untuk update -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
+                <div style="display: flex; flex-direction: column; margin-left:10px; margin-right:-10px;">
                     <div class="form-group">
                         <label>Nama Perusahaan:</label>
                         <input class="form-control" type="text" name="nama_perusahaan"
@@ -63,7 +64,7 @@
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap:5px;">
+                <div style="display: flex; flex-direction: column;">
                     <div class="form-group">
                         <label>Kriteria:</label>
                         <textarea class="form-control" name="kriteria"
@@ -91,13 +92,24 @@
         </div>
 
         <style>
+            html,
+            body {
+                height: 100%;
+                overflow: hidden;
+                /* Menonaktifkan scroll */
+                margin: 0;
+            }
+
             .form-container {
-                margin-top: -30px;
-                width: auto;
-                padding: 2rem;
+                width: 600px;
                 background-color: white;
                 display: flex;
                 justify-content: center;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: center;
+                height: 70vh;
             }
 
             /* Styling untuk frame form */
@@ -107,7 +119,7 @@
                 border: 1px solid #ddd;
                 border-radius: 10px;
                 height: 50px;
-                width: 100%;
+                width: 95%;
             }
 
             .form-group {
@@ -119,9 +131,10 @@
                 border: 1px solid #ddd;
                 border-radius: 10px;
                 background-color: #A91111;
-                height: 30px;
-                width: 100%;
-                /* Tombol melebar */
+                height: 40px;
+                width: 90%;
+                margin-left: 10px;
+                margin-top: 10px;
             }
 
             .btn {
