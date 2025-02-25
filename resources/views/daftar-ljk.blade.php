@@ -11,7 +11,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            overflow: hidden;
             overflow-x: hidden;
             /* Mencegah scroll horizontal di body */
         }
@@ -105,8 +104,8 @@
         .btn {
             display: inline-block;
             padding: 8px 16px;
-            background-color: #ffc107;
-            color: black;
+            background-color: #007bff;
+            color: white;
             text-decoration: none;
             border-radius: 4px;
             font-size: 14px;

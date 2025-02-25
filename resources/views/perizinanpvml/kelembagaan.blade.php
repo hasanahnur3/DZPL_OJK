@@ -60,13 +60,22 @@
                         });
                     </script>
                     <label for="detail_izin" style="font-weight: bold; color: #555;">Detail Izin</label>
-                    <input type="text" name="detail_izin" id="detail_izin"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                        value="{{ old('detail_izin') }}">
+                    <select id="detail_izin" name="detail_izin" required style="height: 40px; gap:10px">
+                        <option value="">Pilih Detail Izin</option>
+                        @foreach($detail_izin as $izin)
+                            <option value="{{ $izin }}">{{ $izin }}</option>
+                        @endforeach
+                    </select>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
-                    <input type="text" name="status" id="status" required
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;" value="{{ old('status') }}">
+                    <select name="status" id="status" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px; width: 100%;">
+                        <option value="">Pilih Status</option>
+                        <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="Ditolak/Dikembalikan" {{ old('status') == 'Ditolak/Dikembalikan' ? 'selected' : '' }}>Ditolak/Dikembalikan</option>
+                        <option value="Kelengkapan dok" {{ old('status') == 'Kelengkapan dok' ? 'selected' : '' }}>Kelengkapan dok</option>
+                        <option value="Dalam proses analisis" {{ old('status') == 'Dalam proses analisis' ? 'selected' : '' }}>Dalam proses analisis</option>
+                    </select>
+
 
                     <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat
                         Permohonan</label>
@@ -88,8 +97,6 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 5px;">
-
-
                     <label for="tanggal_dokumen_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen
                         Lengkap</label>
                     <input type="date" name="tanggal_dokumen_lengkap" id="tanggal_dokumen_lengkap"

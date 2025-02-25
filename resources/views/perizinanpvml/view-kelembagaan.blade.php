@@ -15,13 +15,13 @@
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Detail Izin</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat Permohonan</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Permohonan</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Sistem</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dokumen Lengkap</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Selesai Analisis</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Selesai Analisis</th>                
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jumlah Hari Kerja</th>
@@ -35,6 +35,21 @@
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jenis_industri }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nama_perusahaan }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->detail_izin ?? '-' }}</td>
+<!-- In view-kelembagaan.blade.php -->
+<!-- Replace just the SLA column in the table -->
+<td style="padding: 0.75rem; border: 1px solid #dee2e6;">
+    @if($item->tanggal_dokumen_lengkap)
+        @if(is_numeric($item->sla_remaining))
+            <span style="color: {{ $item->sla_remaining < 0 ? 'red' : 'green' }}">
+                {{ $item->sla_remaining }}
+            </span>
+        @else
+            {{ $item->sla_remaining }}
+        @endif
+    @else
+        -
+    @endif
+</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->status }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat_permohonan ?? '-' }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
@@ -48,9 +63,6 @@
                 </td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
                     {{ $item->tanggal_selesai_analisis ? date('d-m-Y', strtotime($item->tanggal_selesai_analisis)) : '-' }}
-                </td>
-                <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                    {{ $item->sla ?? '-' }}
                 </td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat ?? '-' }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">

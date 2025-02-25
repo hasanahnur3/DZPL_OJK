@@ -107,6 +107,20 @@
         .main-content {
             background-color: white;
         }
+
+/* Ensure dropdown menus are clickable */
+.sidebar .dropdown-content .sub-item a,
+.sidebar .dropdown-menu a {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1100;
+}
+
+/* Fix for charts or other elements overlapping the sidebar */
+.main-content {
+    position: relative;
+    z-index: 900;
+}
     </style>
 
     <div class="container-fluid">
@@ -136,12 +150,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row g-3 mt-2">
+                        <div class="row mt-2">
                             <div class="col-md-2">
                                 <button type="submit" style="background-color: #007bff;" class="btn w-100 mt-4"><i class="fas fa-filter"></i> Filter</button>
                             </div>
-                            <div class="col-md-6 d-flex align-items-end justify-content-end">
-                                <button type="button" class="btn btn-secondary" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset Filter</button>
+                            <div class="col-md-2 d-flex align-items-end justify-content-end">
+                                <button type="button" class="btn w-100 mt-4" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset Filter</button>
                             </div>
                         </div>
                     </form>

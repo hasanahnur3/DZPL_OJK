@@ -72,7 +72,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $riksusItem->tanggal_persetujuan_kadep ? \Carbon\Carbon::parse($riksusItem->tanggal_persetujuan_kadep)->format('d-m-Y') : '-' }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                        <a href="{{ route('riksus.edit', $riksusItem->id) }}" style="background-color: #007bff; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                        <a href="{{ route('riksus.edit', $riksusItem->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         @endif
                     </td>
                 </tr>

@@ -82,8 +82,7 @@
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
                     <select name="status" id="status" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                        <option value="Sudah diajukan" {{ $data->status == 'Sudah diajukan' ? 'selected' : '' }}>Sudah
-                            diajukan</option>
+                        <option value="Sudah diajukan" {{ $data->status == 'Sudah diajukan' ? 'selected' : '' }}>Sudah diajukan</option>
                         <option value="Dokumen perlu dilengkapi" {{ $data->status == 'Dokumen perlu dilengkapi' ? 'selected' : '' }}>Dokumen perlu dilengkapi</option>
                         <option value="Dokumen sudah diverifikasi" {{ $data->status == 'Dokumen sudah diverifikasi' ? 'selected' : '' }}>Dokumen sudah diverifikasi</option>
                         <option value="Selesai" {{ $data->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
