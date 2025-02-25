@@ -56,7 +56,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $control->follow_up_status }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                        <a href="{{ route('quality_control.edit', $control) }}" style="background-color: #007bff; color: black; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                        <a href="{{ route('quality_control.edit', $control) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         @endif
                     </td>
                 </tr>
