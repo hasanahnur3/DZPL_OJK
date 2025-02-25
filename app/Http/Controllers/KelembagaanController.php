@@ -16,22 +16,22 @@ public function index()
     return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
 }
 
-    public function create()
+public function create()
 {
-    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
-    $detail_izin = DB::table('izin_industri')->pluck('detail_izin'); // Fetch detail_izin from izin_industri table
-
+    $jenis_industri = DB::table('izin_industri')->distinct()->pluck('jenis_industri');
+    $detail_izin = []; // Initially empty, will be populated via AJAX
+    
     return view('perizinanpvml.kelembagaan', compact('jenis_industri', 'detail_izin'));
 }
 
 
-    public function getCompaniesByIndustry(Request $request)
-    {
-        $companies = DB::table('daftarljk')
-            ->where('jenis_industri', $request->jenis_industri)
-            ->pluck('nama_perusahaan');
-        return response()->json($companies);
-    }
+public function getDetailIzinByIndustry(Request $request)
+{
+    $detailIzin = DB::table('izin_industri')
+        ->where('jenis_industri', $request->jenis_industri)
+        ->pluck('detail_izin');
+    return response()->json($detailIzin);
+}
 
     public function store(Request $request)
     {
@@ -61,8 +61,9 @@ public function index()
 
     public function edit($id)
     {
-        $kelembagaan = KelembagaanPvml::findOrFail($id); // Gunakan model KelembagaanPvml
-        return view('perizinanpvml.edit-kelembagaan', compact('kelembagaan'));
+        $kelembagaan = KelembagaanPvml::findOrFail($id);
+        $jenis_industri = DB::table('izin_industri')->distinct()->pluck('jenis_industri');
+        return view('perizinanpvml.edit-kelembagaan', compact('kelembagaan', 'jenis_industri'));
     }
 
     public function update(Request $request, $id)
