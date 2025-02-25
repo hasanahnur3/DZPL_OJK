@@ -34,20 +34,20 @@ class PkkController extends Controller
     {
         $request->validate([
             'jenis_industri' => 'required',
-        'nama_perusahaan' => 'required',
-        'nama_pihak_utama' => 'required',
-        'jabatan' => 'required',
-        'status' => 'required',
-        'nomor_surat_permohonan' => 'required',
-        'tanggal_surat_permohonan' => 'required|date',
-        'tanggal_pengajuan_sistem' => 'required|date',
-        'tanggal_dok_lengkap' => 'nullable|date', // Perubahan di sini
-        'perlu_klarifikasi' => 'required',
-        'tanggal_klarifikasi' => 'nullable|date',
-        'hasil' => 'required',
-        'nomor_persetujuan' => 'required',
-        'tanggal_persetujuan' => 'required|date',
-        'jumlah_hari_kerja' => 'required|integer',
+            'nama_perusahaan' => 'required',
+            'nama_pihak_utama' => 'required',
+            'jabatan' => 'required',
+            'status' => 'required',
+            'nomor_surat_permohonan' => 'required',
+            'tanggal_surat_permohonan' => 'required|date',
+            'tanggal_pengajuan_sistem' => 'required|date',
+            'tanggal_dok_lengkap' => 'nullable|date', // Perubahan di sini
+            'perlu_klarifikasi' => 'required',
+            'tanggal_klarifikasi' => 'nullable|date',
+            'hasil' => 'required',
+            'nomor_persetujuan' => 'required',
+            'tanggal_persetujuan' => 'required|date',
+            'jumlah_hari_kerja' => 'required|integer',
         ]);
 
         Pkk::create($request->all());
@@ -57,40 +57,40 @@ class PkkController extends Controller
 
     // Halaman form edit data
     public function edit($id)
-{
-    $data = Pkk::findOrFail($id);
-    $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
-    $nama_perusahaan = DB::table('daftarljk')
-        ->where('jenis_industri', $data->jenis_industri)
-        ->pluck('nama_perusahaan');
+    {
+        $data = Pkk::findOrFail($id);
+        $jenis_industri = DB::table('daftarljk')->distinct()->pluck('jenis_industri');
+        $nama_perusahaan = DB::table('daftarljk')
+            ->where('jenis_industri', $data->jenis_industri)
+            ->pluck('nama_perusahaan');
 
-    return view('perizinanpvml.edit-pkk', compact('data', 'jenis_industri', 'nama_perusahaan'));
-}
+        return view('perizinanpvml.edit-pkk', compact('data', 'jenis_industri', 'nama_perusahaan'));
+    }
 
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'jenis_industri' => 'required',
-        'nama_perusahaan' => 'required',
-        'nama_pihak_utama' => 'required',
-        'jabatan' => 'required',
-        'status' => 'required',
-        'nomor_surat_permohonan' => 'required',
-        'tanggal_surat_permohonan' => 'required|date',
-        'tanggal_pengajuan_sistem' => 'required|date',
-        'tanggal_dok_lengkap' => 'nullable|date', // Perubahan di sini
-        'perlu_klarifikasi' => 'required',
-        'tanggal_klarifikasi' => 'nullable|date',
-        'hasil' => 'required',
-        'nomor_persetujuan' => 'required',
-        'tanggal_persetujuan' => 'required|date',
-        'jumlah_hari_kerja' => 'required|integer',
-    ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'jenis_industri' => 'required',
+            'nama_perusahaan' => 'required',
+            'nama_pihak_utama' => 'required',
+            'jabatan' => 'required',
+            'status' => 'required',
+            'nomor_surat_permohonan' => 'required',
+            'tanggal_surat_permohonan' => 'required|date',
+            'tanggal_pengajuan_sistem' => 'required|date',
+            'tanggal_dok_lengkap' => 'nullable|date', // Perubahan di sini
+            'perlu_klarifikasi' => 'required',
+            'tanggal_klarifikasi' => 'nullable|date',
+            'hasil' => 'required',
+            'nomor_persetujuan' => 'required',
+            'tanggal_persetujuan' => 'required|date',
+            'jumlah_hari_kerja' => 'required|integer',
+        ]);
 
-    $data = Pkk::findOrFail($id);
-    $data->update($request->all());
+        $data = Pkk::findOrFail($id);
+        $data->update($request->all());
 
-    return redirect()->route('pkk')->with('success', 'Data berhasil diupdate');
-}
+        return redirect()->route('pkk')->with('success', 'Data berhasil diupdate');
+    }
 }

@@ -27,22 +27,22 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <div class="form-container">
-<div style="width: 800px; height:auto; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); ">
-    <h2>Edit Daftar Direksi Komisaris</h2>
+<div style="width: 800px; height:auto; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color: #ffffff; ">
+    <h2 style="text-align: center; color: #333;">Edit Daftar Direksi Komisaris</h2>
     <form action="{{ route('dirkom.update', $dirkom->id) }}" method="POST" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
         @csrf
         @method('PUT')
 
-        <div style="display: flex; flex-direction: column; gap: 5px;">
+        <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 20px;">
 
-            <select id="jenis_industri" name="jenis_industri" required>
+            <select id="jenis_industri" name="jenis_industri" required style="height:35px;">
                 <option value="">Pilih Jenis Industri</option>
                 @foreach($jenis_industri as $jenis)
                     <option value="{{ $jenis }}" {{ old('jenis_industri', $dirkom->jenis_industri) == $jenis ? 'selected' : '' }}>{{ $jenis }}</option>
                 @endforeach
             </select>
             
-            <select id="nama_perusahaan" name="nama_perusahaan" required>
+            <select id="nama_perusahaan" name="nama_perusahaan" required style="height:35px;">
                 @foreach($nama_perusahaan as $nama)
                 <option value="{{ $nama }}" {{ old('nama_perusahaan', $dirkom->nama_perusahaan) == $nama ? 'selected' : '' }}>{{ $nama }}</option>
             @endforeach
@@ -103,15 +103,24 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 </div>
 <style>
-          .form-container {
-        max-width: 100%;
-        width: 100%;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        display: flex;
-        justify-content: center;
-    }  
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            /* Menonaktifkan scroll */
+            margin: 0;
+        }
+
+
+        .form-container {
+            height: 85vh;
+            max-width: 100%;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: flex;
+            justify-content: center;
+        } 
 </style>
 @endsection

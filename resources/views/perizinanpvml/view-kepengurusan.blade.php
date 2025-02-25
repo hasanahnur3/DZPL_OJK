@@ -62,7 +62,9 @@
          
 <script>
     $(document).ready(function () {
-        $('#kepengurusanTable').DataTable();
+        $('#kepengurusanTable').DataTable({
+            "pageLength": 6 
+        });
     });
 </script>
 <style>

@@ -87,8 +87,9 @@
 
 <script>
 $(document).ready(function () {
-    $('#kelembagaanTable').DataTable({
-        scrollX: true, // Enables horizontal scrolling
+    $('#kelembagaanTable').DataTable({         
+        scrollX: true,
+        "pageLength": 6 // Enables horizontal scrolling
     });
 });
 </script>
