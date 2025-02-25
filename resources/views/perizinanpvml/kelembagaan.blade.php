@@ -47,7 +47,7 @@
                             style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                             <option value="">Pilih Nama Perusahaan</option>
                         </select>
-                    </div>>
+                    </div>
                     <script>
                         document.getElementById('jenis_industri').addEventListener('change', function () {
                             let jenisIndustri = this.value;
