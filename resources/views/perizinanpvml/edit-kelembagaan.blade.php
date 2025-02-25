@@ -40,9 +40,12 @@
                 <!-- Input Jenis Industri -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-                    <input type="text" class="form-control" id="jenis_industri" name="jenis_industri"
-                        value="{{ $kelembagaan->jenis_industri }}" required
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                    <select id="jenis_industri" name="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                        <option value="">Pilih Jenis Industri</option>
+                        @foreach($jenis_industri as $jenis)
+                            <option value="{{ $jenis }}" {{ $kelembagaan->jenis_industri == $jenis ? 'selected' : '' }}>{{ $jenis }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Input Nama Perusahaan -->
@@ -56,10 +59,53 @@
                 <!-- Input Detail Izin -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="detail_izin" style="font-weight: bold; color: #555;">Detail Izin</label>
-                    <input type="text" class="form-control" id="detail_izin" name="detail_izin"
-                        value="{{ $kelembagaan->detail_izin }}" required
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                    <select id="detail_izin" name="detail_izin" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                        <option value="">Pilih Detail Izin</option>
+                        <!-- Current value will be selected via JavaScript -->
+                    </select>
                 </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const jenisIndustri = document.getElementById('jenis_industri');
+                        const currentDetailIzin = "{{ $kelembagaan->detail_izin }}";
+                        
+                        // Load detail_izin options when page loads
+                        if (jenisIndustri.value) {
+                            fetch(`/get-detail-izin?jenis_industri=${jenisIndustri.value}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let detailIzinDropdown = document.getElementById('detail_izin');
+                                    detailIzinDropdown.innerHTML = '<option value="">Pilih Detail Izin</option>';
+                                    data.forEach(detail => {
+                                        let option = document.createElement('option');
+                                        option.value = detail;
+                                        option.textContent = detail;
+                                        if (detail === currentDetailIzin) {
+                                            option.selected = true;
+                                        }
+                                        detailIzinDropdown.appendChild(option);
+                                    });
+                                });
+                        }
+                        
+                        // Update detail_izin when jenis_industri changes
+                        jenisIndustri.addEventListener('change', function () {
+                            let selectedJenisIndustri = this.value;
+                            fetch(`/get-detail-izin?jenis_industri=${selectedJenisIndustri}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let detailIzinDropdown = document.getElementById('detail_izin');
+                                    detailIzinDropdown.innerHTML = '<option value="">Pilih Detail Izin</option>';
+                                    data.forEach(detail => {
+                                        let option = document.createElement('option');
+                                        option.value = detail;
+                                        option.textContent = detail;
+                                        detailIzinDropdown.appendChild(option);
+                                    });
+                                });
+                        });
+                    });
+                </script>
 
                 <!-- Input Status -->
                 <div style="display: flex; flex-direction: column; gap:5px;">

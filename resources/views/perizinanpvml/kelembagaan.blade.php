@@ -62,10 +62,40 @@
                     <label for="detail_izin" style="font-weight: bold; color: #555;">Detail Izin</label>
                     <select id="detail_izin" name="detail_izin" required style="height: 40px; gap:10px">
                         <option value="">Pilih Detail Izin</option>
-                        @foreach($detail_izin as $izin)
-                            <option value="{{ $izin }}">{{ $izin }}</option>
-                        @endforeach
                     </select>
+                    <script>
+                        document.getElementById('jenis_industri').addEventListener('change', function () {
+                            let jenisIndustri = this.value;
+                            
+                            // First update companies dropdown
+                            fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let namaPerusahaanDropdown = document.getElementById('nama_perusahaan');
+                                    namaPerusahaanDropdown.innerHTML = '<option value="">Pilih Nama Perusahaan</option>';
+                                    data.forEach(nama => {
+                                        let option = document.createElement('option');
+                                        option.value = nama;
+                                        option.textContent = nama;
+                                        namaPerusahaanDropdown.appendChild(option);
+                                    });
+                                });
+                                
+                            // Then update detail_izin dropdown
+                            fetch(`/get-detail-izin?jenis_industri=${jenisIndustri}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let detailIzinDropdown = document.getElementById('detail_izin');
+                                    detailIzinDropdown.innerHTML = '<option value="">Pilih Detail Izin</option>';
+                                    data.forEach(detail => {
+                                        let option = document.createElement('option');
+                                        option.value = detail;
+                                        option.textContent = detail;
+                                        detailIzinDropdown.appendChild(option);
+                                    });
+                                });
+                        });
+                    </script>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
                     <select name="status" id="status" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px; width: 100%;">
