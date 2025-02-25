@@ -47,7 +47,9 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('#sosRiksus').DataTable();
+        $('#sosRiksus').DataTable({
+            "pageLength": 6 // Menampilkan 6 entri per halaman
+        });
     });
 </script>
 <style>

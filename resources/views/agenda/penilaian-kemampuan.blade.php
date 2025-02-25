@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container"
-        style="max-width: 700px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:white;">
-        <h3 style="text-align:center;">Tambah Data Agenda PKK</h3>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; height:85vh; padding: 2rem; background-color: #FFFFFF;">
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -33,63 +32,79 @@
         </script>
         <!-- Form untuk Menambah Data -->
         <div class="form-container">
+        <h3 style="text-align:center; margin-top:-30px;">Tambah Data Agenda PKK</h3>
             <form action="{{ route('penilaian-kemampuan.store') }}" method="POST"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top:20px; align-item:center; width:100%;">
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top:20px; align-item:center; width:100%;">
                 @csrf
-                <div style="display: flex; flex-direction: column; gap:5px;">
-                <div class="form-group">
-                    <input type="date" name="hari_tanggal" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input type="time" name="waktu" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="nama_perusahaan" placeholder="Nama Perusahaan" class="form-control"
-                        required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="peserta" placeholder="Peserta" class="form-control" required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="jabatan" placeholder="Jabatan" class="form-control" required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="zoom" placeholder="Zoom Link" class="form-control" required><br>
-                </div>
-                </div>
-                <div style="display: flex; flex-direction: column; gap:5px;">
-                <div class="form-group">
-                    <input type="text" name="pic" placeholder="PIC" class="form-control" required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="penguji" placeholder="Penguji" class="form-control" required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="penguji1" placeholder="Penguji 1" id="penguji1" class="form-control"
-                        required><br>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="penguji2" placeholder="Penguji 2" id="penguji2" class="form-control"><br>
-                </div>
-                <div class="form-group">
-                    <textarea name="hasil" placeholder="Hasil" class="form-control" required></textarea><br>
-                </div>
 
-                <button type="submit" class="btn btn-primary"
-                    style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah
-                    Agenda</button>
+                <div style="display: flex; flex-direction: column; margin-left:10px; margin-right:-10px;">
+
+                    <div class="form-group">
+                        <input type="date" name="hari_tanggal" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="time" name="waktu" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nama_perusahaan" placeholder="Nama Perusahaan" class="form-control"
+                            required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="peserta" placeholder="Peserta" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="jabatan" placeholder="Jabatan" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="zoom" placeholder="Zoom Link" class="form-control" required><br>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <div class="form-group">
+                        <input type="text" name="pic" placeholder="PIC" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="penguji" placeholder="Penguji" class="form-control" required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="penguji1" placeholder="Penguji 1" id="penguji1" class="form-control"
+                            required><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="penguji2" placeholder="Penguji 2" id="penguji2" class="form-control"><br>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="hasil" placeholder="Hasil" class="form-control" required></textarea><br>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Tambah
+                        Agenda</button>
                 </div>
             </form>
         </div>
     </div>
 
     <style>
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            /* Menonaktifkan scroll */
+            margin: 0;
+        }
+
         .form-container {
-            margin-top: -10px;
-            width: auto;
+            width: 700px;
             background-color: white;
             display: flex;
             justify-content: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            align-items: center;
+            height: 80vh;
         }
 
         /* Styling untuk frame form */
@@ -98,7 +113,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             height: 50px;
-            width: 100%;
+            width: 95%;
         }
 
         .form-group {
@@ -109,8 +124,10 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #A91111;
-            height: 30px;
-            width: 100%;
+            height: 40px;
+            width: 90%;
+            margin-left: 20px;
+            margin-top: 10px;
             /* Tombol melebar */
         }
 

@@ -46,7 +46,9 @@
 
 <script>
     $(document).ready(function() {
-        $('#rapatTable').DataTable();
+        $('#rapatTable').DataTable({
+            "pageLength": 6 // Menampilkan 6 entri per halaman
+        });
     });
 </script>
 

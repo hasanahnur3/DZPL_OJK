@@ -65,7 +65,9 @@
 
 <script>
     $(document).ready(function () {
-        $('#pkkTable').DataTable();
+        $('#pkkTable').DataTable({
+            "pageLength": 6 // Menampilkan 6 entri per halaman
+        });
     });
 </script>
 <style>
