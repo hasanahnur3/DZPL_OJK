@@ -68,8 +68,14 @@
                     </select>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
-                    <input type="text" name="status" id="status" required
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;" value="{{ old('status') }}">
+                    <select name="status" id="status" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px; width: 100%;">
+                        <option value="">Pilih Status</option>
+                        <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="Ditolak/Dikembalikan" {{ old('status') == 'Ditolak/Dikembalikan' ? 'selected' : '' }}>Ditolak/Dikembalikan</option>
+                        <option value="Kelengkapan dok" {{ old('status') == 'Kelengkapan dok' ? 'selected' : '' }}>Kelengkapan dok</option>
+                        <option value="Dalam proses analisis" {{ old('status') == 'Dalam proses analisis' ? 'selected' : '' }}>Dalam proses analisis</option>
+                    </select>
+
 
                     <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat
                         Permohonan</label>
