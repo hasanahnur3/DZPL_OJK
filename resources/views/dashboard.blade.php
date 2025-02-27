@@ -25,9 +25,9 @@
     .container-fluid {
         padding-right: 0 !important;
         padding-left: 0 !important;
-        margin-right: 0 !important;
+        margin-right: 20 !important;
         margin-left: 10 !important;
-        width: 80vw !important;
+        width: auto !important;
     }
 
         /* Ensure row takes full width */
@@ -152,10 +152,10 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-2">
-                                <button type="submit" style="background-color: #007bff;" class="btn w-100 mt-4"><i class="fas fa-filter"></i> Filter</button>
+                                <button type="submit" style="background-color: #007bff; color: white;" class="btn w-100 mt-4"><i class="fas fa-filter"></i> Filter</button>
                             </div>
                             <div class="col-md-2 d-flex align-items-end justify-content-end">
-                                <button type="button" class="btn w-100 mt-4" onclick="resetFilters()"><i class="fas fa-undo"></i> Reset Filter</button>
+                                <button type="button" class="btn w-100 mt-4" onclick="resetFilters()" style="color:white;"><i class="fas fa-undo"></i> Reset Filter</button>
                             </div>
                         </div>
                     </form>
@@ -167,7 +167,7 @@
             <div class="col-md-6">
                 <div class="card" style="height: 10.1cm">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-bar"></i> Distribusi Status</span>
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Kelembagaan</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('statusChart', 'Status_Distribution')">
                             <i class="fas fa-download"></i>
                         </button>
@@ -181,7 +181,7 @@
             <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-pie"></i> Detail Distribusi Izin</span>
+                        <span><i class="fas fa-chart-pie"></i> Detail Distribusi Izin Kelembagaan</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('detailIzinChart', 'Detail_Izin_Distribution')">
                             <i class="fas fa-download"></i>
                         </button>

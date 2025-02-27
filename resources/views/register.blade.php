@@ -14,8 +14,10 @@
         .container-ajust{
             display: flex;
             justify-content: center;
+            align-items: center;
             width: auto;
-            background-color: #EEEEEE;
+            height: 90vh;
+            background-color: #FFFFFF;
         }
 
         .container {
@@ -26,6 +28,7 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 643px;
+            height: 375px;
 
         }
 
