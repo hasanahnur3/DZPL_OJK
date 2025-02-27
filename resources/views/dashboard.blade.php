@@ -25,9 +25,9 @@
     .container-fluid {
         padding-right: 0 !important;
         padding-left: 0 !important;
-        margin-right: 0 !important;
+        margin-right: 20 !important;
         margin-left: 10 !important;
-        width: 80vw !important;
+        width: auto !important;
     }
 
         /* Ensure row takes full width */
