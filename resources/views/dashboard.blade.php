@@ -52,7 +52,7 @@
         }
 
         body, html, .container-fluid {
-            height: 100%;
+            height: auto;
             margin: 0;
             padding: 0;
         }
@@ -62,6 +62,7 @@
             padding: 10px;
             background: #f4f6f9;
             width: 100%;
+            height: auto;
         }
 
         .row {
@@ -191,12 +192,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
 
-            <div class="col-md-6" style="margin-bottom: 1cm">
+<h3>Kepengurusan</h3>
+
+<div class="container-fluid">
+<div class="row" style="margin-bottom: 1cm">
+<div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-bar"></i> Distribusi Jenis Industri</span>
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Jenis Industri Kepengurusan</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('jenisIndustriChart', 'Jenis_Industri_Distribution')">
                             <i class="fas fa-download"></i>
                         </button>
@@ -211,7 +218,7 @@
             <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian</span>
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian Kepengurusan</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('statusPenilaianChart', 'Status_Penilaian_Distribution')">
                             <i class="fas fa-download"></i>
                         </button>
@@ -221,8 +228,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        
+    </div>
 
-            <div class="col-md-6">
+    <div class="container-fluid">
+<div class="row" style="margin-bottom: 1cm">
+<div class="col-md-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-user-check"></i> Frekuensi Penguji</span>
@@ -264,6 +277,8 @@
                 </div>
             </div>
         </div>
+        </div>
+        
     </div>
 
     <script>
