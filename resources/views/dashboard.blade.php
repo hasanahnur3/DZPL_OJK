@@ -25,9 +25,9 @@
     .container-fluid {
         padding-right: 0 !important;
         padding-left: 0 !important;
-        margin-right: 20 !important;
+        margin-right: 0 !important;
         margin-left: 10 !important;
-        width: auto !important;
+        width: 80vw !important;
     }
 
         /* Ensure row takes full width */
@@ -108,19 +108,19 @@
             background-color: white;
         }
 
-/* Ensure dropdown menus are clickable */
-.sidebar .dropdown-content .sub-item a,
-.sidebar .dropdown-menu a {
-    pointer-events: auto !important;
-    position: relative;
-    z-index: 1100;
-}
+        /* Ensure dropdown menus are clickable */
+        .sidebar .dropdown-content .sub-item a,
+        .sidebar .dropdown-menu a {
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 1100;
+        }
 
-/* Fix for charts or other elements overlapping the sidebar */
-.main-content {
-    position: relative;
-    z-index: 900;
-}
+        /* Fix for charts or other elements overlapping the sidebar */
+        .main-content {
+            position: relative;
+            z-index: 900;
+        }
     </style>
 
     <div class="container-fluid">
@@ -191,7 +191,37 @@
                     </div>
                 </div>
             </div>
-        
+
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Jenis Industri</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('jenisIndustriChart', 'Jenis_Industri_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="jenisIndustriChart"></canvas>
+                    </div>
+                </div>
+            </div>
+         
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('statusPenilaianChart', 'Status_Penilaian_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusPenilaianChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -205,7 +235,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -234,52 +264,52 @@
                 </div>
             </div>
         </div>
-        </div>
     </div>
-</div>
-<script>
-    // Add this with your existing scripts
-    function resetFilters() {
-        document.getElementById('start_date').value = '';
-        document.getElementById('end_date').value = '';
-        document.getElementById('month').value = '';
-        document.getElementById('year').value = '';
-        document.getElementById('jenis_industri').value = '';
-        document.forms[0].submit();
-    }
-    
-    // Add validation for date ranges
-    document.addEventListener('DOMContentLoaded', function() {
-        const startDateInput = document.getElementById('start_date');
-        const endDateInput = document.getElementById('end_date');
-        const monthSelect = document.getElementById('month');
-        const yearSelect = document.getElementById('year');
-        
-        // Disable month/year selects if date range is being used
-        function toggleDateControls() {
-            const usingDateRange = startDateInput.value || endDateInput.value;
-            monthSelect.disabled = usingDateRange;
-            yearSelect.disabled = usingDateRange;
-            
-            if (usingDateRange) {
-                monthSelect.value = '';
-                yearSelect.value = '';
-            }
-        }
-        
-        startDateInput.addEventListener('change', toggleDateControls);
-        endDateInput.addEventListener('change', toggleDateControls);
-        
-        // Initialize on page load
-        toggleDateControls();
-    });
-</script>
 
+    <script>
+        // Add this with your existing scripts
+        function resetFilters() {
+            document.getElementById('start_date').value = '';
+            document.getElementById('end_date').value = '';
+            document.getElementById('month').value = '';
+            document.getElementById('year').value = '';
+            document.getElementById('jenis_industri').value = '';
+            document.forms[0].submit();
+        }
+
+        // Add validation for date ranges
+        document.addEventListener('DOMContentLoaded', function() {
+            const startDateInput = document.getElementById('start_date');
+            const endDateInput = document.getElementById('end_date');
+            const monthSelect = document.getElementById('month');
+            const yearSelect = document.getElementById('year');
+
+            // Disable month/year selects if date range is being used
+            function toggleDateControls() {
+                const usingDateRange = startDateInput.value || endDateInput.value;
+                monthSelect.disabled = usingDateRange;
+                yearSelect.disabled = usingDateRange;
+
+                if (usingDateRange) {
+                    monthSelect.value = '';
+                    yearSelect.value = '';
+                }
+            }
+
+            startDateInput.addEventListener('change', toggleDateControls);
+            endDateInput.addEventListener('change', toggleDateControls);
+
+            // Initialize on page load
+            toggleDateControls();
+        });
+    </script>
 
     <script>
         const pengujiData = @json($pengujiData);
         const statusData = @json($statusData);
         const detailIzinData = @json($detailIzinData);
+        const jenisIndustriData = @json($jenisIndustriData);
+        const statusPenilaianData = @json($statusPenilaianData);
 
         function downloadChart(canvasId, filename) {
             const canvas = document.getElementById(canvasId);
@@ -356,6 +386,58 @@
                 plugins: {
                     legend: {
                         position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('jenisIndustriChart'), {
+            type: 'bar',
+            data: {
+                labels: jenisIndustriData.map(item => item.jenis_industri),
+                datasets: [{
+                    label: 'Jumlah',
+                    data: jenisIndustriData.map(item => item.total),
+                    backgroundColor: '#36A2EB'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('statusPenilaianChart'), {
+            type: 'bar',
+            data: {
+                labels: statusPenilaianData.map(item => item.status),
+                datasets: [{
+                    label: 'Jumlah',
+                    data: statusPenilaianData.map(item => item.total),
+                    backgroundColor: '#FFCE56'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
                 }
             }
