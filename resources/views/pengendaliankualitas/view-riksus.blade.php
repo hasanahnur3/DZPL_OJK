@@ -7,7 +7,7 @@
 
 <div class="form-container">
     
-<div style="overflow-x: auto; max-width: 100%;">
+<div style="max-width: 100%;">
 <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Riksus</h2>
     <table id="riksusTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">

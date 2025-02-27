@@ -70,8 +70,10 @@
                 </td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jumlah_hari_kerja ?? '-' }}</td>
                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                    <a href="{{ route('kelembagaan.edit', $item->id) }}"
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                        <a href="{{ route('kelembagaan.edit', $item->id) }}"
                         style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
@@ -79,9 +81,10 @@
     </table>
 
     <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
-        <a href="{{ route('kelembagaan.create') }}"
-            style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
+        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            <a href="{{ route('kelembagaan.create') }}" style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
             class="btn btn-success">Tambah Data</a>
+        @endif
     </div>
 </div>
 
