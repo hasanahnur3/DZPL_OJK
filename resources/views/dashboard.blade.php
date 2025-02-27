@@ -22,13 +22,13 @@
         }
 
         /* Override container styles */
-    .container-fluid {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-        margin-right: 20 !important;
-        margin-left: 10 !important;
-        width: auto !important;
-    }
+        .container-fluid {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            margin-right: 20 !important;
+            margin-left: 10 !important;
+            width: auto !important;
+        }
 
         /* Ensure row takes full width */
         .row {
@@ -195,26 +195,10 @@
         </div>
     </div>
 
+    <h3>Kepengurusan</h3>
 
-<h3>Kepengurusan</h3>
-
-<div class="container-fluid">
-<div class="row" style="margin-bottom: 1cm">
-<div class="col-md-6" style="margin-bottom: 1cm">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-bar"></i> Distribusi Jenis Industri Kepengurusan</span>
-                        <button class="btn btn-sm download-btn" onclick="downloadChart('jenisIndustriChart', 'Jenis_Industri_Distribution')">
-                            <i class="fas fa-download"></i>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="jenisIndustriChart"></canvas>
-                    </div>
-                </div>
-            </div>
-         
-
+    <div class="container-fluid">
+        <div class="row" style="margin-bottom: 1cm">
             <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -228,14 +212,26 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('hasilChart', 'Hasil_Penilaian_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="hasilChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-        
     </div>
 
     <div class="container-fluid">
-<div class="row" style="margin-bottom: 1cm">
-<div class="col-md-6">
+        <div class="row" style="margin-bottom: 1cm">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-user-check"></i> Frekuensi Penguji</span>
@@ -277,8 +273,6 @@
                 </div>
             </div>
         </div>
-        </div>
-        
     </div>
 
     <script>
@@ -325,6 +319,7 @@
         const detailIzinData = @json($detailIzinData);
         const jenisIndustriData = @json($jenisIndustriData);
         const statusPenilaianData = @json($statusPenilaianData);
+        const hasilData = @json($hasilData);
 
         function downloadChart(canvasId, filename) {
             const canvas = document.getElementById(canvasId);
@@ -453,6 +448,26 @@
                 scales: {
                     y: {
                         beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('hasilChart'), {
+            type: 'pie',
+            data: {
+                labels: hasilData.map(item => item.hasil),
+                datasets: [{
+                    data: hasilData.map(item => item.total),
+                    backgroundColor: ['#FF6384', '#36A2EB']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
                     }
                 }
             }

@@ -161,6 +161,27 @@ class DashboardController extends Controller
 
         $statusPenilaianData = $statusPenilaianQuery->groupBy('status')->get();
 
+        // Query untuk hasil Chart dari tabel penilaian
+        $hasilQuery = DB::table('penilaian')
+            ->select('hasil', DB::raw('count(*) as total'));
+
+        if ($startDate && $endDate) {
+            $hasilQuery->whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $hasilQuery->whereMonth('tanggal_pengajuan_sistem', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $hasilQuery->whereYear('tanggal_pengajuan_sistem', $selectedYear);
+            }
+        }
+
+        if ($selectedJenisIndustri) {
+            $hasilQuery->where('jenis_industri', $selectedJenisIndustri);
+        }
+
+        $hasilData = $hasilQuery->groupBy('hasil')->get();
+
         // Return view with data that has been initialized
         return view('dashboard', compact(
             'statusData',
@@ -174,7 +195,8 @@ class DashboardController extends Controller
             'startDate',
             'endDate',
             'jenisIndustriData',
-            'statusPenilaianData'
+            'statusPenilaianData',
+            'hasilData'
         ));
     }
 }
