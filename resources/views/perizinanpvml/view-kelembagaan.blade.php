@@ -38,7 +38,9 @@
 <!-- In view-kelembagaan.blade.php -->
 <!-- Replace just the SLA column in the table -->
 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-    @if($item->tanggal_dokumen_lengkap)
+    @if(strtolower($item->status) == 'selesai')
+        -
+    @elseif($item->tanggal_dokumen_lengkap)
         @if(is_numeric($item->sla_remaining))
             <span style="color: {{ $item->sla_remaining < 0 ? 'red' : 'green' }}">
                 {{ $item->sla_remaining }}
