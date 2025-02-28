@@ -41,41 +41,41 @@
                         {{ $dirkom->tanggal_surat_pencatatan ? \Carbon\Carbon::parse($dirkom->tanggal_surat_pencatatan)->format('Y-m-d') : '-' }}
                     </td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                        @php
-                            if ($dirkom->status_perizinan == 'selesai' || !$dirkom->tanggal_dok_lengkap) {
-                                echo '-';
-                            } else {
-                                $today = new DateTime();
-                                $dokDate = new DateTime($dirkom->tanggal_dok_lengkap);
-                                
-                                // Count business days between dates (excluding weekends)
-                                $daysPassed = 0;
-                                $currentDate = clone $dokDate;
-                                
-                                while ($currentDate <= $today) {
-                                    $weekDay = $currentDate->format('N');
-                                    if ($weekDay < 6) { // 1 (Monday) to 5 (Friday)
-                                        $daysPassed++;
-                                    }
-                                    $currentDate->modify('+1 day');
-                                }
-                                
-                                // Calculate SLA: 20 minus business days passed
-                                $sla = 20 - $daysPassed;
-                                
-                                // Color code based on SLA value
-                                $color = '';
-                                if ($sla < 0) {
-                                    $color = 'color: red;';
-                                } elseif ($sla <= 5) {
-                                    $color = 'color: orange;';
+                            @php
+                                if ($dirkom->status_perizinan == 'Selesai' || !$dirkom->tanggal_dok_lengkap) {
+                                    echo '-';
                                 } else {
-                                    $color = 'color: green;';
+                                    $today = new DateTime();
+                                    $dokDate = new DateTime($dirkom->tanggal_dok_lengkap);
+                                    
+                                    // Count business days between dates (excluding weekends)
+                                    $daysPassed = 0;
+                                    $currentDate = clone $dokDate;
+                                    
+                                    while ($currentDate <= $today) {
+                                        $weekDay = $currentDate->format('N');
+                                        if ($weekDay < 6) { // 1 (Monday) to 5 (Friday)
+                                            $daysPassed++;
+                                        }
+                                        $currentDate->modify('+1 day');
+                                    }
+                                    
+                                    // Calculate SLA: 20 minus business days passed
+                                    $sla = 20 - $daysPassed;
+                                    
+                                    // Color code based on SLA value
+                                    $color = '';
+                                    if ($sla < 0) {
+                                        $color = 'color: red;';
+                                    } elseif ($sla <= 5) {
+                                        $color = 'color: orange;';
+                                    } else {
+                                        $color = 'color: green;';
+                                    }
+                                    
+                                    echo "<span style='$color font-weight: bold;'>$sla</span>";
                                 }
-                                
-                                echo "<span style='$color font-weight: bold;'>$sla</span>";
-                            }
-                        @endphp
+                            @endphp
                     </td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
