@@ -165,6 +165,7 @@
         </div>
 
         <div class="row" style="margin-bottom: 1cm">
+            <h3>Kelembagaan</h3>
             <div class="col-md-6">
                 <div class="card" style="height: 10.1cm">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -195,10 +196,11 @@
         </div>
     </div>
 
-    <h3>Kepengurusan</h3>
+   
 
     <div class="container-fluid">
         <div class="row" style="margin-bottom: 1cm">
+            <h3>Kepengurusan</h3>
             <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
