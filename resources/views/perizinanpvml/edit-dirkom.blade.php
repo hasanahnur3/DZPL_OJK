@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         @csrf
         @method('PUT')
 
-        <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 25px;">
 
             <select id="jenis_industri" name="jenis_industri" required style="height:35px;">
                 <option value="">Pilih Jenis Industri</option>

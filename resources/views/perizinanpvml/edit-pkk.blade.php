@@ -36,7 +36,7 @@
                 @method('PUT') <!-- Menggunakan PUT untuk update -->
 
                 <!-- Input Jenis Industri -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
+                <div style="display: flex; flex-direction: column; gap:5px; margin-top: 25px;">
                     <select id="jenis_industri" name="jenis_industri" required style="height:35px;">
                         <option value="">Pilih Jenis Industri</option>
                         @foreach($jenis_industri as $jenis)

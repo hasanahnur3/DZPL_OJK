@@ -23,6 +23,7 @@ use App\Http\Controllers\ViewRapimController;
 use App\Http\Controllers\ViewForumPanelController;
 use App\Http\Controllers\ViewPenilaianController;
 use App\Http\Controllers\ViewKelembagaanPvmlController;
+use App\Http\Controllers\AgendaLainyaController;
 use App\Http\Controllers\DaftarljkController;
 use App\Models\Daftarljk;
 use Illuminate\Http\Request;
@@ -259,6 +260,12 @@ Route::get('/pkk-agenda/{id}/edit', [PkkAgendaController::class, 'edit'])->name(
 Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
 Route::get('/pkk-agenda', [PkkAgendaController::class, 'index'])->name('pkk-agenda.index');
 
+Route::resource('agenda-lainnya', AgendaLainyaController::class);
+Route::get('agenda-lainnya', [AgendaLainyaController::class, 'index'])->name('agenda-lainnya.index');
+Route::get('agenda-lainnya/create', [AgendaLainyaController::class, 'create'])->name('agenda-lainnya.create');
+Route::post('agenda-lainnya', [AgendaLainyaController::class, 'store'])->name('agenda-lainnya.store');
+Route::get('agenda-lainnya/{id}/edit', [AgendaLainyaController::class, 'edit'])->name('agenda.edit-agenda-lainnya');
+Route::put('agenda-lainnya/{id}', [AgendaLainyaController::class, 'update'])->name('agenda-lainnya.update');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/chart-data', [DashboardController::class, 'getChartData']);

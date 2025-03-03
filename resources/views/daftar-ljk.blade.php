@@ -109,7 +109,6 @@
             text-decoration: none;
             border-radius: 4px;
             font-size: 14px;
-            font-weight: bold;
         }
 
         .btn:hover {

@@ -311,6 +311,9 @@
                     <li class="sub-item">
                         <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
                     </li>
+                    <li class="sub-item">
+                        <a href="{{ route('agenda-lainnya.index') }}">Agenda Lainnya</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
