@@ -336,13 +336,10 @@
                             <li><a href="{{ route('tka') }}">TKA</a></li>
                         </ul>
                     </li>
-                    <li class="sub-item dropdown">
-                        <a>Kelembagaan</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a></li>
-                            <li><a href="{{ route('riksus') }}">Riksus</a></li>
-                            <li><a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a></li>
-                        </ul>
+                    <li class="dropdown-menu">
+                    <a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a>
+                    <a href="{{ route('riksus') }}">Riksus</a>
+                    <a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a>
                     </li>
                 </ul>
             </li>

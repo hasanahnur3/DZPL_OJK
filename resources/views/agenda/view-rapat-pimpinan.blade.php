@@ -8,7 +8,7 @@
 
 
 <div class="form-container" style="overflow-x: auto;">
-<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Rapat Pimpinan</h2>
+<h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Jadwal Rapat Pimpinan</h2>
     <table id="rapatTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
         <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
             <tr>
