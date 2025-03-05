@@ -13,5 +13,13 @@ class Rapim extends Model
 
     protected $table = 'rapim';  // Pastikan ini sesuai dengan nama tabel di database
 
-    protected $fillable = ['tanggal', 'topik', 'hasil'];
+    protected $fillable = [
+        'tanggal',
+        'topik',
+        'bahan_materi',
+        'hasil',
+    ];
+
+        // Timestamps akan otomatis dikelola
+        public $timestamps = true;
 }

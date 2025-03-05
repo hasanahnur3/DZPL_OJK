@@ -397,3 +397,4 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 
 
 Route::get('/get-detail-izin', [KelembagaanController::class, 'getDetailIzinByIndustry']);
+

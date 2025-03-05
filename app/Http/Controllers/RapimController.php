@@ -17,14 +17,29 @@ class RapimController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input, termasuk file
         $request->validate([
             'tanggal' => 'required|date',
-            'topik' => 'required|string',
-            'hasil' => 'required|string',
+            'topik' => 'required|string|max:255',
+            'bahan_materi' => 'required|file|mimes:pdf,ppt,pptx|max:10240', // 10MB Max untuk bahan materi
+            'hasil' => 'required|file|mimes:pdf,ppt,pptx|max:10240', // 10MB Max
         ]);
 
-        Rapim::create($request->all());
+        // Menyimpan file Bahan Materi ke dalam storage dan mendapatkan path-nya
+        $bahanMateriPath = $request->file('bahan_materi')->store('rapim_files', 'public');
 
+        // Menyimpan file ke dalam storage dan mendapatkan path-nya
+        $hasilPath = $request->file('hasil')->store('rapim_files', 'public');// Menyimpan di storage/app/public/rapim_files
+
+        // Menyimpan data rapim ke dalam database
+        Rapim::create([
+            'tanggal' => $request->tanggal,
+            'topik' => $request->topik,
+            'bahan_materi' => $bahanMateriPath,
+            'hasil' => $hasilPath, // Menyimpan path file
+        ]);
+
+        // Redirect kembali dengan pesan sukses
         return redirect()->route('rapim.index')->with('success', 'Agenda rapat berhasil ditambahkan!');
     }
 
@@ -33,34 +48,67 @@ class RapimController extends Controller
         $rapim = Rapim::findOrFail($id);
         return view('agenda.edit-rapim', compact('rapim'));
     }
-    
+
 
     // Method untuk memproses update data rapim
     // Method untuk memproses update data rapim
     public function update(Request $request, $id)
     {
-        // Validasi inputan
-        $request->validate([
-            'tanggal' => 'required|date',
-            'topik' => 'required|string',
-            'hasil' => 'required|string',
-        ]);
-    
-        // Mencari data rapim berdasarkan ID
+        // Temukan data rapim berdasarkan ID
         $rapim = Rapim::findOrFail($id);
     
-        // Melakukan update pada data rapim
-        $rapim->update([
-            'tanggal' => $request->tanggal,
-            'topik' => $request->topik,
-            'hasil' => $request->hasil,
+        // Validasi input dari form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'topik' => 'required|string|max:255',
+            'bahan_materi' => 'nullable|file|mimes:pdf,ppt,pptx', // Validasi untuk file bahan materi
+            'hasil' => 'nullable|file|mimes:pdf,ppt,pptx', // Validasi untuk file hasil
         ]);
     
-        // Mengarahkan kembali ke halaman view rapat pimpinan dengan pesan sukses
-        return redirect()->route('view-rapat-pimpinan.index')->with('success', 'Agenda rapat berhasil diperbarui!');
+        // Update file bahan_materi jika ada
+        if ($request->hasFile('bahan_materi')) {
+            // Menghapus file lama jika ada
+            if ($rapim->bahan_materi) {
+                Storage::delete($rapim->bahan_materi);
+            }
+            
+            // Menyimpan file baru dan menyimpan pathnya
+            $bahanMateriPath = $request->file('bahan_materi')->store('bahan_materi');
+            $rapim->bahan_materi = $bahanMateriPath;
+        }
+    
+        // Update file hasil jika ada
+        if ($request->hasFile('hasil')) {
+            // Menghapus file lama jika ada
+            if ($rapim->hasil) {
+                Storage::delete($rapim->hasil);
+            }
+    
+            // Menyimpan file baru dan menyimpan pathnya
+            $hasilPath = $request->file('hasil')->store('hasil');
+            $rapim->hasil = $hasilPath;
+        }
+    
+        // Menyimpan data yang diupdate
+        // Menyimpan siapa yang melakukan update jika pengguna sudah login
+        if (auth()->check()) {
+            $rapim->updated_by = auth()->user()->name; // Menyimpan nama pengguna yang mengupdate
+        } else {
+            $rapim->updated_by = 'Unknown'; // Jika tidak ada user yang login
+        }
+    
+        // Mengupdate tanggal dan topik
+        $rapim->tanggal = $request->tanggal;
+        $rapim->topik = $request->topik;
+    
+        // Menyimpan perubahan ke database
+        $rapim->save();
+    
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('rapim.index')->with('success', 'Data berhasil diupdate.');
     }
     
-
+    
 
     public function destroy($id)
     {

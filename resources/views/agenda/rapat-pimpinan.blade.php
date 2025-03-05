@@ -31,7 +31,7 @@
         </script>
         {{-- Form Tambah Agenda --}}
         <div class="form-container">
-            <form action="{{ route('rapim.store') }}" method="POST" style="width: 100%;">
+            <form action="{{ route('rapim.store') }}" method="POST" enctype="multipart/form-data" style="width: 100%;">
                 @csrf
                 <h3>Agenda Rapat Pimpinan (Rapim)</h3>
                 <div class="form-group">
@@ -43,8 +43,12 @@
                     <input type="text" name="topik" class="form-control" required>
                 </div>
                 <div class="form-group">
+                    <label for="bahan_materi">Bahan Materi</label>
+                    <input type="file" name="bahan_materi" class="form-control" accept=".pdf, .ppt, .pptx" required>
+                </div>
+                <div class="form-group">
                     <label for="hasil">Hasil</label>
-                    <input name="hasil" class="form-control" required>
+                    <input type="file" name="hasil" class="form-control" accept=".pdf, .ppt, .pptx" required>
                 </div>
                 <button type="submit" class="btn btn-primary"
                     style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; margin-left:5px;">Tambah

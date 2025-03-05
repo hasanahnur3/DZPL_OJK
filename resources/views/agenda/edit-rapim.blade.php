@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container"
-        style="display: flex; justify-content: center; align-items: center; height: 95vh; background-color: #FFFFFF;  ">
-
+        style="display: flex; justify-content: center; align-items: center; height: 95vh; background-color: #FFFFFF; ">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -31,13 +30,13 @@
                 });
             });
         </script>
+        {{-- Form Edit Agenda --}}
         <div class="form-container">
-
-            {{-- Form untuk Edit Agenda --}}
-            <form action="{{ route('rapim.update', $rapim->id) }}" method="POST">
+            <form action="{{ route('rapim.update', $rapim->id) }}" method="POST" enctype="multipart/form-data"
+                style="width: 100%;">
                 @csrf
                 @method('PUT') <!-- Menambahkan metode PUT untuk update -->
-                <h2>Edit Agenda Rapat Pimpinan (Rapim)</h2>
+                <h3>Edit Agenda Rapat Pimpinan (Rapim)</h3>
                 <div class="form-group">
                     <label for="tanggal">Hari/Tanggal</label>
                     <input type="date" name="tanggal" class="form-control" value="{{ $rapim->tanggal }}" required>
@@ -47,12 +46,26 @@
                     <input type="text" name="topik" class="form-control" value="{{ $rapim->topik }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="hasil">Hasil</label>
-                    <textarea name="hasil" class="form-control" required>{{ $rapim->hasil }}</textarea>
+                    <label for="bahan_materi">Bahan Materi</label>
+                    <input type="file" name="bahan_materi" class="form-control" accept=".pdf, .ppt, .pptx">
+                    @if ($rapim->bahan_materi)
+                        <small>File saat ini: <a href="{{ asset('storage/' . $rapim->bahan_materi) }}" target="_blank">Lihat
+                                File</a></small>
+                    @endif
                 </div>
+                <div class="form-group">
+                    <label for="hasil">Hasil</label>
+                    <input type="file" name="hasil" class="form-control" accept=".pdf, .ppt, .pptx">
+                    @if ($rapim->hasil)
+                        <small>File saat ini: <a href="{{ asset('storage/' . $rapim->hasil) }}" target="_blank">Lihat
+                                File</a></small>
+                    @endif
+                </div>
+
                 <button type="submit" class="btn btn-primary"
-                    style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer;">Perbarui
-                    Agenda</button>
+                    style="background-color: #A91111; color: white; border: none; border-radius: 10px; cursor: pointer; margin-left:5px;">
+                    Perbarui Agenda
+                </button>
             </form>
         </div>
     </div>
@@ -77,26 +90,11 @@
             justify-content: center;
         }
 
-        .form-control {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            height: 30px;
-            width: 100%;
-        }
-
-        .form-group {
-            margin: 10px;
-        }
-
-        .btn-primary {
-            color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #A91111;
-            height: 30px;
-            width: 100%;
-            /* Tombol melebar */
+        /* Styling untuk frame form */
+        h3 {
+            text-align: center;
+            /* Rata tengah teks */
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -112,6 +110,27 @@
 
         .btn:hover {
             background-color: #e0a800;
+        }
+
+        /* Styling untuk tombol */
+        .btn-primary {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #A91111;
+            height: 30px;
+            width: 100%;
+            /* Tombol melebar */
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin: 10px;
         }
     </style>
 @endsection

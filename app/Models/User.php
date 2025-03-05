@@ -46,4 +46,8 @@ class User extends Authenticatable
             }
         });
     }
+    public function getNameAttribute()
+    {
+        return $this->attributes['name'] ?? 'Nama Tidak Diketahui'; // Fallback jika name null
+    }
 }
