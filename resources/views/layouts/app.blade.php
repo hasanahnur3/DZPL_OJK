@@ -276,7 +276,7 @@
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
-            <!-- <li class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a href="#" class="nav-link">
                     <i class="fas fa-clock"></i>
                     <span class="menu-text">Pending Matters</span>
@@ -292,7 +292,7 @@
                         <a href="#">Submenu 3</a>
                     </li>
                 </ul>
-            </li> -->
+            </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link">
                     <i class="fas fa-calendar"></i>
