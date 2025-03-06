@@ -338,7 +338,7 @@
                 datasets: [{
                     label: 'Jumlah Frekuensi',
                     data: pengujiData.map(item => item.total),
-                    backgroundColor: '#FF6384'
+                    backgroundColor: '#D84343'
                 }]
             },
             options: {
@@ -364,7 +364,7 @@
                 datasets: [{
                     label: 'Jumlah',
                     data: statusData.map(item => item.total),
-                    backgroundColor: '#FF6384'
+                    backgroundColor: '#D84343'
                 }]
             },
             options: {
@@ -436,7 +436,7 @@
                 datasets: [{
                     label: 'Jumlah',
                     data: statusPenilaianData.map(item => item.total),
-                    backgroundColor: '#FFCE56'
+                    backgroundColor: '#D84343'
                 }]
             },
             options: {

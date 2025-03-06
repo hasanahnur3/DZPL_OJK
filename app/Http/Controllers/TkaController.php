@@ -43,7 +43,6 @@ class TkaController extends Controller
             'tanggal_dok_lengkap' => 'nullable|date',
             'no_surat_pencatatan' => 'nullable|string',
             'tanggal_surat_pencatatan' => 'nullable|date',
-            'jumlah_hari_kerja' => 'nullable|string|max:17',
         ]);
 
         Tka::create($request->all());
@@ -77,7 +76,6 @@ class TkaController extends Controller
             'tanggal_dok_lengkap' => 'nullable|date',
             'no_surat_pencatatan' => 'nullable|string',
             'tanggal_surat_pencatatan' => 'nullable|date',
-            'jumlah_hari_kerja' => 'nullable|string|max:17',
         ]);
 
         $tka = Tka::findOrFail($id);

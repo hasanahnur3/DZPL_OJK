@@ -86,6 +86,7 @@
                         <option value="Dokumen perlu dilengkapi" {{ $data->status == 'Dokumen perlu dilengkapi' ? 'selected' : '' }}>Dokumen perlu dilengkapi</option>
                         <option value="Dokumen sudah diverifikasi" {{ $data->status == 'Dokumen sudah diverifikasi' ? 'selected' : '' }}>Dokumen sudah diverifikasi</option>
                         <option value="Selesai" {{ $data->status == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="Dibatlakan" {{ $data->status == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                     </select>
 
 
@@ -131,18 +132,13 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <!-- Input Nomor Persetujuan -->
-                    <label for="nomor_persetujuan" style="font-weight: bold; color: #555;">Nomor Persetujuan</label>
-                    <input type="text" name="nomor_persetujuan" required value="{{$data->nomor_persetujuan }}"
+                    <label for="nomor_keputusan" style="font-weight: bold; color: #555;">Nomor Surat Keputusan</label>
+                    <input type="text" name="nomor_keputusan" required value="{{$data->nomor_keputusan }}"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-                    <!-- Input Tanggal Persetujuan -->
-                    <label for="tanggal_persetujuan" style="font-weight: bold; color: #555;">Tanggal Persetujuan</label>
-                    <input type="date" name="tanggal_persetujuan" required value="{{$data->tanggal_persetujuan }}"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-
-                    <!-- Input Jumlah Hari Kerja -->
-                    <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
-                    <input type="number" name="jumlah_hari_kerja" required value="{{$data->jumlah_hari_kerja }}"
+                    <!-- Input Tanggal keputusan -->
+                    <label for="tanggal_keputusan" style="font-weight: bold; color: #555;">Tanggal Surat Keputusan</label>
+                    <input type="date" name="tanggal_keputusan" required value="{{$data->tanggal_keputusan }}"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <!-- Tombol Update -->

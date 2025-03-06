@@ -188,14 +188,6 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                 </div>
 
-                <!-- Input Jumlah Hari Kerja -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
-                    <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
-                    <input type="text" class="form-control" id="jumlah_hari_kerja" name="jumlah_hari_kerja"
-                        value="{{ $kelembagaan->jumlah_hari_kerja }}"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                </div>
-
                 <!-- Input Aksi -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="aksi" style="font-weight: bold; color: #555;">Aksi</label>

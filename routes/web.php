@@ -398,3 +398,6 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 
 Route::get('/get-detail-izin', [KelembagaanController::class, 'getDetailIzinByIndustry']);
 
+Route::middleware('auth')->group(function () {
+    Route::put('/rapim/{id}', [RapimController::class, 'update'])->name('rapim.update');
+});

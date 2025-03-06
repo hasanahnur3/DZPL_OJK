@@ -38,7 +38,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .sidebar.collapsed .nav-link .menu-text{
+        .sidebar.collapsed .nav-link .menu-text {
             opacity: 0;
             pointer-events: none;
         }
@@ -148,7 +148,7 @@
             margin-top: auto;
         }
 
-        .sidebar.collapsed .logout-btn{
+        .sidebar.collapsed .logout-btn {
             width: 40px;
         }
 
@@ -161,7 +161,7 @@
             background-color: #D84343;
             border: none;
             cursor: pointer;
-            transition:  0.3s ease;
+            transition: 0.3s ease;
             width: auto;
         }
 
@@ -188,7 +188,7 @@
         }
 
         .sidebar.collapsed .toggle-btn {
-            transform: translate(-10px, 45px)
+            transform: translate(-10px, 35px)
         }
 
         @media (max-width: 1380px) {
@@ -337,12 +337,23 @@
                         </ul>
                     </li>
                     <li class="dropdown-menu">
-                    <a href="{{ route('quality_control.index') }}">Pengendalian Kualitas</a>
-                    <a href="{{ route('riksus') }}">Riksus</a>
-                    <a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a>
+                        <a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a>
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('quality_control.index') }}" class="nav-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="menu-text">Pengendalian Kualitas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('riksus') }}" class="nav-link">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="menu-text">Riksus</span>
+                </a>
+            </li>
+
             <li class="nav-item secondary-nav">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

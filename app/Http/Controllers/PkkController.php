@@ -45,9 +45,8 @@ class PkkController extends Controller
             'perlu_klarifikasi' => 'required',
             'tanggal_klarifikasi' => 'nullable|date',
             'hasil' => 'required',
-            'nomor_persetujuan' => 'required',
-            'tanggal_persetujuan' => 'required|date',
-            'jumlah_hari_kerja' => 'required|integer',
+            'nomor_keputusan' => 'required',
+            'tanggal_keputusan' => 'required|date',
         ]);
 
         Pkk::create($request->all());
@@ -83,9 +82,8 @@ class PkkController extends Controller
             'perlu_klarifikasi' => 'required',
             'tanggal_klarifikasi' => 'nullable|date',
             'hasil' => 'required',
-            'nomor_persetujuan' => 'required',
-            'tanggal_persetujuan' => 'required|date',
-            'jumlah_hari_kerja' => 'required|integer',
+            'nomor_keputusan' => 'required',
+            'tanggal_keputusan' => 'required|date',
         ]);
 
         $data = Pkk::findOrFail($id);

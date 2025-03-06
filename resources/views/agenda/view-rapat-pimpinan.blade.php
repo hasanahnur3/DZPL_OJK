@@ -8,7 +8,8 @@
 
     <div class="form-container" style="overflow-x: auto;">
         <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Jadwal Rapat Pimpinan</h2>
-        <table id="rapatTable" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+        <table id="rapatTable" class="table"
+            style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
                 <tr>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
@@ -28,9 +29,9 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $index + 1 }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->tanggal }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->topik }}</td>
-                        <td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             @if ($item->bahan_materi)
-                                <a href="{{ Storage::url($item->bahan_materi) }}" target="_blank">Download Bahan Materi</a>
+                                <a href="{{ Storage::url($item->bahan_materi) }}" target="_blank">Download Materi</a>
                             @else
                                 Tidak ada file
                             @endif
@@ -60,7 +61,8 @@
                         </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                                <a href="{{ route('rapim.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                                <a href="{{ route('rapim.edit', $item->id) }}"
+                                    style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                             @endif
                         </td>
                     </tr>
@@ -135,7 +137,8 @@
             margin-top: 20px;
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;

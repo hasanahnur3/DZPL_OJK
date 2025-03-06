@@ -56,7 +56,7 @@ class RapimController extends Controller
     {
         // Temukan data rapim berdasarkan ID
         $rapim = Rapim::findOrFail($id);
-    
+
         // Validasi input dari form
         $request->validate([
             'tanggal' => 'required|date',
@@ -64,31 +64,31 @@ class RapimController extends Controller
             'bahan_materi' => 'nullable|file|mimes:pdf,ppt,pptx', // Validasi untuk file bahan materi
             'hasil' => 'nullable|file|mimes:pdf,ppt,pptx', // Validasi untuk file hasil
         ]);
-    
+
         // Update file bahan_materi jika ada
         if ($request->hasFile('bahan_materi')) {
             // Menghapus file lama jika ada
             if ($rapim->bahan_materi) {
                 Storage::delete($rapim->bahan_materi);
             }
-            
+
             // Menyimpan file baru dan menyimpan pathnya
             $bahanMateriPath = $request->file('bahan_materi')->store('bahan_materi');
             $rapim->bahan_materi = $bahanMateriPath;
         }
-    
+
         // Update file hasil jika ada
         if ($request->hasFile('hasil')) {
             // Menghapus file lama jika ada
             if ($rapim->hasil) {
                 Storage::delete($rapim->hasil);
             }
-    
+
             // Menyimpan file baru dan menyimpan pathnya
             $hasilPath = $request->file('hasil')->store('hasil');
             $rapim->hasil = $hasilPath;
         }
-    
+
         // Menyimpan data yang diupdate
         // Menyimpan siapa yang melakukan update jika pengguna sudah login
         if (auth()->check()) {
@@ -96,19 +96,19 @@ class RapimController extends Controller
         } else {
             $rapim->updated_by = 'Unknown'; // Jika tidak ada user yang login
         }
-    
+
         // Mengupdate tanggal dan topik
         $rapim->tanggal = $request->tanggal;
         $rapim->topik = $request->topik;
-    
+
         // Menyimpan perubahan ke database
         $rapim->save();
-    
+
         // Redirect kembali dengan pesan sukses
         return redirect()->route('rapim.index')->with('success', 'Data berhasil diupdate.');
     }
-    
-    
+
+
 
     public function destroy($id)
     {

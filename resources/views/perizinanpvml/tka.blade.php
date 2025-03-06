@@ -80,10 +80,11 @@
                     <label for="status_perizinan" style="font-weight: bold; color: #555;">Status Perizinan</label>
                     <select name="status_perizinan" id="status_perizinan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                        <option value="Dalam proses analisis">Dalam proses analisis</option>
+                        <option value="Dalam proses analisis">Dalam proses analisa</option>
                         <option value="Kelengkapan dok">Kelengkapan dok</option>
                         <option value="Selesai">Selesai</option>
                         <option value="Ditolak/Dikembalikan">Ditolak/Dikembalikan</option>
+                        <option value="Ditoanggapi">Ditanggapi</option>
                     </select>
 
 
@@ -93,8 +94,8 @@
                     <label for="jenis_output" style="font-weight: bold; color: #555;">Jenis Output</label>
                     <select name="jenis_output" id="jenis_output" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                        <option value="pencatatan">Pencatatan</option>
-                        <option value="penolakan">Penolakan</option>
+                        <option value="pencatatan">Surat Pencatatan</option>
+                        <option value="penolakan">Surat Penolakan</option>
                     </select>
 
                     <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>
@@ -102,17 +103,13 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
 
-                    <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">No Surat Pencatatan</label>
+                    <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">No Surat Tanggapan</label>
                     <input type="text" name="no_surat_pencatatan" id="no_surat_pencatatan"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <label for="tanggal_surat_pencatatan" style="font-weight: bold; color: #555;">Tanggal Surat
-                        Pencatatan</label>
+                        Tanggapan</label>
                     <input type="date" name="tanggal_surat_pencatatan" id="tanggal_surat_pencatatan"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-
-                    <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
-                    <input type="text" name="jumlah_hari_kerja" id="jumlah_hari_kerja"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <button type="submit"

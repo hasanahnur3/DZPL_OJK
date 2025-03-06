@@ -161,11 +161,6 @@
                     <input type="date" name="tanggal_surat" id="tanggal_surat"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('tanggal_surat') }}">
-
-                    <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
-                    <input type="text" name="jumlah_hari_kerja" id="jumlah_hari_kerja"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
-                        value="{{ old('jumlah_hari_kerja') }}">
                     <button type="submit"
                         style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Simpan</button>
 

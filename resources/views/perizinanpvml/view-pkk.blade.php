@@ -27,9 +27,8 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Perlu Klarifikasi</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Klarifikasi</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Persetujuan</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Persetujuan</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jumlah Hari Kerja</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat Keputusan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Keputusan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th> 
                 </tr>
             </thead>
@@ -85,9 +84,8 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->perlu_klarifikasi }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_klarifikasi }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->hasil }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_persetujuan }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_persetujuan }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jumlah_hari_kerja }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_keputusan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_keputusan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                             <a href="{{ route('pkk.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>

@@ -73,10 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <label for="status_perizinan" style="font-weight: bold; color: #555;">Status Perizinan</label>
             <select id="status_perizinan" name="status_perizinan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                <option value="Dalam proses analisis" {{ $dirkom->status_perizinan == 'Dalam proses analisis' ? 'selected' : '' }}>Dalam proses analisis</option>
+                <option value="Dalam proses analisis" {{ $dirkom->status_perizinan == 'Dalam proses analisis' ? 'selected' : '' }}>Dalam proses analisa</option>
                 <option value="Kelengkapan dok" {{ $dirkom->status_perizinan == 'Kelengkapan dok' ? 'selected' : '' }}>Kelengkapan dok</option>
                 <option value="Selesai" {{ $dirkom->status_perizinan == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                 <option value="Ditolak / dikembalikkan" {{ $dirkom->status_perizinan == 'Ditolak / dikembalikkan' ? 'selected' : '' }}>Ditolak / dikembalikkan</option>
+                <option value="Ditanggapi" {{ $dirkom->status_perizinan == 'Ditanggapi' ? 'selected' : '' }}>Ditanggapi</option>
             </select>
         </div>
 
@@ -91,10 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <input type="date" id="tanggal_dok_lengkap" name="tanggal_dok_lengkap" value="{{ old('tanggal_dok_lengkap', $dirkom->tanggal_dok_lengkap ? \Carbon\Carbon::parse($dirkom->tanggal_dok_lengkap)->format('Y-m-d') : '') }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
 
-            <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">Nomor Surat Pencatatan</label>
+            <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">Nomor Surat Tanggapan</label>
             <input type="text" id="no_surat_pencatatan" name="no_surat_pencatatan" value="{{ old('no_surat_pencatatan', $dirkom->no_surat_pencatatan) }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-            <label for="tanggal_surat_pencatatan" style="font-weight: bold; color: #555;">Tanggal Surat Pencatatan</label>
+            <label for="tanggal_surat_pencatatan" style="font-weight: bold; color: #555;">Tanggal Surat Tanggapan</label>
             <input type="date" id="tanggal_surat_pencatatan" name="tanggal_surat_pencatatan" value="{{ old('tanggal_surat_pencatatan', $dirkom->tanggal_surat_pencatatan ? \Carbon\Carbon::parse($dirkom->tanggal_surat_pencatatan)->format('Y-m-d') : '') }}" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
             <button type="submit" style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">Update</button>

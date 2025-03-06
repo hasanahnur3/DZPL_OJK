@@ -82,10 +82,11 @@
                     <label for="status_perizinan" style="font-weight: bold; color: #555;">Status Perizinan</label>
                     <select name="status_perizinan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                        <option value="Dalam proses analisis">Dalam proses analisis</option>
+                        <option value="Dalam proses analisis">Dalam proses analisa</option>
                         <option value="Kelengkapan dok">Kelengkapan dok</option>
                         <option value="Selesai">Selesai</option>
                         <option value="Ditolak / dikembalikkan">Ditolak / dikembalikkan</option>
+                        <option value="Ditanggapi">Ditanggapi</option>
                     </select>
 
 
@@ -105,12 +106,12 @@
 
 
                     <label for="no_surat_pencatatan" style="font-weight: bold; color: #555;">Nomor Surat
-                        Pencatatan/Penolakan</label>
+                        Tanggapan</label>
                     <input type="text" name="no_surat_pencatatan"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <label for="tanggal_surat_pencatatan" style="font-weight: bold; color: #555;">Tanggal Surat
-                        Pencatatan/Penolakan</label>
+                        Tanggapan</label>
                     <input type="date" name="tanggal_surat_pencatatan"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 

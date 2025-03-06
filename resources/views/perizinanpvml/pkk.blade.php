@@ -6,7 +6,8 @@
             style="max-width: 800px; margin: auto; padding: 2rem;  border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background-color:#ffffff;">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-            <h2 style="text-align: center; color: #333; margin-bottom:40px; margin-top:-10px;">Tambah Daftar Pengajuan Penilaian Kemampuan & Kepatutan</h2>
+            <h2 style="text-align: center; color: #333; margin-bottom:40px; margin-top:-10px;">Tambah Daftar Pengajuan
+                Penilaian Kemampuan & Kepatutan</h2>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     // Seleksi form
@@ -75,9 +76,12 @@
 
                     <label for="jabatan" style="font-weight: bold; color: #555;">Jabatan</label>
                     <select name="jabatan" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                        <option value="Direktur Utama">Pemegang Saham Pengendali</option>
                         <option value="Direktur Utama">Direktur Utama</option>
-                        <option value="Direktur">Direktur</option>
+                        <option value="Direktur">Direktur / Setara Direktur</option>
                         <option value="Komisaris Utama">Komisaris Utama</option>
+                        <option value="Komisaris Utama">Komisaris / Setara Komisaris</option>
+                        <option value="Komisaris Utama">Komisaris Independen</option>
                     </select>
 
                     <label for="status" style="font-weight: bold; color: #555;">Status</label>
@@ -86,6 +90,7 @@
                         <option value="Dokumen perlu dilengkapi">Dokumen perlu dilengkapi</option>
                         <option value="Dokumen sudah diverifikasi">Dokumen sudah diverifikasi</option>
                         <option value="Selesai">Selesai</option>
+                        <option value="Dibatalkan">Dibatalkan</option>
                     </select>
 
                     <label for="nomor_surat_permohonan" style="font-weight: bold; color: #555;">Nomor Surat
@@ -111,15 +116,15 @@
 
 
                     <label for="perlu_klarifikasi" style="font-weight: bold; color: #555;">Perlu Klarifikasi</label>
-                    <select name="perlu_klarifikasi" required
+                    <select id="perlu_klarifikasi" name="perlu_klarifikasi" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                         <option value="iya">Iya</option>
                         <option value="tidak">Tidak</option>
                     </select>
 
-
-                    <label for="tanggal_klarifikasi" style="font-weight: bold; color: #555;">Tanggal Klarifikasi</label>
-                    <input type="date" name="tanggal_klarifikasi"
+                    <label for="tanggal_klarifikasi" id="label_tanggal_klarifikasi"
+                        style="font-weight: bold; color: #555;">Tanggal Klarifikasi</label>
+                    <input type="date" id="tanggal_klarifikasi" name="tanggal_klarifikasi"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
                     <label for="hasil" style="font-weight: bold; color: #555;">Hasil</label>
@@ -129,18 +134,13 @@
                     </select>
 
 
-                    <label for="nomor_persetujuan" style="font-weight: bold; color: #555;">Nomor Persetujuan</label>
+                    <label for="nomor_keputusan" style="font-weight: bold; color: #555;">Nomor Surat Keputusan</label>
                     <input type="text" name="nomor_persetujuan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
-                    <label for="tanggal_persetujuan" style="font-weight: bold; color: #555;">Tanggal Persetujuan</label>
+                    <label for="tanggal_keputusan" style="font-weight: bold; color: #555;">Tanggal Surat Keputusan</label>
                     <input type="date" name="tanggal_persetujuan" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-
-                    <label for="jumlah_hari_kerja" style="font-weight: bold; color: #555;">Jumlah Hari Kerja</label>
-                    <input type="number" name="jumlah_hari_kerja" required
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-
 
                     <button type="submit"
                         style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem;">
@@ -166,4 +166,21 @@
             justify-content: center;
         }
     </style>
+    <script>
+        const selectElement = document.getElementById('perlu_klarifikasi');
+        const dateInput = document.getElementById('tanggal_klarifikasi');
+        const labelTanggal = document.getElementById('label_tanggal_klarifikasi');
+
+        selectElement.addEventListener('change', function () {
+            if (this.value === 'tidak') {
+                dateInput.disabled = true; // Nonaktifkan input
+                dateInput.classList.add('hidden'); // Sembunyikan input
+                labelTanggal.classList.add('hidden'); // Sembunyikan label
+            } else {
+                dateInput.disabled = false; // Aktifkan kembali input
+                dateInput.classList.remove('hidden'); // Tampilkan kembali input
+                labelTanggal.classList.remove('hidden'); // Tampilkan kembali label
+            }
+        });
+    </script>
 @endsection

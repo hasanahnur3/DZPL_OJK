@@ -17,9 +17,8 @@
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status Perizinan</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Output</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dokumen Lengkap</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No Surat Pencatatan</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Pencatatan</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jumlah Hari Kerja</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No Surat Tanggapan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Tanggapan</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
             </tr>
@@ -35,8 +34,7 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->jenis_output }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->status_perizinan == 'Selesai' ? '-' : $tka->tanggal_dok_lengkap }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->no_surat_pencatatan }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->tanggal_surat_pencatatan }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->jumlah_hari_kerja }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->tanggal_surat_pencatatan}}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
                         @php
                             if ($tka->status_perizinan == 'Selesai' || !$tka->tanggal_dok_lengkap) {
