@@ -37,7 +37,7 @@
             <form action="{{ route('agenda-lainnya.update', $agendaLainya->id) }}" method="POST">
                 @csrf
                 @method('PUT') <!-- Menambahkan metode PUT untuk update -->
-                <h2>Edit Agenda Rapat Pimpinan (Rapim)</h2>
+                <h2>Edit Agenda Lainnya</h2>
                 <div class="form-group">
                     <label for="tanggal">Hari/Tanggal</label>
                     <input type="date" name="tanggal" class="form-control" value="{{ $agendaLainya->tanggal }}" required>

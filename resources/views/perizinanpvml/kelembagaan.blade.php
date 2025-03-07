@@ -72,7 +72,7 @@
                     <script>
                         document.getElementById('jenis_industri').addEventListener('change', function () {
                             let jenisIndustri = this.value;
-                            
+
                             // First update companies dropdown
                             fetch(`/get-companies?jenis_industri=${jenisIndustri}`)
                                 .then(response => response.json())
@@ -86,7 +86,7 @@
                                         namaPerusahaanDropdown.appendChild(option);
                                     });
                                 });
-                                
+
                             // Then update detail_izin dropdown
                             fetch(`/get-detail-izin?jenis_industri=${jenisIndustri}`)
                                 .then(response => response.json())
@@ -128,14 +128,16 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('tanggal_surat_permohonan') }}">
 
+
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 5px;">
                     <label for="tanggal_pengajuan_sistem" style="font-weight: bold; color: #555;">Tanggal Pengajuan
                         Sistem</label>
                     <input type="date" name="tanggal_pengajuan_sistem" id="tanggal_pengajuan_sistem"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('tanggal_pengajuan_sistem') }}">
-                </div>
 
-                <div style="display: flex; flex-direction: column; gap: 5px;">
                     <label for="tanggal_dokumen_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen
                         Lengkap</label>
                     <input type="date" name="tanggal_dokumen_lengkap" id="tanggal_dokumen_lengkap"
@@ -147,10 +149,6 @@
                     <input type="date" name="tanggal_selesai_analisis" id="tanggal_selesai_analisis"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;"
                         value="{{ old('tanggal_selesai_analisis') }}">
-
-                    <label for="sla" style="font-weight: bold; color: #555;">SLA</label>
-                    <input type="number" name="sla" id="sla"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;" value="{{ old('sla') }}">
 
                     <label for="nomor_surat" style="font-weight: bold; color: #555;">Nomor Surat</label>
                     <input type="text" name="nomor_surat" id="nomor_surat"

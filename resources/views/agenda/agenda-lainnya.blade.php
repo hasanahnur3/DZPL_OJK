@@ -33,7 +33,7 @@
         <div class="form-container">
             <form action="{{ route('agenda-lainnya.store') }}" method="POST" style="width: 100%;">
                 @csrf
-                <h3>Agenda Rapat Pimpinan (Rapim)</h3>
+                <h3>Agenda Lainnya</h3>
                 <div class="form-group">
                     <label for="tanggal">Hari/Tanggal</label>
                     <input type="date" name="tanggal" class="form-control" required>

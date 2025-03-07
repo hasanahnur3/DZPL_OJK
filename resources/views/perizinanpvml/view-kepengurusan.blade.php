@@ -27,6 +27,8 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Persetujuan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Persetujuan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jumlah Hari Kerja</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th> 
                 </tr>
             </thead>
@@ -48,6 +50,12 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_persetujuan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_persetujuan }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jumlah_hari_kerja }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                                    {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
+                                </td>
+                                <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                                    {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
+                                </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             <a href="{{ route('kepengurusan.edit', $item->id) }}" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
                         </td>

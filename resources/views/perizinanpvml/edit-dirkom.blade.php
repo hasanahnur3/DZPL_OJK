@@ -84,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <div style="display: flex; flex-direction: column; gap: 5px;">
             <label for="jenis_output" style="font-weight: bold; color: #555;">Jenis Output</label>
             <select id="jenis_output" name="jenis_output" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                <option value="pencatatan" {{ $dirkom->jenis_output == 'pencatatan' ? 'selected' : '' }}>Pencatatan</option>
-                <option value="penolakan" {{ $dirkom->jenis_output == 'penolakan' ? 'selected' : '' }}>Penolakan</option>
+                <option value="pencatatan" {{ $dirkom->jenis_output == 'pencatatan' ? 'selected' : '' }}>Surat Persetujuan</option>
+                <option value="penolakan" {{ $dirkom->jenis_output == 'penolakan' ? 'selected' : '' }}>Surat Penolakan</option>
             </select>
 
             <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>

@@ -96,8 +96,8 @@
                     <label for="jenis_output" style="font-weight: bold; color: #555;">Jenis Output</label>
                     <select name="jenis_output" required
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                        <option value="Pencatatan">Pencatatan</option>
-                        <option value="Penolakan">Penolakan</option>
+                        <option value="Pencatatan">Surat Persetujuan</option>
+                        <option value="Penolakan">Surat Penolakan</option>
                     </select>
 
                     <label for="tanggal_dok_lengkap" style="font-weight: bold; color: #555;">Tanggal Dokumen Lengkap</label>

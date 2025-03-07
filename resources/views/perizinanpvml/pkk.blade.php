@@ -122,8 +122,8 @@
                         <option value="tidak">Tidak</option>
                     </select>
 
-                    <label for="tanggal_klarifikasi" id="label_tanggal_klarifikasi"
-                        style="font-weight: bold; color: #555;">Tanggal Klarifikasi</label>
+
+                    <label for="tanggal_klarifikasi" id="label_tanggal_klarifikasi" style="font-weight: bold; color: #555;">Tanggal Klarifikasi</label>
                     <input type="date" id="tanggal_klarifikasi" name="tanggal_klarifikasi"
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
 
@@ -166,7 +166,7 @@
             justify-content: center;
         }
     </style>
-    <script>
+        <script>
         const selectElement = document.getElementById('perlu_klarifikasi');
         const dateInput = document.getElementById('tanggal_klarifikasi');
         const labelTanggal = document.getElementById('label_tanggal_klarifikasi');

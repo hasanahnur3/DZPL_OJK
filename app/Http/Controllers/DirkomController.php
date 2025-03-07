@@ -38,7 +38,7 @@ class DirkomController extends Controller
             'status_perizinan' => 'required',
             'jenis_output' => 'required',
             'tanggal_dok_lengkap' => 'nullable|date',
-            'nomor_surat_pencatatan' => 'nullable',
+            'no_surat_pencatatan' => 'nullable',
             'tanggal_surat_pencatatan' => 'nullable|date',
         ]);
 
@@ -69,7 +69,7 @@ class DirkomController extends Controller
             'status_perizinan' => 'required',
             'jenis_output' => 'required',
             'tanggal_dok_lengkap' => 'nullable|date',
-            'nomor_surat_pencatatan' => 'nullable',
+            'no_surat_pencatatan' => 'nullable',
             'tanggal_surat_pencatatan' => 'nullable|date',
         ]);
 

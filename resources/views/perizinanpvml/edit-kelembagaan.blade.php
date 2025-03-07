@@ -40,10 +40,12 @@
                 <!-- Input Jenis Industri -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="jenis_industri" style="font-weight: bold; color: #555;">Jenis Industri</label>
-                    <select id="jenis_industri" name="jenis_industri" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                    <select id="jenis_industri" name="jenis_industri" required
+                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                         <option value="">Pilih Jenis Industri</option>
                         @foreach($jenis_industri as $jenis)
-                            <option value="{{ $jenis }}" {{ $kelembagaan->jenis_industri == $jenis ? 'selected' : '' }}>{{ $jenis }}</option>
+                            <option value="{{ $jenis }}" {{ $kelembagaan->jenis_industri == $jenis ? 'selected' : '' }}>
+                                {{ $jenis }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -59,16 +61,17 @@
                 <!-- Input Detail Izin -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="detail_izin" style="font-weight: bold; color: #555;">Detail Izin</label>
-                    <select id="detail_izin" name="detail_izin" required style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                    <select id="detail_izin" name="detail_izin" required
+                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                         <option value="">Pilih Detail Izin</option>
                         <!-- Current value will be selected via JavaScript -->
                     </select>
                 </div>
                 <script>
-                    document.addEventListener('DOMContentLoaded', function() {
+                    document.addEventListener('DOMContentLoaded', function () {
                         const jenisIndustri = document.getElementById('jenis_industri');
                         const currentDetailIzin = "{{ $kelembagaan->detail_izin }}";
-                        
+
                         // Load detail_izin options when page loads
                         if (jenisIndustri.value) {
                             fetch(`/get-detail-izin?jenis_industri=${jenisIndustri.value}`)
@@ -87,7 +90,7 @@
                                     });
                                 });
                         }
-                        
+
                         // Update detail_izin when jenis_industri changes
                         jenisIndustri.addEventListener('change', function () {
                             let selectedJenisIndustri = this.value;
@@ -165,13 +168,6 @@
                         style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                 </div>
 
-                <!-- Input SLA -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
-                    <label for="sla" style="font-weight: bold; color: #555;">SLA</label>
-                    <input type="number" class="form-control" id="sla" name="sla" value="{{ $kelembagaan->sla }}"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
-                </div>
-
                 <!-- Input Nomor Surat -->
                 <div style="display: flex; flex-direction: column; gap:5px;">
                     <label for="nomor_surat" style="font-weight: bold; color: #555;">Nomor Surat</label>
@@ -189,20 +185,16 @@
                 </div>
 
                 <!-- Input Aksi -->
-                <div style="display: flex; flex-direction: column; gap:5px;">
-                    <label for="aksi" style="font-weight: bold; color: #555;">Aksi</label>
-                    <input type="text" class="form-control" id="aksi" name="aksi" value="{{ $kelembagaan->aksi }}"
-                        style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
+                <div style="display: flex; flex-direction: column; gap:5px;"> <!-- Update Button -->
+                    <button type="submit"
+                        style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem; align-item:end;">Update</button>
+
                 </div>
 
-                <!-- Update Button -->
-                <button type="submit"
-                    style="background-color: #A91111; color: white; padding: 1rem; border: none; border-radius: 10px; cursor: pointer; margin-top: 1rem; align-item:end;">Update</button>
             </form>
         </div>
     </div>
     <style>
-
         .form-container {
             height: auto;
             max-width: 100%;
