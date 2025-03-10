@@ -91,12 +91,9 @@ class RapimController extends Controller
 
         // Menyimpan data yang diupdate
         // Menyimpan siapa yang melakukan update jika pengguna sudah login
-        if (auth()->check()) {
-            $rapim->updated_by = auth()->user()->name; // Menyimpan nama pengguna yang mengupdate
-        } else {
-            $rapim->updated_by = 'Unknown'; // Jika tidak ada user yang login
-        }
+        $rapim->updated_by = session('name');
 
+        
         // Mengupdate tanggal dan topik
         $rapim->tanggal = $request->tanggal;
         $rapim->topik = $request->topik;

@@ -401,3 +401,7 @@ Route::get('/get-detail-izin', [KelembagaanController::class, 'getDetailIzinByIn
 Route::middleware('auth')->group(function () {
     Route::put('/rapim/{id}', [RapimController::class, 'update'])->name('rapim.update');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
+});

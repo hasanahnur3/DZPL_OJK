@@ -143,8 +143,8 @@
                     <label for="follow_up_status" style="font-weight: bold; color: #555;">Status Tindak Lanjut</label>
                     <select name="follow_up_status" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 10px;">
                         <option value="">Sudah Lengkap</option>
-                        <option value="Sudah Lengkap" {{ old('follow_up_status', $qualityControls->follow_up_status) == 'Manufaktur' ? 'selected' : '' }}>Sudah Lengkap</option>
-                        <option value="Belum Lengkap" {{ old('follow_up_status', $qualityControls->follow_up_status) == 'Jasa' ? 'selected' : '' }}>Belum Lengkap
+                        <option value="Sudah Lengkap" {{ old('follow_up_status', $qualityControls->follow_up_status) == 'Sudah Lengkap' ? 'selected' : '' }}>Sudah Lengkap</option>
+                        <option value="Belum Lengkap" {{ old('follow_up_status', $qualityControls->follow_up_status) == 'Belum Lengkap' ? 'selected' : '' }}>Belum Lengkap
                         </option>
                     </select>
 

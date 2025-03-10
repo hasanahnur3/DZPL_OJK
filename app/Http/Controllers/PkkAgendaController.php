@@ -41,39 +41,45 @@ class PkkAgendaController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Validasi data
-    $request->validate([
-        'hari_tanggal' => 'required|date',
-        'waktu' => 'required',
-        'nama_perusahaan' => 'required|string|max:255',
-        'peserta' => 'required|string|max:255',
-        'jabatan' => 'required|string|max:255',
-        'zoom' => 'required|string|max:255',
-        'pic' => 'required|string|max:255',
-        'penguji' => 'required|string|max:255',
-        'penguji1' => 'required|string|max:255',
-        'penguji2' => 'required|string|max:255',
-        'hasil' => 'required|string',
-    ]);
+    {
+        // Validasi data
+        $request->validate([
+            'hari_tanggal' => 'required|date',
+            'waktu' => 'required',
+            'nama_perusahaan' => 'required|string|max:255',
+            'peserta' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'zoom' => 'required|string|max:255',
+            'pic' => 'required|string|max:255',
+            'penguji' => 'required|string|max:255',
+            'penguji1' => 'required|string|max:255',
+            'penguji2' => 'required|string|max:255',
+            'hasil' => 'required|string',
+        ]);
 
-    // Cari data berdasarkan ID
-    $agenda = PkkAgenda::find($id);
-    
-    // Pastikan data ditemukan
-    if (!$agenda) {
-        return redirect()->route('pkk-agenda.index')->with('error', 'Data tidak ditemukan.');
+        // Cari data berdasarkan ID
+        $agenda = PkkAgenda::find($id);
+
+        // Pastikan data ditemukan
+        if (!$agenda) {
+            return redirect()->route('pkk-agenda.index')->with('error', 'Data tidak ditemukan.');
+        }
+
+        // Update data
+        $agenda->update($request->all());
+
+        // Menyimpan siapa yang melakukan update jika pengguna sudah login
+        $agenda->updated_by = session('name');
+
+        // Menyimpan perubahan ke database
+        $agenda->save();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('view-penilaian-kemampuan.index')->with('success', 'Data berhasil diperbarui.');
     }
 
-    // Update data
-    $agenda->update($request->all());
 
-    // Redirect kembali dengan pesan sukses
-    return redirect()->route('view-penilaian-kemampuan.index')->with('success', 'Data berhasil diperbarui.');
-}
 
-    
-    
 
     public function destroy($id)
     {
