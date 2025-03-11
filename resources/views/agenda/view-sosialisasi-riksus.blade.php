@@ -17,6 +17,9 @@
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tempat</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Keterangan Peserta</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kesimpulan</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                 <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
             </tr>
         </thead>
@@ -29,6 +32,15 @@
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tempat }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->keterangan_peserta }}</td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->kesimpulan }}</td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
+                        </td>
+                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $item->updated_by ?? 'Tidak diketahui' }}
+                        </td>
                     <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                         @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                             <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}"

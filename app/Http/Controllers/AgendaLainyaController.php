@@ -55,6 +55,11 @@ class AgendaLainyaController extends Controller
         $agendaLainya = AgendaLainya::findOrFail($id);
         $agendaLainya->update($request->all());
 
+        $agendaLainya->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
+    
+        // Menyimpan perubahan ke database
+        $agendaLainya->save();
+
         return redirect()->route('agenda-lainnya.index')->with('success', 'Agenda lainnya berhasil diperbarui!');
     }
 

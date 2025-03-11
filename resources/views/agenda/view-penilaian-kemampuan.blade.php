@@ -28,6 +28,8 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji 2</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Penguji 3</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
                 </tr>
@@ -47,6 +49,12 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->penguji1 }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->penguji2 }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $agenda->hasil }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $agenda->created_at ? $agenda->created_at->format('d-m-Y H:i') : '-' }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $agenda->updated_at ? $agenda->updated_at->format('d-m-Y H:i') : '-' }}
+                        </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             {{ $agenda->updated_by ?? 'Tidak diketahui' }}
                         </td>

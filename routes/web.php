@@ -180,7 +180,7 @@ Route::get('/riksus', [RiksusController::class, 'index'])->name('riksus');
 Route::get('/get-companies', [RiksusController::class, 'getCompaniesByIndustry']);
 Route::get('/sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
 Route::get('sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
-
+Route::put('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'update'])->name('sosialisasi-riksus.update');
 
 Route::resource('forum-panel', ForumPanelController::class);
 Route::get('/view-forum-panel', [ViewForumPanelController::class, 'index'])->name('forum-panel.index');
@@ -404,4 +404,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::put('/pkk-agenda/{id}', [PkkAgendaController::class, 'update'])->name('pkk-agenda.update');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::put('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'update'])->name('sosialisasi-riksus.update');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::put('/forum-panel/{id}', [ForumPanelController::class, 'update'])->name('forum-panel.update');
 });

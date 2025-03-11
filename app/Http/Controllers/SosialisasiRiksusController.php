@@ -61,9 +61,16 @@ public function update(Request $request, $id)
         'keterangan_peserta' => 'required',
         'kesimpulan' => 'required',
     ]);
-
+    // Temukan data sosialisasi_riksus berdasarkan ID
     $agenda = SosialisasiRiksus::findOrFail($id);
+
+    // Menyimpan siapa yang melakukan update
+    $agenda->updated_by = session('name');
+
+    // Menyimpan perubahan ke database
+
     $agenda->update($request->all());
+    $agenda->save();
 
     return redirect()->route('view-sosialisasi-riksus.index')->with('success', 'Agenda Sosialisasi berhasil diperbarui');
 }

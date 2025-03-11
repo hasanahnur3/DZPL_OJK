@@ -41,36 +41,41 @@ class ForumPanelController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Validasi data
-    $request->validate([
-        'nama_perusahaan' => 'required|string|max:255',
-        'hari_pelaksanaan' => 'required|date',
-        'waktu' => 'required',
-        'tempat_pelaksanaan' => 'required|string|max:255',
-        'kriteria' => 'required|string',
-        'jenis_industri' => 'required|string|max:255',
-        'hasil' => 'required|string',
-    ]);
-
-    // Cari data berdasarkan ID
-    $forumPanel = ForumPanel::findOrFail($id);
-
-    // Update data
-    $forumPanel->update([
-        'nama_perusahaan' => $request->nama_perusahaan,
-        'hari_pelaksanaan' => $request->hari_pelaksanaan,
-        'waktu' => $request->waktu,
-        'tempat_pelaksanaan' => $request->tempat_pelaksanaan,
-        'kriteria' => $request->kriteria,
-        'jenis_industri' => $request->jenis_industri,
-        'hasil' => $request->hasil,
-    ]);
-
-    // Redirect dengan pesan sukses
-    return redirect()->route('forum-panel.index')->with('success', 'Forum Panel berhasil diperbarui.');
-}
-
+    {
+        // Validasi data
+        $request->validate([
+            'nama_perusahaan' => 'required|string|max:255',
+            'hari_pelaksanaan' => 'required|date',
+            'waktu' => 'required',
+            'tempat_pelaksanaan' => 'required|string|max:255',
+            'kriteria' => 'required|string',
+            'jenis_industri' => 'required|string|max:255',
+            'hasil' => 'required|string',
+        ]);
+    
+        // Cari data berdasarkan ID
+        $forumPanel = ForumPanel::findOrFail($id);
+    
+        // Update data
+        $forumPanel->update([
+            'nama_perusahaan' => $request->nama_perusahaan,
+            'hari_pelaksanaan' => $request->hari_pelaksanaan,
+            'waktu' => $request->waktu,
+            'tempat_pelaksanaan' => $request->tempat_pelaksanaan,
+            'kriteria' => $request->kriteria,
+            'jenis_industri' => $request->jenis_industri,
+            'hasil' => $request->hasil,
+        ]);
+    
+        // Menyimpan siapa yang melakukan update
+        $forumPanel->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
+    
+        // Menyimpan perubahan ke database
+        $forumPanel->save();
+    
+        // Redirect dengan pesan sukses
+        return redirect()->route('forum-panel.index')->with('success', 'Forum Panel berhasil diperbarui.');
+    }
     public function destroy($id)
     {
         $forumPanel = ForumPanel::findOrFail($id);

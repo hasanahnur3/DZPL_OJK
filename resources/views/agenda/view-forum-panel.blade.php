@@ -21,6 +21,9 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kriteria</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hasil</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
                 </tr>
             </thead>
@@ -35,6 +38,15 @@
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $panel->kriteria }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $panel->jenis_industri }}</td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $panel->hasil }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $panel->created_at ? $panel->created_at->format('d-m-Y H:i') : '-' }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $panel->updated_at ? $panel->updated_at->format('d-m-Y H:i') : '-' }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $panel->updated_by ?? 'Tidak diketahui' }}
+                        </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
 
                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
@@ -61,83 +73,80 @@
         });
     </script>
 
-    <style>
-        .form-container {
-            max-width: 94%;
-            width: 100%;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
+<style>
+    .form-container {
+        max-width: 94%;
+        width: 100%;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
 
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
 
-        .btn-success {
-            background-color: #28a745;
-            border: 2px solid #28a745;
-            border-radius: 8px;
-            padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-        }
+    .btn-success {
+        background-color: #28a745;
+        border: 2px solid #28a745;
+        border-radius: 8px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
 
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #ffc107;
-            color: black;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #ffc107;
+        color: black;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
 
-        .btn:hover {
-            background-color: #e0a800;
-        }
+    .btn:hover {
+        background-color: #e0a800;
+    }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            /* Ini kunci untuk membuat kolom compact */
-            margin-top: 20px;
-        }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto; /* Mengatur lebar kolom sesuai dengan konten */
+        margin-top: 20px;
+    }
 
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            overflow: hidden;
-            /* Mencegah teks meluap dari kolom */
-            text-overflow: ellipsis;
-            /* Menambahkan ellipsis (...) jika teks terlalu panjang */
-            white-space: nowrap;
-            /* Mencegah teks wrap ke baris baru */
-        }
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden;
+        word-wrap: break-word; /* Membungkus kata yang terlalu panjang */
+        white-space: nowrap;  /* Mengizinkan teks membungkus baris baru */
+    }
 
-        .table th {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
+    .table th {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
 
-        .table tr:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
+    .table tr:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+
 
 @endsection
