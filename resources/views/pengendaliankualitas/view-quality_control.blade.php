@@ -33,6 +33,7 @@
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status Tindak Lanjut</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                        <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
                     </tr>
                 </thead>
@@ -66,6 +67,9 @@
                             <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                 {{ $control->updated_at ? $control->updated_at->format('d-m-Y H:i') : '-' }}
                             </td>
+                            <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            {{ $control->updated_by ?? 'Tidak diketahui' }}
+                        </td>
                             <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                 @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                                     <a href="{{ route('quality_control.edit', $control) }}"

@@ -76,6 +76,13 @@ class DirkomController extends Controller
         $dirkom = Dirkom::findOrFail($id);
         $dirkom->update($validated);
 
+        $dirkom->update($request->all());
+
+        $dirkom->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
+    
+        // Menyimpan perubahan ke database
+        $dirkom->save();
+
         return redirect()->route('dirkom.index')
             ->with('success', 'Data berhasil diperbarui');
     }

@@ -89,6 +89,12 @@ class PkkController extends Controller
         $data = Pkk::findOrFail($id);
         $data->update($request->all());
 
+        // Menyimpan siapa yang melakukan update jika pengguna sudah login
+        $data->updated_by = session('name');
+
+        // Menyimpan perubahan ke database
+        $data->save();
+
         return redirect()->route('pkk')->with('success', 'Data berhasil diupdate');
     }
 }

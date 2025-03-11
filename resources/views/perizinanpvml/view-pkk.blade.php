@@ -33,6 +33,7 @@
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Keputusan</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                        <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                         <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
                     </tr>
                 </thead>
@@ -48,7 +49,8 @@
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_surat_permohonan }}</td>
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tanggal_pengajuan_sistem }}</td>
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                                            {{ $item->status == 'Selesai' ? '-' : $item->tanggal_dok_lengkap }}</td>
+                                            {{ $item->status == 'Selesai' ? '-' : $item->tanggal_dok_lengkap }}
+                                        </td>
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
                                             @php
                                                 if ($item->status == 'Selesai' || !$item->tanggal_dok_lengkap) {
@@ -96,6 +98,9 @@
                                         </td>
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                             {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
+                                        </td>
+                                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                                            {{ $item->updated_by ?? 'Tidak diketahui' }}
                                         </td>
                                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))

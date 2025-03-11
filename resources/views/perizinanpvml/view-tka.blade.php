@@ -23,6 +23,7 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
                 </tr>
             </thead>
@@ -36,7 +37,8 @@
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->status_perizinan }}</td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->jenis_output }}</td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                                    {{ $tka->status_perizinan == 'Selesai' ? '-' : $tka->tanggal_dok_lengkap }}</td>
+                                    {{ $tka->status_perizinan == 'Selesai' ? '-' : $tka->tanggal_dok_lengkap }}
+                                </td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->no_surat_pencatatan }}</td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $tka->tanggal_surat_pencatatan}}</td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
@@ -81,6 +83,9 @@
                                 </td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                     {{ $tka->updated_at ? $tka->updated_at->format('d-m-Y H:i') : '-' }}
+                                </td>
+                                <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                                    {{ $tka->updated_by ?? 'Tidak diketahui' }}
                                 </td>
                                 <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                     @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))

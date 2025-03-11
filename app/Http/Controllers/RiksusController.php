@@ -177,6 +177,12 @@ public function store(Request $request)
                 'tanggal_siputri' => $request->tanggal_siputri,
                 'tanggal_persetujuan_kadep' => $request->tanggal_persetujuan_kadep,
             ]);
+            $request = Riksus::findOrFail($id);
+    
+            $request->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
+        
+            // Menyimpan perubahan ke database
+            $request->save();
     
             return redirect()->route('riksus.index')
                 ->with('success', 'Data berhasil diperbarui');

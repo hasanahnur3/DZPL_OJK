@@ -1,141 +1,146 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
 
-<div class="form-container" style="overflow-x: auto;">
-    <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Data Sosialisasi Riksus</h2>
-    <table id="sosRiksus" class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
-        <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
-            <tr>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Judul Sosialisasi</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hari/Tanggal</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tempat</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Keterangan Peserta</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kesimpulan</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
-                <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $index => $item)
+    <div class="form-container" style="overflow-x: auto;">
+        <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Data Sosialisasi Riksus</h2>
+        <table id="sosRiksus" class="table"
+            style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
+            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
                 <tr>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $index + 1 }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->judul_sosialisasi }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->hari_tanggal }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tempat }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->keterangan_peserta }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->kesimpulan }}</td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Judul Sosialisasi</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hari/Tanggal</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tempat</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Keterangan Peserta</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Kesimpulan</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($data as $index => $item)
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $index + 1 }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->judul_sosialisasi }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->hari_tanggal }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->tempat }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->keterangan_peserta }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->kesimpulan }}</td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
                         </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
                         </td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             {{ $item->updated_by ?? 'Tidak diketahui' }}
                         </td>
-                    <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                            <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}"
-                            style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div class="button-container">
-        @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-            <a href="{{ route('sosialisasi-riksus.index') }}" class="btn-success">Add Data</a>
-        @endif
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
+                            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                                <a href="{{ route('sosialisasi-riksus.edit', $item->id) }}"
+                                    style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="button-container">
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                <a href="{{ route('sosialisasi-riksus.index') }}" class="btn-success">Add Data</a>
+            @endif
+        </div>
     </div>
-</div>
-<script>
-    $(document).ready(function () {
-        $('#sosRiksus').DataTable({
-            "pageLength": 6 // Menampilkan 6 entri per halaman
+    <script>
+        $(document).ready(function () {
+            $('#sosRiksus').DataTable({
+                "pageLength": 6 // Menampilkan 6 entri per halaman
+            });
         });
-    });
-</script>
-<style>
-    .form-container {
-        max-width: 94%;
-        width: 100%;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: white;
-    }
+    </script>
+    <style>
+        .form-container {
+            max-width: 94%;
+            width: 100%;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
 
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-    }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
 
-    .btn {
-        display: inline-block;
-        padding: 8px 16px;
-        background-color: #ffc107;
-        color: black;
-        text-decoration: none;
-        border-radius: 4px;
-        font-size: 14px;
-        font-weight: bold;
-    }
+        .btn-success {
+            background-color: #28a745;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
 
-    .btn:hover {
-        background-color: #e0a800;
-    }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
 
-    .btn-success {
-        background-color: #28a745;
-        border: 2px solid #28a745;
-        border-radius: 8px;
-        padding: 10px 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        color: white;
-        text-align: center;
-        text-decoration: none;
-    }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ffc107;
+            color: black;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-    .btn-success:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
+        .btn:hover {
+            background-color: #e0a800;
+        }
 
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed; /* Ini kunci untuk membuat kolom compact */
-        margin-top: 20px;
-    }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+            /* Mengatur lebar kolom sesuai dengan konten */
+            margin-top: 20px;
+        }
 
-    .table th, .table td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-        overflow: hidden; /* Mencegah teks meluap dari kolom */
-        text-overflow: ellipsis; /* Menambahkan ellipsis (...) jika teks terlalu panjang */
-        white-space: nowrap; /* Mencegah teks wrap ke baris baru */
-    }
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            overflow: hidden;
+            word-wrap: break-word;
+            /* Membungkus kata yang terlalu panjang */
+            white-space: nowrap;
+            /* Mengizinkan teks membungkus baris baru */
+        }
 
-    .table th {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-    }
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
 
-    .table tr:hover {
-        background-color: #f0f0f0;
-    }
-</style>
+        .table tr:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 
 @endsection

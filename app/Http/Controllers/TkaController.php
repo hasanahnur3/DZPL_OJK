@@ -81,6 +81,11 @@ class TkaController extends Controller
         $tka = Tka::findOrFail($id);
         $tka->update($request->all());
 
+        $tka->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
+    
+        // Menyimpan perubahan ke database
+        $tka->save();
+
         return redirect()->route('tka')->with('success', 'Data berhasil diperbarui');
     }
 }

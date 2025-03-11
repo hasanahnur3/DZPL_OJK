@@ -27,6 +27,7 @@ class QualityControl extends Model {
         'working_days',
         'document_number',
         'follow_up_submission_date',
-        'follow_up_status'
+        'follow_up_status',
+        'updated_by'
     ];
 }
