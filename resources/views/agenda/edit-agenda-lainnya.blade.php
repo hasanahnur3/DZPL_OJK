@@ -77,26 +77,11 @@
             justify-content: center;
         }
 
-        .form-control {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            height: 30px;
-            width: 100%;
-        }
-
-        .form-group {
-            margin: 10px;
-        }
-
-        .btn-primary {
-            color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #A91111;
-            height: 30px;
-            width: 100%;
-            /* Tombol melebar */
+        /* Styling untuk frame form */
+        h3 {
+            text-align: center;
+            /* Rata tengah teks */
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -112,6 +97,27 @@
 
         .btn:hover {
             background-color: #e0a800;
+        }
+
+        /* Styling untuk tombol */
+        .btn-primary {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #A91111;
+            height: 30px;
+            width: 100%;
+            /* Tombol melebar */
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin: 10px;
         }
     </style>
 @endsection

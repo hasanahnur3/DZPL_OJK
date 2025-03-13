@@ -75,7 +75,8 @@
             border-radius: 15px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease-in-out;
-            width: 100%; /* Ensure card fills column width */
+            width: 100%;
+            height: auto; /* Ensure card fills column width */
         }
 
         .card:hover {
@@ -204,7 +205,7 @@
             <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian Kepengurusan</span>
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian Kepengurusan PKK</span>
                         <button class="btn btn-sm download-btn" onclick="downloadChart('statusPenilaianChart', 'Status_Penilaian_Distribution')">
                             <i class="fas fa-download"></i>
                         </button>
@@ -228,6 +229,63 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian Kepengurusan TKA</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('statusPerizinanChart', 'Status_Perizinan_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusPerizinanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('jenisOutputChart', 'Hasil_Penilaian_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="jenisOutputChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Status Penilaian Kepengurusan Dirkom</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('statusPerizinanDirkomChart', 'Status_Perizinan_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="statusPerizinanDirkomChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 1cm">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
+                        <button class="btn btn-sm download-btn" onclick="downloadChart('jenisOutputDirkomChart', 'Hasil_Penilaian_Distribution')">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="jenisOutputDirkomChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -474,5 +532,93 @@
                 }
             }
         });
+
+        var ctx = document.getElementById('statusPerizinanChart').getContext('2d');
+        var statusPerizinanChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($statusPerizinanData->pluck('status_perizinan')),
+            datasets: [{
+                label: 'Jumlah Status Perizinan',
+                data: @json($statusPerizinanData->pluck('total')),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    var ctx = document.getElementById('jenisOutputChart').getContext('2d');
+    var jenisOutputChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: @json($jenisOutputData->pluck('jenis_output')),
+            datasets: [{
+                label: 'Jenis Output',
+                data: @json($jenisOutputData->pluck('total')),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+    });
+
+    var ctx = document.getElementById('statusPerizinanDirkomChart').getContext('2d');
+        var statusPerizinanDirkomChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @json($statusPerizinanDirkomData->pluck('status_perizinan')),
+            datasets: [{
+                label: 'Jumlah Status Perizinan',
+                data: @json($statusPerizinanDirkomData->pluck('total')),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    var ctx = document.getElementById('jenisOutputDirkomChart').getContext('2d');
+    var jenisOutputDirkomChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: @json($jenisOutputDirkomData->pluck('jenis_output')),
+            datasets: [{
+                label: 'Jenis Output',
+                data: @json($jenisOutputDirkomData->pluck('total')),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+    });
     </script>
 @endsection

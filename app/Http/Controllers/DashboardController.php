@@ -120,7 +120,7 @@ class DashboardController extends Controller
         $allAgendas = $allAgendas->sortBy('date');
 
         // Query untuk jenis_industri Chart
-        $jenisIndustriQuery = DB::table('penilaian')
+        $jenisIndustriQuery = DB::table('pkk')
             ->select('jenis_industri', DB::raw('count(*) as total'));
 
         if ($startDate && $endDate) {
@@ -140,8 +140,8 @@ class DashboardController extends Controller
 
         $jenisIndustriData = $jenisIndustriQuery->groupBy('jenis_industri')->get();
 
-        // Query untuk status Chart dari tabel penilaian
-        $statusPenilaianQuery = DB::table('penilaian')
+        // Query untuk status Chart dari tabel pkk
+        $statusPenilaianQuery = DB::table('pkk')
             ->select('status', DB::raw('count(*) as total'));
 
         if ($startDate && $endDate) {
@@ -162,7 +162,7 @@ class DashboardController extends Controller
         $statusPenilaianData = $statusPenilaianQuery->groupBy('status')->get();
 
         // Query untuk hasil Chart dari tabel penilaian
-        $hasilQuery = DB::table('penilaian')
+        $hasilQuery = DB::table('pkk')
             ->select('hasil', DB::raw('count(*) as total'));
 
         if ($startDate && $endDate) {
@@ -182,6 +182,77 @@ class DashboardController extends Controller
 
         $hasilData = $hasilQuery->groupBy('hasil')->get();
 
+        // Query untuk Status Perizinan Chart dari tabel tka
+        $statusPerizinanQuery = DB::table('tka')
+            ->select('status_perizinan', DB::raw('count(*) as total'));
+
+        // Filter berdasarkan tanggal surat permohonan
+        if ($startDate && $endDate) {
+            $statusPerizinanQuery->whereBetween('tanggal_surat_permohonan', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $statusPerizinanQuery->whereMonth('tanggal_surat_permohonan', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $statusPerizinanQuery->whereYear('tanggal_surat_permohonan', $selectedYear);
+            }
+        }
+
+        $statusPerizinanData = $statusPerizinanQuery->groupBy('status_perizinan')->get();
+
+        // Query untuk Jenis Output Chart dari tabel tka
+        $jenisOutputQuery = DB::table('tka')
+            ->select('jenis_output', DB::raw('count(*) as total'));
+
+        if ($startDate && $endDate) {
+            $jenisOutputQuery->whereBetween('tanggal_surat_permohonan', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $jenisOutputQuery->whereMonth('tanggal_surat_permohonan', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $jenisOutputQuery->whereYear('tanggal_surat_permohonan', $selectedYear);
+            }
+        }
+
+        $jenisOutputData = $jenisOutputQuery->groupBy('jenis_output')->get();
+
+        // Query untuk Status Perizinan Chart dari tabel dirkom
+        $statusPerizinanDirkomQuery = DB::table('dirkom')
+            ->select('status_perizinan', DB::raw('count(*) as total'));
+
+        // Filter berdasarkan tanggal surat permohonan
+        if ($startDate && $endDate) {
+            $statusPerizinanDirkomQuery->whereBetween('tanggal_surat_permohonan', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $statusPerizinanDirkomQuery->whereMonth('tanggal_surat_permohonan', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $statusPerizinanDirkomQuery->whereYear('tanggal_surat_permohonan', $selectedYear);
+            }
+        }
+
+        $statusPerizinanDirkomData = $statusPerizinanDirkomQuery->groupBy('status_perizinan')->get();
+
+        // Query untuk Jenis Output Chart dari tabel dirkom
+        $jenisOutputDirkomQuery = DB::table('dirkom')
+            ->select('jenis_output', DB::raw('count(*) as total'));
+
+        if ($startDate && $endDate) {
+            $jenisOutputDirkomQuery->whereBetween('tanggal_surat_permohonan', [$startDate, $endDate]);
+        } else {
+            if ($selectedMonth) {
+                $jenisOutputDirkomQuery->whereMonth('tanggal_surat_permohonan', $selectedMonth);
+            }
+            if ($selectedYear) {
+                $jenisOutputDirkomQuery->whereYear('tanggal_surat_permohonan', $selectedYear);
+            }
+        }
+
+        $jenisOutputDirkomData = $jenisOutputDirkomQuery->groupBy('jenis_output')->get();
+
+
         // Return view with data that has been initialized
         return view('dashboard', compact(
             'statusData',
@@ -196,7 +267,11 @@ class DashboardController extends Controller
             'endDate',
             'jenisIndustriData',
             'statusPenilaianData',
-            'hasilData'
+            'hasilData',
+            'statusPerizinanData', // Data status perizinan untuk TKA
+            'jenisOutputData',// Data jenis output untuk TKA
+            'statusPerizinanDirkomData', // Data status perizinan untuk Dirkom
+            'jenisOutputDirkomData'// Data jenis output untuk Dirkom
         ));
     }
 }
