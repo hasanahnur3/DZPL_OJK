@@ -5,7 +5,7 @@
         <div
             style="width: 800px; margin: auto; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <h2 style="text-align: center; color: #333; margin-bottom: 10px;">Edit Daftar Pengendalian Kualitas</h2>
+            <h2 style="text-align: center; color: #333; margin-bottom: 10px;">Edit Daftar Riksus</h2>
 
             @if ($errors->any())
                 <div style="background-color: #ffcccc; padding: 1rem; border-radius: 5px; margin-bottom: 15px;">

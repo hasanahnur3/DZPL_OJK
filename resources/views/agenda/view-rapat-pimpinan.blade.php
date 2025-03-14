@@ -18,7 +18,6 @@
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Bahan Materi</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Hasil</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; ">Aksi</th>
                 </tr>
@@ -54,10 +53,12 @@
                             {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
                         </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->updated_by ?? 'Tidak diketahui' }}
+                            @if ($item->updated_by && $item->updated_at)
+                                {{ $item->updated_by }} at <br>
+                                {{ $item->updated_at->format('d-m-Y H:i') }}
+                            @else
+                                Tidak diketahui
+                            @endif
                         </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))

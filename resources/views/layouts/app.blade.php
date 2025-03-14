@@ -336,7 +336,7 @@
                             <li><a href="{{ route('tka') }}">TKA</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown-menu">
+                    <li class="dropdown-menu" style="border:none">
                         <a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a>
                     </li>
                 </ul>
