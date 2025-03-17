@@ -413,3 +413,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::put('/forum-panel/{id}', [ForumPanelController::class, 'update'])->name('forum-panel.update');
 });
+
+
+Route::middleware(['auth', 'kepala_eksekutif'])->group(function () {
+    Route::get('/pkk/kepala_eksekutif', [PkkController::class, 'index'])->name('pengajuan.kepala-eksekutif');
+});
+
+

@@ -41,7 +41,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'password' => 'required|min:3',
-            'role' => 'required|in:staf,kadep,kabag,direktur,deputi'
+            'role' => 'required|in:staf,kadep,kabag,direktur,deputi,kepala_eksekutif'
         ]);
 
         DB::table('users')->insert([

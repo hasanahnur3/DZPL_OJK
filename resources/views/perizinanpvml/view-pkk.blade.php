@@ -240,5 +240,14 @@
                     .table tr:hover {
                         background-color: #f0f0f0;
                     }
+
+                    .dataTables_wrapper .dataTables_filter {
+                        float: left;
+                        /* Pindahkan ke kiri */
+                        text-align: left;
+                        /* Atur teks agar rata kiri */
+                        margin-left: 10px;
+                        /* Tambahkan margin jika perlu */
+                    }
                 </style>
 @endsection

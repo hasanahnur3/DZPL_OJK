@@ -68,8 +68,8 @@
                                 {{ $control->updated_at ? $control->updated_at->format('d-m-Y H:i') : '-' }}
                             </td>
                             <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $control->updated_by ?? 'Tidak diketahui' }}
-                        </td>
+                                {{ $control->updated_by ?? 'Tidak diketahui' }}
+                            </td>
                             <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
                                 @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                                     <a href="{{ route('quality_control.edit', $control) }}"
@@ -207,6 +207,15 @@
 
         .table tr:hover {
             background-color: #f0f0f0;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: left;
+            /* Pindahkan ke kiri */
+            text-align: left;
+            /* Atur teks agar rata kiri */
+            margin-left: 10px;
+            /* Tambahkan margin jika perlu */
         }
     </style>
 @endsection
