@@ -11,8 +11,20 @@ class PkkController extends Controller
 {
     public function index()
     {
-        $data = Pkk::all(); // Ambil semua data dari tabel pkk
-        return view('perizinanpvml.view-pkk', compact('data'));
+        if (auth()->check()) {
+            $userRole = auth()->user()->role;
+    
+            if ($userRole === 'kepala_eksekutif') {
+                $data = Pkk::select('jenis_industri', 'nama_perusahaan', 'status')->get();
+            } else {
+                $data = Pkk::all();
+            }
+    
+            return view('perizinanpvml.view-pkk', compact('data'));
+        }
+    
+        // Jika pengguna tidak login
+        return redirect()->back()->with('error', 'Anda tidak memiliki akses ke halaman ini.');
     }
 
     // Halaman form tambah data dengan data dari DB

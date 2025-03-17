@@ -179,7 +179,6 @@ Route::delete('/riksus/{id}', [RiksusController::class, 'destroy'])->name('riksu
 Route::get('/riksus', [RiksusController::class, 'index'])->name('riksus');
 Route::get('/get-companies', [RiksusController::class, 'getCompaniesByIndustry']);
 Route::get('/sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
-Route::get('sosialisasi-riksus/{id}/view', [SosialisasiRiksusController::class, 'show'])->name('sosialisasi-riksus.view');
 Route::put('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'update'])->name('sosialisasi-riksus.update');
 
 Route::resource('forum-panel', ForumPanelController::class);
@@ -374,7 +373,7 @@ Route::middleware(['role:kasubag'])->group(function () {
     });
 });
 
-Route::middleware(['role:direktur|deputi direktur|kabag|kepala departemen'])->group(function () {
+Route::middleware(['role:direktur|deputi direktur|kabag|kepala departemen|kepala_eksekutif'])->group(function () {
     Route::get('/users', function () {
         $users = \App\Models\User::all();
         return view('users.view', compact('users'));
@@ -416,7 +415,9 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'kepala_eksekutif'])->group(function () {
-    Route::get('/pkk/kepala_eksekutif', [PkkController::class, 'index'])->name('pengajuan.kepala-eksekutif');
+    Route::get('/pkk/kepala_eksekutif', [PkkController::class, 'index'])->name('pkk.kepala-eksekutif');
 });
 
-
+Route::get('/rapim/{id}', [RapimController::class, 'show']);
+Route::get('/pkk-agenda/{id}', [PkkAgendaController::class, 'show']);
+Route::get('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'show']);

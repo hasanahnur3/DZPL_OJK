@@ -5,72 +5,35 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
 
     <div class="form-container" style="overflow-x: auto;">
         <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Jadwal Rapat Pimpinan</h2>
-        <table id="rapatTable" class="table"
+        <table id="rapimTable" class="table table-striped"
             style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
-            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+            <thead>
                 <tr>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Hari/Tanggal</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Topik</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Bahan Materi</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Hasil</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center; ">Aksi</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Topik</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Hari/Tanggal</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($rapim as $index => $item)
+                @foreach($rapim as $item)
                     <tr>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $index + 1 }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->tanggal }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">{{ $item->topik }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            @if ($item->bahan_materi)
-                                <a href="{{ Storage::url($item->bahan_materi) }}" target="_blank">Download Materi</a>
-                            @else
-                                Tidak ada file
-                            @endif
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: left; cursor: pointer;"
+                            class="open-modal" data-id="{{ $item->id }}">
+                            {{ $item->topik }}
                         </td>
-
-                        <!-- Only show the "Download Hasil" link if the user is not a 'staff' -->
-                        @if (Session::get('role') !== 'staf')
-                            <td>
-                                @if ($item->hasil)
-                                    <a href="{{ Storage::url($item->hasil) }}" target="_blank">Download Hasil</a>
-                                @else
-                                    Tidak ada file
-                                @endif
-                            </td>
-                        @else
-                            <td>Tidak diizinkan</td>
-                        @endif
-
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            @if ($item->updated_by && $item->updated_at)
-                                {{ $item->updated_by }} at <br>
-                                {{ $item->updated_at->format('d-m-Y H:i') }}
-                            @else
-                                Tidak diketahui
-                            @endif
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                                <a href="{{ route('rapim.edit', $item->id) }}"
-                                    style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
-                            @endif
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: left;">
+                            {{ $item->tanggal }}
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
+        <!-- Button Add Data -->
         <div class="button-container">
             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
                 <a href="{{ route('rapat-pimpinan.create') }}" class="btn btn-success">Add Data</a>
@@ -78,14 +41,90 @@
         </div>
     </div>
 
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Rapat Pimpinan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Detail akan diisi dengan JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <!-- Button Edit -->
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                        <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    @endif
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function () {
-            $('#rapatTable').DataTable({
+            // Inisialisasi DataTables
+            $('#rapimTable').DataTable({
                 "pageLength": 6
+            });
+
+            // Event delegation untuk klik pada elemen dengan class 'open-modal'
+            $(document).on('click', '.open-modal', function () {
+                const id = $(this).data('id');
+
+                // Ajax request untuk mendapatkan detail
+                $.ajax({
+                    url: `/rapim/${id}`, // Pastikan route sesuai dengan backend
+                    type: 'GET',
+                    success: function (response) {
+                        const userRole = '{{ Session::get('role') }}';
+
+                        let hasilContent = '';
+                        if (response.hasil) {
+                            if (userRole === 'staf') {
+                                hasilContent = '<p><strong>Hasil:</strong> Tidak diizinkan</p>';
+                            } else {
+                                hasilContent = `
+                                        <p><strong>Hasil:</strong> <a href="${response.hasil}" target="_blank">Download Hasil</a></p>
+                                    `;
+                            }
+                        } else {
+                            hasilContent = '<p><strong>Hasil:</strong> Tidak ada file</p>';
+                        }
+
+                        const updatedInfo = response.updated_by
+                            ? `<p><strong>Diperbarui Oleh:</strong> ${response.updated_by} pada ${response.updated_at || '-'}</p>`
+                            : '<p><strong>Diperbarui Oleh:</strong> Tidak diketahui</p>';
+
+                        // Update modal content
+                        $('#modalContent').html(`
+                                <p><strong>Topik:</strong> ${response.topik}</p>
+                                <p><strong>Hari/Tanggal:</strong> ${response.tanggal}</p>
+                                <p><strong>Bahan Materi:</strong> 
+                                    ${response.bahan_materi ? `<a href="${response.bahan_materi}" target="_blank">Download Materi</a>` : 'Tidak ada file'}
+                                </p>
+                                ${hasilContent}
+                                ${updatedInfo}
+                                <p><strong>Dibuat Pada:</strong> ${response.created_at}</p>
+                            `);
+
+                        // Tampilkan tombol edit
+                        $('#editButton').show();
+                        $('#editButton').attr('href', `/rapim/${id}/edit`);
+
+                        // Tampilkan modal
+                        $('#detailModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Gagal mendapatkan detail rapim.');
+                    }
+                });
             });
         });
     </script>
-
     <style>
         .form-container {
             max-width: 94%;
@@ -96,25 +135,20 @@
             background-color: white;
         }
 
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tr:hover {
+            background-color: #f0f0f0;
+        }
+
         .button-container {
             display: flex;
             justify-content: flex-end;
             margin-top: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #ffc107;
-            color: black;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background-color: #e0a800;
         }
 
         .btn-success {
@@ -133,29 +167,17 @@
             border-color: #1e7e34;
         }
 
-        .table {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .table th {
-            background-color: #007bff;
-            color: white;
+        .btn-close {
+            color: black;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        .table tr:hover {
-            background-color: #f0f0f0;
+        .btn-close:hover {
+            color: red;
         }
     </style>
 

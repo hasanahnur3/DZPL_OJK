@@ -63,5 +63,27 @@ class AgendaLainyaController extends Controller
         return redirect()->route('agenda-lainnya.index')->with('success', 'Agenda lainnya berhasil diperbarui!');
     }
 
-    // Method untuk menghapus data agenda lainnya
+    public function show($id)
+    {
+        // Ambil data agenda berdasarkan ID
+        $agendaLainya = AgendaLainya::find($id);
+
+        // Periksa apakah data ditemukan
+        if (!$agendaLainya) {
+            return response()->json([
+                'message' => 'Agenda tidak ditemukan.'
+            ], 404);
+        }
+
+        // Return data dalam format JSON
+        return response()->json([
+            'id' => $agendaLainya->id,
+            'tanggal' => $agendaLainya->tanggal,
+            'topik' => $agendaLainya->topik,
+            'hasil' => $agendaLainya->hasil,
+            'created_at' => $agendaLainya->created_at->format('d-m-Y H:i'),
+            'updated_by' => $agendaLainya->updated_by,
+            'updated_at' => $agendaLainya->updated_at ? $agendaLainya->updated_at->format('d-m-Y H:i') : null,
+        ]);
+    }
 }

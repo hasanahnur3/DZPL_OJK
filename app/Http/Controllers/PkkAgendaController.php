@@ -88,4 +88,35 @@ class PkkAgendaController extends Controller
 
         return redirect()->route('pkk-agenda.index')->with('success', 'Agenda berhasil dihapus');
     }
+
+    public function show($id)
+    {
+        // Ambil data agenda berdasarkan ID
+        $agenda = PKkAgenda::find($id);
+
+        // Periksa apakah data ditemukan
+        if (!$agenda) {
+            return response()->json([
+                'message' => 'Agenda tidak ditemukan.'
+            ], 404);
+        }
+
+        // Return data dalam format JSON
+        return response()->json([
+            'id' => $agenda->id,
+            'hari_tanggal' => $agenda->hari_tanggal,
+            'waktu' => $agenda->waktu,
+            'nama_perusahaan' => $agenda->nama_perusahaan,
+            'pic' => $agenda->pic,
+            'zoom' => $agenda->zoom,
+            'peserta' => $agenda->peserta,
+            'penguji' => $agenda->penguji,
+            'penguji1' => $agenda->penguji1,
+            'penguji2' => $agenda->penguji2,
+            'hasil' => $agenda->hasil,
+            'created_at' => $agenda->created_at->format('d-m-Y H:i'),
+            'updated_by' => $agenda->updated_by,
+            'updated_at' => $agenda->updated_at ? $agenda->updated_at->format('d-m-Y H:i') : null,
+        ]);
+    }
 }

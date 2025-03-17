@@ -52,10 +52,10 @@ class ForumPanelController extends Controller
             'jenis_industri' => 'required|string|max:255',
             'hasil' => 'required|string',
         ]);
-    
+
         // Cari data berdasarkan ID
         $forumPanel = ForumPanel::findOrFail($id);
-    
+
         // Update data
         $forumPanel->update([
             'nama_perusahaan' => $request->nama_perusahaan,
@@ -66,13 +66,13 @@ class ForumPanelController extends Controller
             'jenis_industri' => $request->jenis_industri,
             'hasil' => $request->hasil,
         ]);
-    
+
         // Menyimpan siapa yang melakukan update
         $forumPanel->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
-    
+
         // Menyimpan perubahan ke database
         $forumPanel->save();
-    
+
         // Redirect dengan pesan sukses
         return redirect()->route('forum-panel.index')->with('success', 'Forum Panel berhasil diperbarui.');
     }
@@ -82,5 +82,33 @@ class ForumPanelController extends Controller
         $forumPanel->delete();
 
         return redirect()->route('forum-panel.index')->with('success', 'Forum panel deleted successfully.');
+    }
+
+    public function show($id)
+    {
+        // Ambil data agenda berdasarkan ID
+        $forumPanel = ForumPanel::find($id);
+
+        // Periksa apakah data ditemukan
+        if (!$forumPanel) {
+            return response()->json([
+                'message' => 'Agenda tidak ditemukan.'
+            ], 404);
+        }
+
+        // Return data dalam format JSON
+        return response()->json([
+            'id' => $forumPanel->id,
+            'nama_perusahaan' => $forumPanel->nama_perusahaan,
+            'hari_pelaksanaan' => $forumPanel->hari_pelaksanaan,
+            'waktu' => $forumPanel->waktu,
+            'tempat_pelaksanaan' => $forumPanel->tempat_pelaksanaan,
+            'kriteri' => $forumPanel->kriteri,
+            'jenis_industri' => $forumPanel->jenis_industri,
+            'hasil' => $forumPanel->hasil,
+            'created_at' => $forumPanel->created_at->format('d-m-Y H:i'),
+            'updated_by' => $forumPanel->updated_by,
+            'updated_at' => $forumPanel->updated_at ? $forumPanel->updated_at->format('d-m-Y H:i') : null,
+        ]);
     }
 }

@@ -14,7 +14,8 @@ class CheckRole
         'kabag' => ['read'],
         'direktur' => ['read'],
         'deputi' => ['read'],
-        'kadep' => ['read']
+        'kadep' => ['read'],
+        'kaepala_eksekutif' => ['read']
     ];
 
     public function handle(Request $request, Closure $next, $permission = null)

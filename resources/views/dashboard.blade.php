@@ -127,7 +127,7 @@
 
     <div class="container-fluid">
         <div class="row mb-4">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card p-3">
                     <form method="GET" action="{{ route('dashboard') }}">
                         <div class="row g-3">
@@ -140,7 +140,7 @@
                                 <label for="end_date" class="form-label">Tanggal Akhir</label>
                                 <input type="date" id="end_date" name="end_date" class="form-control" value="{{ $endDate ?? '' }}">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="jenis_industri" class="form-label">Jenis Industri</label>
                                 <select id="jenis_industri" name="jenis_industri" class="form-control">
                                     <option value="">Semua</option>
@@ -153,10 +153,10 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <button type="submit" style="background-color: #007bff; color: white;" class="btn w-100 mt-4"><i class="fas fa-filter"></i> Filter</button>
                             </div>
-                            <div class="col-md-2 d-flex align-items-end justify-content-end">
+                            <div class="col-md-4 d-flex align-items-end justify-content-end">
                                 <button type="button" class="btn w-100 mt-4" onclick="resetFilters()" style="color:white;"><i class="fas fa-undo"></i> Reset Filter</button>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" style="margin-bottom: 1cm">
+            <div class="col-md-4" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-pie"></i> Detail Distribusi Izin Kelembagaan</span>
@@ -216,7 +216,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" style="margin-bottom: 1cm">
+            <div class="col-md-4" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
@@ -244,7 +244,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" style="margin-bottom: 1cm">
+            <div class="col-md-4" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
@@ -272,7 +272,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6" style="margin-bottom: 1cm">
+            <div class="col-md-4" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>

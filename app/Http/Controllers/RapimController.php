@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Rapim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class RapimController extends Controller
 {
@@ -114,5 +115,22 @@ class RapimController extends Controller
         $rapim->delete();
 
         return redirect()->route('rapim.index')->with('success', 'Agenda rapat berhasil dihapus!');
+    }
+
+    public function show($id)
+    {
+        $rapim = Rapim::findOrFail($id);
+        $userRole = Session::get('role');
+    
+        return response()->json([
+            'id' => $rapim->id,
+            'topik' => $rapim->topik,
+            'tanggal' => $rapim->tanggal,
+            'bahan_materi' => $rapim->bahan_materi ? Storage::url($rapim->bahan_materi) : null,
+            'hasil' => $userRole === 'staf' ? null : ($rapim->hasil ? Storage::url($rapim->hasil) : null),
+            'created_at' => $rapim->created_at->format('d-m-Y H:i'),
+            'updated_by' => $rapim->updated_by,
+            'updated_at' => $rapim->updated_at ? $rapim->updated_at->format('d-m-Y H:i') : null,
+        ]);
     }
 }

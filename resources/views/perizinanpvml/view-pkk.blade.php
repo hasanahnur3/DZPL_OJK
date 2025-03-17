@@ -117,14 +117,11 @@
 
 
             <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
-                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kepala_eksekutif']))
                     <a href="{{ route('pkk.create') }}"
                         style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
                         class="btn btn-success">Tambah Data</a>
                 @endif
-
-
-
 
                 <script>
                     $(document).ready(function () {
