@@ -138,7 +138,7 @@
                             <td>{{ $ljk->jenis_industri }}</td>
                             <td>{{ $ljk->nama_perusahaan }}</td>
                             <td style="text-align:center;">
-                                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                                     <a href="{{ route('daftarljk.edit', $ljk->id) }}" class="btn">Edit</a>
                                 @endif
                             </td>
@@ -147,7 +147,7 @@
                 </tbody>
             </table>
             <!-- Tombol Add Data hanya muncul jika role bukan direktur, deputi, atau kadep -->
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                 <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button"
                     style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
                     class="btn btn-success">Add Data</a>

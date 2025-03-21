@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Http\Controllers\UserController;
+use App\Exports\TkaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 Route::post('/logout', function () {
@@ -118,7 +120,12 @@ Route::get('/tka', [TkaController::class, 'index'])->name('tka');
 Route::get('/tka/create', [TkaController::class, 'create'])->name('tka.create');
 Route::post('/tka/store', [TkaController::class, 'store'])->name('tka.store');
 Route::get('/tka/edit/{id}', [TkaController::class, 'edit'])->name('tka.edit');
-Route::post('/tka/update/{id}', [TkaController::class, 'update'])->name('tka.update');
+Route::post('/tka/{id}', [TkaController::class, 'update'])->name('tka.update');
+
+Route::get('/tka/{id}', [TkaController::class, 'show'])->name('tka.show');
+Route::get('/tka/{id}/edit', [TkaController::class, 'edit'])->name('tka.edit');
+Route::put('/tka/{id}', [TkaController::class, 'update'])->name('tka.update');
+
 Route::get('/get-companies', [TkaController::class, 'getCompaniesByIndustry']);
 
 
@@ -201,7 +208,10 @@ Route::get('/get-companies', [QualityControlController::class, 'getCompaniesByIn
 Route::get('/quality-control', [QualityControlController::class, 'index'])->name('quality_control.index');
 Route::get('/quality-control/create', [QualityControlController::class, 'create'])->name('quality_control.create');
 Route::post('/quality-control', [QualityControlController::class, 'store'])->name('quality_control.store');
-
+// Routes with {id} parameter
+Route::get('/quality-control/{id}', [QualityControlController::class, 'show'])->name('quality_control.show');
+Route::get('/quality-control/{id}/edit', [QualityControlController::class, 'edit'])->name('quality_control.edit');
+Route::put('/quality-control/{id}', [QualityControlController::class, 'update'])->name('quality_control.update');
 
 
 Route::get('/daftar-ljk', [DaftarljkController::class, 'index'])->name('daftarljk.index');
@@ -373,16 +383,16 @@ Route::middleware(['role:kasubag'])->group(function () {
     });
 });
 
-Route::middleware(['role:direktur|deputi direktur|kabag|kepala departemen|kepala_eksekutif'])->group(function () {
+Route::middleware(['role:direktur|deputi direktur|kabag|kadep|kepala_eksekutif'])->group(function () {
     Route::get('/users', function () {
         $users = \App\Models\User::all();
         return view('users.view', compact('users'));
     });
 });
 
-
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::resource('users', UserController::class);
+
 
 
 
@@ -414,10 +424,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware(['auth', 'kepala_eksekutif'])->group(function () {
-    Route::get('/pkk/kepala_eksekutif', [PkkController::class, 'index'])->name('pkk.kepala-eksekutif');
-});
-
 Route::get('/rapim/{id}', [RapimController::class, 'show']);
 Route::get('/pkk-agenda/{id}', [PkkAgendaController::class, 'show']);
 Route::get('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'show']);
+Route::get('/pkk/{id}', [PkkController::class, 'show']);
+Route::get('/tka/{id}', [TkaController::class, 'show']);
+Route::get('/kelembagaan/{id}', [KelembagaanController::class, 'show']);
+Route::get('/dirkom/{id}', [DirkomController::class, 'show']);
+
+Route::get('/tka/export', [TkaController::class, 'export'])->name('tka.export');

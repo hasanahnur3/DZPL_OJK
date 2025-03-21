@@ -1,119 +1,210 @@
 @extends('layouts.app')
 
 @section('content')
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
 
     <div class="form-container" style="overflow-x: auto;">
-        <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Kelembagaan PVML</h2>
-
-        <table id="kelembagaanTable" class="table"
+        <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Pengendalian Kualitas</h2>
+        <table id="kelembagaanTable" class="table table-striped"
             style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
-            <thead style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+            <thead>
                 <tr>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">No</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Indsutri</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Detail Izin</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">SLA</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat Permohonan</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat Permohonan</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Pengajuan Sistem</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Dokumen Lengkap</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Selesai Analisis</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nomor Surat</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Tanggal Surat</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Created At</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Updated At</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; ">Last Updated By</th>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($kelembagaan as $index => $item)
                     <tr>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $index + 1 }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->jenis_industri }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nama_perusahaan }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->detail_izin ?? '-' }}</td>
-                        <!-- In view-kelembagaan.blade.php -->
-                        <!-- Replace just the SLA column in the table -->
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; cursor: pointer;" class="open-modal"
+                            data-id="{{ $item->id }}">
+                            {{ $item->jenis_industri }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; cursor: pointer;" class="open-modal"
+                            data-id="{{ $item->id }}">
+                            {{ $item->nama_perusahaan }}
+                        </td>
+                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; cursor: pointer;" class="open-modal"
+                            data-id="{{ $item->id }}">
+                            {{ $item->detail_izin }}
+                        </td>
                         <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            @if(strtolower($item->status) == 'selesai')
-                                -
-                            @elseif($item->tanggal_dokumen_lengkap)
-                                @if(is_numeric($item->sla_remaining))
-                                    <span style="color: {{ $item->sla_remaining < 0 ? 'red' : 'green' }}">
-                                        {{ $item->sla_remaining }}
-                                    </span>
-                                @else
+                            @if (is_numeric($item->sla_remaining))
+                                <span style="color: {{ $item->sla_remaining < 0 ? 'red' : 'green' }}">
                                     {{ $item->sla_remaining }}
-                                @endif
+                                </span>
                             @else
-                                -
-                            @endif
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->status }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat_permohonan ?? '-' }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            {{ $item->tanggal_surat_permohonan ? date('d-m-Y', strtotime($item->tanggal_surat_permohonan)) : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            {{ $item->tanggal_pengajuan_sistem ? date('d-m-Y', strtotime($item->tanggal_pengajuan_sistem)) : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            {{ $item->tanggal_dokumen_lengkap ? date('d-m-Y', strtotime($item->tanggal_dokumen_lengkap)) : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            {{ $item->tanggal_selesai_analisis ? date('d-m-Y', strtotime($item->tanggal_selesai_analisis)) : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">{{ $item->nomor_surat ?? '-' }}</td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6;">
-                            {{ $item->tanggal_surat ? date('d-m-Y', strtotime($item->tanggal_surat)) : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->created_at ? $item->created_at->format('d-m-Y H:i') : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->updated_at ? $item->updated_at->format('d-m-Y H:i') : '-' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            {{ $item->updated_by ?? 'Tidak diketahui' }}
-                        </td>
-                        <td style="padding: 0.75rem; border: 1px solid #dee2e6; text-align: center;">
-                            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                                <a href="{{ route('kelembagaan.edit', $item->id) }}"
-                                    style="background-color: #007bff; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Edit</a>
+                                {{ $item->sla_remaining }}
                             @endif
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <div style="text-align: right; margin-bottom: 1rem;" class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
-                <a href="{{ route('kelembagaan.create') }}"
-                    style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
-                    class="btn btn-success">Tambah Data</a>
+        <!-- Button Add Data -->
+        <div class="button-container mb-3">
+            <x-modal-filter :action="route('kelembagaan.index')" :startDate="$startDate" :endDate="$endDate" />
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
+                <a href="{{ route('kelembagaan.create') }}" class="btn btn-success">Add Data</a>
             @endif
+        </div>
+    </div>
+
+    <!-- Modal untuk Detail -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Sosialisasi Riksus</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Detail akan diisi dengan JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <!-- Button Edit -->
+                    <!-- Button Edit -->
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
+                        <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    @endif
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
+            // Inisialisasi DataTables
             $('#kelembagaanTable').DataTable({
-                scrollX: true,
-                "pageLength": 6 // Enables horizontal scrolling
+                "pageLength": 6
+            });
+
+            // Event untuk membuka modal
+            $(document).on('click', '.open-modal', function () {
+                const id = $(this).data('id');
+
+                // AJAX request untuk mendapatkan detail
+                $.ajax({
+                    url: `/kelembagaan/${id}`, // Sesuaikan dengan route backend
+                    type: 'GET',
+                    success: function (response) {
+                        // Isi modal dengan detail data
+                        $('#modalContent').html(`
+                                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                                            <table style="border-collapse: collapse;">
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.jenis_industri}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.nama_perusahaan}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Detail Izin</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.detail_izin || '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>SLA</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">
+                                                                        ${isNaN(response.sla_remaining)
+                                ? response.sla_remaining
+                                : `<span style="color: ${response.sla_remaining < 0 ? 'red' : 'green'};">
+                                                                                ${response.sla_remaining}
+                                                                            </span>`}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Status</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.status}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Nomor Surat Permohonan</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.nomor_surat_permohonan || '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Tanggal Surat Permohonan</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.tanggal_surat_permohonan ? new Date(response.tanggal_surat_permohonan).toLocaleDateString('id-ID') : '-'}</td>
+                                                                </tr>
+
+                                                            </table>
+                                                            <table style="border-collapse: collapse;">
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Tanggal Pengajuan Sistem</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.tanggal_pengajuan_sistem ? new Date(response.tanggal_pengajuan_sistem).toLocaleDateString('id-ID') : '-'}</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Tanggal Dokumen Lengkap</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.tanggal_dokumen_lengkap ? new Date(response.tanggal_dokumen_lengkap).toLocaleDateString('id-ID') : '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Tanggal Selesai Analisis</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.tanggal_selesai_analisis ? new Date(response.tanggal_selesai_analisis).toLocaleDateString('id-ID') : '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Nomor Surat</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.nomor_surat ?? '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Tanggal Surat</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.tanggal_surat ? new Date(response.tanggal_surat).toLocaleDateString('id-ID') : '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                                                    <td>:</td>
+                                                                    <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    `);
+                        // Set href button Edit
+                        $('#editButton').attr('href', `/kelembagaan/${id}/edit`);
+
+                        // Tampilkan modal
+                        $('#detailModal').modal('show');
+                    },
+                    error: function () {
+                        alert('Gagal mendapatkan detail sosialisasi.');
+                    }
+                });
             });
         });
     </script>
 
     <style>
         .form-container {
-            max-width: 100%;
+            max-width: 94%;
             width: 100%;
             padding: 2rem;
             border-radius: 8px;
@@ -121,7 +212,20 @@
             background-color: white;
         }
 
+        .table th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tr:hover {
+            background-color: #f0f0f0;
+        }
+
         .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 20px;
         }
 
@@ -141,61 +245,22 @@
             border-color: #1e7e34;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #ffc107;
+        .btn-close {
             color: black;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: #e0a800;
+        .btn-close:hover {
+            color: red;
         }
 
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            height: 43px;
-        }
-
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            overflow: hidden;
-            /* Prevent text from overflowing */
-            text-overflow: ellipsis;
-            /* Add ellipsis (...) for overflow text */
-            white-space: nowrap;
-            /* Prevent text from wrapping into new lines */
-        }
-
-        .table th {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-        }
-
-        .table tr:hover {
-            background-color: #f0f0f0;
-        }
-
-        .dataTables_scrollHead {
-            height: 43px;
-        }
-
-        .dataTables_wrapper .dataTables_filter {
-            float: left;
-            /* Pindahkan ke kiri */
-            text-align: left;
-            /* Atur teks agar rata kiri */
-            margin-left: 10px;
-            /* Tambahkan margin jika perlu */
+        .modal-content {
+            max-width: 100%;
+            margin: auto;
         }
     </style>
 

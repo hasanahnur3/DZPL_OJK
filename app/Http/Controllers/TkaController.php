@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Tka;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\TkaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 class TkaController extends Controller
 {
     // Menampilkan daftar TKA
-    public function index()
+    public function index(Request $request)
     {
-        $tkas = Tka::all();
-        return view('perizinanpvml.view-tka', compact('tkas'));
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal tanpa relasi
+        $tkas = Tka::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-tka', compact('tkas', 'startDate', 'endDate'));
     }
+
 
     // Menampilkan form tambah data
     public function create()
@@ -59,7 +69,7 @@ class TkaController extends Controller
         $nama_perusahaan = DB::table('daftarljk')
             ->where('jenis_industri', $tka->jenis_industri)
             ->pluck('nama_perusahaan');
-    
+
         return view('perizinanpvml.edit-tka', compact('tka', 'jenis_industri', 'nama_perusahaan'));
     }
 
@@ -82,11 +92,29 @@ class TkaController extends Controller
         $tka->update($request->all());
 
         $tka->updated_by = session('name');  // Menyimpan nama pengguna yang sedang login
-    
+
         // Menyimpan perubahan ke database
         $tka->save();
 
         return redirect()->route('tka')->with('success', 'Data berhasil diperbarui');
     }
+
+    public function show($id)
+    {
+        return response()->json(Tka::findOrFail($id));
+    }
+
+    public function export(Request $request)
+    {
+        Log::info('Export called with:', $request->all()); // Log parameter yang diterima
     
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+    
+        if (!$startDate || !$endDate) {
+            return response()->json(['message' => 'Tanggal tidak lengkap'], 400); // Tambahkan validasi tanggal
+        }
+    
+        return Excel::download(new TkaExport($startDate, $endDate), 'tka_data.xlsx');
+    }
 }

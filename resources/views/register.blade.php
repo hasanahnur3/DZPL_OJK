@@ -90,11 +90,11 @@
                                             <select name="role" class="form-control" required>
                                                 <option value="">Pilih Role</option>
                                                 <option value="staf">Staf</option>
-                                                <option value="kepala_eksekutif">Kepala Eksekutif</option>
                                                 <option value="kadep">Kadep</option>
                                                 <option value="kabag">kabag</option>
                                                 <option value="direktur">direktur</option>
                                                 <option value="deputi">deputi</option>
+                                                <option value="kepala_eksekutif">Kepala Eksekutif</option>
                                             </select>
                                         </div>
                                     </div>

@@ -46,7 +46,4 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\CheckRole::class,
     ];
 
-    protected $routeMiddleware = [
-        'kepala_eksekutif' => \App\Http\Middleware\KepalaEksekutifMiddleware::class,
-    ];
 }

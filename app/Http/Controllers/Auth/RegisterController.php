@@ -21,7 +21,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'role' => 'required|in:staf,kasubag,kabag,direktur,deputi_direktur,kepala_departemen',
+            'role' => 'required|in:staf,kasubag,kabag,direktur,deputi_direktur,kadep, kepala_eksekutif',
         ]);
 
         $user = User::create([

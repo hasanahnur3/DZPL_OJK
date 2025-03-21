@@ -129,4 +129,9 @@ public function update(Request $request, QualityControl $qualityControl)
         return redirect()->route('quality_control.index')
             ->with('success', 'Data berhasil dihapus.');
     }
+
+    public function show($id)
+    {
+        return response()->json(QualityControl::findOrFail($id));
+    }
 }

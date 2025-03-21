@@ -86,4 +86,9 @@ class DirkomController extends Controller
         return redirect()->route('dirkom.index')
             ->with('success', 'Data berhasil diperbarui');
     }
+
+    public function show($id)
+    {
+        return response()->json(Dirkom::findOrFail($id));
+    }
 }

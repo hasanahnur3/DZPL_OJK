@@ -40,7 +40,7 @@
         </table>
          <!-- Button Add Data -->
          <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                 <a href="{{ route('rapat-pimpinan.create') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -58,7 +58,10 @@
                     <!-- Detail akan diisi dengan JavaScript -->
                 </div>
                 <div class="modal-footer">
-                    <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    <!-- Button Edit -->
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                        <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    @endif
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -83,15 +86,53 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                                <p><strong>Nama Perusahaan:</strong> ${response.nama_perusahaan}</p>
-                                <p><strong>Hari Pelaksanaan:</strong> ${response.hari_pelaksanaan}</p>
-                                <p><strong>Waktu:</strong> ${response.waktu}</p>
-                                <p><strong>Tempat Pelaksanaan:</strong> ${response.tempat_pelaksanaan}</p>
-                                <p><strong>Kriteria:</strong> ${response.kriteria}</p>
-                                <p><strong>Jenis Industri:</strong> ${response.jenis_industri}</p>
-                                <p><strong>Hasil:</strong> ${response.hasil}</p>
-                                <p><strong>Dibuat Pada:</strong> ${response.created_at}</p>
-                                <p><strong>Diperbarui Oleh:</strong> ${response.updated_by} pada ${response.updated_at || '-'}</p>
+                                <table style=" border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>>Nama Perusahaan</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.nama_perusahaan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Hari Pelaksanaan</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.hari_pelaksanaan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Waktu</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;" >  ${response.waktu}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Tempat Pelaksanaan</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.tempat_pelaksanaan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Kriteria</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.kriteria}</td>
+                                    </tr>
+                               	<tr>
+                                        <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.jenis_industri}</td>
+                                    </tr>
+                               	<tr>
+                                        <td style="padding: 8px;"><strong>hasil</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.hasil}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.created_at}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
+                                    </tr>
+                                </table>
                             `);
 
                         // Set href button Edit
@@ -143,6 +184,44 @@
 
         .modal-footer .btn {
             margin-left: 5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-close {
+            color: black;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-close:hover {
+            color: red;
+        }
+        .modal-content {
+            max-width: 550px;
+            margin: auto;
         }
     </style>
 

@@ -62,7 +62,7 @@ class KelembagaanPvmlController extends Controller
         }
     }
 
-    public function update(Request $request, kelem $qualityControl)
+    public function update(Request $request, KelembagaanPvml $qualityControl)
     {
         $validatedData = $request->validate([
             'jenis_industri' => 'required|string',
@@ -100,6 +100,11 @@ class KelembagaanPvmlController extends Controller
                 ->with('error', 'Terjadi kesalahan: ' . $e->getMessage())
                 ->withInput();
         }
+    }
+
+    public function show($id)
+    {
+        return response()->json(KelembagaanPvml::findOrFail($id));
     }
     
 }

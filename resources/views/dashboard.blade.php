@@ -127,7 +127,7 @@
 
     <div class="container-fluid">
         <div class="row mb-4">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card p-3">
                     <form method="GET" action="{{ route('dashboard') }}">
                         <div class="row g-3">
@@ -181,7 +181,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="margin-bottom: 1cm">
+            <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-pie"></i> Detail Distribusi Izin Kelembagaan</span>
@@ -216,7 +216,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="margin-bottom: 1cm">
+            <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
@@ -244,7 +244,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="margin-bottom: 1cm">
+            <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>
@@ -272,7 +272,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4" style="margin-bottom: 1cm">
+            <div class="col-md-6" style="margin-bottom: 1cm">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span><i class="fas fa-chart-bar"></i> Distribusi Hasil Penilaian</span>

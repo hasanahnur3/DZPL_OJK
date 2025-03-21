@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'role' => 'required|in:staf,kadep,kabag,direktur,deputi'
+            'role' => 'required|in:staf,kadep,kabag,direktur,deputi,kepala_eksekutif'
         ]);
 
         $updateData = [

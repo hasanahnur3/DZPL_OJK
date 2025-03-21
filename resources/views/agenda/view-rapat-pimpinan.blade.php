@@ -35,7 +35,7 @@
 
         <!-- Button Add Data -->
         <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                 <a href="{{ route('rapat-pimpinan.create') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- Button Edit -->
-                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                         <a href="#" id="editButton" class="btn btn-primary">Edit</a>
                     @endif
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

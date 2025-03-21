@@ -40,7 +40,7 @@
         </table>
         <!-- Button Add Data -->
         <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag']))
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
                 <a href="{{ route('sosialisasi-riksus.index') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -59,7 +59,10 @@
                 </div>
                 <div class="modal-footer">
                     <!-- Button Edit -->
-                    <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    <!-- Button Edit -->
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                        <a href="#" id="editButton" class="btn btn-primary">Edit</a>
+                    @endif
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -84,15 +87,44 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                                <p><strong>Judul Sosialisasi:</strong> ${response.judul_sosialisasi}</p>
-                                <p><strong>Hari/Tanggal:</strong> ${response.hari_tanggal}</p>
-                                <p><strong>Tempat:</strong> ${response.tempat}</p>
-                                <p><strong>Keterangan Peserta:</strong> ${response.keterangan_peserta}</p>
-                                <p><strong>Kesimpulan:</strong> ${response.kesimpulan}</p>
-                                <p><strong>Dibuat Pada:</strong> ${response.created_at}</p>
-                                <p><strong>Diperbarui Oleh:</strong> ${response.updated_by} pada ${response.updated_at || '-'}</p>
+                                <table style=" border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Judul Sosialisasi</strong></td>
+                                        <td>:</td>
+                                        <td >${response.judul_sosialisasi}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Hari/Tanggal</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.hari_tanggal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Tempat</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.tempat}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Keterangan Peserta</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.keterangan_peserta}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Kesimpulan</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.kesimpulan}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.created_at}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                        <td>:</td>
+                                        <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
+                                    </tr>
+                                </table>
                             `);
-
                         // Set href button Edit
                         $('#editButton').attr('href', `/sosialisasi-riksus/${id}/edit`);
 
@@ -127,6 +159,28 @@
             background-color: #f0f0f0;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
         .btn-close {
             color: black;
             background: none;
@@ -139,9 +193,9 @@
         .btn-close:hover {
             color: red;
         }
-
-        .modal-footer .btn {
-            margin-left: 5px;
+        .modal-content {
+            max-width: 550px;
+            margin: auto;
         }
     </style>
 
