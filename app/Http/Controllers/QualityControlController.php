@@ -8,10 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class QualityControlController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $qualityControls = QualityControl::all();
-        return view('pengendaliankualitas.view-quality_control', compact('qualityControls'));
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal tanpa relasi
+        $qualityControls = QualityControl::whereBetween('forum_date', [$startDate, $endDate])->get();
+
+        return view('pengendaliankualitas.view-quality_control', compact('qualityControls', 'startDate', 'endDate'));
     }
 
     public function create()

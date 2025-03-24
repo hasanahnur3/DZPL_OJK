@@ -39,8 +39,9 @@
             </tbody>
         </table>
         <!-- Button Add Data -->
-        <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+        <div class="button-container mb-3">
+            <x-modal-filter :action="route('riksus.index')" :startDate="$startDate" :endDate="$endDate" />
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                 <a href="{{ route('riksus.create') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -60,7 +61,7 @@
                 <div class="modal-footer">
                     <!-- Button Edit -->
                     <!-- Button Edit -->
-                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                         <a href="#" id="editButton" class="btn btn-primary">Edit</a>
                     @endif
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -73,7 +74,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#riksusTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Event untuk membuka modal
@@ -87,151 +88,151 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                <table style=" border-collapse: collapse;">
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Kode Riksus</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.kode_riskus}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.jenis_industri}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.nama_perusahaan}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No ND Pelimpahan</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_nd_pelimpahan}</td>
-                                    </tr>
-<tr>
-                                        <td style="padding: 8px;"><strong>Tanggal ND Pelimpahan</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_nd_pelimpahan ? new Date(response.tanggal_nd_pelimpahan).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No RKPK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_rkpk}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal RKPK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.tanggal_rkpk ? new Date(response.tanggal_rkpk).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No Surat Tugas</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_surat_tugas}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal Surat Tugas</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_surat_tugas ? new Date(response.tanggal_surat_tugas).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Periode Pemeriksaan</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.periode_pemeriksaan_surat_tugas}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal QA</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.tanggal_qa ? new Date(response.tanggal_qa).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal Expose</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_expose ? new Date(response.tanggal_expose).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-<tr>
-                                        <td style="padding: 8px;"><strong>Paparan Ke PVML</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.paparan_ke_pvml}</td>
-                                    </tr>
-                                    </table>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                                     <table style=" border-collapse: collapse;">
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No ND Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_nd_ke_dpjk}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal ND Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.tanggal_nd_ke_dpjk ? new Date(response.tanggal_nd_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No BAST Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_bast_ke_dpjk}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal BAST Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_bast_ke_dpjk ? new Date(response.tanggal_bast_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No LHPK Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_lhpk_ke_dpjk}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal LHPK Ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.tanggal_lhpk_ke_dpjk ? new Date(response.tanggal_lhpk_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No ND Penyampaian LHPK ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.no_nd_penyampaian_lhpk_ke_pengawas_dpjk}</td>
-                                    </tr>
-<tr>
-                                        <td style="padding: 8px;"><strong>Tanggal ND Penyampaian LHPK ke DPJK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk ? new Date(response.tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal KKPK</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_kpkp ? new Date(response.tanggal_kpkp).toLocaleDateString('id-ID') : '-'}
-</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>No SIPUTRI</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >${response.no_siputri}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal SIPUTRI</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_siputri ? new Date(response.tanggal_siputri).toLocaleDateString('id-ID') : '-'}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Tanggal Persetujuan Kadep</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal_persetujuan_kadep ? new Date(response.tanggal_persetujuan_kadep).toLocaleDateString('id-ID') : '-'}
-</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.created_at}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
-                                    </tr>
-                                </table>
-                                </div>
-                            `);
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Kode Riksus</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.kode_riskus}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.jenis_industri}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.nama_perusahaan}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No ND Pelimpahan</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_nd_pelimpahan}</td>
+                                        </tr>
+    <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal ND Pelimpahan</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_nd_pelimpahan ? new Date(response.tanggal_nd_pelimpahan).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No RKPK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_rkpk}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal RKPK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.tanggal_rkpk ? new Date(response.tanggal_rkpk).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No Surat Tugas</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_surat_tugas}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal Surat Tugas</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_surat_tugas ? new Date(response.tanggal_surat_tugas).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Periode Pemeriksaan</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.periode_pemeriksaan_surat_tugas}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal QA</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.tanggal_qa ? new Date(response.tanggal_qa).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal Expose</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_expose ? new Date(response.tanggal_expose).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+    <tr>
+                                            <td style="padding: 8px;"><strong>Paparan Ke PVML</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.paparan_ke_pvml}</td>
+                                        </tr>
+                                        </table>
+                                        <table style=" border-collapse: collapse;">
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No ND Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_nd_ke_dpjk}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal ND Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.tanggal_nd_ke_dpjk ? new Date(response.tanggal_nd_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No BAST Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_bast_ke_dpjk}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal BAST Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_bast_ke_dpjk ? new Date(response.tanggal_bast_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No LHPK Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_lhpk_ke_dpjk}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal LHPK Ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.tanggal_lhpk_ke_dpjk ? new Date(response.tanggal_lhpk_ke_dpjk).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No ND Penyampaian LHPK ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.no_nd_penyampaian_lhpk_ke_pengawas_dpjk}</td>
+                                        </tr>
+    <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal ND Penyampaian LHPK ke DPJK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk ? new Date(response.tanggal_nd_penyampaian_lhpk_ke_pengawas_dpjk).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal KKPK</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_kpkp ? new Date(response.tanggal_kpkp).toLocaleDateString('id-ID') : '-'}
+    </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>No SIPUTRI</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >${response.no_siputri}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal SIPUTRI</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_siputri ? new Date(response.tanggal_siputri).toLocaleDateString('id-ID') : '-'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Tanggal Persetujuan Kadep</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal_persetujuan_kadep ? new Date(response.tanggal_persetujuan_kadep).toLocaleDateString('id-ID') : '-'}
+    </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.created_at}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
+                                        </tr>
+                                    </table>
+                                    </div>
+                                `);
                         // Set href button Edit
                         $('#editButton').attr('href', `/pengendaliankualitas/riksus/${id}/edit`);
 
@@ -268,7 +269,8 @@
 
         .button-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 20px;
         }
 
@@ -300,6 +302,7 @@
         .btn-close:hover {
             color: red;
         }
+
         .modal-content {
             max-width: 100%;
             margin: auto;

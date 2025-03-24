@@ -8,10 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class DirkomController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dirkoms = Dirkom::all(); // Ambil semua data Dirkom
-        return view('perizinanpvml.view-dirkom', compact('dirkoms'));
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal tanpa relasi
+        $dirkoms = Dirkom::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-dirkom', compact('dirkoms', 'startDate', 'endDate'));
     }
 
     public function create()

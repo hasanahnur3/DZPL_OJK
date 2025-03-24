@@ -36,11 +36,17 @@ class RiksusController extends Controller
         return response()->json($companies);
     }
 
-    public function index()
-{
-    $riksus = Riksus::all();
-    return view('pengendaliankualitas.view-riksus', compact('riksus'));
-}
+    public function index(Request $request)
+    {
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal tanpa relasi
+        $riksus = Riksus::whereBetween('tanggal_nd_pelimpahan', [$startDate, $endDate])->get();
+
+        return view('pengendaliankualitas.view-riksus', compact('riksus', 'startDate', 'endDate'));
+    }
 
 public function store(Request $request)
 {

@@ -9,10 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class PkkController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $data = Pkk::all(); // Ambil semua data dari tabel pkk
-        return view('perizinanpvml.view-pkk', compact('data'));
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal tanpa relasi
+        $data = PKK::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-pkk', compact('data', 'startDate', 'endDate'));
     }
 
     // Halaman form tambah data dengan data dari DB

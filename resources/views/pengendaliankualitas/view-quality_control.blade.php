@@ -39,8 +39,9 @@
             </tbody>
         </table>
         <!-- Button Add Data -->
-        <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kepala_eksekutif']))
+        <div class="button-container mb-3">
+            <x-modal-filter :action="route('quality_control.index')" :startDate="$startDate" :endDate="$endDate" />
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kepala_eksekutif']))
                 <a href="{{ route('quality_control.create') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -60,7 +61,7 @@
                 <div class="modal-footer">
                     <!-- Button Edit -->
                     <!-- Button Edit -->
-                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                         <a href="#" id="editButton" class="btn btn-primary">Edit</a>
                     @endif
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -87,94 +88,94 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                    <table style=" border-collapse: collapse;">
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.jenis_industri}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Criteria</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.criteria}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;" >  ${response.nama_perusahaan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Forum</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.forum_date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Masalah Keuangan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.financial_issues}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Masalah Non Keuangan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;" >  ${response.non_financial_issues}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Akar Penyebab</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.root_cause}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Rekomendasi Utama</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.main_recommendation}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Rekomendasi Pendukung</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.supporting_recommendation}</td>
-                                        </tr>
-                                        </table>
-
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                                         <table style=" border-collapse: collapse;">
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Batas Tindak Lanjut</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;" >  ${response.follow_up_deadline}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Panelis</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.panelists}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Pengawas</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.supervisors}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Pengajuan Tindak Lanjut</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.follow_up_submission_date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Status Tindak Lanjut</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;" >  ${response.follow_up_status}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.created_at}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
-                                        </tr>
-                                    </table>
-                                    </div>
-                                `);
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.jenis_industri}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Criteria</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.criteria}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;" >  ${response.nama_perusahaan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Forum</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.forum_date}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Masalah Keuangan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.financial_issues}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Masalah Non Keuangan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;" >  ${response.non_financial_issues}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Akar Penyebab</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.root_cause}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Rekomendasi Utama</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.main_recommendation}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Rekomendasi Pendukung</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.supporting_recommendation}</td>
+                                            </tr>
+                                            </table>
+
+                                            <table style=" border-collapse: collapse;">
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Batas Tindak Lanjut</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;" >  ${response.follow_up_deadline}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Panelis</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.panelists}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Pengawas</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.supervisors}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Pengajuan Tindak Lanjut</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.follow_up_submission_date}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Status Tindak Lanjut</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;" >  ${response.follow_up_status}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.created_at}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
+                                            </tr>
+                                        </table>
+                                        </div>
+                                    `);
                         // Set href button Edit
                         $('#editButton').attr('href', `/quality-control/${id}/edit`);
 
@@ -211,7 +212,8 @@
 
         .button-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 20px;
         }
 
