@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index(Request $request)
     {
+
+        $startDate = Carbon::now()->subMonths(2)->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
+
         // Inisialisasi variabel dengan nilai default
         $selectedMonth = $request->input('month', '');
         $selectedYear = $request->input('year', date('Y'));

@@ -5,8 +5,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="form-container" style="overflow-x: auto;">
         <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Jadwal Forum Panels</h2>
@@ -38,9 +40,9 @@
                 @endforeach
             </tbody>
         </table>
-         <!-- Button Add Data -->
-         <div class="button-container">
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+        <!-- Button Add Data -->
+        <div class="button-container">
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                 <a href="{{ route('agenda-lainnya.create') }}" class="btn btn-success">Add Data</a>
             @endif
         </div>
@@ -52,17 +54,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="detailModalLabel">Detail Agenda Lainnya</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&times;</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalContent">
                     <!-- Detail akan diisi dengan JavaScript -->
                 </div>
                 <div class="modal-footer">
                     <!-- Button Edit -->
-                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                    @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                         <a href="#" id="editButton" class="btn btn-primary">Edit</a>
                     @endif
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -86,34 +88,34 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                                <table style=" border-collapse: collapse;">
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Hari/Tanggal</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.tanggal}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Topik</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.topik}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>hasil</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;" >  ${response.hasil}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.created_at}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                        <td>:</td>
-                                        <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
-                                    </tr>
-                                </table>
-                            `);
+                                    <table style=" border-collapse: collapse;">
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Hari/Tanggal</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.tanggal}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Topik</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.topik}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>hasil</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;" >  ${response.hasil}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.created_at}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                            <td>:</td>
+                                            <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
+                                        </tr>
+                                    </table>
+                                `);
 
                         // Set href button Edit
                         $('#editButton').attr('href', `/agenda-lainnya/${id}/edit`);
@@ -165,6 +167,7 @@
         .modal-footer .btn {
             margin-left: 5px;
         }
+
         .button-container {
             display: flex;
             justify-content: flex-end;
@@ -199,7 +202,7 @@
         .btn-close:hover {
             color: red;
         }
-        
+
         .modal-content {
             max-width: 550px;
             margin: auto;

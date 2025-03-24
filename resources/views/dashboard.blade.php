@@ -134,11 +134,11 @@
                             <!-- Date Range Filter -->
                             <div class="col-md-3">
                                 <label for="start_date" class="form-label">Tanggal Mulai</label>
-                                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ $startDate ?? '' }}">
+                                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ $startDate }}">
                             </div>
                             <div class="col-md-3">
                                 <label for="end_date" class="form-label">Tanggal Akhir</label>
-                                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ $endDate ?? '' }}">
+                                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ $endDate }}">
                             </div>
                             <div class="col-md-4">
                                 <label for="jenis_industri" class="form-label">Jenis Industri</label>
@@ -547,11 +547,19 @@
             }]
         },
         options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
-        }
     });
 
     var ctx = document.getElementById('jenisOutputChart').getContext('2d');
@@ -591,11 +599,19 @@
             }]
         },
         options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
-        }
     });
 
     var ctx = document.getElementById('jenisOutputDirkomChart').getContext('2d');

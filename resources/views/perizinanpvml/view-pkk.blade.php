@@ -5,8 +5,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="form-container" style="overflow-x: auto;">
         <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Pengajuan Penilaian Kemampuan & Kepatuhan
@@ -120,99 +122,99 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                        <table style="border-collapse: collapse;">
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.jenis_industri}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.nama_perusahaan}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Jabatan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.jabatan}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Status</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.status}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Nama Pihak Utama</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.nama_pihak_utama}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Nomor Surat Permohonan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.nomor_surat_permohonan}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Tanggal Surat Permohonan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.tanggal_surat_permohonan}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Tanggal Pengajuan Sistem</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.tanggal_pengajuan_sistem}</td>
-                                            </tr>
-                                            </table>
-
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                                             <table style="border-collapse: collapse;">
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Perlu Klarifikasi</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.perlu_klarifikasi}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Tanggal Klarifikasi</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.tanggal_klarifikasi}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Hasil</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.hasil}</td>
-                                             </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Nomor Surat Keputusan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.nomor_persetujuan}</td>
-                                             </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Tanggal Surat Keputusan</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.tanggal_persetujuan}</td>
-                                             </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Tanggal Dokumen Lengkap</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.tanggal_dok_lengkap}</td>
-                                             </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>SLA</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${calculateSLA(response.tanggal_dok_lengkap, response.status)}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                                <td>:</td>
-                                                <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                `);
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.jenis_industri}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.nama_perusahaan}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Jabatan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.jabatan}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Status</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.status}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Nama Pihak Utama</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.nama_pihak_utama}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Nomor Surat Permohonan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.nomor_surat_permohonan}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Tanggal Surat Permohonan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.tanggal_surat_permohonan}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Tanggal Pengajuan Sistem</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.tanggal_pengajuan_sistem}</td>
+                                                </tr>
+                                                </table>
+
+                                                <table style="border-collapse: collapse;">
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Perlu Klarifikasi</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.perlu_klarifikasi}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Tanggal Klarifikasi</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.tanggal_klarifikasi}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Hasil</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.hasil}</td>
+                                                 </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Nomor Surat Keputusan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.nomor_persetujuan}</td>
+                                                 </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Tanggal Surat Keputusan</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.tanggal_persetujuan}</td>
+                                                 </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Tanggal Dokumen Lengkap</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.tanggal_dok_lengkap}</td>
+                                                 </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>SLA</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${calculateSLA(response.tanggal_dok_lengkap, response.status)}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                                    <td>:</td>
+                                                    <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    `);
 
                         // Set href button Edit
                         $('#editButton').attr('href', `/pkk/${id}/edit`);

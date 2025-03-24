@@ -5,11 +5,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="form-container" style="overflow-x: auto;">
-        <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar TKA</h2>
+        <h2 style="text-align: center; color: #333; margin-bottom: 1.5rem;">Daftar Dirkom</h2>
         <table id="dirkomTable" class="table table-striped"
             style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead>
@@ -44,7 +46,7 @@
             </tbody>
         </table>
         <!-- Button Add Data -->
-        <div class="button-container">
+        <div class="button-container mb-3">
             <x-modal-filter :action="route('dirkom')" :startDate="$startDate" :endDate="$endDate" />
             @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                 <a href="{{ route('dirkom.create') }}" class="btn btn-success">Add Data</a>
@@ -79,7 +81,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#dirkomTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Fungsi menghitung SLA
@@ -119,73 +121,73 @@
                     success: function (response) {
                         // Isi modal dengan detail data
                         $('#modalContent').html(`
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                    <table style="border-collapse: collapse;">
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.jenis_industri}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.nama_perusahaan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Nomor Surat Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.nomor_surat_permohonan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Surat Permohonan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.tanggal_surat_permohonan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Status Perizinan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.status_perizinan}</td>
-                                        </tr>
-                                        </table>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                                         <table style="border-collapse: collapse;">
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Jenis Output</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.jenis_output}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Dokumen Lengkap</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.status_perizinan == 'Selesai' ? '-' : response.tanggal_dok_lengkap}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Nomor Surat Tanggapan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.no_surat_pencatatan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Tanggal Surat Tanggapan</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.tanggal_surat_pencatatan}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>SLA</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${calculateSLA(response.tanggal_dok_lengkap, response.status_perizinan)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                            <td>:</td>
-                                            <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            `);
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Jenis Industri</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.jenis_industri}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Nama Perusahaan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.nama_perusahaan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Nomor Surat Permohonan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.nomor_surat_permohonan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Surat Permohonan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.tanggal_surat_permohonan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Status Perizinan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.status_perizinan}</td>
+                                            </tr>
+                                            </table>
+                                            <table style="border-collapse: collapse;">
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Jenis Output</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.jenis_output}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Dokumen Lengkap</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.status_perizinan == 'Selesai' ? '-' : response.tanggal_dok_lengkap}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Nomor Surat Tanggapan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.no_surat_pencatatan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Tanggal Surat Tanggapan</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.tanggal_surat_pencatatan}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>SLA</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${calculateSLA(response.tanggal_dok_lengkap, response.status_perizinan)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                                <td>:</td>
+                                                <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                `);
 
                         // Set href button Edit
                         $('#editButton').attr('href', `/dirkom/${id}/edit`);
@@ -223,7 +225,8 @@
 
         .button-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             margin-top: 20px;
         }
 
