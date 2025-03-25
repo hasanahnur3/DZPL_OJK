@@ -11,15 +11,15 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
 
-        $startDate = Carbon::now()->subMonths(2)->startOfMonth()->toDateString();
-        $endDate = Carbon::now()->endOfMonth()->toDateString();
+        $defaultStartDate = Carbon::now()->subMonths(2)->toDateString();;
+        $defaultEndDate = Carbon::now()->toDateString();
 
         // Inisialisasi variabel dengan nilai default
         $selectedMonth = $request->input('month', '');
         $selectedYear = $request->input('year', date('Y'));
         $selectedJenisIndustri = $request->input('jenis_industri', '');
-        $startDate = $request->input('start_date', '');
-        $endDate = $request->input('end_date', '');
+        $startDate = $request->input('start_date', $defaultStartDate);
+        $endDate = $request->input('end_date', $defaultEndDate);
 
         // Ambil daftar jenis industri unik untuk dropdown
         $jenisIndustriList = DB::table('kelembagaan')
