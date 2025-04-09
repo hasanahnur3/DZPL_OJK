@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -9,7 +18,6 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             overflow-x: hidden;
             /* Mencegah scroll horizontal di body */
@@ -138,7 +146,7 @@
                             <td>{{ $ljk->jenis_industri }}</td>
                             <td>{{ $ljk->nama_perusahaan }}</td>
                             <td style="text-align:center;">
-                                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+                                @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                                     <a href="{{ route('daftarljk.edit', $ljk->id) }}" class="btn">Edit</a>
                                 @endif
                             </td>
@@ -147,7 +155,7 @@
                 </tbody>
             </table>
             <!-- Tombol Add Data hanya muncul jika role bukan direktur, deputi, atau kadep -->
-            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag','kadep','kepala_eksekutif']))
+            @if (!in_array(Session::get('role'), ['direktur', 'deputi', 'kabag', 'kadep', 'kepala_eksekutif']))
                 <a href="{{ route('daftarljk.create') }}" class="btn btn-primary add-data-button"
                     style="background-color: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;"
                     class="btn btn-success">Add Data</a>
@@ -162,7 +170,7 @@
     <script>
         $(document).ready(function () {
             $('.table').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             }); // Inisialisasi DataTables pada tabel dengan class "table"
         });
     </script>

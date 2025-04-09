@@ -9,15 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class KelembagaanPvmlController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        try {
-            // Mengambil data dari database "ojk"
-            $kelembagaan = KelembagaanPvml::on('ojk')->orderBy('created_at', 'desc')->get();
-            return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengambil data');
-        }
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal
+        $kelembagaan = KelembagaanPvml::whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
     }
 
     public function create()
@@ -46,6 +47,7 @@ class KelembagaanPvmlController extends Controller
 
             // Menyimpan data ke database "ojk"
             KelembagaanPvml::on('ojk')->create($validated);
+
             return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data')->withInput();

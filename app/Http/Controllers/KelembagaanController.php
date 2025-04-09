@@ -17,12 +17,11 @@ class KelembagaanController extends Controller
         $endDate = $request->input('end_date', now()->toDateString());
 
         // Query dengan filter tanggal
-        $kelembagaan = KelembagaanPvml::with('izinIndustri')
-            ->whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate])
-            ->get();
+        $kelembagaan = KelembagaanPvml::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
 
         return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
     }
+
 
     public function create()
     {
@@ -63,7 +62,7 @@ class KelembagaanController extends Controller
         $kelembagaan->fill($validated);
         $kelembagaan->save();
 
-        return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->routse('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)

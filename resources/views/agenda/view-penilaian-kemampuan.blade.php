@@ -75,7 +75,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#pkkTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Event untuk membuka modal

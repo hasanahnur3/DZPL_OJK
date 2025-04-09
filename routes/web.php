@@ -429,7 +429,9 @@ Route::get('/pkk-agenda/{id}', [PkkAgendaController::class, 'show']);
 Route::get('/sosialisasi-riksus/{id}', [SosialisasiRiksusController::class, 'show']);
 Route::get('/pkk/{id}', [PkkController::class, 'show']);
 Route::get('/tka/{id}', [TkaController::class, 'show']);
-Route::get('/kelembagaan/{id}', [KelembagaanController::class, 'show']);
+Route::get('/kelembagaan/{id}', [KelembagaanPvmlController::class, 'show']);
 Route::get('/dirkom/{id}', [DirkomController::class, 'show']);
 
 Route::get('/tka/export', [TkaController::class, 'export'])->name('tka.export');
+
+Route::get('/kelembagaan', [KelembagaanController::class, 'index'])->name('kelembagaan.index');

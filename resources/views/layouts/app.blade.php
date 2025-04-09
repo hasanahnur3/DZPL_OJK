@@ -224,8 +224,8 @@
             position: static;
             display: none;
             padding-left: 15px;
-            background-color: rgba(0, 0, 0, 0.1);
-            width: 100%;
+            width: 90%;
+            border: none;
         }
 
         .sidebar .dropdown-content .sub-item.dropdown.active .dropdown-menu {

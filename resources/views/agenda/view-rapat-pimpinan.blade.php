@@ -69,7 +69,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#rapimTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Event delegation untuk klik pada elemen dengan class 'open-modal'

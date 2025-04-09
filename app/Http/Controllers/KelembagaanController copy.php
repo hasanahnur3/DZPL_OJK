@@ -10,10 +10,16 @@ use Illuminate\Support\Facades\DB;
 class KelembagaanController extends Controller
 {
     // In KelembagaanController.php
-    public function index()
+    public function index(Request $request)
     {
-        $kelembagaan = KelembagaanPvml::with('izinIndustri')->get();
-        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan'));
+        // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal
+        $kelembagaan = KelembagaanPvml::whereBetween('tanggal_pengajuan_sistem', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
     }
 
     public function create()

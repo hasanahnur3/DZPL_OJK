@@ -76,7 +76,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#riksusTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Event untuk membuka modal

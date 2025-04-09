@@ -165,16 +165,16 @@
                                                     <td>:</td>
                                                     <td style="padding: 8px;" >  ${response.follow_up_status}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
-                                                    <td>:</td>
-                                                    <td style="padding: 8px;">${response.created_at}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
-                                                    <td>:</td>
-                                                    <td style="padding: 8px;">${response.updated_by} pada ${response.updated_at || '-'}</td>
-                                                </tr>
+                                                    <tr>
+                                                        <td style="padding: 8px;"><strong>Dibuat Pada</strong></td>
+                                                        <td>:</td>
+                                                        <td style="padding: 8px;">${response.created_at ? new Date(response.created_at).toLocaleString('id-ID') : '-'}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding: 8px;"><strong>Diperbarui Oleh</strong></td>
+                                                        <td>:</td>
+                                                        <td style="padding: 8px;">${response.updated_by || 'Tidak diketahui'} pada ${response.updated_at ? new Date(response.updated_at).toLocaleString('id-ID') : '-'}</td>
+                                                    </tr>
                                             </table>
                                             </div>
                                         `);

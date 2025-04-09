@@ -74,7 +74,7 @@
         $(document).ready(function () {
             // Inisialisasi DataTables
             $('#agendaLainnyaTable').DataTable({
-                "pageLength": 6
+                "pageLength": 5
             });
 
             // Event untuk membuka modal

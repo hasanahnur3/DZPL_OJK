@@ -16,7 +16,7 @@
             style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; text-align: left;">
             <thead>
                 <tr>
-                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Indsutri</th>
+                    <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Industri</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Nama Perusahaan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Status Perizinan</th>
                     <th style="padding: 0.75rem; border: 1px solid #dee2e6;">Jenis Output</th>
