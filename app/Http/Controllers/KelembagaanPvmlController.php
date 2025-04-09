@@ -48,7 +48,15 @@ class KelembagaanPvmlController extends Controller
             // Menyimpan data ke database "ojk"
             KelembagaanPvml::on('ojk')->create($validated);
 
-            return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
+                    // Filter default: 1 bulan terakhir
+        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+        $endDate = $request->input('end_date', now()->toDateString());
+
+        // Query dengan filter tanggal
+        $kelembagaan = KelembagaanPvml::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+
+        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
+            // return redirect()->route('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data')->withInput();
         }

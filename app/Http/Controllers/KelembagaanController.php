@@ -62,7 +62,16 @@ class KelembagaanController extends Controller
         $kelembagaan->fill($validated);
         $kelembagaan->save();
 
-        return redirect()->routse('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
+                // Filter default: 1 bulan terakhir
+                $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+                $endDate = $request->input('end_date', now()->toDateString());
+        
+                // Query dengan filter tanggal
+                $kelembagaan = KelembagaanPvml::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+        
+                return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
+
+        // return redirect()->routse('kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)

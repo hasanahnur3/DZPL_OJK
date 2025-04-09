@@ -41,7 +41,16 @@ class ViewKelembagaanPvmlController extends Controller
 
         KelembagaanPvml::create($request->all());
 
-        return redirect()->route('view-kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
+                        // Filter default: 1 bulan terakhir
+                        $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+                        $endDate = $request->input('end_date', now()->toDateString());
+                
+                        // Query dengan filter tanggal
+                        $kelembagaan = KelembagaanPvml::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+                
+                        return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
+
+        // return redirect()->route('view-kelembagaan.index')->with('success', 'Data berhasil ditambahkan');
     }
 
     // Menampilkan form edit
@@ -74,6 +83,15 @@ class ViewKelembagaanPvmlController extends Controller
     $kelembagaan = KelembagaanPvml::findOrFail($id);
     $kelembagaan->update($request->all());
 
-    return redirect()->route('view-kelembagaan.index')->with('success', 'Data berhasil diperbarui');
+                    // Filter default: 1 bulan terakhir
+                    $startDate = $request->input('start_date', now()->subMonth()->toDateString());
+                    $endDate = $request->input('end_date', now()->toDateString());
+            
+                    // Query dengan filter tanggal
+                    $kelembagaan = KelembagaanPvml::whereBetween('tanggal_surat_permohonan', [$startDate, $endDate])->get();
+            
+                    return view('perizinanpvml.view-kelembagaan', compact('kelembagaan', 'startDate', 'endDate'));
+
+    // return redirect()->route('view-kelembagaan.index')->with('success', 'Data berhasil diperbarui');
 }
 }
