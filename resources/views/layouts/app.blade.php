@@ -1,419 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard DZPL</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="style.css">
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            background-color: #EEEEEE;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard DZPL</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      background-color: #eeeeee;
+    }
 
-        .sidebar {
-            width: 250px;
-            background-color: #D84343;
-            color: #fff;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            transition: width 0.3s ease;
-            z-index: 1000;
-        }
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(to right, #7f0101, #e50101);
+      color: #fff;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transition: width 0.3s ease, left 0.3s ease;
+      z-index: 1000;
+    }
 
-        .sidebar.collapsed {
-            width: 70px;
-        }
+    .sidebar .logo {
+      text-align: center;
+      background: #fff;
+    }
 
-        .nav-menu .nav-link .menu-text {
-            transition: opacity 0.3s ease;
-        }
+    .sidebar .logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
 
-        .sidebar.collapsed .nav-link .menu-text {
-            opacity: 0;
-            pointer-events: none;
-        }
+    .sidebar .create-user-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      text-align: center;
+      background-color: #5cb85c;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-        .sidebar .logo {
-            padding: 20px;
-            text-align: center;
-        }
+    .sidebar .create-user-btn:hover {
+      background-color: #4cae4c;
+    }
 
-        .sidebar .logo img {
-            max-width: 150px;
-            transition: max-width 0.3s ease;
-        }
+    .sidebar .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0.3cm;
+    }
 
-        .sidebar.collapsed .logo img {
-            max-width: 70px;
-        }
+    .sidebar .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      text-decoration: none;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
 
-        .sidebar .create-user-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            color: #fff;
-            background-color: #5cb85c;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .sidebar .nav-link:hover {
+      background-color: #d84343;
+    }
 
-        .sidebar .create-user-btn:hover {
-            background-color: #4cae4c;
-        }
+    .sidebar .nav-link .menu-text {
+      margin-left: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
 
-        .sidebar .nav-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0.3cm;
-        }
+    .sidebar .dropdown-content,
+    .sidebar .dropdown-menu {
+      display: none;
+      list-style: none;
+      background-color: #d84343;
+      padding: 0;
+      margin: 0;
+    }
 
-        .sidebar .nav-item {
-            position: relative;
-            align-items: center;
-        }
+    .sidebar .dropdown.active .dropdown-content,
+    .sidebar .dropdown.active .dropdown-menu {
+      display: block;
+    }
 
-        .sidebar .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            text-decoration: none;
-            color: #fff;
-            transition: background-color 0.3s ease;
-        }
+    .sidebar .dropdown-content .sub-item a,
+    .sidebar .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      padding: 10px 25px;
+      text-decoration: none;
+      color: #fff;
+      transition: background-color 0.3s ease;
+    }
 
-        .sidebar .nav-link:hover {
-            background-color: #D84343;
-        }
+    .sidebar .dropdown-content .sub-item a:hover,
+    .sidebar .dropdown-menu a:hover {
+      background-color: #e0e0e0;
+      color: #000;
+    }
 
-        .sidebar .nav-link .menu-text {
-            margin-left: 15px;
-        }
+    .sidebar .logout-item {
+      margin-top: auto;
+    }
 
-        .dropdown-content {
-            display: none;
-            /* Sembunyikan dropdown secara default */
-        }
+    .sidebar .logout-btn {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      width: auto;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
 
-        .dropdown-content.show {
-            display: block;
-            /* Tampilkan dropdown saat aktif */
-        }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+      width: 100%;
+    }
 
-        .sidebar .dropdown-content,
-        .sidebar .dropdown-menu {
-            display: none;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            background-color: #D84343;
-        }
+    .toggle-btn {
+      position: fixed;
+      top: 5px; /* Ditinggikan */
+      right: 15px;
+      background: #e50101;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 0 12px 12px;
+      padding: 5px 10px;
+      z-index: 1100;
+      display: none;
+    }
 
-        .sidebar .dropdown-content .sub-item a,
-        .sidebar .dropdown-menu a {
-            display: flex;
-            align-items: center;
-            padding: 10px 25px;
-            text-decoration: none;
-            color: #fff;
-            transition: background-color 0.3s ease;
-        }
+    /* iPad: Sidebar collapsed style (tapi logo & logout tetap tampil normal) */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 70px;
+      }
 
-        .sidebar .dropdown-content .sub-item a:hover,
-        .sidebar .dropdown-menu a:hover {
-            background-color: #E0E0E0;
-        }
+      .main-content {
+        margin-left: 70px;
+      }
 
-        .sidebar .dropdown-content .sub-item.dropdown .dropdown-menu {
-            margin-left: 20px;
-        }
+      .toggle-btn {
+        display: block !important;
+      }
 
-        .sidebar .dropdown.active .dropdown-content,
-        .sidebar .dropdown.active .dropdown-menu {
-            display: block;
-        }
+      .sidebar .create-user-btn {
+        display: none;
+      }
 
-        .sidebar .logout-item {
-            margin-top: auto;
-        }
+      .sidebar .nav-link .menu-text {
+        display: none;
+      }
+    }
 
-        .sidebar.collapsed .logout-btn {
-            width: 40px;
-        }
+    /* Mobile: Sidebar slide-in, toggle aktif */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+        left: -200px;
+      }
 
-        .sidebar .logout-btn {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #D84343;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s ease;
-            width: auto;
-        }
+      .sidebar.active {
+        left: 0;
+      }
 
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-            width: 100%;
-        }
+      .main-content {
+        margin-left: 0;
+      }
 
-        .main-content.collapsed {
-            margin-left: 70px;
-        }
+      .toggle-btn {
+        display: block !important;
+      }
 
-        .toggle-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .sidebar.collapsed .toggle-btn {
-            transform: translate(-10px, 35px)
-        }
-
-        @media (max-width: 1380px) {
-            .sidebar {
-                width: 70px;
-            }
-
-            .container {
-                flex-direction: column;
-                max-width: 100%;
-            }
-
-            select {
-                width: 100%;
-            }
-
-            .sidebar .logo img {
-                max-width: 70px;
-            }
-
-            .sidebar .create-user-btn {
-                display: none;
-            }
-
-            .main-content {
-                margin-left: 70px;
-            }
-        }
-
-
-        .sidebar .dropdown-content .sub-item.dropdown .dropdown-menu {
-            position: static;
-            display: none;
-            padding-left: 15px;
-            width: 90%;
-            border: none;
-        }
-
-        .sidebar .dropdown-content .sub-item.dropdown.active .dropdown-menu {
-            display: block;
-        }
-
-        /* Ensure all menu text is visible */
-        .sidebar .nav-link .menu-text,
-        .sidebar .dropdown-content .sub-item a,
-        .sidebar .dropdown-menu a {
-            white-space: nowrap;
-            overflow: hidden;
-
-        }
-
-        .nav-menu .secondary-nav {
-            position: absolute;
-            bottom: 5px;
-            width: 100%;
-        }
-
-        .nav-menu .nav-link .nav-item {
-            align-items: center;
-        }
-    </style>
+      .sidebar .nav-link .menu-text {
+        display: inline;
+      }
+    }
+  </style>
 </head>
+<body>
+  <nav class="sidebar">
+    <div class="logo">
+      <a href="{{ route('dashboard') }}">
+        <img src="{{ asset('img/bglog.jpeg') }}" alt="OJK Logo" class="logo-image" />
+      </a>
+    </div>
 
-<body>>
-
-    <nav class="sidebar">
-        <div class="logo">
-            <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('img/logo.jpg') }}" alt="OJK Logo" class="logo-image">
-            </a>
-        </div>
-
-        <ul class="nav-menu">
-            <li class="nav-item">
-                @if(Session::get(key: 'role') === 'kasubag')
-                    <a href="{{ route('register') }}" class="nav-link">
-                        <i class="fas fa-plus"></i>
-                        <span class="menu-text">Create New User</span>
-                    </a>
-                @endif
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-clock"></i>
-                    <span class="menu-text">Pending Matters</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item">
-                        <a href="#">Submenu 1</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="#">Submenu 2</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="#">Submenu 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-calendar"></i>
-                    <span class="menu-text">Agenda DZPL</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item">
-                        <a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('view-sosialisasi-riksus.index') }}">Sosialisasi Riksus</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('forum-panel.index') }}">Forum Panel</a>
-                    </li>
-                    <li class="sub-item">
-                        <a href="{{ route('agenda-lainnya.index') }}">Agenda Lainnya</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('daftarljk.index') }}" class="nav-link">
-                    <i class="fas fa-list"></i>
-                    <span class="menu-text">Daftar LJK PVML</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="menu-text">Pengajuan Perizinan <br>PVML</span>
-                </a>
-                <ul class="dropdown-content">
-                    <li class="sub-item dropdown">
-                        <a>Kepengurusan</a>
-                        <ul class="dropdown-menu"style="z-index:999999999;">
-                            <li><a href="{{ route('pkk') }}">PKK</a></li>
-                            <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
-                            <li><a href="{{ route('tka') }}">TKA</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown-menu" style="border:none">
-                        <a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('quality_control.index') }}" class="nav-link">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="menu-text">Pengendalian Kualitas</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('riksus') }}" class="nav-link">
-                    <i class="fas fa-file-alt"></i>
-                    <span class="menu-text">Riksus</span>
-                </a>
-            </li>
-
-            <li class="nav-item secondary-nav">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button class="nav-link logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span class="menu-text">Logout</span>
-                    </button>
-                </form>
-            </li>
+    <ul class="nav-menu">
+      <li class="nav-item">
+        @if(Session::get('role') === 'kasubag')
+        <a href="{{ route('register') }}" class="nav-link">
+          <i class="fas fa-plus"></i>
+          <span class="menu-text">Create New User</span>
+        </a>
+        @endif
+      </li>
+      <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-home"></i><span class="menu-text">Dashboard</span></a></li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-clock"></i><span class="menu-text">Pending Matters</span></a>
+        <ul class="dropdown-content">
+          <li class="sub-item"><a href="#">Submenu 1</a></li>
+          <li class="sub-item"><a href="#">Submenu 2</a></li>
+          <li class="sub-item"><a href="#">Submenu 3</a></li>
         </ul>
-        <button class="toggle-btn" id="toggleSidebar">
-            <i class="fas fa-bars"></i>
-        </button>
-    </nav>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-calendar"></i><span class="menu-text">Agenda DZPL</span></a>
+        <ul class="dropdown-content">
+          <li class="sub-item"><a href="{{ route('view-rapat-pimpinan.index') }}">Rapat Pimpinan</a></li>
+          <li class="sub-item"><a href="{{ route('view-penilaian-kemampuan.index') }}">PKK</a></li>
+          <li class="sub-item"><a href="{{ route('view-sosialisasi-riksus.index') }}">Sosialisasi Riksus</a></li>
+          <li class="sub-item"><a href="{{ route('forum-panel.index') }}">Forum Panel</a></li>
+          <li class="sub-item"><a href="{{ route('agenda-lainnya.index') }}">Agenda Lainnya</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="{{ route('daftarljk.index') }}" class="nav-link"><i class="fas fa-list"></i><span class="menu-text">Daftar LJK PVML</span></a></li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link"><i class="fas fa-file-alt"></i><span class="menu-text">Pengajuan Perizinan <br />PVML</span></a>
+        <ul class="dropdown-content">
+          <li class="sub-item dropdown">
+            <a>Kepengurusan</a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('pkk') }}">PKK</a></li>
+              <li><a href="{{ route('dirkom') }}">Dirkom</a></li>
+              <li><a href="{{ route('tka') }}">TKA</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-menu"><a href="{{ route('kelembagaan.index') }}">Pengajuan Kelembagaan</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="{{ route('quality_control.index') }}" class="nav-link"><i class="fas fa-file-alt"></i><span class="menu-text">Pengendalian Kualitas</span></a></li>
+      <li class="nav-item"><a href="{{ route('riksus') }}" class="nav-link"><i class="fas fa-file-alt"></i><span class="menu-text">Riksus</span></a></li>
+      <li class="nav-item logout-item">
+        <form action="{{ route('logout') }}" method="POST">@csrf
+          <button class="nav-link logout-btn"><i class="fas fa-sign-out-alt"></i><span class="menu-text">Logout</span></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
 
-    <main class="main-content">
-        <div class="chart-container">
-            @yield('content')
-        </div>
-    </main>
+  <button class="toggle-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
 
-    <script>
-        // Replace your current dropdown JS with this
-        document.addEventListener('DOMContentLoaded', () => {
-            // Main dropdown toggles
-            document.querySelectorAll('.nav-item.dropdown > .nav-link').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const parentItem = this.parentElement;
-                    parentItem.classList.toggle('active');
-                });
-            });
+  <main class="main-content">
+    <div class="chart-container">
+      @yield('content')
+    </div>
+  </main>
 
-            // Sub-item dropdown toggles
-            document.querySelectorAll('.sub-item.dropdown > a').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const parentItem = this.parentElement;
-                    parentItem.classList.toggle('active');
-                });
-            });
-
-            // Toggle sidebar
-            // Toggle sidebar with logo resizing
-            document.getElementById('toggleSidebar').addEventListener('click', () => {
-                const sidebar = document.querySelector('.sidebar');
-                const mainContent = document.querySelector('.main-content');
-                const logoImage = document.querySelector('.logo img');
-
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('collapsed');
-
-                // Explicitly change the logo size based on sidebar state
-                if (sidebar.classList.contains('collapsed')) {
-                    logoImage.style.maxWidth = '40px'; // Even smaller when collapsed
-                } else {
-                    logoImage.style.maxWidth = '150px'; // Original size when expanded
-                }
-            });
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".nav-item.dropdown > .nav-link").forEach(link => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.parentElement.classList.toggle("active");
         });
-    </script>
+      });
+
+      document.querySelectorAll(".sub-item.dropdown > a").forEach(link => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          this.parentElement.classList.toggle("active");
+        });
+      });
+
+      document.getElementById("toggleSidebar").addEventListener("click", () => {
+        const sidebar = document.querySelector(".sidebar");
+        if (window.innerWidth < 1024) {
+          sidebar.classList.toggle("active");
+        }
+      });
+    });
+  </script>
 </body>
+</html>
