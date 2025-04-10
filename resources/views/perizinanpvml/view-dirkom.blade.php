@@ -59,7 +59,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailModalLabel">Detail Sosialisasi Riksus</h5>
+                    <h5 class="modal-title" id="detailModalLabel">Detail Dirkom</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body" id="modalContent">
